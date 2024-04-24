@@ -1,103 +1,79 @@
 #include <SFML/Graphics.hpp>
 #include <ctime>
-//#include"../SFML/Images/"
 using namespace sf;
 using namespace std;
 
-
 struct coordinats {
-	int x;
-	int y;
+    int x;
+    int y;
 };
 
+// Drawing the map
+void createMap(RenderWindow& window, Texture& mapTexture) {
+    // Drawing a map
+    Sprite s_map;
+    s_map.setTexture(mapTexture);
 
+    // Scale the sprite to fit the window size
+    float scaleX = static_cast<float>(window.getSize().x) / s_map.getLocalBounds().width;
+    float scaleY = static_cast<float>(window.getSize().y) / s_map.getLocalBounds().height;
+    s_map.setScale(scaleX, scaleY);
 
-//Drawing the background
-void createBack(RenderWindow& window) {
-	//Drawing the background
-	Image map_image;
-	map_image.loadFromFile("../SFML/Images/backwindow.jpg");
-	Texture map;
-	map.loadFromImage(map_image);
-	Sprite s_map;
-	s_map.setTexture(map);
-	s_map.setPosition(0, 0);
-	window.draw(s_map);
+    window.draw(s_map);
 }
 
-//Drawing the map
-void createMap(RenderWindow& window) {
-	//Drawing a map
-	Image map_image;
-	map_image.loadFromFile("../SFML/Images/grid.png");//load the file for the map
-	Texture map;
-	map.loadFromImage(map_image);
-	Sprite s_map;
-	s_map.setTexture(map);
-	s_map.setPosition(300, 160);
+int main() {
+    RenderWindow window(VideoMode(1280, 720), "Plants Vs Zombies");
 
-	window.draw(s_map);
-}
+    // Load the map texture
+    Texture mapTexture;
+    if (!mapTexture.loadFromFile("C:/Users/optay/OneDrive/Uni/Semester 2/OOP/OOP_PROJECT/starter_files/Images/grid.png")) {
+        return 1;
+    }
 
+    // Game icon
+    Image icon;
+    if (!icon.loadFromFile("C:/Users/optay/OneDrive/Uni/Semester 2/OOP/OOP_PROJECT/PVZ_Textures/icon.png")) {
+        return 1;
+    }
+    window.setIcon(32, 32, icon.getPixelsPtr());
+    
+    ///////////////////////////////////////
 
-int main()
-{
-	//Create a window, n*n
-	RenderWindow window(VideoMode(1200, 700), "Plants Vs Zombies");
-	//Game icon
-	Image icon;
-	if (!icon.loadFromFile("../SFML/Images/icon.png"))
-	{
-		return 1;
-	}
-	window.setIcon(32, 32, icon.getPixelsPtr());
+    // Game field (5*9)
+    // Point 137*79 - leftmost point
+    // length 41; width 53
+    const int ROWS = 5;
+    const int COLS = 9;
 
-	///////////////////////////////////////
+    bool FIELD_GAME_STATUS[ROWS][COLS];
 
-	//Game field (5*9)
-	//Point 137*79 - leftmost point
-	//length 41; width 53
-	const int ROWS = 5;
-	const int COLS = 9;
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            FIELD_GAME_STATUS[i][j] = true;
+        }
+    }
 
-	bool FIELD_GAME_STATUS[ROWS][COLS];
+    Clock timeMoney;
+    Clock clock;
 
-	for (int i = 0; i < ROWS; i++) {
-		for (int j = 0; j < COLS; j++) {
-			FIELD_GAME_STATUS[i][j] = true;
-		}
-	}
+    while (window.isOpen()) {
+        float time = clock.getElapsedTime().asMicroseconds();
+        float moneyTime = timeMoney.getElapsedTime().asSeconds();
+        clock.restart();
+        time = time / 800;
 
-	Clock timeMoney;
+        Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == Event::Closed)
+                window.close();
+        }
 
+        // Create a background
+        createMap(window, mapTexture);
 
+        window.display();
+    }
 
-	Clock clock;
-
-	while (window.isOpen())
-	{
-		float time = clock.getElapsedTime().asMicroseconds();
-		float moneyTime = timeMoney.getElapsedTime().asSeconds();
-
-		clock.restart();
-		time = time / 800;
-
-		Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == Event::Closed)
-				window.close();
-		}
-
-		//Create a background
-		createBack(window);
-		createMap(window);
-
-
-
-
-		window.setSize(sf::Vector2u(550, 340));
-		window.display();
-	}
-	return 0;
+    return 0;
 }
