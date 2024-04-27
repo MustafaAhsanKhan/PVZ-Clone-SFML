@@ -12,10 +12,7 @@ BulletPea& Shooter::getBullet(int index)
 {
 	return bullets[index];
 }
-void Shooter::moveBullets()
-{
 
-}
 void Shooter::shootBullet()
 {
 
@@ -46,3 +43,7 @@ int Shooter::getYgridcoordinate()
 	return Ygridcoordinate;
 }
 
+int Shooter::getMaxBullets()
+{
+	return MAX_BULLETS;
+}

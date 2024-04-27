@@ -1,7 +1,15 @@
 #include "BulletPea.h"
 
+
+BulletPea::BulletPea()
+{
+	this->x_pos = 0, this->y_pos = 0;
+	this->damage = 10; // change according to game
+	this->exists = false; // initially false 
+	this->bulletSpeed = 1.0f; // change to whatever speed
+}
 // Getters
-int BulletPea::getBulletSpeed()
+float BulletPea::getBulletSpeed()
 {
 	return bulletSpeed;
 }
@@ -27,12 +35,7 @@ sf::Sprite& BulletPea::getBulletSprite()
 	return bulletSprite;
 }
 
-// Setters
-void BulletPea::setBulletSpeed(int speed)
-{
-	bulletSpeed = speed;
 
-}
 void BulletPea::setDamage(int damage)
 {
 	this->damage = damage;
@@ -50,20 +53,13 @@ void BulletPea::setExists(bool exists)
 	this->exists = exists;
 }
 
-void BulletPea::shoot(int XgridCoordinate, int YgridCoordinate)
-{
-	x_pos = XgridCoordinate;
-	y_pos = YgridCoordinate;
-	exists = true;
-}
-
 void BulletPea::move()
 {
-	x_pos += bulletSpeed;
-	if (x_pos > 800)
+	if (exists)
 	{
-		exists = false;
+		x_pos += bulletSpeed; // handling one bullet for now (shayad miss hi karate hain dusra)
 	}
+		
 }
 
 void BulletPea::drawBullet(sf::RenderWindow& window)

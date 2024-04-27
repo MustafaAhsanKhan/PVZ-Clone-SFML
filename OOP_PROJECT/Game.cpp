@@ -6,6 +6,7 @@ Game::Game()
 {
     // plant = new Plant;
     plant = new Plant;
+    shooters = new PeaShooter;
     
 }
 
@@ -21,9 +22,19 @@ void Game::handleMouseInput(sf::RenderWindow& window)
         int gridY = (mousePosition.y - 10) / 144;   // Assuming 10 is the offset for y-axis
 
         // Update the position of the plant sprite
-        plant->getPlantSprite().setPosition(gridX * 142.2 + 15, gridY * 144 + 10);
-        plant->setXgridcoordinate(gridX);
-        plant->setYgridcoordinate(gridY);
+        shooters->getPlantSprite().setPosition(gridX * 142.2 + 15, gridY * 144 + 10);
+        shooters->setXgridcoordinate(gridX);
+        shooters->setYgridcoordinate(gridY);
+        for (int i = 0; i < shooters->getMaxBullets(); i++)
+        {
+            shooters->getBullet(i).setXPos(gridX * 142.2 + 80);
+            shooters->getBullet(i).setYPos(gridY * 144);
+            shooters->getBullet(i).getBulletSprite().setScale(0.1, 0.1);
+        }
+        shooters->getBullet(0).setXPos(gridX * 142.2 + 80);
+        shooters->getBullet(0).setYPos(gridY * 144);
+        shooters->getBullet(0).getBulletSprite().setScale(0.1, 0.1);
+        
     }
 }
 
@@ -37,23 +48,38 @@ void Game::setObjectTextures()
     Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/sunflower.png");
     Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/cherrybomb.png");
     Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/wallnut.png");
-
+    Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/Pea.png");
     // Setting textures for sprites
     mapSprite.setTexture(Asset_Texture.getTexture(0));
 
-    plant = &PeaShooterPlant;
+    shooters = &PeaShooterPlant;
 
     sf::IntRect textureRect(0, 0, 27.125, 31);  // x = 0, y = 0, width = 64, height = 64
 
 
-    plant->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
-    plant->getPlantSprite().setTextureRect(textureRect);
-    plant->getPlantSprite().setScale(3.75, 3.75);  // Scale the sprite to make it appear larger
+    shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
+    shooters->getPlantSprite().setTextureRect(textureRect);
+    shooters->getPlantSprite().setScale(3.75, 3.75);  // Scale the sprite to make it appear larger
+    for (int i = 0; i < shooters->getMaxBullets(); i++)
+    {
+        shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(5));
+        shooters->getBullet(i).getBulletSprite().setScale(0.1, 0.1);
+    }
+    
+    // shooters->getBullet(0).getBulletSprite().setPosition(100, 100);
+
 }
 void Game::drawAll(RenderWindow& window)
 {
     window.draw(mapSprite);
-    window.draw(plant->getPlantSprite());
+    window.draw(shooters->getPlantSprite());
+    shooters->getBullet(0).drawBullet(window);
+    if (shooters->getBullet(0).getXPos() > 700) // change this to a clock that handles the rate of shooting
+    {
+        shooters->getBullet(1).drawBullet(window);
+    }
+    
+    // window.draw(shooters->getBullet(0).getBulletSprite());
     window.display();
     window.clear();
 }
@@ -69,7 +95,7 @@ void Game::run()
     float scaleX = static_cast<float>(window.getSize().x) / mapSprite.getLocalBounds().width;
     float scaleY = static_cast<float>(window.getSize().y) / mapSprite.getLocalBounds().height;
     mapSprite.setScale(scaleX, scaleY);
-
+    
     // Game icon
     Image icon;
     if (!icon.loadFromFile("../PVZ_Textures/icon.png"))
@@ -114,9 +140,9 @@ void Game::run()
         }
 
         handleMouseInput(window);  // Handle mouse input
-
         // Create a background
-        plant->setAnimation();
+        shooters->setAnimation();
+        shooters->shootBullet();
         drawAll(window);
         
     }

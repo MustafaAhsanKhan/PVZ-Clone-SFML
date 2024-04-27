@@ -31,7 +31,7 @@ void PeaShooter::setAnimation()
 	}
 }
 
-
+/*
 void PeaShooter::shootBullet()
 {
 	// Find an available bullet slot and shoot
@@ -39,21 +39,23 @@ void PeaShooter::shootBullet()
 	{
 		if (!bullets[i].getExists())
 		{
-			bullets[i].shoot(Xgridcoordinate, Ygridcoordinate);
+			// bullets[i].shoot(Xgridcoordinate, Ygridcoordinate);
 			break;
 		}
 	}
-}
+}*/
 
 // Update all bullets
-void PeaShooter::moveBullets()
+void PeaShooter::shootBullet()
 {
-	for (int i = 0; i < MAX_BULLETS; ++i)
+	
+	this->bullets[0].setExists(true);
+	bullets[0].move();
+	if (bullets[0].getXPos() > 700)
 	{
-		if (bullets[i].getExists())
-		{
-			bullets[i].move();
-		}
+		bullets[0].setExists(false);
+		bullets[1].setExists(true);
+		bullets[1].move();
 	}
 }
 
@@ -91,7 +93,13 @@ void PeaShooter::setYgridcoordinate(int y)
 	Ygridcoordinate = y;
 }
 
+int PeaShooter::getMaxBullets()
+{
+	return MAX_BULLETS;
+}
+
 PeaShooter::~PeaShooter()
 {
 	delete[] bullets;
 }
+

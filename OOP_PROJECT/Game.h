@@ -24,6 +24,7 @@ private:
 	Plant* plant;  // The plant object
 	PeaShooter PeaShooterPlant;
 	Sprite mapSprite;
+	Shooter* shooters;
 
 public:
 	Game();  // Default constructor
