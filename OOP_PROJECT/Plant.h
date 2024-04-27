@@ -15,5 +15,6 @@ protected:
 public:
 	Plant();
 
+	virtual sf::Sprite& getplantSprite();
 
 };
