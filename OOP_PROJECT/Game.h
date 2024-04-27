@@ -28,13 +28,12 @@ private:
 
 public:
 	Game();  // Default constructor
-
+	void InitializeMapSprite();
+	void InitializePlantTextures();
 	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input
-
-	void setObjectTextures();
-
-	void drawAll(RenderWindow& window);  // Draw all the objects in the game
-
+	void setPlantTextures();
+	void renderMap(RenderWindow& window);
+	void renderPlants(RenderWindow& window);
 	void run();  // The whole game is inside this 
 
 };

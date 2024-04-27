@@ -2,12 +2,44 @@
 #include<iostream>
 using namespace sf;
 
-Game::Game()
+Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close)
 {
-    // plant = new Plant;
-    plant = new Plant;
+    // Initialize Plants
+    plant = new Plant; // will handle the plants array later
     shooters = new PeaShooter;
     
+    // Initialize Map
+    InitializeMapSprite();
+    float scaleX = static_cast<float>(window.getSize().x) / mapSprite.getLocalBounds().width;
+    float scaleY = static_cast<float>(window.getSize().y) / mapSprite.getLocalBounds().height;
+    mapSprite.setScale(scaleX, scaleY);
+
+    // Game icon
+    Image icon;
+    if (!icon.loadFromFile("../PVZ_Textures/icon.png"))
+    {
+        return;
+    }
+    window.setIcon(32, 32, icon.getPixelsPtr());
+    
+    InitializePlantTextures();
+    setPlantTextures();
+    
+}
+
+void Game::InitializeMapSprite()
+{
+    Asset_Texture.loadTexture(0, "../starter_files/Images/grid.png");
+    mapSprite.setTexture(Asset_Texture.getTexture(0));
+}
+
+void Game::InitializePlantTextures()
+{
+    Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");
+    Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/sunflower.png");
+    Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/cherrybomb.png");
+    Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/wallnut.png");
+    Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/Pea.png");
 }
 
 void Game::handleMouseInput(sf::RenderWindow& window)
@@ -38,24 +70,11 @@ void Game::handleMouseInput(sf::RenderWindow& window)
     }
 }
 
-void Game::setObjectTextures()
+void Game::setPlantTextures()
 {
-    // Grid Texture
-    Asset_Texture.loadTexture(0, "../starter_files/Images/grid.png");
-
-    // Plant Textures
-    Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");
-    Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/sunflower.png");
-    Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/cherrybomb.png");
-    Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/wallnut.png");
-    Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/Pea.png");
-    // Setting textures for sprites
-    mapSprite.setTexture(Asset_Texture.getTexture(0));
-
     shooters = &PeaShooterPlant;
 
     sf::IntRect textureRect(0, 0, 27.125, 31);  // x = 0, y = 0, width = 64, height = 64
-
 
     shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
     shooters->getPlantSprite().setTextureRect(textureRect);
@@ -69,43 +88,26 @@ void Game::setObjectTextures()
     // shooters->getBullet(0).getBulletSprite().setPosition(100, 100);
 
 }
-void Game::drawAll(RenderWindow& window)
+
+void Game::renderPlants(RenderWindow& window)
 {
-    window.draw(mapSprite);
     window.draw(shooters->getPlantSprite());
     shooters->getBullet(0).drawBullet(window);
     if (shooters->getBullet(0).getXPos() > 700) // change this to a clock that handles the rate of shooting
     {
         shooters->getBullet(1).drawBullet(window);
     }
-    
-    // window.draw(shooters->getBullet(0).getBulletSprite());
-    window.display();
-    window.clear();
+}
+void Game::renderMap(RenderWindow& window)
+{
+    window.draw(mapSprite);
 }
 
 
 void Game::run()
 {
-    RenderWindow window(VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close);
-
-    setObjectTextures();
-
-    // Scale the sprite to fit the window size
-    float scaleX = static_cast<float>(window.getSize().x) / mapSprite.getLocalBounds().width;
-    float scaleY = static_cast<float>(window.getSize().y) / mapSprite.getLocalBounds().height;
-    mapSprite.setScale(scaleX, scaleY);
-    
-    // Game icon
-    Image icon;
-    if (!icon.loadFromFile("../PVZ_Textures/icon.png"))
-    {
-        return;
-    }
-    window.setIcon(32, 32, icon.getPixelsPtr());
-
-    ///////////////////////////////////////
-
+    /*
+    NOTE : THIS CODE IS EXTRA AND WE MIGHT NEED IT LATER BUT NOW
     // Game field (5x9)
     const int ROWS = 5;
     const int COLS = 9;
@@ -119,12 +121,10 @@ void Game::run()
             FIELD_GAME_STATUS[i][j] = true;
         }
     }
+    */
 
     Clock deltaClock;
     float deltaTime = 0.0f;
-
-    
-
     while (window.isOpen())
     {
         deltaTime = deltaClock.getElapsedTime().asMicroseconds();
@@ -140,12 +140,11 @@ void Game::run()
         }
 
         handleMouseInput(window);  // Handle mouse input
-        // Create a background
-        shooters->setAnimation();
-        shooters->shootBullet();
-        drawAll(window);
-        
+        shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
+        shooters->shootBullet(); // shoot peas
+        window.clear();
+        renderMap(window); // map
+        renderPlants(window); // plants 
+        window.display();  
     }
-
-    return;
 }
