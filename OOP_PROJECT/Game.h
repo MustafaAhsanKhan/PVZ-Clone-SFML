@@ -28,6 +28,8 @@ private:
 public:
 	Game();  // Default constructor
 
+	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input
+
 	void setObjectTextures();
 
 	void drawAll(RenderWindow& window);  // Draw all the objects in the game

@@ -9,6 +9,24 @@ Game::Game()
     
 }
 
+void Game::handleMouseInput(sf::RenderWindow& window)
+{
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        // Get the mouse position relative to the window
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+        // Convert mouse position to grid coordinates
+        int gridX = (mousePosition.x - 15) / 142.2; // Assuming 15 is the offset for x-axis
+        int gridY = (mousePosition.y - 10) / 144;   // Assuming 10 is the offset for y-axis
+
+        // Update the position of the plant sprite
+        plant->getPlantSprite().setPosition(gridX * 142.2 + 15, gridY * 144 + 10);
+        plant->setXgridcoordinate(gridX);
+        plant->setYgridcoordinate(gridY);
+    }
+}
+
 void Game::setObjectTextures()
 {
     // Grid Texture
@@ -28,16 +46,7 @@ void Game::setObjectTextures()
     sf::IntRect textureRect(0, 0, 27.125, 31);  // x = 0, y = 0, width = 64, height = 64
 
 
-    // Bullet texture
-
-   
-    plant->setXgridcoordinate(1);
-    plant->setYgridcoordinate(0);
-
-
-
     plant->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
-    plant->getPlantSprite().setPosition((plant->getXgridcoordinate() * 142.2) + 15, (plant->getYgridcoordinate() * 144) + 10);  // + 15 x - axis, + 10 y - axis
     plant->getPlantSprite().setTextureRect(textureRect);
     plant->getPlantSprite().setScale(3.75, 3.75);  // Scale the sprite to make it appear larger
 }
@@ -103,6 +112,8 @@ void Game::run()
                 window.close();
             }
         }
+
+        handleMouseInput(window);  // Handle mouse input
 
         // Create a background
         plant->setAnimation();
