@@ -6,7 +6,7 @@ using namespace std;
 class Plant
 {
 protected:
-	int gridcoordinateX, gridcoordinateY; 
+	int Xgridcoordinate, Ygridcoordinate; 
 	int Suncost;
 	bool isAlive;
 	bool isUnlocked;
@@ -15,8 +15,8 @@ protected:
 public:
 	Plant();
 
-	virtual void setAnimation();
-	
-	virtual sf::Sprite& getplantSprite();
+	virtual void setAnimation() = 0;
+	virtual sf::Sprite& getPlantSprite() = 0;
+
 
 };

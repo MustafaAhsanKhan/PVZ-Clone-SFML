@@ -140,19 +140,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="BulletPea.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PeaShooter.cpp" />
     <ClCompile Include="Plant.cpp" />
+    <ClCompile Include="Shooter.cpp" />
     <ClCompile Include="SimpleZombie.cpp" />
+    <ClCompile Include="SunFlower.cpp" />
+    <ClCompile Include="WallNut.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="BulletPea.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="PeaShooter.h" />
     <ClInclude Include="Plant.h" />
+    <ClInclude Include="Shooter.h" />
     <ClInclude Include="SimpleZombie.h" />
+    <ClInclude Include="SunFlower.h" />
+    <ClInclude Include="WallNut.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

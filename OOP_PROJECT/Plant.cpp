@@ -5,13 +5,3 @@ Plant::Plant()
 {
 	
 }
-
-void Plant::setAnimation()
-{
-	
-}
-
-sf::Sprite& Plant::getplantSprite()
-{
-	return plantSprite;
-}

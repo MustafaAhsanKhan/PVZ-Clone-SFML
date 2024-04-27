@@ -101,7 +101,6 @@ void Game::run()
         drawAll(window);
         
     }
-    
 
     return;
 }
