@@ -22,7 +22,7 @@ private:
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
 	Plant* plant;  // The plant object
-	PeaShooter PeaShooter_plant;
+	PeaShooter PeaShooterPlant;
 	Sprite mapSprite;
 
 public:

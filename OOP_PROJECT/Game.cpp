@@ -4,7 +4,9 @@ using namespace sf;
 
 Game::Game()
 {
+    // plant = new Plant;
     plant = new Plant;
+    
 }
 
 void Game::setObjectTextures()
@@ -21,22 +23,28 @@ void Game::setObjectTextures()
     // Setting textures for sprites
     mapSprite.setTexture(Asset_Texture.getTexture(0));
 
-    plant = &PeaShooter_plant;
+    plant = &PeaShooterPlant;
 
     sf::IntRect textureRect(0, 0, 27.125, 31);  // x = 0, y = 0, width = 64, height = 64
 
-    int x = 4;  // grid starts from 0, 0
-    int y = 4;
 
-    plant->getplantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
-    plant->getplantSprite().setPosition((x * 142.2) + 15, (y* 144) + 10);  // + 15 x - axis, + 10 y - axis
-    plant->getplantSprite().setTextureRect(textureRect);
-    plant->getplantSprite().setScale(3.75, 3.75);  // Scale the sprite to make it appear larger
+    // Bullet texture
+
+   
+    plant->setXgridcoordinate(1);
+    plant->setYgridcoordinate(0);
+
+
+
+    plant->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
+    plant->getPlantSprite().setPosition((plant->getXgridcoordinate() * 142.2) + 15, (plant->getYgridcoordinate() * 144) + 10);  // + 15 x - axis, + 10 y - axis
+    plant->getPlantSprite().setTextureRect(textureRect);
+    plant->getPlantSprite().setScale(3.75, 3.75);  // Scale the sprite to make it appear larger
 }
 void Game::drawAll(RenderWindow& window)
 {
     window.draw(mapSprite);
-    window.draw(plant->getplantSprite());
+    window.draw(plant->getPlantSprite());
     window.display();
     window.clear();
 }

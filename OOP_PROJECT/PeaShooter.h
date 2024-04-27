@@ -8,12 +8,18 @@ class PeaShooter : public Shooter
 {
 
 public:
-	PeaShooter() {}
+	PeaShooter();
 	virtual void setMaxBullets(int bullets);
 	virtual void setShootingRate(float p_ShootingRate);
-	virtual BulletPea*& getBullet(int index);
+	virtual BulletPea& getBullet(int index);
 	virtual void moveBullets();
 	virtual void shootBullet();
 	virtual void setAnimation();
 	virtual sf::Sprite& getPlantSprite();
+	virtual int getXgridcoordinate();
+	virtual int getYgridcoordinate();
+	virtual void setXgridcoordinate(int x);
+	virtual void setYgridcoordinate(int y);
+
+	~PeaShooter();
 };

@@ -14,9 +14,10 @@ protected:
 	sf::Clock PS_animationClock;
 public:
 	Plant();
-
-	virtual void setAnimation() = 0;
-	virtual sf::Sprite& getPlantSprite() = 0;
-
-
+	virtual void setAnimation();
+	virtual sf::Sprite& getPlantSprite();
+	virtual void setXgridcoordinate(int x);
+	virtual void setYgridcoordinate(int y);
+	virtual int getXgridcoordinate();
+	virtual int getYgridcoordinate();
 };

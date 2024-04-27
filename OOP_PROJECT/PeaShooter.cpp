@@ -1,5 +1,12 @@
 #include "PeaShooter.h"
 
+PeaShooter::PeaShooter()
+{
+	MAX_BULLETS = 2;
+	ShootingRate = 300;  // 300 milliseconds
+	bullets = new BulletPea[MAX_BULLETS];
+}
+
 sf::Sprite& PeaShooter::getPlantSprite()
 {
 	return plantSprite;
@@ -48,4 +55,43 @@ void PeaShooter::moveBullets()
 			bullets[i].move();
 		}
 	}
+}
+
+
+void PeaShooter::setMaxBullets(int bullets)
+{
+	
+}
+void PeaShooter::setShootingRate(float p_ShootingRate)
+{
+	cout << "temp";
+}
+BulletPea& PeaShooter::getBullet(int index)
+{
+	return bullets[index];
+}
+
+int PeaShooter::getXgridcoordinate()
+{
+	return Xgridcoordinate;
+}
+
+int PeaShooter::getYgridcoordinate()
+{
+	return Ygridcoordinate;
+}
+
+void PeaShooter::setXgridcoordinate(int x)
+{
+	Xgridcoordinate = x;
+}
+
+void PeaShooter::setYgridcoordinate(int y)
+{
+	Ygridcoordinate = y;
+}
+
+PeaShooter::~PeaShooter()
+{
+	delete[] bullets;
 }
