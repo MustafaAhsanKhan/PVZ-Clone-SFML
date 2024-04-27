@@ -1,8 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <ctime>
+#include <iostream>
 #include "Plant.h"
+#include "PeaShooter.h"
 #include "AssetManager.h"
+
+using namespace sf;
 
 // Key for the asset manager //
 
@@ -18,6 +22,7 @@ private:
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
 	Plant* plant;  // The plant object
+	PeaShooter PeaShooter_plant;
 	Sprite mapSprite;
 
 public:

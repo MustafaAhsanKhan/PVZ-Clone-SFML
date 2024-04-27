@@ -1,8 +1,7 @@
 #pragma once
-#include <iostream>
-#include <SFML/Graphics.hpp>
 using namespace std;
-using namespace sf;
+
+#include <SFML/Graphics.hpp>
 
 class Plant
 {
@@ -11,14 +10,11 @@ protected:
 	int Suncost;
 	bool isAlive;
 	bool isUnlocked;
-	Sprite plantSprite;
+	sf::Sprite plantSprite;
 
 public:
 	Plant();
 
-	virtual Sprite& getplantSprite();
-
-	// virtual void drawPlant();
+	virtual sf::Sprite& getplantSprite();
 
 };
-

@@ -1,7 +1,4 @@
 #include "Game.h"
-#include<iostream>
-#include<SFML/Graphics.hpp>
-#include "PeaShooter.h"
 
 Game::Game()
 {
@@ -21,18 +18,23 @@ void Game::setObjectTextures()
 
     // Setting textures for sprites
     mapSprite.setTexture(Asset_Texture.getTexture(0));
-    PeaShooter peashooter;
 
-    
-    
-    plant = &peashooter;
-    plant->getplantSprite().setTexture(Asset_Texture.getTexture(1));
-    plant->getplantSprite().setPosition(100, 100);
+    plant = &PeaShooter_plant;
+
+    sf::IntRect textureRect(0, 0, 27.125, 31);  // x = 0, y = 0, width = 64, height = 64
+
+    int x = 4;  // grid starts from 0, 0
+    int y = 4;
+
+    plant->getplantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
+    plant->getplantSprite().setPosition((x * 142.2) + 15, (y* 144) + 10);  // + 15 x - axis, + 10 y - axis
+    plant->getplantSprite().setTextureRect(textureRect);
+    plant->getplantSprite().setScale(3.75, 3.75);  // Scale the sprite to make it appear larger
 }
 void Game::drawAll(RenderWindow& window)
 {
     window.draw(mapSprite);
-    window.draw(plantgetplantSprite());
+    window.draw(plant->getplantSprite());
     window.display();
     window.clear();
 }
@@ -76,6 +78,8 @@ void Game::run()
     Clock deltaClock;
     float deltaTime = 0.0f;
 
+    Clock PS_animationClock;
+
     while (window.isOpen())
     {
         deltaTime = deltaClock.getElapsedTime().asMicroseconds();
@@ -91,6 +95,21 @@ void Game::run()
         }
 
         // Create a background
+
+        if (PS_animationClock.getElapsedTime().asMilliseconds() > 300)
+        {
+			sf::IntRect textureRect = plant->getplantSprite().getTextureRect();
+            if (textureRect.left >= 188.75)
+            {
+				textureRect.left = 0;
+			}
+            else
+            {
+				textureRect.left += 27.25;
+			}
+			plant->getplantSprite().setTextureRect(textureRect);
+			PS_animationClock.restart();
+		}
 
         drawAll(window);
         
