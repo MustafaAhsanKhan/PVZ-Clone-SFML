@@ -1,4 +1,6 @@
 #include "Game.h"
+#include<iostream>
+using namespace sf;
 
 Game::Game()
 {
@@ -53,7 +55,7 @@ void Game::run()
 
     // Game icon
     Image icon;
-    if (!icon.loadFromFile("C:/Users/optay/OneDrive/Uni/Semester 2/OOP/OOP_PROJECT/PVZ_Textures/icon.png"))
+    if (!icon.loadFromFile("../PVZ_Textures/icon.png"))
     {
         return;
     }
@@ -78,42 +80,28 @@ void Game::run()
     Clock deltaClock;
     float deltaTime = 0.0f;
 
-    Clock PS_animationClock;
+    
 
     while (window.isOpen())
     {
         deltaTime = deltaClock.getElapsedTime().asMicroseconds();
         deltaClock.restart();
 
-        Event event;
+        sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == Event::Closed)
+            if (event.type == sf::Event::Closed)
             {
                 window.close();
             }
         }
 
         // Create a background
-
-        if (PS_animationClock.getElapsedTime().asMilliseconds() > 300)
-        {
-			sf::IntRect textureRect = plant->getplantSprite().getTextureRect();
-            if (textureRect.left >= 188.75)
-            {
-				textureRect.left = 0;
-			}
-            else
-            {
-				textureRect.left += 27.25;
-			}
-			plant->getplantSprite().setTextureRect(textureRect);
-			PS_animationClock.restart();
-		}
-
+        plant->setAnimation();
         drawAll(window);
         
     }
+    
 
     return;
 }
