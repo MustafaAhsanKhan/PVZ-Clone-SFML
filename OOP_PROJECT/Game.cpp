@@ -47,7 +47,7 @@ void Game::handleMouseInput(sf::RenderWindow& window)
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
         // Get the mouse position relative to the window
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(window)
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
         int gridX = 0;
         int gridY = 0;
@@ -64,16 +64,6 @@ void Game::handleMouseInput(sf::RenderWindow& window)
             shooters->setXgridcoordinate(gridX);
             shooters->setYgridcoordinate(gridY);
         }
-
-        for (int i = 0; i < shooters->getMaxBullets(); i++)
-        {
-            shooters->getBullet(i).setXPos(gridX * 142.2 + 80);
-            shooters->getBullet(i).setYPos(gridY * 144);
-            shooters->getBullet(i).getBulletSprite().setScale(0.1, 0.1);
-        }
-        shooters->getBullet(0).setXPos(gridX * 142.2 + 80);
-        shooters->getBullet(0).setYPos(gridY * 144);
-        shooters->getBullet(0).getBulletSprite().setScale(0.1, 0.1);
         
     }
 }
@@ -92,19 +82,17 @@ void Game::setPlantTextures()
         shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(5));
         shooters->getBullet(i).getBulletSprite().setScale(0.1, 0.1);
     }
-    
-    // shooters->getBullet(0).getBulletSprite().setPosition(100, 100);
 
 }
 
 void Game::renderPlants(RenderWindow& window)
 {
     window.draw(shooters->getPlantSprite());
-    shooters->getBullet(0).drawBullet(window);
-    if (shooters->getBullet(0).getXPos() > 700) // change this to a clock that handles the rate of shooting
+    for (int i = 0; i < shooters->getMaxBullets(); i++)
     {
-        shooters->getBullet(1).drawBullet(window);
+        shooters->getBullet(i).drawBullet(window);
     }
+ 
 }
 void Game::renderMap(RenderWindow& window)
 {

@@ -1,12 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class BulletPea
 {
 private:
 	sf::Sprite bulletSprite;
-	int x_pos;
-	int y_pos;
+	float x_pos;
+	float y_pos;
 	int damage;
 	float bulletSpeed;
 	bool exists;
@@ -20,6 +21,7 @@ public:
 	int getYPos();
 	bool getExists();
 	sf::Sprite& getBulletSprite();
+
 
 	// Setters
 	void setDamage(int damage);

@@ -25,13 +25,10 @@ private:
 	PeaShooter PeaShooterPlant;
 	Sprite mapSprite;
 	Shooter* shooters;
-
 public:
-
 	Game();  // Default constructor
 	void run(); // has the game loop
-
-private:   // private functions
+private: 
 	void InitializeMapSprite();
 	void InitializePlantTextures();
 	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input

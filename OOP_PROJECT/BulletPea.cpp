@@ -3,10 +3,11 @@
 
 BulletPea::BulletPea()
 {
-	this->x_pos = 0, this->y_pos = 0;
+	this->x_pos = 0;
+	this->y_pos = 0;
 	this->damage = 10; // change according to game
 	this->exists = false; // initially false 
-	this->bulletSpeed = 1.0f; // change to whatever speed
+	this->bulletSpeed = 1; // change to whatever speed
 }
 // Getters
 float BulletPea::getBulletSpeed()
@@ -55,9 +56,16 @@ void BulletPea::setExists(bool exists)
 
 void BulletPea::move()
 {
+	
 	if (exists)
 	{
+		//std::cout << "test";
 		x_pos += bulletSpeed; // handling one bullet for now (shayad miss hi karate hain dusra)
+		std::cout << x_pos;
+	}
+	if(x_pos > 740)
+	{
+		exists = false;
 	}
 		
 }
