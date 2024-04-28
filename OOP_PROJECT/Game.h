@@ -27,13 +27,15 @@ private:
 	Shooter* shooters;
 
 public:
+
 	Game();  // Default constructor
+	void run(); // has the game loop
+
+private:   // private functions
 	void InitializeMapSprite();
 	void InitializePlantTextures();
 	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input
 	void setPlantTextures();
 	void renderMap(RenderWindow& window);
 	void renderPlants(RenderWindow& window);
-	void run();  // The whole game is inside this 
-
 };

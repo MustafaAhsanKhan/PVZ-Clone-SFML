@@ -29,7 +29,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
 
 void Game::InitializeMapSprite()
 {
-    Asset_Texture.loadTexture(0, "../starter_files/Images/grid.png");
+    Asset_Texture.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
     mapSprite.setTexture(Asset_Texture.getTexture(0));
 }
 
@@ -47,16 +47,24 @@ void Game::handleMouseInput(sf::RenderWindow& window)
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
         // Get the mouse position relative to the window
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window)
+
+        int gridX = 0;
+        int gridY = 0;
 
         // Convert mouse position to grid coordinates
-        int gridX = (mousePosition.x - 15) / 142.2; // Assuming 15 is the offset for x-axis
-        int gridY = (mousePosition.y - 10) / 144;   // Assuming 10 is the offset for y-axis
+        if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660)
+        {
 
-        // Update the position of the plant sprite
-        shooters->getPlantSprite().setPosition(gridX * 142.2 + 15, gridY * 144 + 10);
-        shooters->setXgridcoordinate(gridX);
-        shooters->setYgridcoordinate(gridY);
+            gridX = (mousePosition.x / 100.66);
+            gridY = (mousePosition.y / 114);
+
+            // Update the position of the plant sprite
+            shooters->getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
+            shooters->setXgridcoordinate(gridX);
+            shooters->setYgridcoordinate(gridY);
+        }
+
         for (int i = 0; i < shooters->getMaxBullets(); i++)
         {
             shooters->getBullet(i).setXPos(gridX * 142.2 + 80);
@@ -78,7 +86,7 @@ void Game::setPlantTextures()
 
     shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
     shooters->getPlantSprite().setTextureRect(textureRect);
-    shooters->getPlantSprite().setScale(3.75, 3.75);  // Scale the sprite to make it appear larger
+    shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
     for (int i = 0; i < shooters->getMaxBullets(); i++)
     {
         shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(5));
