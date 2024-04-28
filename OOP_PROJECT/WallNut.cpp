@@ -8,7 +8,7 @@ sf::Sprite& WallNut::getplantSprite()
 
 void WallNut::setAnimation()
 {
-    if (PS_animationClock.getElapsedTime().asMilliseconds() > 300)
+    if (animationClock.getElapsedTime().asMilliseconds() > 300)
     {
         sf::IntRect textureRect = this->getplantSprite().getTextureRect();
         if (textureRect.left >= 188.75)
@@ -20,6 +20,6 @@ void WallNut::setAnimation()
             textureRect.left += 27.25;
         }
         this->getplantSprite().setTextureRect(textureRect);
-        PS_animationClock.restart();
+        animationClock.restart();
     }
 }

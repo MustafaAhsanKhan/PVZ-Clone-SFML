@@ -33,20 +33,20 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
 void Game::InitializeUISprites()
 {
     Asset_Texture.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
-    Asset_Texture.loadTexture(8, "../PVZ_Textures/Seed_Packets.png");
-    Asset_Texture.loadTexture(9, "../PVZ_Textures/Lawn_Mower2.png");
+    Asset_Texture.loadTexture(20, "../PVZ_Textures/Seed_Packets.png");
+    Asset_Texture.loadTexture(21, "../PVZ_Textures/Lawn_Mower2.png");
 
     sf::IntRect textureRect(0, 73, 143, 550);
 
     // Seed packet sprite
-    seedPacketSprite.setTexture(Asset_Texture.getTexture(8));
+    seedPacketSprite.setTexture(Asset_Texture.getTexture(20));
     seedPacketSprite.setTextureRect(textureRect);
     seedPacketSprite.setPosition(50, 70);
 
     // Lawn mower sprite
     for (int i = 0; i < 5; i++)
     {
-		lawnMowerSprite[i].setTexture(Asset_Texture.getTexture(9));
+		lawnMowerSprite[i].setTexture(Asset_Texture.getTexture(21));
 		lawnMowerSprite[i].setPosition(185, (i * 118) + 70);
 	}
 
@@ -62,6 +62,12 @@ void Game::InitializePlantTextures()
     Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/sunflower.png");
     Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/cherrybomb.png");
     Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/wallnut.png");
+}
+
+void Game::InitializeZombieTextures()
+{
+	// Asset_Texture.loadTexture(8, "../PVZ_Textures/PlantTextures/Peashooter.png");
+	
 }
 
 void Game::handleMouseInput(sf::RenderWindow& window)

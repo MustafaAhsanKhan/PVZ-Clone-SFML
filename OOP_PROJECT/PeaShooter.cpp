@@ -16,7 +16,7 @@ sf::Sprite& PeaShooter::getPlantSprite()
 
 void PeaShooter::setAnimation()
 {
-	if (PS_animationClock.getElapsedTime().asMilliseconds() > 300)
+	if (animationClock.getElapsedTime().asMilliseconds() > 300)
 	{
 		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
 		if (textureRect.left >= 188.75)
@@ -28,18 +28,13 @@ void PeaShooter::setAnimation()
 			textureRect.left += 27.25;
 		}
 		this->getPlantSprite().setTextureRect(textureRect);
-		PS_animationClock.restart();
+		animationClock.restart();
 	}
 }
 
 // Update all bullets
 void PeaShooter::shootBullet(float deltaTime)
 {
-	/*for (int i = 0; i < this->getMaxBullets(); i++)
-	{
-		this->getBullet(i).setXPos(Xgridcoordinate * 100.66);
-		this->getBullet(i).setYPos(Ygridcoordinate * 114);
-	}*/
 	
 	if (ShootingRateClock.getElapsedTime().asSeconds() > ShootingRate)  // Making a new bullet after every 300 milliseconds
 	{

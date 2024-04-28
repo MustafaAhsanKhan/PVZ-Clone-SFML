@@ -11,9 +11,9 @@ protected:
 	bool isAlive;
 	bool isUnlocked;
 	sf::Sprite plantSprite;
-	sf::Clock PS_animationClock;
+	sf::Clock animationClock;
 public:
-	Plant();	
+	Plant();
 	virtual void setAnimation();
 	virtual sf::Sprite& getPlantSprite();
 	virtual void setXgridcoordinate(int x);

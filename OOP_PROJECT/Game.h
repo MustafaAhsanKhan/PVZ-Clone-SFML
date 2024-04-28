@@ -34,8 +34,10 @@ public:
 private: 
 	void InitializeUISprites();
 	void InitializePlantTextures();
+	void InitializeZombieTextures();
 	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input
 	void setPlantTextures();
 	void renderUI(RenderWindow& window);
 	void renderPlants(RenderWindow& window);
+
 };
