@@ -12,7 +12,7 @@ BulletPea::BulletPea()
 	Its not going to depend on the rate at which the plant shoots. 
 	Hence when the bullet becomes false we just need to set its position back to the plant's
 	*/
-	this->bulletSpeed = 1.5; // change to whatever speed
+	this->bulletSpeed = 0.5; // change to whatever speed
 }
 // Getters
 float BulletPea::getBulletSpeed()
@@ -67,7 +67,10 @@ void BulletPea::move()
 		x_pos += bulletSpeed; // handling one bullet for now (shayad miss hi karate hain dusra)
 		std::cout << x_pos;
 	}	
-	// removed the condtion checking if it reaches outside resolution since that doesnt matter. The rate is still constant 
+	if (x_pos > 1350)
+	{
+		exists = false;
+	}
 }
 
 void BulletPea::drawBullet(sf::RenderWindow& window)
