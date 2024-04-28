@@ -63,9 +63,7 @@ void BulletPea::move()
 {
 	if (exists)
 	{
-		//std::cout << "test";
-		x_pos += bulletSpeed; // handling one bullet for now (shayad miss hi karate hain dusra)
-		std::cout << x_pos;
+		x_pos += bulletSpeed;
 	}	
 	if (x_pos > 1350)
 	{

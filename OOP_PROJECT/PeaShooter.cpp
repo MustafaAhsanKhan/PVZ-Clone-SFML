@@ -5,6 +5,7 @@ PeaShooter::PeaShooter()
 	MAX_BULLETS = 2;
 	ShootingRate = 1;  // 1 second
 	bullets = new BulletPea[MAX_BULLETS];
+	Suncost = 100; // initializing the cost of Peashooter
 }
 
 sf::Sprite& PeaShooter::getPlantSprite()
