@@ -13,11 +13,12 @@ protected:
 	sf::Sprite plantSprite;
 	sf::Clock PS_animationClock;
 public:
-	Plant();
+	Plant();	
 	virtual void setAnimation();
 	virtual sf::Sprite& getPlantSprite();
 	virtual void setXgridcoordinate(int x);
 	virtual void setYgridcoordinate(int y);
 	virtual int getXgridcoordinate();
 	virtual int getYgridcoordinate();
+    //virtual void setSunClock(float clock);
 };

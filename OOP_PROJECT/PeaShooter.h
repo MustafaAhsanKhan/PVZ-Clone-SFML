@@ -10,9 +10,12 @@ class PeaShooter : public Shooter
 public:
 	PeaShooter();
 	virtual void setMaxBullets(int bullets);
+	virtual int getMaxBullets();
 	virtual void setShootingRate(float p_ShootingRate);
 	virtual BulletPea& getBullet(int index);
-	virtual void moveBullets();
+
+	// virtual void moveBullets();
+
 	virtual void shootBullet();
 	virtual void setAnimation();
 	virtual sf::Sprite& getPlantSprite();

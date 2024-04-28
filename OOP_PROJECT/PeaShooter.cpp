@@ -3,8 +3,9 @@
 PeaShooter::PeaShooter()
 {
 	MAX_BULLETS = 2;
-	ShootingRate = 300;  // 300 milliseconds
+	ShootingRate = 1;  // 1 second
 	bullets = new BulletPea[MAX_BULLETS];
+	Suncost = 100; // initializing the cost of Peashooter
 }
 
 sf::Sprite& PeaShooter::getPlantSprite()
@@ -31,24 +32,31 @@ void PeaShooter::setAnimation()
 	}
 }
 
-
+// Update all bullets
 void PeaShooter::shootBullet()
 {
-	// Find an available bullet slot and shoot
-	for (int i = 0; i < MAX_BULLETS; ++i)
+	/*for (int i = 0; i < this->getMaxBullets(); i++)
 	{
-		if (!bullets[i].getExists())
+		this->getBullet(i).setXPos(Xgridcoordinate * 100.66);
+		this->getBullet(i).setYPos(Ygridcoordinate * 114);
+	}*/
+	
+	if (ShootingRateClock.getElapsedTime().asSeconds() > ShootingRate)  // Making a new bullet after every 300 milliseconds
+	{
+		for (int i = 0; i < this->getMaxBullets(); ++i)
 		{
-			bullets[i].shoot(Xgridcoordinate, Ygridcoordinate);
-			break;
+			if (!bullets[i].getExists()) // removed this condition since the rate will be constant and wont depend on if the bullet exists or not
+			{
+				bullets[i].setExists(true);
+				bullets[i].setXPos(Xgridcoordinate * 100.66 + 50); // correctly alligned
+				bullets[i].setYPos(Ygridcoordinate * 114 - 10); // correctly alligned
+				ShootingRateClock.restart();
+				break;
+			}
 		}
 	}
-}
 
-// Update all bullets
-void PeaShooter::moveBullets()
-{
-	for (int i = 0; i < MAX_BULLETS; ++i)
+	for (int i = 0; i < this->getMaxBullets(); i++)
 	{
 		if (bullets[i].getExists())
 		{
@@ -64,7 +72,7 @@ void PeaShooter::setMaxBullets(int bullets)
 }
 void PeaShooter::setShootingRate(float p_ShootingRate)
 {
-	cout << "temp";
+	
 }
 BulletPea& PeaShooter::getBullet(int index)
 {
@@ -91,7 +99,13 @@ void PeaShooter::setYgridcoordinate(int y)
 	Ygridcoordinate = y;
 }
 
+int PeaShooter::getMaxBullets()
+{
+	return MAX_BULLETS;
+}
+
 PeaShooter::~PeaShooter()
 {
 	delete[] bullets;
 }
+

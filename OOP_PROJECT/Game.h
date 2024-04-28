@@ -24,16 +24,17 @@ private:
 	Plant* plant;  // The plant object
 	PeaShooter PeaShooterPlant;
 	Sprite mapSprite;
-
+	Sprite seedPacketSprite;
+	Shooter* shooters;
+	bool isPlacingPlant;
 public:
 	Game();  // Default constructor
-
+	void run(); // has the game loop
+private: 
+	void InitializeUISprites();
+	void InitializePlantTextures();
 	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input
-
-	void setObjectTextures();
-
-	void drawAll(RenderWindow& window);  // Draw all the objects in the game
-
-	void run();  // The whole game is inside this 
-
+	void setPlantTextures();
+	void renderUI(RenderWindow& window);
+	void renderPlants(RenderWindow& window);
 };

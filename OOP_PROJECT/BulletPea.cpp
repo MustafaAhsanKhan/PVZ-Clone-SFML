@@ -1,7 +1,21 @@
 #include "BulletPea.h"
 
+
+BulletPea::BulletPea()
+{
+	this->x_pos = 0;
+	this->y_pos = 0;
+	this->damage = 10; // change according to game
+	this->exists = false; // initially false  
+	/*
+	this variable is only to check if the bullet should draw or not. 
+	Its not going to depend on the rate at which the plant shoots. 
+	Hence when the bullet becomes false we just need to set its position back to the plant's
+	*/
+	this->bulletSpeed = 0.5; // change to whatever speed
+}
 // Getters
-int BulletPea::getBulletSpeed()
+float BulletPea::getBulletSpeed()
 {
 	return bulletSpeed;
 }
@@ -27,12 +41,7 @@ sf::Sprite& BulletPea::getBulletSprite()
 	return bulletSprite;
 }
 
-// Setters
-void BulletPea::setBulletSpeed(int speed)
-{
-	bulletSpeed = speed;
 
-}
 void BulletPea::setDamage(int damage)
 {
 	this->damage = damage;
@@ -50,17 +59,13 @@ void BulletPea::setExists(bool exists)
 	this->exists = exists;
 }
 
-void BulletPea::shoot(int XgridCoordinate, int YgridCoordinate)
-{
-	x_pos = XgridCoordinate;
-	y_pos = YgridCoordinate;
-	exists = true;
-}
-
 void BulletPea::move()
 {
-	x_pos += bulletSpeed;
-	if (x_pos > 800)
+	if (exists)
+	{
+		x_pos += bulletSpeed;
+	}	
+	if (x_pos > 1350)
 	{
 		exists = false;
 	}
@@ -69,5 +74,9 @@ void BulletPea::move()
 void BulletPea::drawBullet(sf::RenderWindow& window)
 {
 	bulletSprite.setPosition(x_pos, y_pos);
-	window.draw(bulletSprite);
+	if (exists)
+	{
+		window.draw(bulletSprite); // only draws when the bullet exists
+	}
+	
 }
