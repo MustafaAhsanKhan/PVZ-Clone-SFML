@@ -2,8 +2,8 @@
 
 PeaShooter::PeaShooter()
 {
-	MAX_BULLETS = 2;
-	ShootingRate = 2;  // 2 seconds
+	MAX_BULLETS = 1;
+	ShootingRate = 1.5;  // 2 seconds
 	bullets = new BulletPea[MAX_BULLETS];
 }
 
@@ -34,24 +34,26 @@ void PeaShooter::setAnimation()
 // Update all bullets
 void PeaShooter::shootBullet()
 {
-	for (int i = 0; i < this->getMaxBullets(); i++)
+	/*for (int i = 0; i < this->getMaxBullets(); i++)
 	{
 		this->getBullet(i).setXPos(Xgridcoordinate * 100.66);
 		this->getBullet(i).setYPos(Ygridcoordinate * 114);
-	}
+	}*/
 	
 	if (ShootingRateClock.getElapsedTime().asSeconds() > ShootingRate)  // Making a new bullet after every 300 milliseconds
 	{
+
+		
 		for (int i = 0; i < this->getMaxBullets(); ++i)
 		{
-			if (!bullets[i].getExists())
-			{
+			//if (!bullets[i].getExists()) // removed this condition since the rate will be constant and wont depend on if the bullet exists or not
+			//{
 				bullets[i].setExists(true);
-				bullets[i].setXPos(Xgridcoordinate * 100.66);
-				bullets[i].setYPos(Ygridcoordinate * 114);
+				bullets[i].setXPos(Xgridcoordinate * 100.66 + 50); // correctly alligned
+				bullets[i].setYPos(Ygridcoordinate * 114 - 10); // correctly alligned
 				ShootingRateClock.restart();
-				break;
-			}
+				// break;
+			//}
 		}
 	}
 
