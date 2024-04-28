@@ -30,6 +30,6 @@ public:
 	void setExists(bool exists);
 
 	// Functions to handle the bullet
-	void move(); // increment position at a constant rate (bullet speed will be constant)
+	void move(float deltaTime); // increment position at a constant rate (bullet speed will be constant)
 	void drawBullet(sf::RenderWindow& window);
 };

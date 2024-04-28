@@ -33,7 +33,7 @@ void PeaShooter::setAnimation()
 }
 
 // Update all bullets
-void PeaShooter::shootBullet()
+void PeaShooter::shootBullet(float deltaTime)
 {
 	/*for (int i = 0; i < this->getMaxBullets(); i++)
 	{
@@ -60,7 +60,7 @@ void PeaShooter::shootBullet()
 	{
 		if (bullets[i].getExists())
 		{
-			bullets[i].move();
+			bullets[i].move(deltaTime);
 		}
 	}
 }

@@ -16,7 +16,7 @@ public:
 
 	// virtual void moveBullets();
 
-	virtual void shootBullet();
+	virtual void shootBullet(float deltaTime);
 	virtual void setAnimation();
 	virtual sf::Sprite& getPlantSprite();
 	virtual int getXgridcoordinate();

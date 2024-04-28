@@ -13,7 +13,7 @@ BulletPea& Shooter::getBullet(int index)
 	return bullets[index];
 }
 
-void Shooter::shootBullet()
+void Shooter::shootBullet(float deltaTime)
 {
 
 }

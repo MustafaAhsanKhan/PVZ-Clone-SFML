@@ -34,12 +34,21 @@ void Game::InitializeUISprites()
 {
     Asset_Texture.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
     Asset_Texture.loadTexture(8, "../PVZ_Textures/Seed_Packets.png");
+    Asset_Texture.loadTexture(9, "../PVZ_Textures/Lawn_Mower2.png");
 
     sf::IntRect textureRect(0, 73, 143, 550);
 
+    // Seed packet sprite
     seedPacketSprite.setTexture(Asset_Texture.getTexture(8));
     seedPacketSprite.setTextureRect(textureRect);
     seedPacketSprite.setPosition(50, 70);
+
+    // Lawn mower sprite
+    for (int i = 0; i < 5; i++)
+    {
+		lawnMowerSprite[i].setTexture(Asset_Texture.getTexture(9));
+		lawnMowerSprite[i].setPosition(185, (i * 118) + 70);
+	}
 
     mapSprite.setTexture(Asset_Texture.getTexture(0));
 }
@@ -121,6 +130,10 @@ void Game::renderPlants(RenderWindow& window)
 void Game::renderUI(RenderWindow& window)
 {
     window.draw(mapSprite);
+    for (int i = 0; i < 5; i++)
+    {
+		window.draw(lawnMowerSprite[i]);
+	}
     window.draw(seedPacketSprite);  // Draw the seed packet (Buttons)
 }
 
@@ -145,12 +158,12 @@ void Game::run()
     */
 
     Clock deltaClock;
-    float deltaTime = 0.0f;
+    float deltaTime = 0.0;
 
     while (window.isOpen())
     {
-        deltaTime = deltaClock.getElapsedTime().asMicroseconds();
         deltaClock.restart();
+        deltaTime = deltaClock.getElapsedTime().asSeconds();
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -167,7 +180,7 @@ void Game::run()
         if (shooters != NULL)
         {
             shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
-            shooters->shootBullet(); // shoot peas
+            shooters->shootBullet(deltaTime); // shoot peas
             renderPlants(window); // plants 
         }
 

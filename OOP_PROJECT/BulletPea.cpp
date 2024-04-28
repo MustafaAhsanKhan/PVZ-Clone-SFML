@@ -12,7 +12,7 @@ BulletPea::BulletPea()
 	Its not going to depend on the rate at which the plant shoots. 
 	Hence when the bullet becomes false we just need to set its position back to the plant's
 	*/
-	this->bulletSpeed = 0.5; // change to whatever speed
+	this->bulletSpeed = 60000; // change to whatever speed
 }
 // Getters
 float BulletPea::getBulletSpeed()
@@ -59,11 +59,11 @@ void BulletPea::setExists(bool exists)
 	this->exists = exists;
 }
 
-void BulletPea::move()
+void BulletPea::move(float deltaTime)
 {
 	if (exists)
 	{
-		x_pos += bulletSpeed;
+		x_pos += bulletSpeed * deltaTime;
 	}	
 	if (x_pos > 1350)
 	{

@@ -25,6 +25,7 @@ private:
 	PeaShooter PeaShooterPlant;
 	Sprite mapSprite;
 	Sprite seedPacketSprite;
+	Sprite lawnMowerSprite[5];
 	Shooter* shooters;
 	bool isPlacingPlant;
 public:
