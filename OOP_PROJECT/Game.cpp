@@ -66,16 +66,16 @@ void Game::InitializePlantTextures()
 {
     Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");
     Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/Repeater.png");
-    Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/snow_pea.png");
+    Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/SnowPea.png");
     Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/Pea.png");
-    Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/sunflower.png");
-    Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/cherrybomb.png");
-    Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/wallnut.png");
+    Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/Sunflower.png");
+    Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
+    Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Wallnut.png");
 }
 
 void Game::InitializeZombieTextures()
 {
-	// Asset_Texture.loadTexture(8, "../PVZ_Textures/PlantTextures/Peashooter.png");
+	Asset_Texture.loadTexture(8, "../PVZ_Textures/Zombies/simple_zombie.png");
 	
 }
 
