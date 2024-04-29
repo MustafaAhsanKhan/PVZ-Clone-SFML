@@ -10,6 +10,15 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     plant = NULL;  // Currently no plants exist
     shooters = NULL;
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
+
+    // Initialize the game grid status
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            FIELD_GAME_STATUS[i][j] = false;
+        }
+    }
     
     // Initialize the UI
     InitializeUISprites();
@@ -80,19 +89,20 @@ void Game::handleMouseInput(sf::RenderWindow& window)
         // Get the mouse position relative to the window
         sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
+        gridX = (mousePosition.x / 100.66);
+        gridY = (mousePosition.y / 114);
 
         if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 144 && mousePosition.y <= 233)
         {
             isPlacingPlant = true;
         }
         // Convert mouse position to grid coordinates
-        else if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && isPlacingPlant == true)
+        else if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && isPlacingPlant == true && FIELD_GAME_STATUS[gridX - 3][gridY - 1] == false)
         {
+            cout << "Plant placed";
             shooters = new PeaShooter;
             shooters = &PeaShooterPlant;
 
-            gridX = (mousePosition.x / 100.66);
-            gridY = (mousePosition.y / 114);
 
 
             // Update the position of the plant sprite
@@ -100,6 +110,12 @@ void Game::handleMouseInput(sf::RenderWindow& window)
             shooters->setXgridcoordinate(gridX);
             shooters->setYgridcoordinate(gridY);
 
+            FIELD_GAME_STATUS[gridX - 3][gridY - 1] = true;  // So another plant cant be placed on the same spot
+            
+            isPlacingPlant = false;
+        }
+        else
+        {
             isPlacingPlant = false;
         }
         
@@ -146,23 +162,6 @@ void Game::renderUI(RenderWindow& window)
 
 void Game::run()
 {
-    /*
-    NOTE : THIS CODE IS EXTRA AND WE MIGHT NEED IT LATER BUT NOW
-    // Game field (5x9)
-    const int ROWS = 5;
-    const int COLS = 9;
-
-    bool FIELD_GAME_STATUS[ROWS][COLS];
-
-    for (int i = 0; i < ROWS; i++)
-    {
-        for (int j = 0; j < COLS; j++)
-        {
-            FIELD_GAME_STATUS[i][j] = true;
-        }
-    }
-    */
-
     Clock deltaClock;
     float deltaTime = 0.0;
 

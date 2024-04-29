@@ -19,6 +19,7 @@ using namespace sf;
 class Game
 {
 private:
+	bool FIELD_GAME_STATUS[5][9];
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
 	Plant* plant;  // The plant object
