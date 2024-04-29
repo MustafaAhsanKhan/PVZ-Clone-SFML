@@ -64,10 +64,10 @@ void Game::InitializeUISprites()
 
 void Game::InitializePlantTextures()
 {
-    Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");
+    Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Plant texture
     Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/Repeater.png");
     Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/SnowPea.png");
-    Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/Pea.png");
+    Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
     Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/Sunflower.png");
     Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
     Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Wallnut.png");
@@ -76,7 +76,10 @@ void Game::InitializePlantTextures()
 void Game::InitializeZombieTextures()
 {
 	Asset_Texture.loadTexture(8, "../PVZ_Textures/Zombies/simple_zombie.png");
-	
+    Asset_Texture.loadTexture(9, "../PVZ_Textures/Zombies/flying_zombie.png");
+    Asset_Texture.loadTexture(10, "../PVZ_Textures/Zombies/football_zombie.png");
+    Asset_Texture.loadTexture(11, "../PVZ_Textures/Zombies/dancing_zombie.png");
+    Asset_Texture.loadTexture(12, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
 }
 
 void Game::handleMouseInput(sf::RenderWindow& window)
@@ -131,10 +134,12 @@ void Game::setPlantTextures()
     shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
     shooters->getPlantSprite().setTextureRect(textureRect);
     shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
+    textureRect = sf::IntRect(78, 38, 10, 20);
     for (int i = 0; i < shooters->getMaxBullets(); i++)
     {
         shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
-        shooters->getBullet(i).getBulletSprite().setScale(0.1, 0.1);
+        shooters->getBullet(i).getBulletSprite().setScale(3, 3);
+        shooters->getBullet(i).getBulletSprite().setTextureRect(textureRect);
     }
 
     shooters = NULL;  // Currently no plants exist
