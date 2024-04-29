@@ -19,7 +19,7 @@ using namespace sf;
 class Game
 {
 private:
-	bool FIELD_GAME_STATUS[5][9];
+	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
 	Plant* plant;  // The plant object
@@ -33,12 +33,12 @@ public:
 	Game();  // Default constructor
 	void run(); // has the game loop
 private: 
-	void InitializeUISprites();
-	void InitializePlantTextures();
-	void InitializeZombieTextures();
+	void InitializeUISprites();  // Initialize the UI sprites
+	void InitializePlantTextures();  // Initialize the plant textures
+	void InitializeZombieTextures();  // Initialize the zombie textures
 	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input
 	void setPlantTextures();
-	void renderUI(RenderWindow& window);
-	void renderPlants(RenderWindow& window);
+	void renderUI(RenderWindow& window);  // Render the UI
+	void renderPlants(RenderWindow& window);  // Render the plants
 
 };

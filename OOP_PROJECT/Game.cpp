@@ -16,7 +16,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     {
         for (int j = 0; j < 9; j++)
         {
-            FIELD_GAME_STATUS[i][j] = false;
+            FIELD_GAME_STATUS[i][j] = false;  // Initially all the grid is empty
         }
     }
     
