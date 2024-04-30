@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PeaShooter.cpp" />
     <ClCompile Include="Plant.cpp" />
+    <ClCompile Include="PlantFactory.cpp" />
     <ClCompile Include="Shooter.cpp" />
     <ClCompile Include="SimpleZombie.cpp" />
     <ClCompile Include="SunFlower.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="PeaShooter.h" />
     <ClInclude Include="Plant.h" />
+    <ClInclude Include="PlantFactory.h" />
     <ClInclude Include="Shooter.h" />
     <ClInclude Include="SimpleZombie.h" />
     <ClInclude Include="SunFlower.h" />

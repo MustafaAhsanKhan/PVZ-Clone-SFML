@@ -107,6 +107,10 @@ void Game::handleMouseInput(sf::RenderWindow& window)
             shooters = &PeaShooterPlant;
 
 
+            AllPlants.getPlant(0, 0).getPlantSprite().setPosition((gridX) * 100.66 + 20, (gridY + 1) * 114); // all plants
+            AllPlants.getPlant(0, 0).setXgridcoordinate(gridX);
+            AllPlants.getPlant(0, 0).setYgridcoordinate(gridY + 1);
+
 
             // Update the position of the plant sprite
             shooters->getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
@@ -133,6 +137,11 @@ void Game::setPlantTextures()
 
     shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
     shooters->getPlantSprite().setTextureRect(textureRect);
+
+    //AllPlants.getPlant(0, 0).getPlantSprite().setTexture(Asset_Texture.getTexture(1)); // set texture of first type of plant(peashooter)
+    //AllPlants.getPlant(0, 0).getPlantSprite().setTextureRect(textureRect); // set texture of first type of plant(peashooter)
+    //AllPlants.getPlant(0, 0).getPlantSprite().setScale(3, 3);
+
     shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
     textureRect = sf::IntRect(78, 38, 10, 20);
     for (int i = 0; i < shooters->getMaxBullets(); i++)
@@ -152,6 +161,9 @@ void Game::renderPlants(RenderWindow& window)
     {
         shooters->getBullet(i).drawBullet(window);
     }
+
+    window.draw(AllPlants.getPlant(0, 0).getPlantSprite());
+    
  
 }
 void Game::renderUI(RenderWindow& window)
@@ -193,6 +205,9 @@ void Game::run()
             shooters->shootBullet(deltaTime); // shoot peas
             renderPlants(window); // plants 
         }
+
+        // AllPlants.getPlant(0, 0).setAnimation();
+        
 
         window.display();  
         window.clear();

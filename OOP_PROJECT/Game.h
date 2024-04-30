@@ -5,6 +5,7 @@
 #include "Plant.h"
 #include "PeaShooter.h"
 #include "AssetManager.h"
+#include "PlantFactory.h"
 
 using namespace sf;
 
@@ -24,6 +25,9 @@ private:
 	AssetManager Asset_Texture;  // The asset manager for the textures
 	Plant* plant;  // The plant object
 	PeaShooter PeaShooterPlant;
+
+	PlantFactory AllPlants;
+
 	Sprite mapSprite;
 	Sprite seedPacketSprite;
 	Sprite lawnMowerSprite[5];
