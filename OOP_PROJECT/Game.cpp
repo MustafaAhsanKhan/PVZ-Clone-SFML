@@ -107,9 +107,9 @@ void Game::handleMouseInput(sf::RenderWindow& window)
             shooters = &PeaShooterPlant;
 
 
-            AllPlants.getPlant(0, 0).getPlantSprite().setPosition((gridX) * 100.66 + 20, (gridY + 1) * 114); // all plants
-            AllPlants.getPlant(0, 0).setXgridcoordinate(gridX);
-            AllPlants.getPlant(0, 0).setYgridcoordinate(gridY + 1);
+           // AllPlants.getPlant(0, 0).getPlantSprite().setPosition((gridX) * 100.66 + 20, (gridY + 1) * 114); // all plants
+            // AllPlants.getPlant(0, 0).setXgridcoordinate(gridX);
+            // AllPlants.getPlant(0, 0).setYgridcoordinate(gridY + 1);
 
 
             // Update the position of the plant sprite
@@ -162,7 +162,7 @@ void Game::renderPlants(RenderWindow& window)
         shooters->getBullet(i).drawBullet(window);
     }
 
-    window.draw(AllPlants.getPlant(0, 0).getPlantSprite());
+   //  window.draw(AllPlants.getPlant(0, 0).getPlantSprite());
     
  
 }
