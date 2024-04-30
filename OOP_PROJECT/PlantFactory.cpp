@@ -2,10 +2,19 @@
 
 PlantFactory::PlantFactory()
 {
-	totalplantTypes = 2; // will change later
+	totalplantTypes = 1; // will change later
 	plants = new Plant * [totalplantTypes];
-	plants[0] = new PeaShooter [5];
-	plants[1] = new SunFlower [5];
+
+	for (int i = 0; i < totalplantTypes; ++i) {
+		plants[i] = new Plant[5];
+	}
+	for (int j = 0; j < 5; ++j) {
+		plants[0][j] = PeaShooter(); // Assuming PeaShooter has a default constructor
+	}
+
+	// plants[0][1].getPlantSprite().setPosition(190, 199);
+	
+	// plants[1] = new SunFlower [5];
 	// 2 rows and 5 column arrays
 }
 

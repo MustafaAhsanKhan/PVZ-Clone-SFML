@@ -12,14 +12,17 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
 
     // Initialize the game grid status
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < 5; i++)
     {
-        for (int j = 0; j < 5; j++)
+        for (int j = 0; j < 9; j++)
         {
             FIELD_GAME_STATUS[i][j] = false;  // Initially all the grid is empty
         }
     }
-    
+    for (int i = 0; i < 2; i++)
+    {
+        clickedseedPacket[i] = false;
+    }
     // Initialize the UI
     InitializeUISprites();
     float scaleX = static_cast<float>(window.getSize().x) / mapSprite.getLocalBounds().width;
@@ -82,6 +85,65 @@ void Game::InitializeZombieTextures()
     Asset_Texture.loadTexture(12, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
 }
 
+
+void Game::handlePlantCreation()
+{
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        int gridX = 0;
+        int gridY = 0;
+
+
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+        gridX = (mousePosition.x / 100.66);
+        gridY = (mousePosition.y / 114);
+
+        int totalplanttypes = 1;
+        int eachtypenum = 5;
+        int totaltypescreated = 1;
+        // for peashooter
+        int plantscreated = 1;
+        for (int i = 0; i < totalplanttypes; i++)
+        {
+            for (int j = 0; i < eachtypenum; i++)
+            {               
+                // for sunflower
+                if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 55 && mousePosition.y <= 144)
+                {
+                    clickedseedPacket[0] = true;
+                }
+
+                // for peashooter
+                if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 144 && mousePosition.y <= 233)
+                {
+                    clickedseedPacket[1] = true;
+                }
+                
+                if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedseedPacket[1] == true && FIELD_GAME_STATUS[gridX - 3][gridY - 1] == false)
+                {
+                    AllPlants.getPlant(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
+                    AllPlants.getPlant(totalplanttypes - 1, totaltypescreated - 1).setXgridcoordinate(gridX);
+                    AllPlants.getPlant(totalplanttypes - 1, totaltypescreated - 1).setYgridcoordinate(gridY);
+                    totaltypescreated++;
+
+                    FIELD_GAME_STATUS[gridX - 3][gridY - 1] = true;  // So another plant cant be placed on the same spot
+
+                    clickedseedPacket[0] = false;
+                }
+                              
+            }            
+        }
+       
+        
+        // Convert mouse position to grid coordinates
+
+       
+    }
+}
+
+
+
 void Game::handleMouseInput(sf::RenderWindow& window)
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -100,24 +162,18 @@ void Game::handleMouseInput(sf::RenderWindow& window)
             isPlacingPlant = true;
         }
         // Convert mouse position to grid coordinates
-        else if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && isPlacingPlant == true && FIELD_GAME_STATUS[gridX - 3][gridY - 1] == false)
+        else if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && isPlacingPlant == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
         {
             cout << "Plant placed";
             shooters = new PeaShooter;
             shooters = &PeaShooterPlant;
-
-
-           // AllPlants.getPlant(0, 0).getPlantSprite().setPosition((gridX) * 100.66 + 20, (gridY + 1) * 114); // all plants
-            // AllPlants.getPlant(0, 0).setXgridcoordinate(gridX);
-            // AllPlants.getPlant(0, 0).setYgridcoordinate(gridY + 1);
-
 
             // Update the position of the plant sprite
             shooters->getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
             shooters->setXgridcoordinate(gridX);
             shooters->setYgridcoordinate(gridY);
 
-            FIELD_GAME_STATUS[gridX - 3][gridY - 1] = true;  // So another plant cant be placed on the same spot
+            FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
             
             isPlacingPlant = false;
         }
@@ -129,6 +185,9 @@ void Game::handleMouseInput(sf::RenderWindow& window)
     }
 }
 
+
+
+
 void Game::setPlantTextures()
 {
     shooters = &PeaShooterPlant;
@@ -138,9 +197,7 @@ void Game::setPlantTextures()
     shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
     shooters->getPlantSprite().setTextureRect(textureRect);
 
-    //AllPlants.getPlant(0, 0).getPlantSprite().setTexture(Asset_Texture.getTexture(1)); // set texture of first type of plant(peashooter)
-    //AllPlants.getPlant(0, 0).getPlantSprite().setTextureRect(textureRect); // set texture of first type of plant(peashooter)
-    //AllPlants.getPlant(0, 0).getPlantSprite().setScale(3, 3);
+   
 
     shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
     textureRect = sf::IntRect(78, 38, 10, 20);
@@ -150,6 +207,16 @@ void Game::setPlantTextures()
         shooters->getBullet(i).getBulletSprite().setScale(3, 3);
         shooters->getBullet(i).getBulletSprite().setTextureRect(textureRect);
     }
+
+    for (int i = 0; i < 5; i++) // setting textures of all plants (peashooter here)
+    {
+        AllPlants.getPlant(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1)); // set texture of first type of plant(peashooter)
+        AllPlants.getPlant(0, i).getPlantSprite().setTextureRect(textureRect); // set texture of first type of plant(peashooter)
+        AllPlants.getPlant(0, i).getPlantSprite().setScale(3, 3);
+    }
+    
+
+
 
     shooters = NULL;  // Currently no plants exist
 }
@@ -161,8 +228,16 @@ void Game::renderPlants(RenderWindow& window)
     {
         shooters->getBullet(i).drawBullet(window);
     }
+    
+    for (int i = 0; i < 5; i++)
+    {
+        // window.draw(AllPlants.getPlant(0, i).getPlantSprite());
+    }
 
-   //  window.draw(AllPlants.getPlant(0, 0).getPlantSprite());
+    
+
+
+
     
  
 }
@@ -198,14 +273,14 @@ void Game::run()
 
         renderUI(window); // render the UI
         handleMouseInput(window);  // Handle mouse input
-
+        // handlePlantCreation();
         if (shooters != NULL)
         {
             shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
             shooters->shootBullet(deltaTime); // shoot peas
             renderPlants(window); // plants 
         }
-
+        
         // AllPlants.getPlant(0, 0).setAnimation();
         
 

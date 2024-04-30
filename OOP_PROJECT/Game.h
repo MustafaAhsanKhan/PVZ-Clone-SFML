@@ -20,7 +20,7 @@ using namespace sf;
 class Game
 {
 private:
-	bool FIELD_GAME_STATUS[9][5];  // The status of the game field
+	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
 	Plant* plant;  // The plant object
@@ -33,10 +33,12 @@ private:
 	Sprite lawnMowerSprite[5];
 	Shooter* shooters;
 	bool isPlacingPlant;
+	bool clickedseedPacket[2]; // change size later
 public:
 	Game();  // Default constructor
 	void run(); // has the game loop
-private: 
+private:  
+	void handlePlantCreation();
 	void InitializeUISprites();  // Initialize the UI sprites
 	void InitializePlantTextures();  // Initialize the plant textures
 	void InitializeZombieTextures();  // Initialize the zombie textures

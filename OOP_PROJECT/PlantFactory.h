@@ -15,6 +15,7 @@ private:
 public:
 	PlantFactory();
 	Plant& getPlant(int row, int col);
+	
 	// static int getPlantnum(int index);
 	
 
