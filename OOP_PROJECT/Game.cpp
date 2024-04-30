@@ -12,9 +12,9 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
 
     // Initialize the game grid status
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 9; i++)
     {
-        for (int j = 0; j < 9; j++)
+        for (int j = 0; j < 5; j++)
         {
             FIELD_GAME_STATUS[i][j] = false;  // Initially all the grid is empty
         }
