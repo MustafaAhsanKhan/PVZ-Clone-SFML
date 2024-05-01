@@ -26,21 +26,21 @@ sf::Sprite& Shooter::getPlantSprite()
 	return plantSprite;
 }
 
-void Shooter::setXgridcoordinate(int x)
+void Shooter::setXgridCoordinate(int x)
 {
-	Xgridcoordinate = x;
+	XgridCoordinate = x;
 }
-void Shooter::setYgridcoordinate(int y)
+void Shooter::setYgridCoordinate(int y)
 {
-	Ygridcoordinate = y;
+	YgridCoordinate = y;
 }
-int Shooter::getXgridcoordinate()
+int Shooter::getXgridCoordinate()
 {
-	return Xgridcoordinate;
+	return XgridCoordinate;
 }
-int Shooter::getYgridcoordinate()
+int Shooter::getYgridCoordinate()
 {
-	return Ygridcoordinate;
+	return YgridCoordinate;
 }
 
 int Shooter::getMaxBullets()

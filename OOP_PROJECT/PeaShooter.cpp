@@ -74,24 +74,24 @@ BulletPea& PeaShooter::getBullet(int index)
 	return bullets[index];
 }
 
-int PeaShooter::getXgridcoordinate()
+int PeaShooter::getXgridCoordinate()
 {
-	return Xgridcoordinate;
+	return XgridCoordinate;
 }
 
-int PeaShooter::getYgridcoordinate()
+int PeaShooter::getYgridCoordinate()
 {
-	return Ygridcoordinate;
+	return YgridCoordinate;
 }
 
-void PeaShooter::setXgridcoordinate(int x)
+void PeaShooter::setXgridCoordinate(int x)
 {
-	Xgridcoordinate = x;
+	XgridCoordinate = x;
 }
 
-void PeaShooter::setYgridcoordinate(int y)
+void PeaShooter::setYgridCoordinate(int y)
 {
-	Ygridcoordinate = y;
+	YgridCoordinate = y;
 }
 
 int PeaShooter::getMaxBullets()
