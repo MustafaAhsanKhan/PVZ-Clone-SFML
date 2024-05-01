@@ -7,15 +7,10 @@
 #include "AssetManager.h"
 #include "PlantFactory.h"
 
+#include "Zombie.h"
+#include "SimpleZombie.h"
+
 using namespace sf;
-
-// Key for the asset manager //
-
-// 0 is the map texture
-// 1 is the sun currency texture
-// 2 is the sunflower texture
-// 3 is the peashooter texture
-// 4 is the pea bullet texture
 
 class Game
 {
@@ -27,6 +22,9 @@ private:
 	PeaShooter PeaShooterPlant;
 
 	PlantFactory AllPlants;
+
+	Zombie* zombie;
+	SimpleZombie SimpleZombie;
 
 	Sprite mapSprite;
 	Sprite seedPacketSprite;
@@ -44,7 +42,9 @@ private:
 	void InitializeZombieTextures();  // Initialize the zombie textures
 	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input
 	void setPlantTextures();
-	void renderUI(RenderWindow& window);  // Render the UI
+	void setZombieTextures();
 	void renderPlants(RenderWindow& window);  // Render the plants
+	void renderZombies(RenderWindow& window);  // Render the zombies
+	void renderUI(RenderWindow& window);  // Render the UI
 
 };

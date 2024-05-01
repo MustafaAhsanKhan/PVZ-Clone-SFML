@@ -11,6 +11,10 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     shooters = NULL;
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
 
+    // Initialize Zombies
+
+    zombie = NULL;  // Currently no zombies exist
+
     // Initialize the game grid status
     for (int i = 0; i < 5; i++)
     {
@@ -39,7 +43,9 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     
     InitializePlantTextures();
     setPlantTextures();
-    
+
+    InitializeZombieTextures();
+    setZombieTextures();
 }
 
 void Game::InitializeUISprites()
@@ -165,14 +171,19 @@ void Game::handleMouseInput(sf::RenderWindow& window)
         // Convert mouse position to grid coordinates
         else if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && isPlacingPlant == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
         {
-            cout << "Plant placed";
+            
+
             shooters = new PeaShooter;
             shooters = &PeaShooterPlant;
 
             // Update the position of the plant sprite
             shooters->getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
-            shooters->setXgridcoordinate(gridX);
-            shooters->setYgridcoordinate(gridY);
+            shooters->setXgridcoordinate(gridX - 3);
+            shooters->setYgridcoordinate(gridY - 1);
+
+            cout << "Plant grid" << endl;
+            cout << shooters->getXgridcoordinate() << endl;
+            cout << shooters->getYgridcoordinate() << endl;
 
             FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
             
@@ -187,8 +198,6 @@ void Game::handleMouseInput(sf::RenderWindow& window)
 }
 
 
-
-
 void Game::setPlantTextures()
 {
     shooters = &PeaShooterPlant;
@@ -201,8 +210,8 @@ void Game::setPlantTextures()
    
 
     shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
-    textureRect = sf::IntRect(78, 38, 10, 20);
-    for (int i = 0; i < shooters->getMaxBullets(); i++)
+    textureRect = sf::IntRect(78, 38, 10, 20);  // Setting the texture of the bullet (pea)
+    for (int i = 0; i < shooters->getMaxBullets(); i++)  // setting textures of all bullets (peas here)
     {
         shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
         shooters->getBullet(i).getBulletSprite().setScale(3, 3);
@@ -220,6 +229,18 @@ void Game::setPlantTextures()
 
 
     shooters = NULL;  // Currently no plants exist
+}
+
+void Game::setZombieTextures()
+{
+    zombie = &SimpleZombie;
+
+    sf::IntRect textureRect(0, 58.28, 51.11, 58.28);
+
+    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(8));
+    zombie->getZombieSprite().setScale(2, 2);
+
+    zombie->getZombieSprite().setTextureRect(textureRect);
 }
 
 void Game::renderPlants(RenderWindow& window)
@@ -242,6 +263,12 @@ void Game::renderPlants(RenderWindow& window)
     
  
 }
+
+void Game::renderZombies(RenderWindow& window)
+{
+	window.draw(zombie->getZombieSprite());
+}
+
 void Game::renderUI(RenderWindow& window)
 {
     window.draw(mapSprite);
@@ -255,8 +282,17 @@ void Game::renderUI(RenderWindow& window)
 
 void Game::run()
 {
+    srand(time(0));
     Clock deltaClock;
+    Clock zombieClock;
     float deltaTime = 0.0;
+    int temp = rand() % 5;
+    cout << temp;
+    zombie->setXgridCoordinate(8);
+    zombie->setYgridCoordinate(temp);
+    zombie->setx_pos(1180);
+    zombie->sety_pos((120 * temp) + 90);
+    zombie->getZombieSprite().setPosition(1180, (120 * temp) + 90);
 
     while (window.isOpen())
     {
@@ -280,6 +316,13 @@ void Game::run()
             shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
             shooters->shootBullet(deltaTime); // shoot peas
             renderPlants(window); // plants 
+        }
+
+        if (zombie != NULL)
+        {
+            zombie->moveZombie(deltaTime);
+            zombie->setAnimation();
+            renderZombies(window);
         }
         
         // AllPlants.getPlant(0, 0).setAnimation();
