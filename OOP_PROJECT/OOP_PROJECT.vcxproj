@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="BulletPea.cpp" />
+    <ClCompile Include="FlyingZombie.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PeaShooter.cpp" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="BulletPea.h" />
+    <ClInclude Include="FlyingZombie.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="PeaShooter.h" />
     <ClInclude Include="Plant.h" />

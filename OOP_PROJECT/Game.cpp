@@ -28,7 +28,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
         clickedSeedPacket[i] = false;
     }
     // Initialize the UI
-    InitializeUISprites();
+	Game::InitializeUISprites();
     float scaleX = static_cast<float>(window.getSize().x) / mapSprite.getLocalBounds().width;
     float scaleY = static_cast<float>(window.getSize().y) / mapSprite.getLocalBounds().height;
     mapSprite.setScale(scaleX, scaleY);
@@ -41,11 +41,14 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     }
     window.setIcon(32, 32, icon.getPixelsPtr());
     
-    InitializePlantTextures();
-    setPlantTextures();
+	Game::InitializePlantTextures();
+	Game::setPlantTextures();
 
-    InitializeZombieTextures();
-    setZombieTextures();
+	Game::InitializeZombieTextures();
+	Game::setZombieTextures();
+
+    
+
 }
 
 void Game::InitializeUISprites()
@@ -208,10 +211,6 @@ void Game::handleMouseInput(sf::RenderWindow& window)
             shooters->setXgridCoordinate(gridX - 3);
             shooters->setYgridCoordinate(gridY - 1);
 
-            cout << "Plant grid" << endl;
-            cout << shooters->getXgridCoordinate() << endl;
-            cout << shooters->getYgridCoordinate() << endl;
-
             FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
             
             isPlacingPlant = false;
@@ -229,33 +228,38 @@ void Game::setPlantTextures()
 {
     shooters = &PeaShooterPlant;
 
-    sf::IntRect peashooterRect(0, 0, 27.125, 31);  // x = 0, y = 0, width = 64, height = 64 and peashooter rectangle
+     // plant pointer is setting the sunflower sprite texture
+    // shooter pointer is setting the peashooter sprite texture
 
-    sf::IntRect sunflowerRect(101.9, 36.75, 29, 32); // sunflower rectangle
+
+    sf::IntRect textureRect(0, 0, 27.125, 31);  // Peashooter rect
+
 
     shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
-    shooters->getPlantSprite().setTextureRect(peashooterRect);
+    shooters->getPlantSprite().setTextureRect(textureRect);
 
    
 
     shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
-    peashooterRect = sf::IntRect(78, 38, 10, 20);
+    textureRect = sf::IntRect(78, 38, 10, 20);
     for (int i = 0; i < shooters->getMaxBullets(); i++)
     {
         shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
         shooters->getBullet(i).getBulletSprite().setScale(3, 3);
-        shooters->getBullet(i).getBulletSprite().setTextureRect(peashooterRect);
+        shooters->getBullet(i).getBulletSprite().setTextureRect(textureRect);
     }
 
     for (int i = 0; i < 5; i++) // setting textures of all plants (peashooter here)
     {
         AllPlants.getPlant(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1)); // set texture of first type of plant(peashooter)
-        AllPlants.getPlant(0, i).getPlantSprite().setTextureRect(peashooterRect); // set texture of first type of plant(peashooter)
+        AllPlants.getPlant(0, i).getPlantSprite().setTextureRect(textureRect); // set texture of first type of plant(peashooter)
         AllPlants.getPlant(0, i).getPlantSprite().setScale(3, 3);
     }
     
-    plant->getPlantSprite().setTexture(Asset_Texture.getTexture(5));
-    plant->getPlantSprite().setTextureRect(sunflowerRect);
+    textureRect = sf::IntRect(101.9, 36.75, 30, 32);  // sunflower rectangle
+
+    plant->getPlantSprite().setTexture(Asset_Texture.getTexture(5));  // Setting the texture of the sunflower
+    plant->getPlantSprite().setTextureRect(textureRect);
     plant->getPlantSprite().setScale(3, 3);
 
     
@@ -268,9 +272,16 @@ void Game::setZombieTextures()
     zombie = &SimpleZombie;
 
     sf::IntRect textureRect(0, 58.28, 51.11, 58.28);
-
     zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(8));
-    zombie->getZombieSprite().setScale(2, 2);
+    zombie->getZombieSprite().setScale(3, 3);
+
+    zombie->getZombieSprite().setTextureRect(textureRect);
+
+    zombie = &FlyingZombie;
+
+    textureRect = sf::IntRect(0, 0, 34.95, 58);
+    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(9));
+    zombie->getZombieSprite().setScale(3, 3);
 
     zombie->getZombieSprite().setTextureRect(textureRect);
 }
@@ -323,12 +334,22 @@ void Game::run()
     Clock zombieClock;
     float deltaTime = 0.0;
     int temp = rand() % 5;
-    cout << temp;
+   
+
+    zombie = &SimpleZombie;
     zombie->setXgridCoordinate(8);
     zombie->setYgridCoordinate(temp);
     zombie->setx_pos(1180);
-    zombie->sety_pos((120 * temp) + 90);
-    zombie->getZombieSprite().setPosition(1180, (120 * temp) + 90);
+    zombie->sety_pos((120 * temp) + 40);
+
+
+    temp = rand() % 5;
+    zombie = &FlyingZombie;
+
+    zombie->setXgridCoordinate(8);
+    zombie->setYgridCoordinate(temp);
+    zombie->setx_pos(1180);
+    zombie->sety_pos((120 * temp) + 40);
 
     while (window.isOpen())
     {
@@ -344,11 +365,11 @@ void Game::run()
             }
         }
 
-        renderUI(window); // render the UI
+		Game::renderUI(window); // render the UI
        
-        handlePlantCreation();
+        Game::handlePlantCreation();
 
-        handleMouseInput(window);  // Handle mouse input
+		Game::handleMouseInput(window);  // Handle mouse input
 
         plant->setAnimation(); // extra for sunflower for now
         if (shooters != NULL)
@@ -356,19 +377,25 @@ void Game::run()
             shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
             shooters->shootBullet(deltaTime); // shoot peas
         }
-            renderPlants(window); // plants 
+        Game::renderPlants(window); // plants 
 
         if (zombie != NULL)
         {
+            zombie = &FlyingZombie;
             zombie->moveZombie(deltaTime);
             zombie->setAnimation();
-            renderZombies(window);
+            Game::renderZombies(window);
+
+            zombie = &SimpleZombie;
+            zombie->moveZombie(deltaTime);
+            zombie->setAnimation();
+            Game::renderZombies(window);
         }
         
         // AllPlants.getPlant(0, 0).setAnimation();
         
 
-        window.display();  
+        window.display();
         window.clear();
     }
 }

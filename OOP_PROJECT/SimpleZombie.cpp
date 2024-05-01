@@ -39,7 +39,7 @@ int SimpleZombie::getZombieHealth()
 }
 void SimpleZombie::setAnimation()
 {
-	if (animationClock.getElapsedTime().asMilliseconds() > 300)
+	if (animationClock.getElapsedTime().asMilliseconds() > 350)
 	{
 		sf::IntRect textureRect = this->getZombieSprite().getTextureRect();
 		
