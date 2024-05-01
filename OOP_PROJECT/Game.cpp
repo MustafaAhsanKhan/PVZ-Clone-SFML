@@ -205,12 +205,12 @@ void Game::handleMouseInput(sf::RenderWindow& window)
 
             // Update the position of the plant sprite
             shooters->getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
-            shooters->setXgridcoordinate(gridX - 3);
-            shooters->setYgridcoordinate(gridY - 1);
+            shooters->setXgridCoordinate(gridX - 3);
+            shooters->setYgridCoordinate(gridY - 1);
 
             cout << "Plant grid" << endl;
-            cout << shooters->getXgridcoordinate() << endl;
-            cout << shooters->getYgridcoordinate() << endl;
+            cout << shooters->getXgridCoordinate() << endl;
+            cout << shooters->getYgridCoordinate() << endl;
 
             FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
             

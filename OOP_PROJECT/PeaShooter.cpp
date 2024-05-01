@@ -43,8 +43,8 @@ void PeaShooter::shootBullet(float deltaTime)
 			if (!bullets[i].getExists()) // removed this condition since the rate will be constant and wont depend on if the bullet exists or not
 			{
 				bullets[i].setExists(true);
-				bullets[i].setXPos(Xgridcoordinate * 100.66 + 380); // correctly alligned
-				bullets[i].setYPos(Ygridcoordinate * 114 + 110); // correctly alligned
+				bullets[i].setXPos(XgridCoordinate * 100.66 + 380); // correctly alligned
+				bullets[i].setYPos(YgridCoordinate * 114 + 110); // correctly alligned
 				ShootingRateClock.restart();
 				break;
 			}
