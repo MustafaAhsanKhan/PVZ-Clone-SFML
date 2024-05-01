@@ -2,7 +2,7 @@
 #include<iostream>
 using namespace sf;
 
-int Game::totaltypescreated = 1; // current plant types created
+// int Game::totaltypescreated = 1; // current plant types created
 
 Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close)
 {
@@ -473,11 +473,11 @@ void Game::run()
 
         // For plant factory
 
-       /* for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             AllPlants->getShooter(0, i).setAnimation();
             AllPlants->getShooter(0, i).shootBullet(deltaTime);
-        }*/
+        }
         
 
         Game::renderPlants(window); // plants 

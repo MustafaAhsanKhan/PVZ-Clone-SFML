@@ -37,7 +37,7 @@ private:
 	bool isPlacingPlant;
 	bool clickedSeedPacket[2]; // change size later
 
-	static int totaltypescreated;
+	int totaltypescreated = 1;
 
 public:
 	Game();  // Default constructor
