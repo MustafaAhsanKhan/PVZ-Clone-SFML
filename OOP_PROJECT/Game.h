@@ -33,7 +33,7 @@ private:
 	Sprite lawnMowerSprite[5];
 	Shooter* shooters;
 	bool isPlacingPlant;
-	bool clickedseedPacket[2]; // change size later
+	bool clickedSeedPacket[2]; // change size later
 public:
 	Game();  // Default constructor
 	void run(); // has the game loop

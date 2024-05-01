@@ -21,7 +21,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     }
     for (int i = 0; i < 2; i++)
     {
-        clickedseedPacket[i] = false;
+        clickedSeedPacket[i] = false;
     }
     // Initialize the UI
     InitializeUISprites();
@@ -102,25 +102,32 @@ void Game::handlePlantCreation()
         int totalplanttypes = 1;
         int eachtypenum = 5;
         int totaltypescreated = 1;
-        // for peashooter
+       
+        // for sunflower
         int plantscreated = 1;
+
+		if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 55 && mousePosition.y <= 144)
+		{
+			clickedSeedPacket[0] = true;
+		}
+
+		// for peashooter
+		if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 144 && mousePosition.y <= 233)
+		{
+            
+			clickedSeedPacket[1] = true;
+		}
+
+
+       
         for (int i = 0; i < totalplanttypes; i++)
         {
             for (int j = 0; i < eachtypenum; i++)
             {               
                 // for sunflower
-                if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 55 && mousePosition.y <= 144)
-                {
-                    clickedseedPacket[0] = true;
-                }
-
-                // for peashooter
-                if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 144 && mousePosition.y <= 233)
-                {
-                    clickedseedPacket[1] = true;
-                }
                 
-                if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedseedPacket[1] == true && FIELD_GAME_STATUS[gridX - 3][gridY - 1] == false)
+                
+                if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[1] == true && FIELD_GAME_STATUS[gridX - 3][gridY - 1] == false)
                 {
                     AllPlants.getPlant(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
                     AllPlants.getPlant(totalplanttypes - 1, totaltypescreated - 1).setXgridcoordinate(gridX);
@@ -129,16 +136,10 @@ void Game::handlePlantCreation()
 
                     FIELD_GAME_STATUS[gridX - 3][gridY - 1] = true;  // So another plant cant be placed on the same spot
 
-                    clickedseedPacket[0] = false;
-                }
-                              
+                    clickedSeedPacket[0] = false;
+                }                             
             }            
-        }
-       
-        
-        // Convert mouse position to grid coordinates
-
-       
+        }               // Convert mouse position to grid coordinates
     }
 }
 
