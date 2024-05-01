@@ -20,5 +20,5 @@ public:
 	virtual void setYgridcoordinate(int y);
 	virtual int getXgridcoordinate();
 	virtual int getYgridcoordinate();
-    // virtual void setSunClock(float clock);
+    virtual void setSunClock(float clock); // uncommented this
 };
