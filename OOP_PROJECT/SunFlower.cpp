@@ -17,13 +17,13 @@ void SunFlower::setAnimation() // change for sunflower
     if (animationClock.getElapsedTime().asMilliseconds() > 300)
     {
         sf::IntRect textureRect = this->getplantSprite().getTextureRect();
-        if (textureRect.left >= 188.75)
+        if (textureRect.left >= 251)
         {
-            textureRect.left = 0;
+            textureRect.left = 101.9; // for sunflowers spritesheet
         }
         else
         {
-            textureRect.left += 27.25;
+            textureRect.left += 30;
         }
         this->getplantSprite().setTextureRect(textureRect);
         animationClock.restart();

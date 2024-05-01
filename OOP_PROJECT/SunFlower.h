@@ -11,4 +11,3 @@ public:
 	virtual sf::Sprite& getplantSprite();
 	// virtual void setsunclock(float clock);
 };
-

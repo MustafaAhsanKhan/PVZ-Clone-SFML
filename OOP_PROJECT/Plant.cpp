@@ -17,19 +17,19 @@ sf::Sprite& Plant::getPlantSprite()
 }
 
 
-void Plant::setXgridcoordinate(int x)
+void Plant::setXgridCoordinate(int x)
 {
-	Xgridcoordinate = x;
+	XgridCoordinate = x;
 }
-void Plant::setYgridcoordinate(int y)
+void Plant::setYgridCoordinate(int y)
 {
-	Ygridcoordinate = y;
+	YgridCoordinate = y;
 }
-int Plant::getXgridcoordinate()
+int Plant::getXgridCoordinate()
 {
-	return Xgridcoordinate;
+	return XgridCoordinate;
 }
-int Plant::getYgridcoordinate()
+int Plant::getYgridCoordinate()
 {
-	return Ygridcoordinate;
+	return YgridCoordinate;
 }

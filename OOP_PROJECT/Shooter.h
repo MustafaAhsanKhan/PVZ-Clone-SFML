@@ -19,9 +19,9 @@ public:
 	virtual void shootBullet(float deltaTime);
 	virtual void setAnimation();
 	virtual sf::Sprite& getPlantSprite();
-	virtual void setXgridcoordinate(int x);
-	virtual void setYgridcoordinate(int y);
-	virtual int getXgridcoordinate();
-	virtual int getYgridcoordinate();
+	virtual void setXgridCoordinate(int x);
+	virtual void setYgridCoordinate(int y);
+	virtual int getXgridCoordinate();
+	virtual int getYgridCoordinate();
 
 };

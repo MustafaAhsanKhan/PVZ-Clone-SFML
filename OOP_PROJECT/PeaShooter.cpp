@@ -43,8 +43,8 @@ void PeaShooter::shootBullet(float deltaTime)
 			if (!bullets[i].getExists()) // removed this condition since the rate will be constant and wont depend on if the bullet exists or not
 			{
 				bullets[i].setExists(true);
-				bullets[i].setXPos(Xgridcoordinate * 100.66 + 80); // correctly alligned
-				bullets[i].setYPos(Ygridcoordinate * 114 - 5); // correctly alligned
+				bullets[i].setXPos(XgridCoordinate * 100.66 + 80); // correctly alligned
+				bullets[i].setYPos(YgridCoordinate * 114 - 5); // correctly alligned
 				ShootingRateClock.restart();
 				break;
 			}
@@ -74,24 +74,24 @@ BulletPea& PeaShooter::getBullet(int index)
 	return bullets[index];
 }
 
-int PeaShooter::getXgridcoordinate()
+int PeaShooter::getXgridCoordinate()
 {
-	return Xgridcoordinate;
+	return XgridCoordinate;
 }
 
-int PeaShooter::getYgridcoordinate()
+int PeaShooter::getYgridCoordinate()
 {
-	return Ygridcoordinate;
+	return YgridCoordinate;
 }
 
-void PeaShooter::setXgridcoordinate(int x)
+void PeaShooter::setXgridCoordinate(int x)
 {
-	Xgridcoordinate = x;
+	XgridCoordinate = x;
 }
 
-void PeaShooter::setYgridcoordinate(int y)
+void PeaShooter::setYgridCoordinate(int y)
 {
-	Ygridcoordinate = y;
+	YgridCoordinate = y;
 }
 
 int PeaShooter::getMaxBullets()
