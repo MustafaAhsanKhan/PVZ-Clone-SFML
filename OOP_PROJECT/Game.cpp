@@ -2,14 +2,15 @@
 #include<iostream>
 using namespace sf;
 
+int Game::totaltypescreated = 1; // current plant types created
+
 Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close)
 {
-    // Initialize Plants
-    //plant = new Plant; // will handle the plants array later
-    //shooters = new PeaShooter;
-    plant = new SunFlower;  // Currently no plants exist
+    plant = NULL;  // Currently no plants exist
     shooters = NULL;
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
+    AllPlants = NULL; // null in the start
+
 
     // Initialize Zombies
 
@@ -95,6 +96,58 @@ void Game::InitializeZombieTextures()
 }
 
 
+
+void Game::handleAllPlantsCreation()
+{
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        int gridX = 0;
+        int gridY = 0;
+
+
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+        gridX = (mousePosition.x / 100.66);
+        gridY = (mousePosition.y / 114);
+
+        const int totalplanttypes = 1; // will be 6 once all are implemented
+        const int eachtypenum = 5; // total types
+        // int totaltypescreated = 1; // the total instances of each type currently
+        int plantscreated = 1; // currently
+
+            // checks if seed packet clicked
+            if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 55 && mousePosition.y <= 144)
+            {
+                clickedSeedPacket[0] = true;
+            }
+            if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 233 && mousePosition.y <= 322)
+            {
+                if (!clickedSeedPacket[0])
+                {
+                    clickedSeedPacket[1] = true;
+                }
+                
+            }
+            for (int i = 0; i < totalplanttypes; i++)
+            {
+            
+                 if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[1] == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
+                 {
+                     AllPlants->getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
+                     AllPlants->getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
+                     AllPlants->getShooter(totalplanttypes - 1, totaltypescreated - 1).setYgridCoordinate(gridY);
+
+                     totaltypescreated++;
+                     cout << "NEW PLANT CREATED! ";
+                     FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
+                     clickedSeedPacket[1] = false;
+                 }               
+            }
+    }
+}
+
+
+
 void Game::handlePlantCreation()
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -110,7 +163,7 @@ void Game::handlePlantCreation()
 
         int totalplanttypes = 1;
         int eachtypenum = 5;
-        int totaltypescreated = 1;
+        
        
         // for sunflower
         int plantscreated = 1;
@@ -138,9 +191,8 @@ void Game::handlePlantCreation()
                 
                 if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[0] == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
                 {
-                    // AllPlants.getPlant(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
-                    // AllPlants.getPlant(totalplanttypes - 1, totaltypescreated - 1).setXgridcoordinate(gridX);
-                    // AllPlants.getPlant(totalplanttypes - 1, totaltypescreated - 1).setYgridcoordinate(gridY);
+                    plant = new SunFlower;
+                    plant = &SunFlowerPlant;
                     totaltypescreated++;
                     cout << "Sunflower Seed packet pressed .. ";
                     plant->getPlantSprite().setPosition(gridX * 100.66 + 15, gridY * 114);
@@ -203,7 +255,7 @@ void Game::handleMouseInput(sf::RenderWindow& window)
         {
             
 
-            shooters = new PeaShooter;
+            // shooters = new PeaShooter;
             shooters = &PeaShooterPlant;
 
             // Update the position of the plant sprite
@@ -227,7 +279,8 @@ void Game::handleMouseInput(sf::RenderWindow& window)
 void Game::setPlantTextures()
 {
     shooters = &PeaShooterPlant;
-
+    plant = &SunFlowerPlant;
+    AllPlants = new PlantFactory;
      // plant pointer is setting the sunflower sprite texture
     // shooter pointer is setting the peashooter sprite texture
 
@@ -237,6 +290,19 @@ void Game::setPlantTextures()
 
     shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
     shooters->getPlantSprite().setTextureRect(textureRect);
+
+
+    /*
+    Plant factory
+    */
+    for (int i = 0; i < 10; i++)
+    {
+        AllPlants->getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
+        AllPlants->getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
+        AllPlants->getShooter(0, i).getPlantSprite().setScale(3, 3);
+
+    }
+   
 
    
 
@@ -249,13 +315,17 @@ void Game::setPlantTextures()
         shooters->getBullet(i).getBulletSprite().setTextureRect(textureRect);
     }
 
-    for (int i = 0; i < 5; i++) // setting textures of all plants (peashooter here)
+    // the Shooter's bullets
+    for (int i = 0; i < 10; i++)
     {
-        AllPlants.getPlant(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1)); // set texture of first type of plant(peashooter)
-        AllPlants.getPlant(0, i).getPlantSprite().setTextureRect(textureRect); // set texture of first type of plant(peashooter)
-        AllPlants.getPlant(0, i).getPlantSprite().setScale(3, 3);
+        AllPlants->getShooter(0, i).getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
+        AllPlants->getShooter(0, i).getBullet(i).getBulletSprite().setScale(3, 3);
+        AllPlants->getShooter(0, i).getBullet(i).getBulletSprite().setTextureRect(textureRect);
     }
-    
+
+
+    // For the Sunflower's texture
+
     textureRect = sf::IntRect(101.9, 36.75, 30, 32);  // sunflower rectangle
 
     plant->getPlantSprite().setTexture(Asset_Texture.getTexture(5));  // Setting the texture of the sunflower
@@ -297,14 +367,26 @@ void Game::renderPlants(RenderWindow& window)
         }
     }
     
-    
-    for (int i = 0; i < 5; i++)
+    if (plant != nullptr)
     {
-        // window.draw(AllPlants.getPlant(0, i).getPlantSprite());
+        window.draw(plant->getPlantSprite());
     }
-    window.draw(plant->getPlantSprite());
     
+    
+    if (AllPlants != nullptr)
+    {
+        for (int i = 0; i < totaltypescreated; i++)
+        {
 
+            window.draw(AllPlants->getShooter(0, i).getPlantSprite());
+
+            for (int j = 0; j < AllPlants->getShooter(0, i).getMaxBullets(); j++)
+            {
+                AllPlants->getShooter(0, i).getBullet(j).drawBullet(window);
+            }
+        }
+    }
+   
 
 
     
@@ -335,7 +417,12 @@ void Game::run()
     float deltaTime = 0.0;
     int temp = rand() % 5;
    
-
+    for (int i = 0; i < 10; i++)
+    {
+        AllPlants->getShooter(0, i).getPlantSprite().setPosition(-100, -100);
+    }
+    
+    plant->getPlantSprite().setPosition(-100, -100);
     zombie = &SimpleZombie;
     zombie->setXgridCoordinate(8);
     zombie->setYgridCoordinate(temp);
@@ -367,19 +454,35 @@ void Game::run()
 
 		Game::renderUI(window); // render the UI
        
+        Game::handleAllPlantsCreation();
+
         Game::handlePlantCreation();
 
 		Game::handleMouseInput(window);  // Handle mouse input
 
-        plant->setAnimation(); // extra for sunflower for now
-        if (shooters != NULL)
+        if (plant != nullptr)
         {
-            shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
-            shooters->shootBullet(deltaTime); // shoot peas
+            plant->setAnimation(); // extra for sunflower for now
         }
+        
+        if (shooters != nullptr)
+        {
+           shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
+           shooters->shootBullet(deltaTime); // shoot peas
+        }
+
+        // For plant factory
+
+       /* for (int i = 0; i < 10; i++)
+        {
+            AllPlants->getShooter(0, i).setAnimation();
+            AllPlants->getShooter(0, i).shootBullet(deltaTime);
+        }*/
+        
+
         Game::renderPlants(window); // plants 
 
-        if (zombie != NULL)
+        if (zombie != nullptr)
         {
             zombie = &FlyingZombie;
             zombie->moveZombie(deltaTime);
