@@ -224,7 +224,7 @@ void Game::handleAllPlantsCreation()
                          AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setXPos(gridX * 100.66 + 380);
                          AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setYPos(gridY * 110);
                          AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setXPos(gridX * 100.66 + 380);
-                         AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).getBulletSprite().setPosition(500, 500);
+                         // AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).getBulletSprite().setPosition(500, 500);
 
                      }
                      
@@ -341,7 +341,6 @@ void Game::renderPlantFactory()
 
         for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
         {
-            AllPlants.getShooter(0, i).getBullet(0).getBulletSprite().setPosition(500, 100);
             window.draw(AllPlants.getShooter(0, i).getBullet(j).getBulletSprite());
            // AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
         }
