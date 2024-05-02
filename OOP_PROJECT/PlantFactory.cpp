@@ -22,12 +22,14 @@ PlantFactory::PlantFactory()
 	for (int i = 0; i < totalplantTypes; ++i) {
 		peashooters[i] = new Shooter[10]; // Number of plants for each type
 	}
+	peashooters[0] = new PeaShooter[10];
 
 
-	for (int j = 0; j < 10; ++j) {
-		peashooters[0][j] = PeaShooter(); // Assuming PeaShooter has a default constructor
 
-	}
+	//for (int j = 0; j < 10; ++j) {
+	//	peashooters[0][j] = PeaShooter(); // Assuming PeaShooter has a default constructor
+
+	//}
 
 
 }
