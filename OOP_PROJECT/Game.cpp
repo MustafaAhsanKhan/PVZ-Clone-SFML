@@ -9,7 +9,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     plant = NULL;  // Currently no plants exist
     shooters = NULL;
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
-    AllPlants = NULL; // null in the start
+    
 
 
     // Initialize Zombies
@@ -55,7 +55,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
 void Game::InitializeUISprites()
 {
     Asset_Texture.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
-    Asset_Texture.loadTexture(20, "../PVZ_Textures/Seed_Packets-Transparent.png");
+    Asset_Texture.loadTexture(20, "../PVZ_Textures/Seed_Packets_Transparent.png");
     Asset_Texture.loadTexture(21, "../PVZ_Textures/Lawn_Mower2.png");
 
     sf::IntRect textureRect(0, 73, 143, 550);
@@ -133,9 +133,9 @@ void Game::handleAllPlantsCreation()
             
                  if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[1] == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
                  {
-                     AllPlants->getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
-                     AllPlants->getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
-                     AllPlants->getShooter(totalplanttypes - 1, totaltypescreated - 1).setYgridCoordinate(gridY);
+                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
+                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
+                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setYgridCoordinate(gridY);
 
                      totaltypescreated++;
                      cout << "NEW PLANT CREATED! ";
@@ -280,7 +280,7 @@ void Game::setPlantTextures()
 {
     shooters = &PeaShooterPlant;
     plant = &SunFlowerPlant;
-    AllPlants = new PlantFactory;
+   
      // plant pointer is setting the sunflower sprite texture
     // shooter pointer is setting the peashooter sprite texture
 
@@ -295,13 +295,13 @@ void Game::setPlantTextures()
     /*
     Plant factory
     */
-    for (int i = 0; i < 10; i++)
+    /*or (int i = 0; i < 10; i++)
     {
-        AllPlants->getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
-        AllPlants->getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
-        AllPlants->getShooter(0, i).getPlantSprite().setScale(3, 3);
+        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
+        AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
+        AllPlants.getShooter(0, i).getPlantSprite().setScale(3, 3);
 
-    }
+    }*/
    
 
    
@@ -316,12 +316,12 @@ void Game::setPlantTextures()
     }
 
     // the Shooter's bullets
-    for (int i = 0; i < 10; i++)
+    /*for (int i = 0; i < 10; i++)
     {
-        AllPlants->getShooter(0, i).getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
-        AllPlants->getShooter(0, i).getBullet(i).getBulletSprite().setScale(3, 3);
-        AllPlants->getShooter(0, i).getBullet(i).getBulletSprite().setTextureRect(textureRect);
-    }
+        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
+        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setScale(3, 3);
+        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setTextureRect(textureRect);
+    }*/
 
 
     // For the Sunflower's texture
@@ -372,20 +372,18 @@ void Game::renderPlants(RenderWindow& window)
         window.draw(plant->getPlantSprite());
     }
     
-    
-    if (AllPlants != nullptr)
-    {
-        for (int i = 0; i < totaltypescreated; i++)
+  
+        /*for (int i = 0; i < totaltypescreated; i++)
         {
 
-            window.draw(AllPlants->getShooter(0, i).getPlantSprite());
+            window.draw(AllPlants.getShooter(0, i).getPlantSprite());
 
-            for (int j = 0; j < AllPlants->getShooter(0, i).getMaxBullets(); j++)
+            for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
             {
-                AllPlants->getShooter(0, i).getBullet(j).drawBullet(window);
+                AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
             }
-        }
-    }
+        }*/
+    
    
 
 
@@ -419,7 +417,7 @@ void Game::run()
    
     for (int i = 0; i < 10; i++)
     {
-        AllPlants->getShooter(0, i).getPlantSprite().setPosition(-100, -100);
+        AllPlants.getShooter(0, i).getPlantSprite().setPosition(-100, -100);
     }
     
     plant->getPlantSprite().setPosition(-100, -100);
@@ -473,11 +471,11 @@ void Game::run()
 
         // For plant factory
 
-        for (int i = 0; i < 10; i++)
+        /*for (int i = 0; i < 10; i++)
         {
-            AllPlants->getShooter(0, i).setAnimation();
-            AllPlants->getShooter(0, i).shootBullet(deltaTime);
-        }
+            AllPlants.getShooter(0, i).setAnimation();
+            AllPlants.getShooter(0, i).shootBullet(deltaTime);
+        }*/
         
 
         Game::renderPlants(window); // plants 

@@ -24,7 +24,7 @@ private:
 
 	SunFlower SunFlowerPlant;
 
-	PlantFactory* AllPlants;
+	PlantFactory AllPlants;
 
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
