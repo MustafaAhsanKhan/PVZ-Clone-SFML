@@ -43,15 +43,14 @@ public:
 	Game();  // Default constructor
 	void run(); // has the game loop
 private:  
-
-	void handleAllPlantsCreation();
-	void handlePlantCreation();
 	void InitializeUISprites();  // Initialize the UI sprites
 	void InitializePlantTextures();  // Initialize the plant textures
 	void InitializeZombieTextures();  // Initialize the zombie textures
-	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input
 	void setPlantTextures();
 	void setZombieTextures();
+	void handleAllPlantsCreation();
+	void handlePlantCreation();	
+	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input	
 	void renderPlants(RenderWindow& window);  // Render the plants
 	void renderZombies(RenderWindow& window);  // Render the zombies
 	void renderUI(RenderWindow& window);  // Render the UI

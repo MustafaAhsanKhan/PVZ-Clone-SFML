@@ -95,6 +95,86 @@ void Game::InitializeZombieTextures()
     Asset_Texture.loadTexture(12, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
 }
 
+void Game::setPlantTextures()
+{
+    shooters = &PeaShooterPlant;
+    plant = &SunFlowerPlant;
+
+    // plant pointer is setting the sunflower sprite texture
+   // shooter pointer is setting the peashooter sprite texture
+
+
+    sf::IntRect textureRect(0, 0, 27.125, 31);  // Peashooter rect
+
+
+    shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
+    shooters->getPlantSprite().setTextureRect(textureRect);
+
+
+    /*
+    Plant factory
+    */
+    /*or (int i = 0; i < 10; i++)
+    {
+        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
+        AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
+        AllPlants.getShooter(0, i).getPlantSprite().setScale(3, 3);
+
+    }*/
+
+
+
+
+    shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
+    textureRect = sf::IntRect(78, 38, 10, 20);
+    for (int i = 0; i < shooters->getMaxBullets(); i++)
+    {
+        shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
+        shooters->getBullet(i).getBulletSprite().setScale(3, 3);
+        shooters->getBullet(i).getBulletSprite().setTextureRect(textureRect);
+    }
+
+    // the Shooter's bullets
+    /*for (int i = 0; i < 10; i++)
+    {
+        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
+        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setScale(3, 3);
+        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setTextureRect(textureRect);
+    }*/
+
+
+    // For the Sunflower's texture
+
+    textureRect = sf::IntRect(101.9, 36.75, 30, 32);  // sunflower rectangle
+
+    plant->getPlantSprite().setTexture(Asset_Texture.getTexture(5));  // Setting the texture of the sunflower
+    plant->getPlantSprite().setTextureRect(textureRect);
+    plant->getPlantSprite().setScale(3, 3);
+
+
+
+    shooters = NULL;  // Currently no plants exist
+}
+
+void Game::setZombieTextures()
+{
+    zombie = &SimpleZombie;
+
+    sf::IntRect textureRect(0, 58.28, 51.11, 58.28);
+    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(8));
+    zombie->getZombieSprite().setScale(3, 3);
+
+    zombie->getZombieSprite().setTextureRect(textureRect);
+
+    zombie = &FlyingZombie;
+
+    textureRect = sf::IntRect(0, 0, 34.95, 58);
+    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(9));
+    zombie->getZombieSprite().setScale(3, 3);
+
+    zombie->getZombieSprite().setTextureRect(textureRect);
+}
+
 
 
 void Game::handleAllPlantsCreation()
@@ -276,86 +356,6 @@ void Game::handleMouseInput(sf::RenderWindow& window)
 }
 
 
-void Game::setPlantTextures()
-{
-    shooters = &PeaShooterPlant;
-    plant = &SunFlowerPlant;
-   
-     // plant pointer is setting the sunflower sprite texture
-    // shooter pointer is setting the peashooter sprite texture
-
-
-    sf::IntRect textureRect(0, 0, 27.125, 31);  // Peashooter rect
-
-
-    shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
-    shooters->getPlantSprite().setTextureRect(textureRect);
-
-
-    /*
-    Plant factory
-    */
-    /*or (int i = 0; i < 10; i++)
-    {
-        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
-        AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
-        AllPlants.getShooter(0, i).getPlantSprite().setScale(3, 3);
-
-    }*/
-   
-
-   
-
-    shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
-    textureRect = sf::IntRect(78, 38, 10, 20);
-    for (int i = 0; i < shooters->getMaxBullets(); i++)
-    {
-        shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
-        shooters->getBullet(i).getBulletSprite().setScale(3, 3);
-        shooters->getBullet(i).getBulletSprite().setTextureRect(textureRect);
-    }
-
-    // the Shooter's bullets
-    /*for (int i = 0; i < 10; i++)
-    {
-        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
-        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setScale(3, 3);
-        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setTextureRect(textureRect);
-    }*/
-
-
-    // For the Sunflower's texture
-
-    textureRect = sf::IntRect(101.9, 36.75, 30, 32);  // sunflower rectangle
-
-    plant->getPlantSprite().setTexture(Asset_Texture.getTexture(5));  // Setting the texture of the sunflower
-    plant->getPlantSprite().setTextureRect(textureRect);
-    plant->getPlantSprite().setScale(3, 3);
-
-    
-
-    shooters = NULL;  // Currently no plants exist
-}
-
-void Game::setZombieTextures()
-{
-    zombie = &SimpleZombie;
-
-    sf::IntRect textureRect(0, 58.28, 51.11, 58.28);
-    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(8));
-    zombie->getZombieSprite().setScale(3, 3);
-
-    zombie->getZombieSprite().setTextureRect(textureRect);
-
-    zombie = &FlyingZombie;
-
-    textureRect = sf::IntRect(0, 0, 34.95, 58);
-    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(9));
-    zombie->getZombieSprite().setScale(3, 3);
-
-    zombie->getZombieSprite().setTextureRect(textureRect);
-}
-
 void Game::renderPlants(RenderWindow& window)
 {
     if (shooters != nullptr)
@@ -366,29 +366,24 @@ void Game::renderPlants(RenderWindow& window)
             shooters->getBullet(i).drawBullet(window);
         }
     }
-    
+
     if (plant != nullptr)
     {
         window.draw(plant->getPlantSprite());
     }
-    
-  
-        /*for (int i = 0; i < totaltypescreated; i++)
+
+
+    /*for (int i = 0; i < totaltypescreated; i++)
+    {
+
+        window.draw(AllPlants.getShooter(0, i).getPlantSprite());
+
+        for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
         {
+            AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
+        }
+    }*/
 
-            window.draw(AllPlants.getShooter(0, i).getPlantSprite());
-
-            for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
-            {
-                AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
-            }
-        }*/
-    
-   
-
-
-    
- 
 }
 
 void Game::renderZombies(RenderWindow& window)
@@ -492,8 +487,6 @@ void Game::run()
             zombie->setAnimation();
             Game::renderZombies(window);
         }
-        
-        // AllPlants.getPlant(0, 0).setAnimation();
         
 
         window.display();
