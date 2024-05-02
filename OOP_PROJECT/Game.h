@@ -21,24 +21,18 @@ private:
 	AssetManager Asset_Texture;  // The asset manager for the textures
 	Plant* plant;  // The plant object
 	PeaShooter PeaShooterPlant;
-
 	SunFlower SunFlowerPlant;
-
 	PlantFactory AllPlants;
-
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
 	FlyingZombie FlyingZombie;
-
 	Sprite mapSprite;
 	Sprite seedPacketSprite;
 	Sprite lawnMowerSprite[5];
 	Shooter* shooters;
 	bool isPlacingPlant;
 	bool clickedSeedPacket[2]; // change size later
-
 	int totaltypescreated = 1;
-
 public:
 	Game();  // Default constructor
 	void run(); // has the game loop
@@ -51,8 +45,10 @@ private:
 	void handleAllPlantsCreation();
 	void handlePlantCreation();	
 	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input	
+	void renderPlantFactory();
 	void renderPlants(RenderWindow& window);  // Render the plants
 	void renderZombies(RenderWindow& window);  // Render the zombies
 	void renderUI(RenderWindow& window);  // Render the UI
+
 
 };

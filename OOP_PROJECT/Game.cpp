@@ -6,15 +6,14 @@ using namespace sf;
 
 Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close)
 {
+    // Initialize Plants
     plant = NULL;  // Currently no plants exist
     shooters = NULL;
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
     
-
-
     // Initialize Zombies
-
     zombie = NULL;  // Currently no zombies exist
+
 
     // Initialize the game grid status
     for (int i = 0; i < 5; i++)
@@ -40,16 +39,11 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     {
         return;
     }
-    window.setIcon(32, 32, icon.getPixelsPtr());
-    
+    window.setIcon(32, 32, icon.getPixelsPtr());    
 	Game::InitializePlantTextures();
 	Game::setPlantTextures();
-
 	Game::InitializeZombieTextures();
 	Game::setZombieTextures();
-
-    
-
 }
 
 void Game::InitializeUISprites()
@@ -137,9 +131,12 @@ void Game::setPlantTextures()
     // the Shooter's bullets
     /*for (int i = 0; i < 10; i++)
     {
-        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
-        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setScale(3, 3);
-        AllPlants.getShooter(0, i).getBullet(i).getBulletSprite().setTextureRect(textureRect);
+        for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
+        {
+            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
+            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setScale(3, 3);
+            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
+        }        
     }*/
 
 
@@ -252,15 +249,6 @@ void Game::handlePlantCreation()
 		{
 			clickedSeedPacket[0] = true;
 		}
-
-		// for peashooter
-		/*if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 144 && mousePosition.y <= 233)
-		{
-            
-			clickedSeedPacket[1] = true;
-		}
-        */
-
        
         for (int i = 0; i < totalplanttypes; i++)
         {
@@ -287,28 +275,6 @@ void Game::handlePlantCreation()
             }            
         }               // Convert mouse position to grid coordinates
     }
-
-
-
-    /*
-    HANDLING THE PLANT FACTORY
-    
-    */
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
@@ -333,13 +299,9 @@ void Game::handleMouseInput(sf::RenderWindow& window)
         // Convert mouse position to grid coordinates
         else if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && isPlacingPlant == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
         {
-            
-
-            // shooters = new PeaShooter;
             shooters = &PeaShooterPlant;
-
-            // Update the position of the plant sprite
-            shooters->getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
+            
+            shooters->getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114); // Update the position of the plant sprite
             shooters->setXgridCoordinate(gridX - 3);
             shooters->setYgridCoordinate(gridY - 1);
 
@@ -355,6 +317,21 @@ void Game::handleMouseInput(sf::RenderWindow& window)
     }
 }
 
+void Game::renderPlantFactory()
+{
+
+    for (int i = 0; i < totaltypescreated; i++)
+    {
+
+        window.draw(AllPlants.getShooter(0, i).getPlantSprite());
+
+        for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
+        {
+            AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
+        }
+    }
+
+}
 
 void Game::renderPlants(RenderWindow& window)
 {
@@ -371,18 +348,6 @@ void Game::renderPlants(RenderWindow& window)
     {
         window.draw(plant->getPlantSprite());
     }
-
-
-    /*for (int i = 0; i < totaltypescreated; i++)
-    {
-
-        window.draw(AllPlants.getShooter(0, i).getPlantSprite());
-
-        for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
-        {
-            AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
-        }
-    }*/
 
 }
 
