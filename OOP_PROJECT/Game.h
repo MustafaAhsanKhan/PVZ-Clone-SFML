@@ -16,6 +16,8 @@ using namespace sf;
 class Game
 {
 private:
+	
+	sf::IntRect textureRect;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
@@ -26,9 +28,9 @@ private:
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
 	FlyingZombie FlyingZombie;
-	Sprite mapSprite;
-	Sprite seedPacketSprite;
-	Sprite lawnMowerSprite[5];
+	sf::Sprite mapSprite;
+	sf::Sprite seedPacketSprite;
+	sf::Sprite lawnMowerSprite[5];
 	Shooter* shooters;
 	bool isPlacingPlant;
 	bool clickedSeedPacket[2]; // change size later
@@ -41,6 +43,7 @@ private:
 	void InitializePlantTextures();  // Initialize the plant textures
 	void InitializeZombieTextures();  // Initialize the zombie textures
 	void setPlantTextures();
+	void setPlantFactoryTextures();
 	void setZombieTextures();
 	void handleAllPlantsCreation();
 	void handlePlantCreation();	

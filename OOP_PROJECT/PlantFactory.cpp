@@ -23,14 +23,15 @@ PlantFactory::PlantFactory()
 		peashooters[i] = new Shooter[10]; // Number of plants for each type
 	}
 	peashooters[0] = new PeaShooter[10];
+	
+	// Setting positions to outside window by default
+	/*for (int i = 0; i < totalplantTypes; ++i) {
+		peashooters[0][i].getPlantSprite().setPosition(-1000, -1000);
 
-
-
-	//for (int j = 0; j < 10; ++j) {
-	//	peashooters[0][j] = PeaShooter(); // Assuming PeaShooter has a default constructor
-
-	//}
-
+		for (int j = 0; j < peashooters[0][i].getMaxBullets(); ++j) {
+			peashooters[0][i].getBullet(j).getBulletSprite().setPosition(1350, 900);
+		}
+	}*/
 
 }
 
