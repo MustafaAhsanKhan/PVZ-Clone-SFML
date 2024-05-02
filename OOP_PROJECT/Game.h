@@ -22,7 +22,9 @@ private:
 	Plant* plant;  // The plant object
 	PeaShooter PeaShooterPlant;
 
-	PlantFactory AllPlants;
+	SunFlower SunFlowerPlant;
+
+	PlantFactory* AllPlants;
 
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
@@ -34,10 +36,15 @@ private:
 	Shooter* shooters;
 	bool isPlacingPlant;
 	bool clickedSeedPacket[2]; // change size later
+
+	int totaltypescreated = 1;
+
 public:
 	Game();  // Default constructor
 	void run(); // has the game loop
 private:  
+
+	void handleAllPlantsCreation();
 	void handlePlantCreation();
 	void InitializeUISprites();  // Initialize the UI sprites
 	void InitializePlantTextures();  // Initialize the plant textures

@@ -16,6 +16,7 @@ sf::Sprite& PeaShooter::getPlantSprite()
 
 void PeaShooter::setAnimation()
 {
+	// cout << "SETTING ANIMATION FOR PEASHOOTER...";
 	if (animationClock.getElapsedTime().asMilliseconds() > 300)
 	{
 		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();

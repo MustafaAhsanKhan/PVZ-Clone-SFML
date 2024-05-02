@@ -5,35 +5,31 @@ PlantFactory::PlantFactory()
 	totalplantTypes = 1; // will change later
 	plants = new Plant * [totalplantTypes];
 
+	// for the rest of the plants
+
 	for (int i = 0; i < totalplantTypes; ++i) {
-		plants[i] = new Plant[5]; // Number of plants for each type
+		plants[i] = new Plant[10]; // Number of plants for each type
 	}
 
-	for (int j = 0; j < 5; ++j) {
-		plants[0][j] = PeaShooter(); // Assuming PeaShooter has a default constructor
+	for (int j = 0; j < 10; ++j) {
+		// plants[0][j] = PeaShooter(); // Assuming PeaShooter has a default constructor
 	}
 
 	// for the shooters
 
 	peashooters = new Shooter * [totalplantTypes];
+
 	for (int i = 0; i < totalplantTypes; ++i) {
-		peashooters[i] = new Shooter[5]; // Number of plants for each type
+		peashooters[i] = new Shooter[10]; // Number of plants for each type
 	}
 
 
-	for (int j = 0; j < 5; ++j) {
+	for (int j = 0; j < 10; ++j) {
 		peashooters[0][j] = PeaShooter(); // Assuming PeaShooter has a default constructor
+
 	}
 
 
-
-
-
-
-	// plants[0][1].getPlantSprite().setPosition(190, 199);
-	
-	// plants[1] = new SunFlower [5];
-	// 2 rows and 5 column arrays
 }
 
 Plant& PlantFactory::getPlant(int row, int col)
