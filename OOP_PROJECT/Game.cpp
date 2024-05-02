@@ -55,7 +55,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
 void Game::InitializeUISprites()
 {
     Asset_Texture.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
-    Asset_Texture.loadTexture(20, "../PVZ_Textures/Seed_Packets.png");
+    Asset_Texture.loadTexture(20, "../PVZ_Textures/Seed_Packets-Transparent.png");
     Asset_Texture.loadTexture(21, "../PVZ_Textures/Lawn_Mower2.png");
 
     sf::IntRect textureRect(0, 73, 143, 550);
