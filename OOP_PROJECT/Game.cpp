@@ -46,6 +46,12 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
 	Game::setZombieTextures();
 }
 
+void Game::InitializeMusic()
+{
+    backgroundMusic.openFromFile("Sounds/backgroundMusic.mp3");
+    backgroundMusic.play();
+}
+
 void Game::InitializeUISprites()
 {
     Asset_Texture.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
@@ -419,6 +425,7 @@ void Game::run()
                 window.close();
             }
         }
+        Game::InitializeMusic();
 
 		Game::renderUI(window); // render the UI
        

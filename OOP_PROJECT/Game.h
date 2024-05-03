@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <ctime>
 #include <iostream>
 #include "Plant.h"
@@ -16,7 +17,7 @@ using namespace sf;
 class Game
 {
 private:
-	
+	sf::Music backgroundMusic;
 	sf::IntRect textureRect;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	RenderWindow window;  // The window of the game
@@ -39,6 +40,7 @@ public:
 	Game();  // Default constructor
 	void run(); // has the game loop
 private:  
+	void InitializeMusic();
 	void InitializeUISprites();  // Initialize the UI sprites
 	void InitializePlantTextures();  // Initialize the plant textures
 	void InitializeZombieTextures();  // Initialize the zombie textures
