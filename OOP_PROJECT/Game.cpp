@@ -341,8 +341,8 @@ void Game::renderPlantFactory()
 
         for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
         {
-            window.draw(AllPlants.getShooter(0, i).getBullet(j).getBulletSprite());
-           // AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
+            // window.draw(AllPlants.getShooter(0, i).getBullet(j).getBulletSprite());
+           AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
         }
     }
     
@@ -391,18 +391,6 @@ void Game::run()
     float deltaTime = 0.0;
     int temp = rand() % 5;
    
-   /* for (int i = 0; i < totaltypescreated; i++)
-    {
-       AllPlants.getShooter(0, i).getPlantSprite().setPosition(-100, -100);
-       for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
-       {
-           AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setPosition(-100, -100);
-
-       }
-       
-    }*/
-    
-    // plant->getPlantSprite().setPosition(-100, -100);
     zombie = &SimpleZombie;
     zombie->setXgridCoordinate(8);
     zombie->setYgridCoordinate(temp);
