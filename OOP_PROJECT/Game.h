@@ -32,7 +32,6 @@ private:
 	sf::Sprite mapSprite;
 	sf::Sprite seedPacketSprite;
 	sf::Sprite lawnMowerSprite[5];
-	Shooter* shooters;
 	bool isPlacingPlant;
 	bool clickedSeedPacket[2]; // change size later
 	int totaltypescreated = 1;
@@ -50,7 +49,7 @@ private:
 	void handleAllPlantsCreation();
 	void handleMouseInput();  // Handle the mouse input	
 	void renderPlantFactory();
-	void renderPlants();  // Render the plants
+	// void renderPlants();  // Render the plants
 	void renderZombies();  // Render the zombies
 	void renderUI();  // Render the UI
 

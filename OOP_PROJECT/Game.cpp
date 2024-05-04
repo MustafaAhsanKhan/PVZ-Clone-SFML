@@ -7,7 +7,6 @@ using namespace sf;
 Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close)
 {
     // Initialize Plants
-    shooters = NULL;
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
     
     // Initialize Zombies
@@ -97,9 +96,6 @@ void Game::InitializeZombieTextures()
 
 void Game::setPlantFactoryTextures()
 {
-    /*
-    Plant factory
-    */
     textureRect = sf::IntRect(0, 0, 27.125, 31);  // Peashooter
     for (int i = totaltypescreated - 1; i < totaltypescreated; i++)
     {
@@ -123,7 +119,6 @@ void Game::setPlantFactoryTextures()
     }
 
 }
-
 
 void Game::setZombieTextures()
 {
@@ -169,7 +164,7 @@ void Game::handleAllPlantsCreation()
             {
                 clickedSeedPacket[0] = true;
             }
-            if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 233 && mousePosition.y <= 322)
+            if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 144 && mousePosition.y <= 233)
             {
                 if (!clickedSeedPacket[0])
                 {
@@ -184,6 +179,8 @@ void Game::handleAllPlantsCreation()
                  {
 
                      Game::setPlantFactoryTextures();
+                     cout << "Grid X: " << gridX << endl;
+                     cout << "Grid Y: " << gridY << endl;
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setYgridCoordinate(gridY);
@@ -193,45 +190,6 @@ void Game::handleAllPlantsCreation()
                      clickedSeedPacket[1] = false;
                  }               
             }
-    }
-}
-
-
-void Game::handleMouseInput()
-{
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-    {
-        int gridX = 0;
-        int gridY = 0;
-
-        // Get the mouse position relative to the window
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-        gridX = (mousePosition.x / 100.66);
-        gridY = (mousePosition.y / 114);
-
-        if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 144 && mousePosition.y <= 233)
-        {
-            isPlacingPlant = true;
-        }
-        // Convert mouse position to grid coordinates
-        else if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && isPlacingPlant == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
-        {
-            shooters = &PeaShooterPlant;
-            
-            shooters->getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114); // Update the position of the plant sprite
-            shooters->setXgridCoordinate(gridX - 3);
-            shooters->setYgridCoordinate(gridY - 1);
-
-            FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
-            
-            isPlacingPlant = false;
-        }
-        else
-        {
-            isPlacingPlant = false;
-        }
-        
     }
 }
 
@@ -245,24 +203,11 @@ void Game::renderPlantFactory()
 
         for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
         {
-            // window.draw(AllPlants.getShooter(0, i).getBullet(j).getBulletSprite());
            AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
         }
     }
     
 
-}
-
-void Game::renderPlants()
-{
-    if (shooters != nullptr)
-    {
-        window.draw(shooters->getPlantSprite());
-        for (int i = 0; i < shooters->getMaxBullets(); i++)
-        {
-            shooters->getBullet(i).drawBullet(window);
-        }
-    }
 }
 
 void Game::renderZombies()
@@ -323,25 +268,14 @@ void Game::run()
        
         Game::handleAllPlantsCreation();
 
-		//Game::handleMouseInput(window);  // Handle mouse input
-
-        if (shooters != nullptr)
-        {
-           shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
-           shooters->shootBullet(deltaTime); // shoot peas
-        }
-
         // For plant factory
         for (int i = 0; i < totaltypescreated; i++)
         {
             AllPlants.getShooter(0, i).setAnimation();
             AllPlants.getShooter(0, i).shootBullet(deltaTime);
-           //  AllPlants.getShooter(0, i).getBullet(0).getBulletSprite().setPosition(500, 500);
         }
         
         Game::renderPlantFactory();
-
-        Game::renderPlants(); // plants 
 
         if (zombie != nullptr)
         {
