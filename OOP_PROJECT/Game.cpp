@@ -7,7 +7,6 @@ using namespace sf;
 Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close)
 {
     // Initialize Plants
-    plant = NULL;  // Currently no plants exist
     shooters = NULL;
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
     
@@ -188,17 +187,6 @@ void Game::handleAllPlantsCreation()
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setYgridCoordinate(gridY);
-
-                     int bulletNumber = AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getMaxBullets();
-
-                     for (int j = 0; j < bulletNumber; j++)
-                     {
-                         AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setXPos(gridX * 100.66 + 200);
-                         AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setYPos(gridY * 110);
-                         // AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).getBulletSprite().setPosition(500, 500);
-
-                     }
-                     
                      totaltypescreated++;
                      cout << "NEW PLANT CREATED! ";
                      FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
@@ -209,62 +197,7 @@ void Game::handleAllPlantsCreation()
 }
 
 
-
-void Game::handlePlantCreation()
-{
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-    {
-        int gridX = 0;
-        int gridY = 0;
-
-
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-        gridX = (mousePosition.x / 100.66);
-        gridY = (mousePosition.y / 114);
-
-        int totalplanttypes = 1;
-        int eachtypenum = 5;
-        
-       
-        // for sunflower
-        int plantscreated = 1;
-
-		if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 55 && mousePosition.y <= 144)
-		{
-			clickedSeedPacket[0] = true;
-		}
-       
-        for (int i = 0; i < totalplanttypes; i++)
-        {
-            for (int j = 0; i < eachtypenum; i++)
-            {               
-                // for sunflower
-                
-                
-                if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[0] == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == true)
-                {
-                    plant = new SunFlower;
-                    plant = &SunFlowerPlant;
-                    totaltypescreated++;
-                    cout << "Sunflower Seed packet pressed .. ";
-                    plant->getPlantSprite().setPosition(gridX * 100.66 + 15, gridY * 114);
-                    plant->setXgridCoordinate(gridX);
-                    plant->setYgridCoordinate(gridY);
-
-
-                    FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
-
-                    clickedSeedPacket[0] = false;
-                }                             
-            }            
-        }               // Convert mouse position to grid coordinates
-    }
-}
-
-
-
-void Game::handleMouseInput(sf::RenderWindow& window)
+void Game::handleMouseInput()
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
@@ -320,7 +253,7 @@ void Game::renderPlantFactory()
 
 }
 
-void Game::renderPlants(RenderWindow& window)
+void Game::renderPlants()
 {
     if (shooters != nullptr)
     {
@@ -330,20 +263,14 @@ void Game::renderPlants(RenderWindow& window)
             shooters->getBullet(i).drawBullet(window);
         }
     }
-
-    if (plant != nullptr)
-    {
-        window.draw(plant->getPlantSprite());
-    }
-
 }
 
-void Game::renderZombies(RenderWindow& window)
+void Game::renderZombies()
 {
 	window.draw(zombie->getZombieSprite());
 }
 
-void Game::renderUI(RenderWindow& window)
+void Game::renderUI()
 {
     window.draw(mapSprite);
     for (int i = 0; i < 5; i++)
@@ -392,19 +319,12 @@ void Game::run()
         }
         Game::InitializeMusic();
 
-		Game::renderUI(window); // render the UI
+		Game::renderUI(); // render the UI
        
         Game::handleAllPlantsCreation();
 
-        Game::handlePlantCreation();
-
 		//Game::handleMouseInput(window);  // Handle mouse input
 
-        if (plant != nullptr)
-        {
-            plant->setAnimation(); // extra for sunflower for now
-        }
-        
         if (shooters != nullptr)
         {
            shooters->setAnimation(); // plant animation (will be a for loop inside setting animations for all plants)
@@ -421,19 +341,19 @@ void Game::run()
         
         Game::renderPlantFactory();
 
-        Game::renderPlants(window); // plants 
+        Game::renderPlants(); // plants 
 
         if (zombie != nullptr)
         {
             zombie = &FlyingZombie;
             zombie->moveZombie(deltaTime);
             zombie->setAnimation();
-            Game::renderZombies(window);
+            Game::renderZombies();
 
             zombie = &SimpleZombie;
             zombie->moveZombie(deltaTime);
             zombie->setAnimation();
-            Game::renderZombies(window);
+            Game::renderZombies();
         }
         
 

@@ -22,9 +22,9 @@ private:
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
-	Plant* plant;  // The plant object
+	// Plant* plant;  // The plant object
 	PeaShooter PeaShooterPlant;
-	SunFlower SunFlowerPlant;
+	// SunFlower SunFlowerPlant;
 	PlantFactory AllPlants;
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
@@ -48,7 +48,6 @@ private:
 	void setPlantFactoryTextures();
 	void setZombieTextures();
 	void handleAllPlantsCreation();
-	void handlePlantCreation();	
 	void handleMouseInput();  // Handle the mouse input	
 	void renderPlantFactory();
 	void renderPlants();  // Render the plants
