@@ -5,7 +5,6 @@ PlantFactory::PlantFactory()
 	totalplantTypes = 1; // will change later
 	totalPlantObjects = 50;  // Max number of plants for a single type
 	plants = new Plant * [totalplantTypes];
-
 	// for the shooters
 	peashooters = new Shooter * [totalplantTypes];
 	peashooters[0] = new PeaShooter[totalPlantObjects];  

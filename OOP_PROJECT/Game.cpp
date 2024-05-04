@@ -175,7 +175,7 @@ void Game::handleAllPlantsCreation()
             for (int i = 0; i < totalplanttypes; i++)
             {
             
-                 if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[1] == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
+                 if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[1] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
                  {
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
@@ -183,7 +183,7 @@ void Game::handleAllPlantsCreation()
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setExists(true);
                      totaltypescreated++;
                      cout << "NEW PLANT CREATED! ";
-                     FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
+                     FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
                      clickedSeedPacket[1] = false;
                  }               
             }
