@@ -242,7 +242,7 @@ void Game::handlePlantCreation()
                 // for sunflower
                 
                 
-                if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[0] == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
+                if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[0] == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == true)
                 {
                     plant = new SunFlower;
                     plant = &SunFlowerPlant;

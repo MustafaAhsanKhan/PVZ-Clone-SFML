@@ -49,11 +49,11 @@ private:
 	void setZombieTextures();
 	void handleAllPlantsCreation();
 	void handlePlantCreation();	
-	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input	
+	void handleMouseInput();  // Handle the mouse input	
 	void renderPlantFactory();
-	void renderPlants(RenderWindow& window);  // Render the plants
-	void renderZombies(RenderWindow& window);  // Render the zombies
-	void renderUI(RenderWindow& window);  // Render the UI
+	void renderPlants();  // Render the plants
+	void renderZombies();  // Render the zombies
+	void renderUI();  // Render the UI
 
 
 };
