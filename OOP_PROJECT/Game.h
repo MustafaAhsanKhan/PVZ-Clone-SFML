@@ -10,6 +10,9 @@
 #include "Zombie.h"
 #include "SimpleZombie.h"
 #include "FlyingZombie.h"
+#include "FootballZombie.h"
+#include "DancingZombie.h"
+#include "DolphinRiderZombie.h"
 
 using namespace sf;
 
@@ -29,6 +32,9 @@ private:
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
 	FlyingZombie FlyingZombie;
+	FootballZombie FootballZombie;
+	DancingZombie DancingZombie;
+	DolphinRiderZombie DolphinRiderZombie;
 
 	Sprite mapSprite;
 	Sprite seedPacketSprite;
