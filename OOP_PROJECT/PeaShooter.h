@@ -23,6 +23,5 @@ public:
 	virtual int getYgridCoordinate();
 	virtual void setXgridCoordinate(int x);
 	virtual void setYgridCoordinate(int y);
-
 	~PeaShooter();
 };
