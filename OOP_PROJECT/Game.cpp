@@ -41,7 +41,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     }
     window.setIcon(32, 32, icon.getPixelsPtr());    
 	Game::InitializePlantTextures();
-	Game::setPlantTextures();
+	//Game::setPlantFactoryTextures();
 	Game::InitializeZombieTextures();
 	Game::setZombieTextures();
 }
@@ -95,47 +95,13 @@ void Game::InitializeZombieTextures()
     Asset_Texture.loadTexture(12, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
 }
 
-void Game::setPlantTextures()
-{
-    shooters = &PeaShooterPlant;
-    plant = &SunFlowerPlant;
-
-    // plant pointer is setting the sunflower sprite texture
-   // shooter pointer is setting the peashooter sprite texture
-
-    textureRect = sf::IntRect(0, 0, 27.125, 31);  // Peashooter rect
-
-    shooters->getPlantSprite().setTexture(Asset_Texture.getTexture(1));  // Set the texture of the plant
-    shooters->getPlantSprite().setTextureRect(textureRect);
-    shooters->getPlantSprite().setScale(3, 3);  // Scale the sprite to make it appear larger
-
-    // Setting the bullet
-    textureRect = sf::IntRect(78, 38, 10, 20);
-    for (int i = 0; i < shooters->getMaxBullets(); i++)
-    {
-        shooters->getBullet(i).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
-        shooters->getBullet(i).getBulletSprite().setScale(3, 3);
-        shooters->getBullet(i).getBulletSprite().setTextureRect(textureRect);
-    }
-
-    // For the Sunflower's texture
-    textureRect = sf::IntRect(101.9, 36.75, 30, 32);  // sunflower rectangle
-
-    plant->getPlantSprite().setTexture(Asset_Texture.getTexture(5));  // Setting the texture of the sunflower
-    plant->getPlantSprite().setTextureRect(textureRect);
-    plant->getPlantSprite().setScale(3, 3);
-
-
-    plant = NULL;
-    shooters = NULL;  // Currently no plants exist
-}
 
 void Game::setPlantFactoryTextures()
 {
     /*
     Plant factory
     */
-    textureRect = sf::IntRect(0, 0, 27.125, 31);
+    textureRect = sf::IntRect(0, 0, 27.125, 31);  // Peashooter
     for (int i = totaltypescreated - 1; i < totaltypescreated; i++)
     {
         AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
@@ -191,8 +157,8 @@ void Game::handleAllPlantsCreation()
 
         sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-        gridX = (mousePosition.x / 100.66);
-        gridY = (mousePosition.y / 114);
+        gridX = (mousePosition.x / 100.66) - 3;
+        gridY = (mousePosition.y / 114) - 1;
 
         const int totalplanttypes = 1; // will be 6 once all are implemented
         const int eachtypenum = 5; // total types
@@ -219,7 +185,7 @@ void Game::handleAllPlantsCreation()
                  {
 
                      Game::setPlantFactoryTextures();
-                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 20, gridY * 114);
+                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setYgridCoordinate(gridY);
 
@@ -227,9 +193,8 @@ void Game::handleAllPlantsCreation()
 
                      for (int j = 0; j < bulletNumber; j++)
                      {
-                         AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setXPos(gridX * 100.66 + 380);
+                         AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setXPos(gridX * 100.66 + 200);
                          AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setYPos(gridY * 110);
-                         AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).setXPos(gridX * 100.66 + 380);
                          // AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getBullet(j).getBulletSprite().setPosition(500, 500);
 
                      }
@@ -433,7 +398,7 @@ void Game::run()
 
         Game::handlePlantCreation();
 
-		Game::handleMouseInput(window);  // Handle mouse input
+		//Game::handleMouseInput(window);  // Handle mouse input
 
         if (plant != nullptr)
         {

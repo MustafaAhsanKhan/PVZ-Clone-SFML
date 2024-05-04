@@ -12,6 +12,7 @@ private:
 	Plant** plants;
 	Shooter** peashooters;
 	int totalplantTypes; // will be set in default constructor
+	int totalPlantObjects;
 	// static int eachtypePlants[3]; // current number of plants of each type
 public:
 	PlantFactory();
