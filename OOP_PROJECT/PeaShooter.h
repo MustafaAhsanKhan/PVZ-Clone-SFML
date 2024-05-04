@@ -15,7 +15,8 @@ public:
 	virtual BulletPea& getBullet(int index);
 
 	// virtual void moveBullets();
-
+	virtual void setExists(bool ex);
+	virtual bool exists();
 	virtual void shootBullet(float deltaTime);
 	virtual void setAnimation();
 	virtual sf::Sprite& getPlantSprite();

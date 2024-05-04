@@ -6,6 +6,7 @@ PeaShooter::PeaShooter()
 	ShootingRate = 1;  // 1 second
 	bullets = new BulletPea[MAX_BULLETS];
 	Suncost = 100; // initializing the cost of Peashooter
+	plantExists = false; // checks if plant exists
 }
 
 sf::Sprite& PeaShooter::getPlantSprite()
@@ -41,7 +42,7 @@ void PeaShooter::shootBullet(float deltaTime)
 	{
 		for (int i = 0; i < this->getMaxBullets(); ++i)
 		{
-			if (!bullets[i].getExists()) // removed this condition since the rate will be constant and wont depend on if the bullet exists or not
+			if (!bullets[i].getExists() && plantExists) // removed this condition since the rate will be constant and wont depend on if the bullet exists or not
 			{
 				bullets[i].setExists(true);
 				bullets[i].setXPos(XgridCoordinate * 100.66 + 380); // correctly alligned
@@ -103,5 +104,15 @@ int PeaShooter::getMaxBullets()
 PeaShooter::~PeaShooter()
 {
 	delete[] bullets;
+}
+
+void PeaShooter::setExists(bool ex)
+{
+	plantExists = ex;
+}
+
+bool PeaShooter::exists()
+{
+	return plantExists;
 }
 

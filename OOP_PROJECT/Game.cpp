@@ -39,7 +39,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     }
     window.setIcon(32, 32, icon.getPixelsPtr());    
 	Game::InitializePlantTextures();
-	//Game::setPlantFactoryTextures();
+	Game::setPlantFactoryTextures();
 	Game::InitializeZombieTextures();
 	Game::setZombieTextures();
 }
@@ -97,7 +97,7 @@ void Game::InitializeZombieTextures()
 void Game::setPlantFactoryTextures()
 {
     textureRect = sf::IntRect(0, 0, 27.125, 31);  // Peashooter
-    for (int i = totaltypescreated - 1; i < totaltypescreated; i++)
+    for (int i = 0; i < 50; i++) // 50 plants
     {
         AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
         AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
@@ -107,7 +107,7 @@ void Game::setPlantFactoryTextures()
 
     // the Shooter's bullets
     textureRect = sf::IntRect(78, 38, 10, 20);
-    for (int i = totaltypescreated - 1; i < totaltypescreated; i++)
+    for (int i = 0; i < 50; i++) // 50 plants
     {
         for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
         {
@@ -177,13 +177,10 @@ void Game::handleAllPlantsCreation()
             
                  if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[1] == true && FIELD_GAME_STATUS[gridY - 1][gridX - 3] == false)
                  {
-
-                     Game::setPlantFactoryTextures();
-                     cout << "Grid X: " << gridX << endl;
-                     cout << "Grid Y: " << gridY << endl;
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
                      AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setYgridCoordinate(gridY);
+                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setExists(true);
                      totaltypescreated++;
                      cout << "NEW PLANT CREATED! ";
                      FIELD_GAME_STATUS[gridY - 1][gridX - 3] = true;  // So another plant cant be placed on the same spot
@@ -196,14 +193,15 @@ void Game::handleAllPlantsCreation()
 void Game::renderPlantFactory()
 {
 
-    for (int i = 0; i < totaltypescreated; i++)
+    for (int i = 0; i < 50; i++) // all plants 
     {
-
-        window.draw(AllPlants.getShooter(0, i).getPlantSprite());
-
+        if (AllPlants.getShooter(0, i).exists()) // check if exists then draw plant
+        {
+            window.draw(AllPlants.getShooter(0, i).getPlantSprite());
+        }
         for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
         {
-           AllPlants.getShooter(0, i).getBullet(j).drawBullet(window);
+            AllPlants.getShooter(0, i).getBullet(j).drawBullet(window); // already checking existence
         }
     }
     
@@ -229,7 +227,7 @@ void Game::renderUI()
 void Game::run()
 {
     srand(time(0));
-    Clock deltaClock;
+    
     Clock zombieClock;
     float deltaTime = 0.0;
     int temp = rand() % 5;
