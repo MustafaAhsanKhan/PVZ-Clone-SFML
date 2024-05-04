@@ -48,8 +48,8 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
 
 void Game::InitializeMusic()
 {
-    backgroundMusic.openFromFile("Sounds/backgroundMusic.mp3");
-    backgroundMusic.play();
+    // backgroundMusic.openFromFile("Sounds/backgroundMusic.mp3");
+    // backgroundMusic.play();
 }
 
 void Game::InitializeUISprites()
