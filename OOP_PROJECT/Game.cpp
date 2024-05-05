@@ -1,6 +1,4 @@
 #include "Game.h"
-#include<iostream>
-using namespace sf;
 
 // int Game::totaltypescreated = 1; // current plant types created
 
