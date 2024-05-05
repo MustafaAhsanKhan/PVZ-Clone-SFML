@@ -3,9 +3,13 @@
 #include <SFML/Audio.hpp>
 #include <ctime>
 #include <iostream>
+
+#include "Definitions.h"
+#include "AssetManager.h"
+#include "StateMachine.h"
+
 #include "Plant.h"
 #include "PeaShooter.h"
-#include "AssetManager.h"
 #include "PlantFactory.h"
 
 #include "Zombie.h"
@@ -26,10 +30,9 @@ private:
 	sf::IntRect textureRect;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	RenderWindow window;  // The window of the game
-	AssetManager Asset_Texture;  // The asset manager for the textures
+	AssetManager Assets;  // The asset manager for the textures
+	//StateMachine machine;  // The state machine
 	// Plant* plant;  // The plant object
-	PeaShooter PeaShooterPlant;
-	// SunFlower SunFlowerPlant;
 	PlantFactory AllPlants;
 
 	Zombie* zombie;

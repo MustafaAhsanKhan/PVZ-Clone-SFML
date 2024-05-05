@@ -50,45 +50,45 @@ void Game::InitializeMusic()
 
 void Game::InitializeUISprites()
 {
-    Asset_Texture.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
-    Asset_Texture.loadTexture(20, "../PVZ_Textures/Seed_Packets_Transparent.png");
-    Asset_Texture.loadTexture(21, "../PVZ_Textures/Lawn_Mower2.png");
+    Assets.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
+    Assets.loadTexture(20, "../PVZ_Textures/Seed_Packets_Transparent.png");
+    Assets.loadTexture(21, "../PVZ_Textures/Lawn_Mower2.png");
 
     sf::IntRect textureRect(0, 73, 143, 550);
 
     // Seed packet sprite
-    seedPacketSprite.setTexture(Asset_Texture.getTexture(20));
+    seedPacketSprite.setTexture(Assets.getTexture(20));
     seedPacketSprite.setTextureRect(textureRect);
     seedPacketSprite.setPosition(50, 70);
 
     // Lawn mower sprite
     for (int i = 0; i < 5; i++)
     {
-		lawnMowerSprite[i].setTexture(Asset_Texture.getTexture(21));
+		lawnMowerSprite[i].setTexture(Assets.getTexture(21));
 		lawnMowerSprite[i].setPosition(185, (i * 118) + 70);
 	}
 
-    mapSprite.setTexture(Asset_Texture.getTexture(0));
+    mapSprite.setTexture(Assets.getTexture(0));
 }
 
 void Game::InitializePlantTextures()
 {
-    Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Plant texture
-    Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/Repeater.png");
-    Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/SnowPea.png");
-    Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
-    Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/Sunflower.png");
-    Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
-    Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Wallnut.png");
+    Assets.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Plant texture
+    Assets.loadTexture(2, "../PVZ_Textures/PlantTextures/Repeater.png");
+    Assets.loadTexture(3, "../PVZ_Textures/PlantTextures/SnowPea.png");
+    Assets.loadTexture(4, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
+    Assets.loadTexture(5, "../PVZ_Textures/PlantTextures/Sunflower.png");
+    Assets.loadTexture(6, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
+    Assets.loadTexture(7, "../PVZ_Textures/PlantTextures/Wallnut.png");
 }
 
 void Game::InitializeZombieTextures()
 {
-	Asset_Texture.loadTexture(10, "../PVZ_Textures/Zombies/simple_zombie.png");
-    Asset_Texture.loadTexture(11, "../PVZ_Textures/Zombies/flying_zombie.png");
-    Asset_Texture.loadTexture(12, "../PVZ_Textures/Zombies/football_zombie.png");
-    Asset_Texture.loadTexture(13, "../PVZ_Textures/Zombies/dancing_zombie.png");
-    Asset_Texture.loadTexture(14, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
+	Assets.loadTexture(10, "../PVZ_Textures/Zombies/simple_zombie.png");
+    Assets.loadTexture(11, "../PVZ_Textures/Zombies/flying_zombie.png");
+    Assets.loadTexture(12, "../PVZ_Textures/Zombies/football_zombie.png");
+    Assets.loadTexture(13, "../PVZ_Textures/Zombies/dancing_zombie.png");
+    Assets.loadTexture(14, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
 }
 
 
@@ -97,7 +97,7 @@ void Game::setPlantFactoryTextures()
     textureRect = sf::IntRect(0, 0, 27.125, 31);  // Peashooter
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
+        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Assets.getTexture(1));
         AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getShooter(0, i).getPlantSprite().setScale(3, 3);
 
@@ -109,7 +109,7 @@ void Game::setPlantFactoryTextures()
     {
         for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
         {
-            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
+            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(4));
             AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setScale(3, 3);
             AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
         }
@@ -124,7 +124,7 @@ void Game::setZombieTextures()
 
     textureRect = sf::IntRect(0, 58.28, 51.11, 58.28);
     
-    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(10));
+    zombie->getZombieSprite().setTexture(Assets.getTexture(10));
     zombie->getZombieSprite().setScale(3, 3);
 
     zombie->getZombieSprite().setTextureRect(textureRect);
@@ -132,20 +132,20 @@ void Game::setZombieTextures()
     zombie = &FlyingZombie;
 
     textureRect = sf::IntRect(0, 0, 34.95, 58);
-    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(11));
+    zombie->getZombieSprite().setTexture(Assets.getTexture(11));
     zombie->getZombieSprite().setScale(3, 3);
 
     zombie->getZombieSprite().setTextureRect(textureRect);
 
     zombie = &FootballZombie;
     textureRect = sf::IntRect(0, 67.74, 64, 67.74);
-    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(12));
+    zombie->getZombieSprite().setTexture(Assets.getTexture(12));
     zombie->getZombieSprite().setScale(2.5, 2.5);
     zombie->getZombieSprite().setTextureRect(textureRect);
 
     zombie = &DancingZombie;
     textureRect = sf::IntRect(0, 80, 56, 80);
-    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(13));
+    zombie->getZombieSprite().setTexture(Assets.getTexture(13));
     zombie->getZombieSprite().setScale(2.2, 2.2);
     zombie->getZombieSprite().setTextureRect(textureRect);
 }
@@ -291,6 +291,8 @@ void Game::run()
 
     while (window.isOpen())
     {
+        //machine.ProcessStateChanges();
+
         deltaClock.restart();
         deltaTime = deltaClock.getElapsedTime().asSeconds();
 

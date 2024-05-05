@@ -161,6 +161,7 @@
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="BulletPea.h" />
     <ClInclude Include="DancingZombie.h" />
+    <ClInclude Include="Definitions.h" />
     <ClInclude Include="DolphinRiderZombie.h" />
     <ClInclude Include="FlyingZombie.h" />
     <ClInclude Include="FootballZombie.h" />
