@@ -10,10 +10,12 @@ protected:
 	int Suncost;
 	bool isAlive;
 	bool isUnlocked;
+	bool plantExists;
 	sf::Sprite plantSprite;
 	sf::Clock animationClock;
 public:
 	Plant();
+	virtual bool exists() = 0; 
 	virtual void setAnimation();
 	virtual sf::Sprite& getPlantSprite();
 	virtual void setXgridCoordinate(int x);

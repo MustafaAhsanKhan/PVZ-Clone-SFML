@@ -23,11 +23,11 @@ int BulletPea::getDamage()
 {
 	return damage;
 }
-int BulletPea::getXPos()
+float BulletPea::getXPos()
 {
 	return x_pos;
 }
-int BulletPea::getYPos()
+float BulletPea::getYPos()
 {
 	return y_pos;
 }

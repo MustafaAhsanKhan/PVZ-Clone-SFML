@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <ctime>
 #include <iostream>
 #include "Plant.h"
@@ -16,43 +17,43 @@ using namespace sf;
 class Game
 {
 private:
+	// sf::Music backgroundMusic;
+	sf::Clock deltaClock;
+	float deltaTime = 0.0;
+	sf::IntRect textureRect;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
-	Plant* plant;  // The plant object
+	// Plant* plant;  // The plant object
 	PeaShooter PeaShooterPlant;
-
-	SunFlower SunFlowerPlant;
-
+	// SunFlower SunFlowerPlant;
 	PlantFactory AllPlants;
-
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
 	FlyingZombie FlyingZombie;
-
-	Sprite mapSprite;
-	Sprite seedPacketSprite;
-	Sprite lawnMowerSprite[5];
-	Shooter* shooters;
+	sf::Sprite mapSprite;
+	sf::Sprite seedPacketSprite;
+	sf::Sprite lawnMowerSprite[5];
 	bool isPlacingPlant;
 	bool clickedSeedPacket[2]; // change size later
-
 	int totaltypescreated = 1;
-
 public:
 	Game();  // Default constructor
 	void run(); // has the game loop
 private:  
+	void InitializeMusic();
 	void InitializeUISprites();  // Initialize the UI sprites
 	void InitializePlantTextures();  // Initialize the plant textures
 	void InitializeZombieTextures();  // Initialize the zombie textures
-	void setPlantTextures();
+	//void setPlantTextures();
+	void setPlantFactoryTextures();
 	void setZombieTextures();
 	void handleAllPlantsCreation();
-	void handlePlantCreation();	
-	void handleMouseInput(sf::RenderWindow& window);  // Handle the mouse input	
-	void renderPlants(RenderWindow& window);  // Render the plants
-	void renderZombies(RenderWindow& window);  // Render the zombies
-	void renderUI(RenderWindow& window);  // Render the UI
+	void handleMouseInput();  // Handle the mouse input	
+	void renderPlantFactory();
+	// void renderPlants();  // Render the plants
+	void renderZombies();  // Render the zombies
+	void renderUI();  // Render the UI
+
 
 };

@@ -17,8 +17,8 @@ public:
 	// Getters
 	float getBulletSpeed();
 	int getDamage();
-	int getXPos();
-	int getYPos();
+	float getXPos();
+	float getYPos();
 	bool getExists();
 	sf::Sprite& getBulletSprite();
 
