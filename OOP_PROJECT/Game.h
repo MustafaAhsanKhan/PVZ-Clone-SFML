@@ -11,6 +11,9 @@
 #include "Zombie.h"
 #include "SimpleZombie.h"
 #include "FlyingZombie.h"
+#include "FootballZombie.h"
+#include "DancingZombie.h"
+#include "DolphinRiderZombie.h"
 
 using namespace sf;
 
@@ -28,12 +31,18 @@ private:
 	PeaShooter PeaShooterPlant;
 	// SunFlower SunFlowerPlant;
 	PlantFactory AllPlants;
+
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
 	FlyingZombie FlyingZombie;
-	sf::Sprite mapSprite;
-	sf::Sprite seedPacketSprite;
-	sf::Sprite lawnMowerSprite[5];
+	FootballZombie FootballZombie;
+	DancingZombie DancingZombie;
+	DolphinRiderZombie DolphinRiderZombie;
+
+	Sprite mapSprite;
+	Sprite seedPacketSprite;
+	Sprite lawnMowerSprite[5];
+	//Shooter* shooters;
 	bool isPlacingPlant;
 	bool clickedSeedPacket[2]; // change size later
 	int totaltypescreated = 1;

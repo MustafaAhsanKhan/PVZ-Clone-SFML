@@ -58,7 +58,7 @@ void FlyingZombie::setAnimation()
 	{
 		sf::IntRect textureRect = this->getZombieSprite().getTextureRect();
 
-		if (textureRect.left >= 297)  // animation moving right
+		if (textureRect.left >= 297)
 		{
 			textureRect.left = 0;
 		}

@@ -86,11 +86,11 @@ void Game::InitializePlantTextures()
 
 void Game::InitializeZombieTextures()
 {
-	Asset_Texture.loadTexture(8, "../PVZ_Textures/Zombies/simple_zombie.png");
-    Asset_Texture.loadTexture(9, "../PVZ_Textures/Zombies/flying_zombie.png");
-    Asset_Texture.loadTexture(10, "../PVZ_Textures/Zombies/football_zombie.png");
-    Asset_Texture.loadTexture(11, "../PVZ_Textures/Zombies/dancing_zombie.png");
-    Asset_Texture.loadTexture(12, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
+	Asset_Texture.loadTexture(10, "../PVZ_Textures/Zombies/simple_zombie.png");
+    Asset_Texture.loadTexture(11, "../PVZ_Textures/Zombies/flying_zombie.png");
+    Asset_Texture.loadTexture(12, "../PVZ_Textures/Zombies/football_zombie.png");
+    Asset_Texture.loadTexture(13, "../PVZ_Textures/Zombies/dancing_zombie.png");
+    Asset_Texture.loadTexture(14, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
 }
 
 
@@ -124,19 +124,32 @@ void Game::setZombieTextures()
 {
     zombie = &SimpleZombie;
 
-    sf::IntRect zombietextureRect(0, 58.28, 51.11, 58.28);
-    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(8));
+    textureRect = sf::IntRect(0, 58.28, 51.11, 58.28);
+    
+    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(10));
     zombie->getZombieSprite().setScale(3, 3);
 
-    zombie->getZombieSprite().setTextureRect(zombietextureRect);
+    zombie->getZombieSprite().setTextureRect(textureRect);
 
     zombie = &FlyingZombie;
 
-    zombietextureRect = sf::IntRect(0, 0, 34.95, 58);
-    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(9));
+    textureRect = sf::IntRect(0, 0, 34.95, 58);
+    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(11));
     zombie->getZombieSprite().setScale(3, 3);
 
-    zombie->getZombieSprite().setTextureRect(zombietextureRect);
+    zombie->getZombieSprite().setTextureRect(textureRect);
+
+    zombie = &FootballZombie;
+    textureRect = sf::IntRect(0, 67.74, 64, 67.74);
+    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(12));
+    zombie->getZombieSprite().setScale(2.5, 2.5);
+    zombie->getZombieSprite().setTextureRect(textureRect);
+
+    zombie = &DancingZombie;
+    textureRect = sf::IntRect(0, 80, 56, 80);
+    zombie->getZombieSprite().setTexture(Asset_Texture.getTexture(13));
+    zombie->getZombieSprite().setScale(2.2, 2.2);
+    zombie->getZombieSprite().setTextureRect(textureRect);
 }
 
 
@@ -232,6 +245,13 @@ void Game::run()
     float deltaTime = 0.0;
     int temp = rand() % 5;
    
+    /*for (int i = 0; i < 10; i++)
+    {
+        AllPlants.getShooter(0, i).getPlantSprite().setPosition(-100, -100);
+    }
+    
+    plant->getPlantSprite().setPosition(-100, -100);*/
+
     zombie = &SimpleZombie;
     zombie->setXgridCoordinate(8);
     zombie->setYgridCoordinate(temp);
@@ -241,6 +261,30 @@ void Game::run()
 
     temp = rand() % 5;
     zombie = &FlyingZombie;
+
+    zombie->setXgridCoordinate(8);
+    zombie->setYgridCoordinate(temp);
+    zombie->setx_pos(1180);
+    zombie->sety_pos((120 * temp) + 40);
+
+    temp = rand() % 5;
+    zombie = &FootballZombie;
+
+    zombie->setXgridCoordinate(8);
+    zombie->setYgridCoordinate(temp);
+    zombie->setx_pos(1180);
+    zombie->sety_pos((120 * temp) + 40);
+
+    temp = rand() % 5;
+    zombie = &DancingZombie;
+
+    zombie->setXgridCoordinate(8);
+    zombie->setYgridCoordinate(temp);
+    zombie->setx_pos(1180);
+    zombie->sety_pos((120 * temp) + 40);
+
+    temp = rand() % 5;
+    zombie = &DolphinRiderZombie;
 
     zombie->setXgridCoordinate(8);
     zombie->setYgridCoordinate(temp);
@@ -283,6 +327,16 @@ void Game::run()
             Game::renderZombies();
 
             zombie = &SimpleZombie;
+            zombie->moveZombie(deltaTime);
+            zombie->setAnimation();
+            Game::renderZombies();
+
+            zombie = &FootballZombie;
+            zombie->moveZombie(deltaTime);
+            zombie->setAnimation();
+            Game::renderZombies();
+
+            zombie = &DancingZombie;
             zombie->moveZombie(deltaTime);
             zombie->setAnimation();
             Game::renderZombies();

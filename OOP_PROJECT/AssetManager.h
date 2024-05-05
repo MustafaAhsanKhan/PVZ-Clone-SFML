@@ -4,6 +4,14 @@
 #include <iostream>
 using namespace std;
 
+/*
+Key for Assets
+0: Backgrounds
+1-9 reserved for plants
+10-19 reserved for zombies
+20-29 reserved for UI
+*/
+
 class AssetManager
 {
 private:
