@@ -76,12 +76,13 @@ void Game::InitializeUISprites()
 void Game::InitializePlantTextures()
 {
     Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Plant texture
-    Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/Repeater.png");
-    Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/SnowPea.png");
+    Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/SnowPea.png");
+    Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/Repeater.png");   
     Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
-    Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/Sunflower.png");
-    Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
-    Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Wallnut.png");
+    Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/SnowPea.png"); // snow pea bullet texture
+    Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/Sunflower.png");
+    Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
+    Asset_Texture.loadTexture(8, "../PVZ_Textures/PlantTextures/Wallnut.png");
 }
 
 void Game::InitializeZombieTextures()
@@ -96,27 +97,45 @@ void Game::InitializeZombieTextures()
 
 void Game::setPlantFactoryTextures()
 {
-    textureRect = sf::IntRect(0, 0, 27.125, 31);  // Peashooter
-    for (int i = 0; i < 50; i++) // 50 plants
-    {
-        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
-        AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
-        AllPlants.getShooter(0, i).getPlantSprite().setScale(3, 3);
+    textureRect = sf::IntRect(0, 0, 27.125, 31);  // initially wokrs for normal peashooter
 
+    int assetTextureindex = 1; // once becomes two, sets textures for snowPea
+    const int totalshootertypes = 2;
+    for (int k = 0; k < totalshootertypes; k++)
+    {
+        for (int i = 0; i < 50; i++) // 50 plants
+        {
+            AllPlants.getShooter(k, i).getPlantSprite().setTexture(Asset_Texture.getTexture(assetTextureindex));
+            AllPlants.getShooter(k, i).getPlantSprite().setTextureRect(textureRect);
+            AllPlants.getShooter(k, i).getPlantSprite().setScale(3, 3);
+
+        }
+        assetTextureindex++;
+        // add switch statements here to change the texture rect based on the name
+        
     }
+    
 
     // the Shooter's bullets
-    textureRect = sf::IntRect(78, 38, 10, 20);
-    for (int i = 0; i < 50; i++) // 50 plants
-    {
-        for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
-        {
-            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(4));
-            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setScale(3, 3);
-            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
-        }
+    textureRect = sf::IntRect(78, 38, 10, 20); // initially wokrs for normal peashooter
+    int bullettextureindex = 4;
 
+    for (int k = 0; k < totalshootertypes; k++)
+    {
+        for (int i = 0; i < 50; i++) // 50 plants
+        {
+            for (int j = 0; j < AllPlants.getShooter(k, i).getMaxBullets(); j++)
+            {
+                AllPlants.getShooter(k, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(bullettextureindex));
+                AllPlants.getShooter(k, i).getBullet(j).getBulletSprite().setScale(3, 3);
+                AllPlants.getShooter(k, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
+            }
+
+        }
+        bullettextureindex++;
+        // add switch statements here to change the texture rect based on the number
     }
+   
 
 }
 
@@ -171,6 +190,8 @@ void Game::handleAllPlantsCreation()
         const int eachtypenum = 5; // total types
         // int totaltypescreated = 1; // the total instances of each type currently
         int plantscreated = 1; // currently
+        int plantTypescreated = 1;
+        int seedPacketnum = 3;
 
             // checks if seed packet clicked
             if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 55 && mousePosition.y <= 144)
@@ -179,27 +200,54 @@ void Game::handleAllPlantsCreation()
             }
             if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 144 && mousePosition.y <= 233)
             {
-                if (!clickedSeedPacket[0])
-                {
-                    clickedSeedPacket[1] = true;
-                }
-                
+               
+                clickedSeedPacket[1] = true;
+                               
             }
+
+            if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= 322 && mousePosition.y <= 401)
+            {
+
+                clickedSeedPacket[2] = true;
+
+            }
+
+
             for (int i = 0; i < totalplanttypes; i++)
             {
-            
-                 if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[1] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
-                 {
-                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setXgridCoordinate(gridX);
-                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setYgridCoordinate(gridY);
-                     AllPlants.getShooter(totalplanttypes - 1, totaltypescreated - 1).setExists(true);
-                     totaltypescreated++;
-                     cout << "NEW PLANT CREATED! ";
-                     FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-                     clickedSeedPacket[1] = false;
-                 }               
+                
+                for (int j = 0; j < seedPacketnum; j++)
+                {
+                    if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[j] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
+                    {
+                        switch (j)
+                        {
+                        case 1:
+                            plantTypescreated = 1;
+                        case 2:
+                            plantTypescreated = 2; // checks whether to instantiate snow pea or peashooter or which shooter type
+                        
+                        }
+
+
+
+                        AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+                        AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+                        AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).setExists(true);
+                        totalTypeInstancesCreated++;
+                        // plantTypescreated++;
+                        cout << "NEW PLANT CREATED! ";
+                        FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+                        clickedSeedPacket[j] = false;
+                    }
+                }
+                            
             }
+
+
+
+
     }
 }
 
@@ -311,7 +359,7 @@ void Game::run()
         Game::handleAllPlantsCreation();
 
         // For plant factory
-        for (int i = 0; i < totaltypescreated; i++)
+        for (int i = 0; i < totalTypeInstancesCreated; i++)
         {
             AllPlants.getShooter(0, i).setAnimation();
             AllPlants.getShooter(0, i).shootBullet(deltaTime);

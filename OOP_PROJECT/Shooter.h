@@ -10,8 +10,6 @@ protected:
 	float ShootingRate;
 	BulletPea* bullets;
 public:
-	virtual void setMaxBullets(int bullets) = 0;
-	virtual void setShootingRate(float p_ShootingRate) = 0;
 	virtual BulletPea& getBullet(int index) = 0;
 	virtual int getMaxBullets() = 0;
 	// virtual void moveBullets();
