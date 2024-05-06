@@ -1,8 +1,9 @@
 #include "Game.h"
+#include "SplashState.h"
 
 // int Game::totaltypescreated = 1; // current plant types created
 
-Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close)
+Game::Game() : window(VideoMode(1280, 720), "Plants Vs Zombies", Style::Titlebar | Style::Close)
 {
     // Initialize Plants
     isPlacingPlant = false;  // will be set to true when the user clicks on a plant to place it
@@ -40,6 +41,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
 	Game::setPlantFactoryTextures();
 	Game::InitializeZombieTextures();
 	Game::setZombieTextures();
+    cout << "Game Initialized" << endl;
 }
 
 void Game::InitializeMusic()
@@ -50,36 +52,37 @@ void Game::InitializeMusic()
 
 void Game::InitializeUISprites()
 {
-    Assets.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
-    Assets.loadTexture(20, "../PVZ_Textures/Seed_Packets_Transparent.png");
-    Assets.loadTexture(21, "../PVZ_Textures/Lawn_Mower2.png");
+    Assets.loadTexture(20, "../PVZ_Textures/backgrounds/level1.png");
+    Assets.loadTexture(29, "../PVZ_Textures/backgrounds/level2.png");
+    Assets.loadTexture(30, "../PVZ_Textures/Seed_Packets_Transparent.png");
+    Assets.loadTexture(31, "../PVZ_Textures/Lawn_Mower2.png");
 
     sf::IntRect textureRect(0, 73, 143, 550);
 
     // Seed packet sprite
-    seedPacketSprite.setTexture(Assets.getTexture(20));
+    seedPacketSprite.setTexture(Assets.getTexture(30));
     seedPacketSprite.setTextureRect(textureRect);
     seedPacketSprite.setPosition(50, 70);
 
     // Lawn mower sprite
     for (int i = 0; i < 5; i++)
     {
-		lawnMowerSprite[i].setTexture(Assets.getTexture(21));
+		lawnMowerSprite[i].setTexture(Assets.getTexture(31));
 		lawnMowerSprite[i].setPosition(185, (i * 118) + 70);
 	}
 
-    mapSprite.setTexture(Assets.getTexture(0));
+    mapSprite.setTexture(Assets.getTexture(29));
 }
 
 void Game::InitializePlantTextures()
 {
-    Assets.loadTexture(1, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Plant texture
-    Assets.loadTexture(2, "../PVZ_Textures/PlantTextures/Repeater.png");
-    Assets.loadTexture(3, "../PVZ_Textures/PlantTextures/SnowPea.png");
-    Assets.loadTexture(4, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
-    Assets.loadTexture(5, "../PVZ_Textures/PlantTextures/Sunflower.png");
-    Assets.loadTexture(6, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
-    Assets.loadTexture(7, "../PVZ_Textures/PlantTextures/Wallnut.png");
+    Assets.loadTexture(0, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Plant texture
+    Assets.loadTexture(1, "../PVZ_Textures/PlantTextures/Repeater.png");
+    Assets.loadTexture(2, "../PVZ_Textures/PlantTextures/SnowPea.png");
+    Assets.loadTexture(3, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
+    Assets.loadTexture(4, "../PVZ_Textures/PlantTextures/Sunflower.png");
+    Assets.loadTexture(5, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
+    Assets.loadTexture(6, "../PVZ_Textures/PlantTextures/Wallnut.png");
 }
 
 void Game::InitializeZombieTextures()
@@ -97,7 +100,7 @@ void Game::setPlantFactoryTextures()
     textureRect = sf::IntRect(0, 0, 27.125, 31);  // Peashooter
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Assets.getTexture(1));
+        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Assets.getTexture(0));
         AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getShooter(0, i).getPlantSprite().setScale(3, 3);
 
@@ -109,7 +112,7 @@ void Game::setPlantFactoryTextures()
     {
         for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
         {
-            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(4));
+            AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(3));
             AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setScale(3, 3);
             AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
         }
@@ -238,8 +241,9 @@ void Game::renderUI()
 void Game::run()
 {
     srand(time(0));
+
+    machine.AddState(StateRef(new SplashState));
     
-    Clock zombieClock;
     float deltaTime = 0.0;
     int temp = rand() % 5;
    
@@ -250,7 +254,7 @@ void Game::run()
     
     plant->getPlantSprite().setPosition(-100, -100);*/
 
-    zombie = &SimpleZombie;
+    /*zombie = &SimpleZombie;
     zombie->setXgridCoordinate(8);
     zombie->setYgridCoordinate(temp);
     zombie->setx_pos(1180);
@@ -287,11 +291,11 @@ void Game::run()
     zombie->setXgridCoordinate(8);
     zombie->setYgridCoordinate(temp);
     zombie->setx_pos(1180);
-    zombie->sety_pos((120 * temp) + 40);
+    zombie->sety_pos((120 * temp) + 40);*/
 
     while (window.isOpen())
     {
-        //machine.ProcessStateChanges();
+        machine.ProcessStateChanges();
 
         deltaClock.restart();
         deltaTime = deltaClock.getElapsedTime().asSeconds();
@@ -304,46 +308,50 @@ void Game::run()
                 window.close();
             }
         }
-        Game::InitializeMusic();
+  //      //Game::InitializeMusic();
 
-		Game::renderUI(); // render the UI
-       
-        Game::handleAllPlantsCreation();
+		//Game::renderUI(); // render the UI
+  //     
+  //      Game::handleAllPlantsCreation();
 
-        // For plant factory
-        for (int i = 0; i < totaltypescreated; i++)
-        {
-            AllPlants.getShooter(0, i).setAnimation();
-            AllPlants.getShooter(0, i).shootBullet(deltaTime);
-        }
+  //      // For plant factory
+  //      for (int i = 0; i < totaltypescreated; i++)
+  //      {
+  //          AllPlants.getShooter(0, i).setAnimation();
+  //          AllPlants.getShooter(0, i).shootBullet(deltaTime);
+  //      }
+  //      
+  //      Game::renderPlantFactory();
+
+  //      if (zombie != nullptr)
+  //      {
+  //          zombie = &FlyingZombie;
+  //          zombie->moveZombie(deltaTime);
+  //          zombie->setAnimation();
+  //          Game::renderZombies();
+
+  //          zombie = &SimpleZombie;
+  //          zombie->moveZombie(deltaTime);
+  //          zombie->setAnimation();
+  //          Game::renderZombies();
+
+  //          zombie = &FootballZombie;
+  //          zombie->moveZombie(deltaTime);
+  //          zombie->setAnimation();
+  //          Game::renderZombies();
+
+  //          zombie = &DancingZombie;
+  //          zombie->moveZombie(deltaTime);
+  //          zombie->setAnimation();
+  //          Game::renderZombies();
+  //      }
         
-        Game::renderPlantFactory();
 
-        if (zombie != nullptr)
-        {
-            zombie = &FlyingZombie;
-            zombie->moveZombie(deltaTime);
-            zombie->setAnimation();
-            Game::renderZombies();
+        machine.GetActiveState()->HandleInput();
+        machine.GetActiveState()->Update();
+        machine.GetActiveState()->Draw();
 
-            zombie = &SimpleZombie;
-            zombie->moveZombie(deltaTime);
-            zombie->setAnimation();
-            Game::renderZombies();
-
-            zombie = &FootballZombie;
-            zombie->moveZombie(deltaTime);
-            zombie->setAnimation();
-            Game::renderZombies();
-
-            zombie = &DancingZombie;
-            zombie->moveZombie(deltaTime);
-            zombie->setAnimation();
-            Game::renderZombies();
-        }
-        
-
-        window.display();
-        window.clear();
+        //window.display();
+        //window.clear();
     }
 }

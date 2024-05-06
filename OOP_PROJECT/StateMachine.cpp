@@ -1,6 +1,6 @@
 #include "StateMachine.h"
 
-void StateMachine::AddState(StateRef p_newState, bool p_isReplacing = true)
+void StateMachine::AddState(StateRef p_newState, bool p_isReplacing)
 {
 	isAdding = true;
 	isReplacing = p_isReplacing;

@@ -10,7 +10,7 @@ class StateMachine
 public:
 	StateMachine() {}
 
-	void AddState(StateRef p_newState, bool p_isReplacing);
+	void AddState(StateRef p_newState, bool p_isReplacing = true);
 
 	void RemoveState();
 
@@ -18,6 +18,7 @@ public:
 
 	StateRef& GetActiveState();
 
+	~StateMachine() {};
 private:
 	std::stack<StateRef> states;  // A stack of states
 	StateRef newState;
@@ -26,5 +27,4 @@ private:
 	bool isAdding;
 	bool isReplacing;
 
-	~StateMachine() {};
 };
