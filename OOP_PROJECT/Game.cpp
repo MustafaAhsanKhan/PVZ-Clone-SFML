@@ -53,10 +53,10 @@ void Game::InitializeMusic()
 void Game::InitializeUISprites()
 {
     Asset_Texture.loadTexture(0, "../PVZ_Textures/backgrounds/level2.png");
-    Asset_Texture.loadTexture(20, "../PVZ_Textures/Seed_Packets_Transparent.png");
+    Asset_Texture.loadTexture(20, "../PVZ_Textures/Seed_Packets_Sprites.png");
     Asset_Texture.loadTexture(21, "../PVZ_Textures/Lawn_Mower2.png");
 
-    sf::IntRect textureRect(0, 73, 143, 550);
+    sf::IntRect textureRect(0, 45, 143, 675);
 
     // Seed packet sprite
     seedPacketSprite.setTexture(Asset_Texture.getTexture(20));
