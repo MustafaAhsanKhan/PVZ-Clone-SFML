@@ -314,7 +314,7 @@ void Game::run()
         for (int i = 0; i < totaltypescreated; i++)
         {
             AllPlants.getShooter(0, i).setAnimation();
-            AllPlants.getShooter(0, i).shootBullet(deltaTime);
+            AllPlants.getShooter(0, i).shootBullet(deltaClock.getElapsedTime().asSeconds());
         }
         
         Game::renderPlantFactory();
