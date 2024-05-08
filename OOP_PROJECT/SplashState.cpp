@@ -1,25 +1,31 @@
 #include "SplashState.h"
 
 
-void SplashState::Init()
+void SplashState::Init(AssetManager& Assets)
 {
 	// Initialize the background
-	background.setTexture(Game::Assets.getTexture(20));
+	background.setTexture(Assets.getTexture(20));
 }
 
-void SplashState::Update()
+void SplashState::HandleInput()
+{
+
+}
+
+void SplashState::Update(StateMachine* machine)
 {
 		// If the time elapsed is greater than 3 seconds, switch to the main menu
 	if (displayTime.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
 	{
 		// Change the state to the main menu
-		//cout << "Switching to the main menu" << endl;
+		cout << "Switching to the main menu" << endl;
+		machine->AddState(StateRef(new Level1State));  // Replace the current state with the main menu
 	}
 }
 
-void SplashState::Draw()
+void SplashState::Draw(sf::RenderWindow& window)
 {
-	Game::window.draw(background);
-	Game::window.display();
-	Game::window.clear();
+	window.draw(background);
+	window.display();
+	window.clear();
 }

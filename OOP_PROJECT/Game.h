@@ -6,7 +6,9 @@
 
 #include "Definitions.h"
 #include "AssetManager.h"
-#include "StateMachine.h"
+//#include "StateMachine.h"
+#include "SplashState.h"
+#include "Level1State.h"
 
 #include "Plant.h"
 #include "PeaShooter.h"

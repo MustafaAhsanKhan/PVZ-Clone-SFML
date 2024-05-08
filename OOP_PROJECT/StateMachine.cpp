@@ -14,7 +14,7 @@ void StateMachine::RemoveState()
 	isRemoving = true;
 }
 
-void StateMachine::ProcessStateChanges()
+void StateMachine::ProcessStateChanges(AssetManager& Assets)
 {
 	if (isRemoving == true  && !states.empty())
 	{
@@ -43,7 +43,7 @@ void StateMachine::ProcessStateChanges()
 		}
 
 		states.push(std::move(newState));
-		states.top()->Init();
+		states.top()->Init(Assets);
 		isAdding = false;
 	}
 }

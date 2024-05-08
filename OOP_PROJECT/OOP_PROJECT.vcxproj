@@ -146,6 +146,7 @@
     <ClCompile Include="FlyingZombie.cpp" />
     <ClCompile Include="FootballZombie.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Level1State.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PeaShooter.cpp" />
     <ClCompile Include="Plant.cpp" />
@@ -166,13 +167,13 @@
     <ClInclude Include="FlyingZombie.h" />
     <ClInclude Include="FootballZombie.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Level1State.h" />
     <ClInclude Include="PeaShooter.h" />
     <ClInclude Include="Plant.h" />
     <ClInclude Include="PlantFactory.h" />
     <ClInclude Include="Shooter.h" />
     <ClInclude Include="SimpleZombie.h" />
     <ClInclude Include="SplashState.h" />
-    <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="SunFlower.h" />
     <ClInclude Include="WallNut.h" />

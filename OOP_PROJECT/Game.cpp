@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "SplashState.h"
 
 // int Game::totaltypescreated = 1; // current plant types created
 
@@ -52,7 +51,7 @@ void Game::InitializeMusic()
 
 void Game::InitializeUISprites()
 {
-    Assets.loadTexture(20, "../PVZ_Textures/backgrounds/level1.png");
+    Assets.loadTexture(20, "../PVZ_Textures/backgrounds/mainmenu.jpeg");
     Assets.loadTexture(29, "../PVZ_Textures/backgrounds/level2.png");
     Assets.loadTexture(30, "../PVZ_Textures/Seed_Packets_Transparent.png");
     Assets.loadTexture(31, "../PVZ_Textures/Lawn_Mower2.png");
@@ -295,7 +294,7 @@ void Game::run()
 
     while (window.isOpen())
     {
-        machine.ProcessStateChanges();
+        machine.ProcessStateChanges(Assets);
 
         deltaClock.restart();
         deltaTime = deltaClock.getElapsedTime().asSeconds();
@@ -348,10 +347,7 @@ void Game::run()
         
 
         machine.GetActiveState()->HandleInput();
-        machine.GetActiveState()->Update();
-        machine.GetActiveState()->Draw();
-
-        //window.display();
-        //window.clear();
+        machine.GetActiveState()->Update(&machine);
+        machine.GetActiveState()->Draw(window);
     }
 }

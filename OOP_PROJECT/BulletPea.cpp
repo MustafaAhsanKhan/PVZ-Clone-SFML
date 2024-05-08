@@ -65,7 +65,7 @@ void BulletPea::move(float deltaTime)
 	{
 		x_pos += bulletSpeed * deltaTime;
 	}	
-	if (x_pos > 1350)
+	if (x_pos > 1300)
 	{
 		exists = false;
 	}
