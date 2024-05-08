@@ -12,7 +12,6 @@ protected:
 public:
 	virtual BulletPea& getBullet(int index) = 0;
 	virtual int getMaxBullets() = 0;
-	// virtual void moveBullets();
 	virtual void setExists(bool ex) = 0; // sets existence of the plant
 	virtual bool exists() = 0; // checks if it exists (returns plantExists data member)
 	virtual void shootBullet(float deltaTime) = 0;

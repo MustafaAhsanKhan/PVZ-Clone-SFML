@@ -11,12 +11,13 @@ class PlantFactory
 {
 private:
 	Plant** plants;
-	Shooter** shooters;
-	int totalplantTypes; // will be set in default constructor
-	int totalPlantObjects;
+	Shooter** shooterPlants;
+	int totalShooterplantTypes; // will be set in default constructor
+	int totalNormalPlantTypes; // will be set in default constructor
+	const int MAX_PLANTS;
 public:
 	PlantFactory();
-	Plant& getPlant(int row, int col);
+	Plant& getNormalPlant(int row, int col);
 	Shooter& getShooter(int row, int col);
 	
 
