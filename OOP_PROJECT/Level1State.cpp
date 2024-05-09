@@ -195,12 +195,22 @@ void Level1State::renderPlantFactory(sf::RenderWindow& window)
 
 void Level1State::renderZombies(sf::RenderWindow& window)
 {
+    zombie = &FlyingZombie;
     window.draw(zombie->getZombieSprite());
+
+    zombie = &SimpleZombie;
+    window.draw(zombie->getZombieSprite());
+
+    zombie = &FootballZombie;
+    window.draw(zombie->getZombieSprite());
+
+    zombie = &DancingZombie;
+    window.draw(zombie->getZombieSprite());
+    
 }
 
 void Level1State::renderUI(sf::RenderWindow& window)
 {
-    cout << "Drawing" << endl;
     for (int i = 0; i < 5; i++)
     {
         window.draw(lawnMowerSprite[i]);
@@ -213,6 +223,7 @@ void Level1State::Init(AssetManager& Assets)
 	background.setTexture(Assets.getTexture(29));
     setPlantFactoryTextures(Assets);
     setZombieTextures(Assets);
+    setUITextures(Assets);
 }
 void Level1State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 {
@@ -233,29 +244,25 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
         zombie = &FlyingZombie;
         zombie->moveZombie(deltaTime);
         zombie->setAnimation();
-        //renderZombies(window);
 
         zombie = &SimpleZombie;
         zombie->moveZombie(deltaTime);
         zombie->setAnimation();
-        //renderZombies(window);
 
         zombie = &FootballZombie;
         zombie->moveZombie(deltaTime);
         zombie->setAnimation();
-        //renderZombies(window);
 
         zombie = &DancingZombie;
         zombie->moveZombie(deltaTime);
         zombie->setAnimation();
-        //renderZombies(window);
     }
 }
 void Level1State::Draw(sf::RenderWindow& window)
 {
 	window.draw(background);
     renderPlantFactory(window);
-    //renderZombies(window);
+    renderZombies(window);
     renderUI(window);
 	window.display();
 	window.clear();
