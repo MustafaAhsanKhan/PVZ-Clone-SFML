@@ -1,15 +1,12 @@
 #pragma once
 #include "StateMachine.h"
-#include "InstructionsState.h"
-#include "LeaderBoardState.h"
-#include "LevelSelectionState.h"
 
-class MainMenuState : public State
+class InstructionsState : public State
 {
 private:
 	sf::Sprite background;
 public:
-	MainMenuState() {}
+	InstructionsState() {}
 	virtual void Init(AssetManager& Assets);
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window);
 	virtual void Update(StateMachine* machine, float deltaTime);

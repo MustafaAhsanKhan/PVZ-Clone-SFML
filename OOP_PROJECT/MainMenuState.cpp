@@ -10,9 +10,19 @@ void MainMenuState::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 	{
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-		if (mousePosition.x >= 416 && mousePosition.x <= 897 && mousePosition.y >= 100 && mousePosition.y <= 230)
+		if (mousePosition.x >= 402 && mousePosition.x <= 865 && mousePosition.y >= 279 && mousePosition.y <= 422)
 		{
-			machine->AddState(StateRef(new Level1State));
+			machine->AddState(StateRef(new LevelSelectionState), false);  // Switching to the level selection screen
+		}
+
+		if (mousePosition.x >= 21 && mousePosition.x <= 522 && mousePosition.y >= 653 && mousePosition.y <= 689)
+		{
+			machine->AddState(StateRef(new InstructionsState), false);  // Switching to the instructions screen
+		}
+
+		if (mousePosition.x >= 770 && mousePosition.x <= 1255 && mousePosition.y >= 653 && mousePosition.y <= 689)
+		{
+			machine->AddState(StateRef(new LeaderBoardState), false);  // Switching to the leader board screen
 		}
 	}
 }
