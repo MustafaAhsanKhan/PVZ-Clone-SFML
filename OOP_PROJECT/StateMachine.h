@@ -3,6 +3,11 @@
 #include <stack>
 #include "AssetManager.h"
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <ctime>
+#include <iostream>
+
 class StateMachine;
 
 class State
@@ -10,9 +15,9 @@ class State
 public:
 	virtual void Init(AssetManager& Assets) = 0;
 
-	virtual void HandleInput() = 0;
+	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window) = 0;
 
-	virtual void Update(StateMachine* machine) = 0;  // DeltaTime?
+	virtual void Update(StateMachine* machine, float deltaTime) = 0;  // DeltaTime?
 
 	virtual void Draw(sf::RenderWindow& window) = 0;  // DeltaTime?
 
