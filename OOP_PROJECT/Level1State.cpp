@@ -220,7 +220,7 @@ void Level1State::renderUI(sf::RenderWindow& window)
 
 void Level1State::Init(AssetManager& Assets)
 {
-	background.setTexture(Assets.getTexture(29));
+	background.setTexture(Assets.getTexture(26));
     setPlantFactoryTextures(Assets);
     setZombieTextures(Assets);
     setUITextures(Assets);
@@ -228,6 +228,16 @@ void Level1State::Init(AssetManager& Assets)
 void Level1State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 {
     handleAllPlantsCreation(window);
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+        if (mousePosition.x >= 1165 && mousePosition.x <= 1252 && mousePosition.y >= 31 && mousePosition.y <= 112)
+        {
+            machine->AddState(StateRef(new PauseGameState(26)), false);  // Switching to the Pause game state
+        }
+    }
 }
 void Level1State::Update(StateMachine* machine, float deltaTime)
 {

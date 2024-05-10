@@ -13,7 +13,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
     {
         return;
     }
-    window.setIcon(32, 32, icon.getPixelsPtr());    
+    window.setIcon(32, 32, icon.getPixelsPtr());
 	InitializePlantTextures();
 	InitializeZombieTextures();
 }
@@ -31,7 +31,11 @@ void Game::InitializeUISprites()
     Assets.loadTexture(22, "../PVZ_Textures/backgrounds/LevelSelection.png");
     Assets.loadTexture(23, "../PVZ_Textures/backgrounds/Instructions.png");
     Assets.loadTexture(24, "../PVZ_Textures/backgrounds/LeaderBoard.png");
-    Assets.loadTexture(29, "../PVZ_Textures/backgrounds/Level1.png");
+    Assets.loadTexture(25, "../PVZ_Textures/backgrounds/PauseScreen.png");
+    Assets.loadTexture(26, "../PVZ_Textures/backgrounds/Level1.png");
+    Assets.loadTexture(27, "../PVZ_Textures/backgrounds/Level2.png");
+    Assets.loadTexture(28, "../PVZ_Textures/backgrounds/Level3.png");
+    Assets.loadTexture(29, "../PVZ_Textures/backgrounds/Level4.png");
     Assets.loadTexture(30, "../PVZ_Textures/Seed_Packets_Transparent.png");
     Assets.loadTexture(31, "../PVZ_Textures/Lawn_Mower2.png");
 }
@@ -60,6 +64,7 @@ void Game::InitializeZombieTextures()
 void Game::run()
 {
     srand(time(0));
+    //window.setFramerateLimit(60);
 
     machine.AddState(StateRef(new SplashState));
     

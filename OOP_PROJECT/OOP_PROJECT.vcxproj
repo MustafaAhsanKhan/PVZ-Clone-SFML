@@ -152,6 +152,7 @@
     <ClCompile Include="LevelSelectionState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="PauseGameState.cpp" />
     <ClCompile Include="PeaShooter.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="PlantFactory.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Level1State.h" />
     <ClInclude Include="LevelSelectionState.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="PauseGameState.h" />
     <ClInclude Include="PeaShooter.h" />
     <ClInclude Include="Plant.h" />
     <ClInclude Include="PlantFactory.h" />

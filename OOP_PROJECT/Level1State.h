@@ -1,5 +1,6 @@
 #pragma once
 #include "StateMachine.h"
+#include "PauseGameState.h"
 
 #include "Plant.h"
 #include "PeaShooter.h"
