@@ -49,7 +49,7 @@ void Game::InitializePlantTextures()
 	Assets.loadTexture(5, "../PVZ_Textures/PlantTextures/Repeater.png");
 	Assets.loadTexture(6, "../PVZ_Textures/PlantTextures/SnowPea.png");
 	Assets.loadTexture(7, "../PVZ_Textures/PlantTextures/Peashooter.png");  
-	Assets.loadTexture(8, "../PVZ_Textures/PlantTextures/Fumeshroom.png"); 
+	Assets.loadTexture(8, "../PVZ_Textures/PlantTextures/FumeShroom.png"); 
 }
 
 void Game::InitializeZombieTextures()
