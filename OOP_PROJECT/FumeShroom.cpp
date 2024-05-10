@@ -1,32 +1,36 @@
-#include "SnowPea.h"
+#include "FumeShroom.h"
 
-SnowPea::SnowPea()
+FumeShroom::FumeShroom()
 {
-	MAX_BULLETS = 2;
+	MAX_BULLETS = 1;
 	ShootingRate = 1;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
-	Suncost = 100; // initializing the cost of Peashooter
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[0].setBulletSpeed(500000);
+	}
+	Suncost = 100; 
 	plantExists = false; // checks if plant exists
 }
 
-sf::Sprite& SnowPea::getPlantSprite()
+sf::Sprite& FumeShroom::getPlantSprite()
 {
 	return plantSprite;
 }
 
 
-void SnowPea::Act()
+void FumeShroom::Act()
 {
-	if (animationClock.getElapsedTime().asMilliseconds() > 300)
+	if (animationClock.getElapsedTime().asMilliseconds() > 400)
 	{
 		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
-		if (textureRect.left >= 210)
+		if (textureRect.left >= 66)
 		{
 			textureRect.left = 0;
 		}
 		else
 		{
-			textureRect.left += 30.25;
+			textureRect.left += 33;
 		}
 		this->getPlantSprite().setTextureRect(textureRect);
 		animationClock.restart();
@@ -34,7 +38,7 @@ void SnowPea::Act()
 }
 
 // Update all bullets
-void SnowPea::shootBullet(float deltaTime)
+void FumeShroom::shootBullet(float deltaTime)
 {
 
 	if (ShootingRateClock.getElapsedTime().asSeconds() > ShootingRate)  // Making a new bullet after every 300 milliseconds
@@ -45,7 +49,7 @@ void SnowPea::shootBullet(float deltaTime)
 			{
 				bullets[i].setExists(true);
 				bullets[i].setXPos(XgridCoordinate * 100.66 + 380); // correctly alligned
-				bullets[i].setYPos(YgridCoordinate * 114 + 96); // correctly alligned
+				bullets[i].setYPos(YgridCoordinate * 114 + 110); // correctly alligned
 				ShootingRateClock.restart();
 				break;
 			}
@@ -61,42 +65,47 @@ void SnowPea::shootBullet(float deltaTime)
 	}
 }
 
-Bullet& SnowPea::getBullet(int index)
+Bullet& FumeShroom::getBullet(int index)
 {
 	return bullets[index];
 }
 
-int SnowPea::getXgridCoordinate()
+int FumeShroom::getXgridCoordinate()
 {
 	return XgridCoordinate;
 }
 
-int SnowPea::getYgridCoordinate()
+int FumeShroom::getYgridCoordinate()
 {
 	return YgridCoordinate;
 }
 
-void SnowPea::setXgridCoordinate(int x)
+void FumeShroom::setXgridCoordinate(int x)
 {
 	XgridCoordinate = x;
 }
 
-void SnowPea::setYgridCoordinate(int y)
+void FumeShroom::setYgridCoordinate(int y)
 {
 	YgridCoordinate = y;
 }
 
-int SnowPea::getMaxBullets()
+int FumeShroom::getMaxBullets()
 {
 	return MAX_BULLETS;
 }
 
-void SnowPea::setExists(bool ex)
+FumeShroom::~FumeShroom()
+{
+	delete[] bullets;
+}
+
+void FumeShroom::setExists(bool ex)
 {
 	plantExists = ex;
 }
 
-bool SnowPea::exists()
+bool FumeShroom::exists()
 {
 	return plantExists;
 }

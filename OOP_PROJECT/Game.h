@@ -27,9 +27,7 @@ private:
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	RenderWindow window;  // The window of the game
 	AssetManager Asset_Texture;  // The asset manager for the textures
-	// Plant* plant;  // The plant object
 	PeaShooter PeaShooterPlant;
-	// SunFlower SunFlowerPlant;
 	PlantFactory AllPlants;
 
 	Zombie* zombie;
@@ -38,13 +36,11 @@ private:
 	FootballZombie FootballZombie;
 	DancingZombie DancingZombie;
 	DolphinRiderZombie DolphinRiderZombie;
-
 	Sprite mapSprite;
 	Sprite seedPacketSprite;
 	Sprite lawnMowerSprite[5];
-	//Shooter* shooters;
 	bool isPlacingPlant;
-	bool clickedSeedPacket[4]; // change size later
+	bool clickedSeedPacket[7]; // change size later
 	int totalTypeInstancesCreated = 1;
 public:
 	Game();  // Default constructor

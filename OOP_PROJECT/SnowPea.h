@@ -4,7 +4,7 @@ class SnowPea : public Shooter
 {
 public:
 	SnowPea();
-	virtual BulletPea& getBullet(int index);
+	virtual Bullet& getBullet(int index);
 	virtual int getMaxBullets();
 	virtual void setExists(bool ex); 
 	virtual bool exists(); 

@@ -26,7 +26,7 @@ void WallNut::Act()
 	sf::Vector2f newPosition(currentPosition.x + speed, currentPosition.y + Yspeed);
 	this->getPlantSprite().setPosition(newPosition);
 
-	if (animationClock.getElapsedTime().asMilliseconds() > 200)
+	if (animationClock.getElapsedTime().asMilliseconds() > 120)
 	{
 		
 		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();

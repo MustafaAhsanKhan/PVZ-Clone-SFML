@@ -21,7 +21,7 @@ Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::
 			FIELD_GAME_STATUS[i][j] = false;  // Initially all the grid is empty
 		}
 	}
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 7; i++)
 	{
 		clickedSeedPacket[i] = false;
 	}
@@ -76,13 +76,13 @@ void Game::InitializeUISprites()
 void Game::InitializePlantTextures()
 {
 	Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Sunflower.png");
-	Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Plant texture
+	Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/Peashooter.png");  
 	Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/Wallnut.png");
 	Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/Cherrybomb.png");	
-	Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/SnowPea.png"); // snow pea bullet texture
+	Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/Repeater.png");
 	Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/SnowPea.png");
-	Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
-	Asset_Texture.loadTexture(8, "../PVZ_Textures/PlantTextures/Repeater.png");
+	Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Peashooter.png");  
+	Asset_Texture.loadTexture(8, "../PVZ_Textures/PlantTextures/Fumeshroom.png"); 
 }
 
 void Game::InitializeZombieTextures()
@@ -97,38 +97,85 @@ void Game::InitializeZombieTextures()
 
 void Game::setPlantFactoryTextures()
 {
-	textureRect = sf::IntRect(0, 0, 27.125, 31);  // initially wokrs for normal peashooter
-	int totalShooterTypes = 2;
+	textureRect = sf::IntRect(0, 0, 27.125, 31);  // initially works for normal peashooter
+	int totalShooterTypes = 3;
 
-
-	// TEXTURE SETTING PART CAN BE HARDCODED
-
+	// SHOOTERS
+	// Peashooter
 	for (int i = 0; i < 50; i++) // 50 plants
 	{
 		AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(2));
 		AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
 		AllPlants.getShooter(0, i).getPlantSprite().setScale(3, 3);
 	}
-	// ADD FOR OTHER SHOOTERS
+
+	// Repeater
+	textureRect = sf::IntRect(0, 0, 34, 34);
+	for (int i = 0; i < 50; i++) // 50 plants
+	{
+		AllPlants.getShooter(1, i).getPlantSprite().setTexture(Asset_Texture.getTexture(5));
+		AllPlants.getShooter(1, i).getPlantSprite().setTextureRect(textureRect);
+		AllPlants.getShooter(1, i).getPlantSprite().setScale(3, 3);
+	}
+	// SnowPea
+	textureRect = sf::IntRect(0, 0, 30.25, 31);
+	for (int i = 0; i < 50; i++) // 50 plants
+	{
+		AllPlants.getShooter(2, i).getPlantSprite().setTexture(Asset_Texture.getTexture(6));
+		AllPlants.getShooter(2, i).getPlantSprite().setTextureRect(textureRect);
+		AllPlants.getShooter(2, i).getPlantSprite().setScale(3, 3);
+	}
+	// Fumeshroom
+	textureRect = sf::IntRect(0, 0, 34.8, 33);
+	for (int i = 0; i < 50; i++) // 50 plants
+	{
+		AllPlants.getShooter(3, i).getPlantSprite().setTexture(Asset_Texture.getTexture(8));
+		AllPlants.getShooter(3, i).getPlantSprite().setTextureRect(textureRect);
+		AllPlants.getShooter(3, i).getPlantSprite().setScale(3, 3);
+	}
 
 
-	// THE SHOOTERS BULLETS
-	textureRect = sf::IntRect(78, 38, 10, 20); // initially wokrs for normal peashooter
+	// The shooter bullets
+	textureRect = sf::IntRect(78, 38, 10, 20); 
 	int bullettextureindex = 4;
 
-	for (int i = 0; i < 50; i++)
+	for (int type = 0; type < totalShooterTypes - 1; type++)
 	{
-		for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
+		for (int i = 0; i < 50; i++)
 		{
-			AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(7));
-			AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setScale(3, 3);
-			AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
+			for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
+			{
+				AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(7));
+				AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setScale(3, 3);
+				AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
+			}
 		}
 	}
 	
-	
+	// Snow pea bullet 
+	textureRect = sf::IntRect(90, 44.95, 20, 20); 
+	for (int i = 0; i < 50; i++)
+	{
+		for (int j = 0; j < AllPlants.getShooter(2, i).getMaxBullets(); j++)
+		{
+			AllPlants.getShooter(2, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(6));
+			AllPlants.getShooter(2, i).getBullet(j).getBulletSprite().setScale(3, 3);
+			AllPlants.getShooter(2, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
+		}
+	}
+	// Fumeshroom bullet
+	textureRect = sf::IntRect(0, 106, 32, 15);
+	for (int i = 0; i < 50; i++)
+	{
+		for (int j = 0; j < AllPlants.getShooter(3, i).getMaxBullets(); j++)
+		{
+			AllPlants.getShooter(3, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(8));
+			AllPlants.getShooter(3, i).getBullet(j).getBulletSprite().setScale(3, 3);
+			AllPlants.getShooter(3, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
+		}
+	}
 
-	// TEXTURE SETTING PART CAN BE HARDCODED
+	// NORMAL PLANTS
 	textureRect = sf::IntRect(101.9, 36.75, 30, 32); // sunflower
 	for (int i = 0; i < 50; i++) // 50 plants
 	{
@@ -201,7 +248,7 @@ void Game::handleAllPlantsCreation()
 		gridX = (mousePosition.x / 100.66) - 3;
 		gridY = (mousePosition.y / 114) - 1;
 
-		const int totalPlantTypes = 4; // will be 6 once all are implemented
+		const int totalPlantTypes = 7; // will be 6 once all are implemented
 		const int eachtypenum = 5; // total types
 		// int totaltypescreated = 1; // the total instances of each type currently
 		int plantscreated = 1; // currently
@@ -210,17 +257,23 @@ void Game::handleAllPlantsCreation()
 
 		/*
 		FOR CLARITY:
-		clickedSeedPacket[]
+		1. clickedSeedPacket[]
 		sunflower index : 0
 		peashooter index : 1
 		Wallnut index: 2
 		Cherrybomb index: 3
+		Repeater index: 4
+		Snow Pea index: 5
+		Fumeshroom index: 6
 
-		Texture indexes:
+		2. Texture indexes:
 		sunflower index : 1
 		peashooter index : 2
 		Wallnut index: 3
 		Cherrybomb index: 4
+		Repeater index: 5
+		Snow Pea index: 6
+		Fumeshroom index: 7
 		*/
 
 
@@ -299,6 +352,42 @@ void Game::handleAllPlantsCreation()
 					clickedSeedPacket[i] = false;
 					break;
 				}
+				case 4:
+				{
+					AllPlants.getShooter(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+					AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setExists(true);
+					totalTypeInstancesCreated++;
+					cout << "Repeater created\n";
+					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+					clickedSeedPacket[i] = false;
+					break;
+				}
+				case 5:
+				{
+					AllPlants.getShooter(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+					AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setExists(true);
+					totalTypeInstancesCreated++;
+					cout << "SnowPea created\n";
+					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+					clickedSeedPacket[i] = false;
+					break;
+				}
+				case 6:
+				{
+					AllPlants.getShooter(3, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+					AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setExists(true);
+					totalTypeInstancesCreated++;
+					cout << "Fumeshroom created\n";
+					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+					clickedSeedPacket[i] = false;
+					break;
+				}
 				}
 				break;
 			}
@@ -309,18 +398,22 @@ void Game::handleAllPlantsCreation()
 
 void Game::renderPlantFactory()
 {
-
-	for (int i = 0; i < 50; i++) // each plants could have 50 instances
+	int shooterPlantTypes = 4;
+	for (int k = 0; k < shooterPlantTypes; k++)
 	{
-		if (AllPlants.getShooter(0, i).exists()) // check if exists then draw plant
+		for (int i = 0; i < 50; i++) // each plants could have 50 instances
 		{
-			window.draw(AllPlants.getShooter(0, i).getPlantSprite());
-		}
-		for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
-		{
-			AllPlants.getShooter(0, i).getBullet(j).drawBullet(window); // already checking existence
+			if (AllPlants.getShooter(k, i).exists()) // check if exists then draw plant
+			{
+				window.draw(AllPlants.getShooter(k, i).getPlantSprite());
+			}
+			for (int j = 0; j < AllPlants.getShooter(k, i).getMaxBullets(); j++)
+			{
+				AllPlants.getShooter(k, i).getBullet(j).drawBullet(window); // already checking existence
+			}
 		}
 	}
+	
 	int normalPlantTypes = 3;
 	for (int type = 0; type < normalPlantTypes; type++)
 	{
@@ -419,15 +512,19 @@ void Game::run()
 		Game::renderUI(); // render the UI
 
 		Game::handleAllPlantsCreation();
-
+		int shooterPlanttypes = 4;
 		// For plant factory
-		for (int i = 0; i < totalTypeInstancesCreated; i++)
+		for (int k = 0; k < shooterPlanttypes; k++)
 		{
-			AllPlants.getShooter(0, i).Act();
-			AllPlants.getShooter(0, i).shootBullet(deltaTime);
+			for (int i = 0; i < totalTypeInstancesCreated; i++)
+			{
+				AllPlants.getShooter(k, i).Act();
+				AllPlants.getShooter(k, i).shootBullet(deltaTime);
+			}
 		}
+		
 		int normalPlantTypes = 3;
-		for (int k = 0; k < normalPlantTypes - 1; k++)
+		for (int k = 0; k < normalPlantTypes; k++)
 		{
 			for (int i = 0; i < totalTypeInstancesCreated; i++)
 			{

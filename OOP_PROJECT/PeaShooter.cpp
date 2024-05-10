@@ -4,7 +4,11 @@ PeaShooter::PeaShooter()
 {
 	MAX_BULLETS = 2;
 	ShootingRate = 1;  // 1 second
-	bullets = new BulletPea[MAX_BULLETS];
+	bullets = new Bullet[MAX_BULLETS];
+	for (int i = 0; i < MAX_BULLETS; i++)
+	{
+		bullets[0].setBulletSpeed(500000);
+	}
 	Suncost = 100; // initializing the cost of Peashooter
 	plantExists = false; // checks if plant exists
 }
@@ -62,7 +66,7 @@ void PeaShooter::shootBullet(float deltaTime)
 	}
 }
 
-BulletPea& PeaShooter::getBullet(int index)
+Bullet& PeaShooter::getBullet(int index)
 {
 	return bullets[index];
 }

@@ -5,7 +5,9 @@
 #include "SunFlower.h"
 #include "WallNut.h"
 #include "Cherrybomb.h"
+#include "Repeater.h"
 #include "SnowPea.h"
+#include "FumeShroom.h"
 
 
 
@@ -22,6 +24,7 @@ public:
 	PlantFactory();
 	Plant& getNormalPlant(int row, int col);
 	Shooter& getShooter(int row, int col);
+	~PlantFactory();
 	
 
 };
