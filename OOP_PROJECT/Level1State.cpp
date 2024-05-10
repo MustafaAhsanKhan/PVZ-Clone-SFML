@@ -2,12 +2,6 @@
 
 Level1State::Level1State()
 {
-    /*for (int i = 0; i < 10; i++)
-    {
-        AllPlants.getShooter(0, i).getPlantSprite().setPosition(-100, -100);
-    }
-
-    plant->getPlantSprite().setPosition(-100, -100);*/
 
     int temp = rand() % 5;
 
@@ -246,9 +240,6 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
         Snow Pea index: 6
         Fumeshroom index: 7
         */
-
-
-
 
         // checks if seed packet clicked
         for (int i = 0; i < totalPlantTypes; ++i)
