@@ -31,7 +31,7 @@ void Game::InitializeUISprites()
     Assets.loadTexture(22, "../PVZ_Textures/backgrounds/LevelSelection.png");
     Assets.loadTexture(23, "../PVZ_Textures/backgrounds/Instructions.png");
     Assets.loadTexture(24, "../PVZ_Textures/backgrounds/LeaderBoard.png");
-    Assets.loadTexture(29, "../PVZ_Textures/backgrounds/level1.png");
+    Assets.loadTexture(29, "../PVZ_Textures/backgrounds/Level1.png");
     Assets.loadTexture(30, "../PVZ_Textures/Seed_Packets_Transparent.png");
     Assets.loadTexture(31, "../PVZ_Textures/Lawn_Mower2.png");
 }
