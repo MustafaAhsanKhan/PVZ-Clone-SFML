@@ -158,6 +158,7 @@
     <ClCompile Include="PeaShooter.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="PlantFactory.cpp" />
+    <ClCompile Include="Repeater.cpp" />
     <ClCompile Include="Shooter.cpp" />
     <ClCompile Include="SimpleZombie.cpp" />
     <ClCompile Include="SplashState.cpp" />
