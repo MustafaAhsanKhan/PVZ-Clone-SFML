@@ -37,7 +37,8 @@ void Game::InitializeUISprites()
     Assets.loadTexture(28, "../PVZ_Textures/backgrounds/Level3.png");
     Assets.loadTexture(29, "../PVZ_Textures/backgrounds/Level4.png");
     Assets.loadTexture(30, "../PVZ_Textures/Seed_Packets_Sprites.png");
-    Assets.loadTexture(31, "../PVZ_Textures/Lawn_Mower2.png");
+    Assets.loadTexture(31, "../PVZ_Textures/Lawn_Mower.png");
+    Assets.loadTexture(32, "../PVZ_Textures/Lawn_Mower2.png");
 }
 
 void Game::InitializePlantTextures()

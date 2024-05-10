@@ -196,6 +196,7 @@ void Level1State::setUITextures(AssetManager& Assets)
     for (int i = 0; i < 5; i++)
     {
         lawnMowerSprite[i].setTexture(Assets.getTexture(31));
+        lawnMowerSprite[i].setScale(0.35, 0.35);
         lawnMowerSprite[i].setPosition(185, (i * 118) + 70);
     }
 }

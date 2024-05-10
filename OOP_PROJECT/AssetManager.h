@@ -15,7 +15,7 @@ Key for Assets
 class AssetManager
 {
 private:
-    static const int MAX_TEXTURES = 40;  // Maximum number of textures that can be stored
+    static const int MAX_TEXTURES = 50;  // Maximum number of textures that can be stored
     sf::Texture textures[MAX_TEXTURES];  // Array of textures
     bool loaded[MAX_TEXTURES] = { false };  // Array of flags to indicate if a texture is loaded
 
