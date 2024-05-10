@@ -128,13 +128,17 @@ void Game::setPlantFactoryTextures()
 	}
 
 	// TEXTURE SETTING PART CAN BE HARDCODED THERES NO PROBLEM
-	textureRect = sf::IntRect(100, 39, 30, 32); // sunflower
+	textureRect = sf::IntRect(101.9, 36.75, 30, 32); // sunflower
 	for (int i = 0; i < 50; i++) // 50 plants
 	{
 		AllPlants.getNormalPlant(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
 		AllPlants.getNormalPlant(0, i).getPlantSprite().setTextureRect(textureRect);
 		AllPlants.getNormalPlant(0, i).getPlantSprite().setScale(3, 3);
 	}
+
+
+
+
 }
 
 void Game::setZombieTextures()
@@ -184,7 +188,7 @@ void Game::handleAllPlantsCreation()
 		gridX = (mousePosition.x / 100.66) - 3;
 		gridY = (mousePosition.y / 114) - 1;
 
-		const int totalPlantTypes = 3; // will be 6 once all are implemented
+		const int totalPlantTypes = 4; // will be 6 once all are implemented
 		const int eachtypenum = 5; // total types
 		// int totaltypescreated = 1; // the total instances of each type currently
 		int plantscreated = 1; // currently
@@ -196,11 +200,12 @@ void Game::handleAllPlantsCreation()
 		clickedSeedPacket[]
 		sunflower index : 0
 		peashooter index : 1
+		Wallnut index: 2
 
 		Texture indexes:
 		sunflower index : 1
 		peashooter index : 2
-
+		Wallnut index: 3
 		*/
 
 
@@ -230,10 +235,10 @@ void Game::handleAllPlantsCreation()
 				{
 				case 0:
 				{
-					AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-					AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setExists(true);
+					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
 					totalTypeInstancesCreated++;
 					cout << "Sunflower created\n";
 					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
@@ -244,10 +249,10 @@ void Game::handleAllPlantsCreation()
 					
 				case 1:
 				{
-					AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-					AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).setExists(true);
+					AllPlants.getShooter(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+					AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setExists(true);
 					totalTypeInstancesCreated++;
 					cout << "Peashooter created\n";
 					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
@@ -255,6 +260,19 @@ void Game::handleAllPlantsCreation()
 					break;
 				}
 					
+				case 2:
+				{
+					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
+					totalTypeInstancesCreated++;
+					cout << "Sunflower created\n";
+					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+					clickedSeedPacket[i] = false;
+					break;
+				}
+
 				}
 				break;
 			}

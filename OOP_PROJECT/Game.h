@@ -44,7 +44,7 @@ private:
 	Sprite lawnMowerSprite[5];
 	//Shooter* shooters;
 	bool isPlacingPlant;
-	bool clickedSeedPacket[3]; // change size later
+	bool clickedSeedPacket[4]; // change size later
 	int totalTypeInstancesCreated = 1;
 public:
 	Game();  // Default constructor
