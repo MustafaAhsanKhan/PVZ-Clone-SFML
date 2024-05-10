@@ -1,37 +1,32 @@
-#include "PeaShooter.h"
+#include "SnowPea.h"
 
-PeaShooter::PeaShooter()
+SnowPea::SnowPea()
 {
 	MAX_BULLETS = 2;
 	ShootingRate = 1;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
-	for (int i = 0; i < MAX_BULLETS; i++)
-	{
-		bullets[0].setBulletSpeed(500000);
-	}
 	Suncost = 100; // initializing the cost of Peashooter
 	plantExists = false; // checks if plant exists
 }
 
-sf::Sprite& PeaShooter::getPlantSprite()
+sf::Sprite& SnowPea::getPlantSprite()
 {
 	return plantSprite;
 }
 
 
-void PeaShooter::Act()
+void SnowPea::Act()
 {
-	// cout << "SETTING ANIMATION FOR PEASHOOTER...";
 	if (animationClock.getElapsedTime().asMilliseconds() > 300)
 	{
 		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
-		if (textureRect.left >= 188.75)
+		if (textureRect.left >= 210)
 		{
 			textureRect.left = 0;
 		}
 		else
 		{
-			textureRect.left += 27.25;
+			textureRect.left += 30.25;
 		}
 		this->getPlantSprite().setTextureRect(textureRect);
 		animationClock.restart();
@@ -39,9 +34,9 @@ void PeaShooter::Act()
 }
 
 // Update all bullets
-void PeaShooter::shootBullet(float deltaTime)
+void SnowPea::shootBullet(float deltaTime)
 {
-	
+
 	if (ShootingRateClock.getElapsedTime().asSeconds() > ShootingRate)  // Making a new bullet after every 300 milliseconds
 	{
 		for (int i = 0; i < this->getMaxBullets(); ++i)
@@ -50,7 +45,7 @@ void PeaShooter::shootBullet(float deltaTime)
 			{
 				bullets[i].setExists(true);
 				bullets[i].setXPos(XgridCoordinate * 100.66 + 380); // correctly alligned
-				bullets[i].setYPos(YgridCoordinate * 114 + 110); // correctly alligned
+				bullets[i].setYPos(YgridCoordinate * 114 + 96); // correctly alligned
 				ShootingRateClock.restart();
 				break;
 			}
@@ -66,47 +61,42 @@ void PeaShooter::shootBullet(float deltaTime)
 	}
 }
 
-Bullet& PeaShooter::getBullet(int index)
+Bullet& SnowPea::getBullet(int index)
 {
 	return bullets[index];
 }
 
-int PeaShooter::getXgridCoordinate()
+int SnowPea::getXgridCoordinate()
 {
 	return XgridCoordinate;
 }
 
-int PeaShooter::getYgridCoordinate()
+int SnowPea::getYgridCoordinate()
 {
 	return YgridCoordinate;
 }
 
-void PeaShooter::setXgridCoordinate(int x)
+void SnowPea::setXgridCoordinate(int x)
 {
 	XgridCoordinate = x;
 }
 
-void PeaShooter::setYgridCoordinate(int y)
+void SnowPea::setYgridCoordinate(int y)
 {
 	YgridCoordinate = y;
 }
 
-int PeaShooter::getMaxBullets()
+int SnowPea::getMaxBullets()
 {
 	return MAX_BULLETS;
 }
 
-PeaShooter::~PeaShooter()
-{
-	delete[] bullets;
-}
-
-void PeaShooter::setExists(bool ex)
+void SnowPea::setExists(bool ex)
 {
 	plantExists = ex;
 }
 
-bool PeaShooter::exists()
+bool SnowPea::exists()
 {
 	return plantExists;
 }

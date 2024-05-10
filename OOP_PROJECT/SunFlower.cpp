@@ -3,21 +3,23 @@
 
 SunFlower::SunFlower()
 {
-    sungen_rate = 10;
     Suncost = 50; // cost 
+    plantExists = false;
+    XgridCoordinate = 0;
+    YgridCoordinate = 0;
 }
 
-sf::Sprite& SunFlower::getplantSprite()
+sf::Sprite& SunFlower::getPlantSprite()
 {
     return plantSprite;
 }
 
-void SunFlower::setAnimation() // change for sunflower
+void SunFlower::Act() // change for sunflower
 {
     if (animationClock.getElapsedTime().asMilliseconds() > 300)
     {
-        sf::IntRect textureRect = this->getplantSprite().getTextureRect();
-        if (textureRect.left >= 251)
+        sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
+        if (textureRect.left >= 250.8)
         {
             textureRect.left = 101.9; // for sunflowers spritesheet
         }
@@ -25,12 +27,34 @@ void SunFlower::setAnimation() // change for sunflower
         {
             textureRect.left += 30;
         }
-        this->getplantSprite().setTextureRect(textureRect);
+        this->getPlantSprite().setTextureRect(textureRect);
         animationClock.restart();
     }
 }
 
-//void SunFlower::setSunClock(float clock)
-//{
-//    sungen_rate = clock;
-//}
+void SunFlower::setXgridCoordinate(int x)
+{
+    XgridCoordinate = x;
+}
+void SunFlower::setYgridCoordinate(int y)
+{
+    YgridCoordinate = y;
+}
+int SunFlower::getXgridCoordinate()
+{
+    return XgridCoordinate;
+}
+int SunFlower::getYgridCoordinate()
+{
+    return YgridCoordinate;
+}
+
+void SunFlower::setExists(bool ex)
+{
+    plantExists = ex;
+}
+
+bool SunFlower::exists()
+{
+    return plantExists;
+}

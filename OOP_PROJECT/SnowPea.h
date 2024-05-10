@@ -1,21 +1,19 @@
 #pragma once
 #include "Shooter.h"
-
-class PeaShooter : public Shooter
+class SnowPea : public Shooter
 {
-
 public:
-	PeaShooter();
-	virtual int getMaxBullets();
+	SnowPea();
 	virtual Bullet& getBullet(int index);
-	virtual void setExists(bool ex);
-	virtual bool exists();
+	virtual int getMaxBullets();
+	virtual void setExists(bool ex); 
+	virtual bool exists(); 
 	virtual void shootBullet(float deltaTime);
 	virtual void Act();
 	virtual sf::Sprite& getPlantSprite();
-	virtual int getXgridCoordinate();
-	virtual int getYgridCoordinate();
 	virtual void setXgridCoordinate(int x);
 	virtual void setYgridCoordinate(int y);
-	~PeaShooter();
+	virtual int getXgridCoordinate();
+	virtual int getYgridCoordinate();
 };
+

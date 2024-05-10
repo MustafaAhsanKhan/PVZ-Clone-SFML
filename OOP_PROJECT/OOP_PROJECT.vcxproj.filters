@@ -42,7 +42,7 @@
     <ClCompile Include="WallNut.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BulletPea.cpp">
+    <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlantFactory.cpp">
@@ -110,7 +110,7 @@
     <ClInclude Include="WallNut.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BulletPea.h">
+    <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shooter.h">

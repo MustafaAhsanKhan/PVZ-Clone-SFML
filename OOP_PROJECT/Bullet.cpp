@@ -1,7 +1,7 @@
-#include "BulletPea.h"
+#include "Bullet.h"
 
 
-BulletPea::BulletPea()
+Bullet::Bullet()
 {
 	this->x_pos = 0;
 	this->y_pos = 0;
@@ -15,51 +15,51 @@ BulletPea::BulletPea()
 	this->bulletSpeed = 600000; // change to whatever speed
 }
 // Getters
-float BulletPea::getBulletSpeed()
+float Bullet::getBulletSpeed()
 {
 	return bulletSpeed;
 }
-int BulletPea::getDamage()
+int Bullet::getDamage()
 {
 	return damage;
 }
-float BulletPea::getXPos()
+float Bullet::getXPos()
 {
 	return x_pos;
 }
-float BulletPea::getYPos()
+float Bullet::getYPos()
 {
 	return y_pos;
 }
-bool BulletPea::getExists()
+bool Bullet::getExists()
 {
 	return exists;
 }
 
-sf::Sprite& BulletPea::getBulletSprite()
+sf::Sprite& Bullet::getBulletSprite()
 {
 	return bulletSprite;
 }
 
 
-void BulletPea::setDamage(int damage)
+void Bullet::setDamage(int damage)
 {
 	this->damage = damage;
 }
-void BulletPea::setXPos(int x)
+void Bullet::setXPos(int x)
 {
 	x_pos = x;
 }
-void BulletPea::setYPos(int y)
+void Bullet::setYPos(int y)
 {
 	y_pos = y;
 }
-void BulletPea::setExists(bool exists)
+void Bullet::setExists(bool exists)
 {
 	this->exists = exists;
 }
 
-void BulletPea::move(float deltaTime)
+void Bullet::move(float deltaTime)
 {
 	if (exists)
 	{
@@ -71,7 +71,7 @@ void BulletPea::move(float deltaTime)
 	}
 }
 
-void BulletPea::drawBullet(sf::RenderWindow& window)
+void Bullet::drawBullet(sf::RenderWindow& window)
 {
 	bulletSprite.setPosition(x_pos, y_pos);
 	if (exists)
@@ -79,4 +79,9 @@ void BulletPea::drawBullet(sf::RenderWindow& window)
 		window.draw(bulletSprite); // only draws when the bullet exists
 	}
 	
+}
+
+void Bullet::setBulletSpeed(int sp)
+{
+	bulletSpeed = sp;
 }

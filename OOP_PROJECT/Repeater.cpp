@@ -1,37 +1,33 @@
-#include "PeaShooter.h"
+#include "Repeater.h"
 
-PeaShooter::PeaShooter()
+Repeater::Repeater()
 {
 	MAX_BULLETS = 2;
-	ShootingRate = 1;  // 1 second
+	ShootingRate = 0.2;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
-	for (int i = 0; i < MAX_BULLETS; i++)
-	{
-		bullets[0].setBulletSpeed(500000);
-	}
 	Suncost = 100; // initializing the cost of Peashooter
 	plantExists = false; // checks if plant exists
 }
 
-sf::Sprite& PeaShooter::getPlantSprite()
+sf::Sprite& Repeater::getPlantSprite()
 {
 	return plantSprite;
 }
 
 
-void PeaShooter::Act()
+void Repeater::Act()
 {
 	// cout << "SETTING ANIMATION FOR PEASHOOTER...";
-	if (animationClock.getElapsedTime().asMilliseconds() > 300)
+	if (animationClock.getElapsedTime().asMilliseconds() > 350)
 	{
 		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
-		if (textureRect.left >= 188.75)
+		if (textureRect.left >= 140)
 		{
 			textureRect.left = 0;
 		}
 		else
 		{
-			textureRect.left += 27.25;
+			textureRect.left += 35;
 		}
 		this->getPlantSprite().setTextureRect(textureRect);
 		animationClock.restart();
@@ -39,9 +35,9 @@ void PeaShooter::Act()
 }
 
 // Update all bullets
-void PeaShooter::shootBullet(float deltaTime)
+void Repeater::shootBullet(float deltaTime)
 {
-	
+
 	if (ShootingRateClock.getElapsedTime().asSeconds() > ShootingRate)  // Making a new bullet after every 300 milliseconds
 	{
 		for (int i = 0; i < this->getMaxBullets(); ++i)
@@ -66,48 +62,50 @@ void PeaShooter::shootBullet(float deltaTime)
 	}
 }
 
-Bullet& PeaShooter::getBullet(int index)
+Bullet& Repeater::getBullet(int index)
 {
 	return bullets[index];
 }
 
-int PeaShooter::getXgridCoordinate()
+int Repeater::getXgridCoordinate()
 {
 	return XgridCoordinate;
 }
 
-int PeaShooter::getYgridCoordinate()
+int Repeater::getYgridCoordinate()
 {
 	return YgridCoordinate;
 }
 
-void PeaShooter::setXgridCoordinate(int x)
+void Repeater::setXgridCoordinate(int x)
 {
 	XgridCoordinate = x;
 }
 
-void PeaShooter::setYgridCoordinate(int y)
+void Repeater::setYgridCoordinate(int y)
 {
 	YgridCoordinate = y;
 }
 
-int PeaShooter::getMaxBullets()
+int Repeater::getMaxBullets()
 {
 	return MAX_BULLETS;
 }
 
-PeaShooter::~PeaShooter()
-{
-	delete[] bullets;
-}
-
-void PeaShooter::setExists(bool ex)
+void Repeater::setExists(bool ex)
 {
 	plantExists = ex;
 }
 
-bool PeaShooter::exists()
+bool Repeater::exists()
 {
 	return plantExists;
 }
+
+Repeater::~Repeater()
+{
+	delete[] bullets;
+}
+
+
 

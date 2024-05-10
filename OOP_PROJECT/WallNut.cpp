@@ -1,25 +1,71 @@
 #include "WallNut.h"
 
-sf::Sprite& WallNut::getplantSprite()
+WallNut::WallNut()
 {
-    return plantSprite;
+	Suncost = 50; // cost 
+	plantExists = false;
+	XgridCoordinate = 0;
+	YgridCoordinate = 0;
 }
 
-
-void WallNut::setAnimation()
+sf::Sprite& WallNut::getPlantSprite()
 {
-    if (animationClock.getElapsedTime().asMilliseconds() > 300)
-    {
-        sf::IntRect textureRect = this->getplantSprite().getTextureRect();
-        if (textureRect.left >= 188.75)
-        {
-            textureRect.left = 0;
-        }
-        else
-        {
-            textureRect.left += 27.25;
-        }
-        this->getplantSprite().setTextureRect(textureRect);
-        animationClock.restart();
-    }
+	return plantSprite;
+}
+
+void WallNut::Act() 
+{
+	srand(time(0));
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+	int verticalDirection = (std::rand() % 3) - 1; // up or down direction
+	sf::Vector2f currentPosition = getPlantSprite().getPosition();
+	float speed = 0.75f; // Adjust the speed of movement as needed
+	float Yspeed = speed / 3 * verticalDirection;
+	bool initialRollingPhase = animationClock.getElapsedTime().asMilliseconds() < 3000;
+
+	sf::Vector2f newPosition(currentPosition.x + speed, currentPosition.y + Yspeed);
+	this->getPlantSprite().setPosition(newPosition);
+
+	if (animationClock.getElapsedTime().asMilliseconds() > 120)
+	{
+		
+		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
+		if (textureRect.left >= 204.875 - 29.125)
+		{
+			textureRect.left = 0; 
+		}
+		else
+		{
+			textureRect.left += 29.125;
+		}
+		this->getPlantSprite().setTextureRect(textureRect);
+		animationClock.restart();
+	}
+}
+
+void WallNut::setXgridCoordinate(int x)
+{
+	XgridCoordinate = x;
+}
+void WallNut::setYgridCoordinate(int y)
+{
+	YgridCoordinate = y;
+}
+int WallNut::getXgridCoordinate()
+{
+	return XgridCoordinate;
+}
+int WallNut::getYgridCoordinate()
+{
+	return YgridCoordinate;
+}
+
+void WallNut::setExists(bool ex)
+{
+	plantExists = ex;
+}
+
+bool WallNut::exists()
+{
+	return plantExists;
 }

@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-class BulletPea
+class Bullet
 {
 private:
 	sf::Sprite bulletSprite;
@@ -13,7 +13,7 @@ private:
 	bool exists;
 
 public:
-	BulletPea();
+	Bullet();
 	// Getters
 	float getBulletSpeed();
 	int getDamage();
@@ -28,6 +28,7 @@ public:
 	void setXPos(int x);
 	void setYPos(int y);
 	void setExists(bool exists);
+	void setBulletSpeed(int sp);
 
 	// Functions to handle the bullet
 	void move(float deltaTime); // increment position at a constant rate (bullet speed will be constant)
