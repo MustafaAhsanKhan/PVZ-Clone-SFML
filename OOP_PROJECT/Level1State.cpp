@@ -191,7 +191,7 @@ void Level1State::setUITextures(AssetManager& Assets)
     seedPacketSprite.setTexture(Assets.getTexture(30));
     seedPacketSprite.setTextureRect(textureRect);
     seedPacketSprite.setPosition(50, 70);
-
+    seedPacketSprite.setScale(0.9, 0.9);
     // Lawn mower sprite
     for (int i = 0; i < 5; i++)
     {
