@@ -246,115 +246,111 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
         {
             if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= (55 + 89 * i + 1) && mousePosition.y <= (144 + 89 * i + 1))
             {
-                for (int j = 0; j < totalPlantTypes; j++)
+                for (int j = 0; j < totalPlantTypes; j++)  // We selected another seed packet
                 {
                     clickedSeedPacket[j] = false;
                 }
 
                 clickedSeedPacket[i] = true;
-                break; // Exit loop once the clicked seed packet is found
-            }
-        }
-
-        for (int i = 0; i < totalPlantTypes; i++)
-        {
-
-            if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[i] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
-            {
-                switch (i)
-                {
-                case 0:
-                {
-                    AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-                    AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-                    AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-                    AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
-                    totalTypeInstancesCreated++;
-                    cout << "Sunflower created\n";
-                    FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-                    clickedSeedPacket[i] = false;
-                    break;
-
-                }
-
-                case 1:
-                {
-                    AllPlants.getShooter(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-                    AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-                    AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-                    AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setExists(true);
-                    totalTypeInstancesCreated++;
-                    cout << "Peashooter created\n";
-                    FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-                    clickedSeedPacket[i] = false;
-                    break;
-                }
-
-                case 2:
-                {
-                    AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-                    AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-                    AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-                    AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setExists(true);
-                    totalTypeInstancesCreated++;
-                    cout << "Wallnut created\n";
-                    FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-                    clickedSeedPacket[i] = false;
-                    break;
-                }
-                case 3:
-                {
-                    AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-                    AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-                    AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-                    AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setExists(true);
-                    totalTypeInstancesCreated++;
-                    cout << "Wallnut created\n";
-                    FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-                    clickedSeedPacket[i] = false;
-                    break;
-                }
-                case 4:
-                {
-                    AllPlants.getShooter(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
-                    AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-                    AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-                    AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setExists(true);
-                    totalTypeInstancesCreated++;
-                    cout << "Repeater created\n";
-                    FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-                    clickedSeedPacket[i] = false;
-                    break;
-                }
-                case 5:
-                {
-                    AllPlants.getShooter(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
-                    AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-                    AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-                    AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setExists(true);
-                    totalTypeInstancesCreated++;
-                    cout << "SnowPea created\n";
-                    FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-                    clickedSeedPacket[i] = false;
-                    break;
-                }
-                case 6:
-                {
-                    AllPlants.getShooter(3, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
-                    AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-                    AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-                    AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setExists(true);
-                    totalTypeInstancesCreated++;
-                    cout << "Fumeshroom created\n";
-                    FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-                    clickedSeedPacket[i] = false;
-                    break;
-                }
-                }
-                break;
             }
 
+                if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[i] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
+                {
+                    switch (i)
+                    {
+                    case 0:
+                    {
+                        AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+                        AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+                        AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
+                        totalTypeInstancesCreated++;
+                        cout << "Sunflower created\n";
+                        FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+                        clickedSeedPacket[i] = false;
+                        break;
+
+                    }
+
+                    case 1:
+                    {
+                        AllPlants.getShooter(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+                        AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+                        AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setExists(true);
+                        totalTypeInstancesCreated++;
+                        cout << "Peashooter created\n";
+                        FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+                        clickedSeedPacket[i] = false;
+                        break;
+                    }
+
+                    case 2:
+                    {
+                        AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+                        AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+                        AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setExists(true);
+                        totalTypeInstancesCreated++;
+                        cout << "Wallnut created\n";
+                        FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+                        clickedSeedPacket[i] = false;
+                        break;
+                    }
+                    case 3:
+                    {
+                        AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+                        AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+                        AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setExists(true);
+                        totalTypeInstancesCreated++;
+                        cout << "Wallnut created\n";
+                        FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+                        clickedSeedPacket[i] = false;
+                        break;
+                    }
+                    case 4:
+                    {
+                        AllPlants.getShooter(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+                        AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+                        AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+                        AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setExists(true);
+                        totalTypeInstancesCreated++;
+                        cout << "Repeater created\n";
+                        FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+                        clickedSeedPacket[i] = false;
+                        break;
+                    }
+                    case 5:
+                    {
+                        AllPlants.getShooter(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+                        AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+                        AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+                        AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setExists(true);
+                        totalTypeInstancesCreated++;
+                        cout << "SnowPea created\n";
+                        FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+                        clickedSeedPacket[i] = false;
+                        break;
+                    }
+                    case 6:
+                    {
+                        AllPlants.getShooter(3, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+                        AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+                        AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+                        AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setExists(true);
+                        totalTypeInstancesCreated++;
+                        cout << "Fumeshroom created\n";
+                        FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+                        clickedSeedPacket[i] = false;
+                        break;
+                    }
+                    }
+
+                }
+            
         }
+        
     }
 }
 
