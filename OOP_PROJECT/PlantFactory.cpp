@@ -2,16 +2,16 @@
 
 PlantFactory::PlantFactory() : MAX_PLANTS(50)
 {
-	totalShooterplantTypes = 2; // will change later
-	totalNormalPlantTypes = 2;
+	totalShooterplantTypes = 3; // will change later
+	totalNormalPlantTypes = 4;
 
 	plants = new Plant * [totalNormalPlantTypes];
 	plants[0] = new SunFlower[MAX_PLANTS];
-	plants[0][1].Act(); // problem in this part of the code
+	plants[1] = new WallNut[MAX_PLANTS];
+	plants[2] = new Cherrybomb[MAX_PLANTS];
 	shooterPlants = new Shooter * [totalShooterplantTypes];
 	shooterPlants[0] = new PeaShooter[MAX_PLANTS];
 	shooterPlants[1] = new SnowPea[MAX_PLANTS];
-	shooterPlants[0][0].Act();
 }
 
 Plant& PlantFactory::getNormalPlant(int row, int col)

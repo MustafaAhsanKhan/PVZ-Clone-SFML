@@ -2,9 +2,12 @@
 #include<iostream>
 #include "Plant.h"
 #include "PeaShooter.h"
-#include "SnowPea.h"
 #include "SunFlower.h"
 #include "WallNut.h"
+#include "Cherrybomb.h"
+#include "SnowPea.h"
+
+
 
 
 class PlantFactory

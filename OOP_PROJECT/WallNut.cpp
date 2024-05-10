@@ -1,59 +1,71 @@
 #include "WallNut.h"
 
-Wallnut::Wallnut()
+WallNut::WallNut()
 {
-    Suncost = 50; // cost 
-    plantExists = false;
-    XgridCoordinate = 0;
-    YgridCoordinate = 0;
+	Suncost = 50; // cost 
+	plantExists = false;
+	XgridCoordinate = 0;
+	YgridCoordinate = 0;
 }
 
-sf::Sprite& Wallnut::getPlantSprite()
+sf::Sprite& WallNut::getPlantSprite()
 {
-    return plantSprite;
+	return plantSprite;
 }
 
-void Wallnut::Act() // change for sunflower
+void WallNut::Act() 
 {
-    if (animationClock.getElapsedTime().asMilliseconds() > 300)
-    {
-        sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
-        if (textureRect.left >= 250.8)
-        {
-            textureRect.left = 101.9; // for sunflowers spritesheet
-        }
-        else
-        {
-            textureRect.left += 30;
-        }
-        this->getPlantSprite().setTextureRect(textureRect);
-        animationClock.restart();
-    }
+	srand(time(0));
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+	int verticalDirection = (std::rand() % 3) - 1; // up or down direction
+	sf::Vector2f currentPosition = getPlantSprite().getPosition();
+	float speed = 0.75f; // Adjust the speed of movement as needed
+	float Yspeed = speed / 3 * verticalDirection;
+	bool initialRollingPhase = animationClock.getElapsedTime().asMilliseconds() < 3000;
+
+	sf::Vector2f newPosition(currentPosition.x + speed, currentPosition.y + Yspeed);
+	this->getPlantSprite().setPosition(newPosition);
+
+	if (animationClock.getElapsedTime().asMilliseconds() > 200)
+	{
+		
+		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
+		if (textureRect.left >= 204.875 - 29.125)
+		{
+			textureRect.left = 0; 
+		}
+		else
+		{
+			textureRect.left += 29.125;
+		}
+		this->getPlantSprite().setTextureRect(textureRect);
+		animationClock.restart();
+	}
 }
 
-void Wallnut::setXgridCoordinate(int x)
+void WallNut::setXgridCoordinate(int x)
 {
-    XgridCoordinate = x;
+	XgridCoordinate = x;
 }
-void Wallnut::setYgridCoordinate(int y)
+void WallNut::setYgridCoordinate(int y)
 {
-    YgridCoordinate = y;
+	YgridCoordinate = y;
 }
-int Wallnut::getXgridCoordinate()
+int WallNut::getXgridCoordinate()
 {
-    return XgridCoordinate;
+	return XgridCoordinate;
 }
-int Wallnut::getYgridCoordinate()
+int WallNut::getYgridCoordinate()
 {
-    return YgridCoordinate;
-}
-
-void Wallnut::setExists(bool ex)
-{
-    plantExists = ex;
+	return YgridCoordinate;
 }
 
-bool Wallnut::exists()
+void WallNut::setExists(bool ex)
 {
-    return plantExists;
+	plantExists = ex;
+}
+
+bool WallNut::exists()
+{
+	return plantExists;
 }

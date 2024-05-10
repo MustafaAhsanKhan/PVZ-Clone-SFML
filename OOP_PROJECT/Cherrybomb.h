@@ -1,9 +1,9 @@
 #pragma once
 #include "Plant.h"
-class WallNut : public Plant
+class Cherrybomb : public Plant
 {
 public:
-	WallNut();
+	Cherrybomb();
 	virtual void setExists(bool ex); // sets existence of the plant
 	virtual bool exists();
 	virtual void Act();
@@ -13,3 +13,4 @@ public:
 	virtual int getXgridCoordinate();
 	virtual int getYgridCoordinate();
 };
+

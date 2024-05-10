@@ -78,10 +78,10 @@ void Game::InitializePlantTextures()
 	Asset_Texture.loadTexture(1, "../PVZ_Textures/PlantTextures/Sunflower.png");
 	Asset_Texture.loadTexture(2, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Plant texture
 	Asset_Texture.loadTexture(3, "../PVZ_Textures/PlantTextures/Wallnut.png");
-	Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
+	Asset_Texture.loadTexture(4, "../PVZ_Textures/PlantTextures/Cherrybomb.png");	
 	Asset_Texture.loadTexture(5, "../PVZ_Textures/PlantTextures/SnowPea.png"); // snow pea bullet texture
 	Asset_Texture.loadTexture(6, "../PVZ_Textures/PlantTextures/SnowPea.png");
-	Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
+	Asset_Texture.loadTexture(7, "../PVZ_Textures/PlantTextures/Peashooter.png");  // Bullet texture
 	Asset_Texture.loadTexture(8, "../PVZ_Textures/PlantTextures/Repeater.png");
 }
 
@@ -101,7 +101,7 @@ void Game::setPlantFactoryTextures()
 	int totalShooterTypes = 2;
 
 
-	// TEXTURE SETTING PART CAN BE HARDCODED THERES NO PROBLEM
+	// TEXTURE SETTING PART CAN BE HARDCODED
 
 	for (int i = 0; i < 50; i++) // 50 plants
 	{
@@ -116,18 +116,19 @@ void Game::setPlantFactoryTextures()
 	textureRect = sf::IntRect(78, 38, 10, 20); // initially wokrs for normal peashooter
 	int bullettextureindex = 4;
 
-
-	for (int i = 0; i < 50; i++) // 50 plants
+	for (int i = 0; i < 50; i++)
 	{
 		for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
 		{
-			AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(bullettextureindex));
+			AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(7));
 			AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setScale(3, 3);
 			AllPlants.getShooter(0, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
 		}
 	}
+	
+	
 
-	// TEXTURE SETTING PART CAN BE HARDCODED THERES NO PROBLEM
+	// TEXTURE SETTING PART CAN BE HARDCODED
 	textureRect = sf::IntRect(101.9, 36.75, 30, 32); // sunflower
 	for (int i = 0; i < 50; i++) // 50 plants
 	{
@@ -136,8 +137,20 @@ void Game::setPlantFactoryTextures()
 		AllPlants.getNormalPlant(0, i).getPlantSprite().setScale(3, 3);
 	}
 
-
-
+	textureRect = sf::IntRect(0, 125.6, 28.1, 36); // Wallnut
+	for (int i = 0; i < 50; i++) // 50 plants
+	{
+		AllPlants.getNormalPlant(1, i).getPlantSprite().setTexture(Asset_Texture.getTexture(3));
+		AllPlants.getNormalPlant(1, i).getPlantSprite().setTextureRect(textureRect);
+		AllPlants.getNormalPlant(1, i).getPlantSprite().setScale(3, 3);
+	}
+	textureRect = sf::IntRect(69, 0, 47, 40); // Cherrybomb
+	for (int i = 0; i < 50; i++) // 50 plants
+	{
+		AllPlants.getNormalPlant(2, i).getPlantSprite().setTexture(Asset_Texture.getTexture(4));
+		AllPlants.getNormalPlant(2, i).getPlantSprite().setTextureRect(textureRect);
+		AllPlants.getNormalPlant(2, i).getPlantSprite().setScale(2.25, 2.25);
+	}
 
 }
 
@@ -201,11 +214,13 @@ void Game::handleAllPlantsCreation()
 		sunflower index : 0
 		peashooter index : 1
 		Wallnut index: 2
+		Cherrybomb index: 3
 
 		Texture indexes:
 		sunflower index : 1
 		peashooter index : 2
 		Wallnut index: 3
+		Cherrybomb index: 4
 		*/
 
 
@@ -262,17 +277,28 @@ void Game::handleAllPlantsCreation()
 					
 				case 2:
 				{
-					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
+					AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+					AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setExists(true);
 					totalTypeInstancesCreated++;
-					cout << "Sunflower created\n";
+					cout << "Wallnut created\n";
 					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 					clickedSeedPacket[i] = false;
 					break;
 				}
-
+				case 3:
+				{
+					AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+					AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setExists(true);
+					totalTypeInstancesCreated++;
+					cout << "Wallnut created\n";
+					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+					clickedSeedPacket[i] = false;
+					break;
+				}
 				}
 				break;
 			}
@@ -284,7 +310,7 @@ void Game::handleAllPlantsCreation()
 void Game::renderPlantFactory()
 {
 
-	for (int i = 0; i < 50; i++) // all plants 
+	for (int i = 0; i < 50; i++) // each plants could have 50 instances
 	{
 		if (AllPlants.getShooter(0, i).exists()) // check if exists then draw plant
 		{
@@ -295,13 +321,18 @@ void Game::renderPlantFactory()
 			AllPlants.getShooter(0, i).getBullet(j).drawBullet(window); // already checking existence
 		}
 	}
-	for (int i = 0; i < 50; i++) // all plants 
+	int normalPlantTypes = 3;
+	for (int type = 0; type < normalPlantTypes; type++)
 	{
-		if (AllPlants.getNormalPlant(0, i).exists()) // check if exists then draw plant
+		for (int i = 0; i < 50; i++) // all plants 
 		{
-			window.draw(AllPlants.getNormalPlant(0, i).getPlantSprite());
+			if (AllPlants.getNormalPlant(type, i).exists()) // check if exists then draw plant
+			{
+				window.draw(AllPlants.getNormalPlant(type, i).getPlantSprite());
+			}
 		}
 	}
+	
 
 
 
@@ -395,10 +426,15 @@ void Game::run()
 			AllPlants.getShooter(0, i).Act();
 			AllPlants.getShooter(0, i).shootBullet(deltaTime);
 		}
-		for (int i = 0; i < totalTypeInstancesCreated; i++)
+		int normalPlantTypes = 3;
+		for (int k = 0; k < normalPlantTypes - 1; k++)
 		{
-			AllPlants.getNormalPlant(0, i).Act();
+			for (int i = 0; i < totalTypeInstancesCreated; i++)
+			{
+				AllPlants.getNormalPlant(k, i).Act();
+			}
 		}
+		
 		
 
 		Game::renderPlantFactory();
