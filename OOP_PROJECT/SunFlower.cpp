@@ -17,11 +17,10 @@ sf::Sprite& SunFlower::getPlantSprite()
 
 void SunFlower::setAnimation() // change for sunflower
 {
-    cout << "Sunflowr animation. " << endl;
     if (animationClock.getElapsedTime().asMilliseconds() > 300)
     {
         sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
-        if (textureRect.left >= 251)
+        if (textureRect.left >= 250.8)
         {
             textureRect.left = 101.9; // for sunflowers spritesheet
         }

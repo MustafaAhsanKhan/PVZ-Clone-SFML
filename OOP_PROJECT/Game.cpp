@@ -128,13 +128,13 @@ void Game::setPlantFactoryTextures()
 	}
 
 	// TEXTURE SETTING PART CAN BE HARDCODED THERES NO PROBLEM
-	textureRect = sf::IntRect(99, 39, 32, 32); // sunflower
-	//for (int i = 0; i < 50; i++) // 50 plants
-	//{
-	//	AllPlants.getNormalPlant(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
-	//	AllPlants.getNormalPlant(0, i).getPlantSprite().setTextureRect(textureRect);
-	//	AllPlants.getNormalPlant(0, i).getPlantSprite().setScale(3, 3);
-	//}
+	textureRect = sf::IntRect(100, 39, 30, 32); // sunflower
+	for (int i = 0; i < 50; i++) // 50 plants
+	{
+		AllPlants.getNormalPlant(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
+		AllPlants.getNormalPlant(0, i).getPlantSprite().setTextureRect(textureRect);
+		AllPlants.getNormalPlant(0, i).getPlantSprite().setScale(3, 3);
+	}
 }
 
 void Game::setZombieTextures()
@@ -228,20 +228,19 @@ void Game::handleAllPlantsCreation()
 			{
 				switch (i)
 				{
-				//case 0:
-				//{
-				//	AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
-				//	AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-				//	AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-				//	AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setExists(true);
-				//	totalTypeInstancesCreated++;
-				//	// plantTypescreated++;
-				//	cout << "Sunflower created\n";
-				//	FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-				//	clickedSeedPacket[i] = false;
-				//	break;
-				//	
-				//}
+				case 0:
+				{
+					AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+					AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+					AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+					AllPlants.getNormalPlant(plantTypescreated - 1, totalTypeInstancesCreated - 1).setExists(true);
+					totalTypeInstancesCreated++;
+					cout << "Sunflower created\n";
+					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+					clickedSeedPacket[i] = false;
+					break;
+					
+				}
 					
 				case 1:
 				{
@@ -250,7 +249,6 @@ void Game::handleAllPlantsCreation()
 					AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
 					AllPlants.getShooter(plantTypescreated - 1, totalTypeInstancesCreated - 1).setExists(true);
 					totalTypeInstancesCreated++;
-					// plantTypescreated++;
 					cout << "Peashooter created\n";
 					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 					clickedSeedPacket[i] = false;
@@ -279,13 +277,13 @@ void Game::renderPlantFactory()
 			AllPlants.getShooter(0, i).getBullet(j).drawBullet(window); // already checking existence
 		}
 	}
-	//for (int i = 0; i < 50; i++) // all plants 
-	//{
-	//	if (AllPlants.getNormalPlant(0, i).exists()) // check if exists then draw plant
-	//	{
-	//		window.draw(AllPlants.getNormalPlant(0, i).getPlantSprite());
-	//	}
-	//}
+	for (int i = 0; i < 50; i++) // all plants 
+	{
+		if (AllPlants.getNormalPlant(0, i).exists()) // check if exists then draw plant
+		{
+			window.draw(AllPlants.getNormalPlant(0, i).getPlantSprite());
+		}
+	}
 
 
 
@@ -314,13 +312,6 @@ void Game::run()
 	Clock zombieClock;
 	float deltaTime = 0.0;
 	int temp = rand() % 5;
-
-	/*for (int i = 0; i < 10; i++)
-	{
-		AllPlants.getShooter(0, i).getPlantSprite().setPosition(-100, -100);
-	}
-
-	plant->getPlantSprite().setPosition(-100, -100);*/
 
 	zombie = &SimpleZombie;
 	zombie->setXgridCoordinate(8);
@@ -386,6 +377,11 @@ void Game::run()
 			AllPlants.getShooter(0, i).setAnimation();
 			AllPlants.getShooter(0, i).shootBullet(deltaTime);
 		}
+		for (int i = 0; i < totalTypeInstancesCreated; i++)
+		{
+			AllPlants.getNormalPlant(0, i).setAnimation();
+		}
+		
 
 		Game::renderPlantFactory();
 
