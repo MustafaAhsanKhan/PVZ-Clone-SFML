@@ -109,7 +109,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     }
 
     // Snow pea bullet 
-    textureRect = sf::IntRect(90, 44.95, 20, 20);
+    textureRect = sf::IntRect(90, 44.95, 23, 20);
     for (int i = 0; i < 50; i++)
     {
         for (int j = 0; j < AllPlants.getShooter(2, i).getMaxBullets(); j++)
@@ -191,7 +191,7 @@ void Level1State::setZombieTextures(AssetManager& Assets)
 
 void Level1State::setUITextures(AssetManager& Assets)
 {
-    sf::IntRect textureRect(0, 73, 143, 550);
+    sf::IntRect textureRect(0, 45, 143, 675);
 
     // Seed packet sprite
     seedPacketSprite.setTexture(Assets.getTexture(30));
