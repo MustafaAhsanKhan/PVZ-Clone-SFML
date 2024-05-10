@@ -3,7 +3,7 @@
 
 SunFlower::SunFlower()
 {
-    sungen_rate = 10;
+    // sungen_rate = 10;
     Suncost = 50; // cost 
     plantExists = false;
     XgridCoordinate = 0;

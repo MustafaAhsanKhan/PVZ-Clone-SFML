@@ -3,8 +3,8 @@
 class SunFlower : public Plant
 {
 private:
-	sf::Clock sungen_rateclock;
-	float sungen_rate;
+	// sf::Clock sungen_rateclock;
+	// float sungen_rate;
 public:
 	SunFlower();
 	virtual void setExists(bool ex); // sets existence of the plant
