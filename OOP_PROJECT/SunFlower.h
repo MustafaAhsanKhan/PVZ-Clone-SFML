@@ -6,7 +6,7 @@ public:
 	SunFlower();
 	virtual void setExists(bool ex); // sets existence of the plant
 	virtual bool exists();
-	virtual void setAnimation();
+	virtual void Act();
 	virtual sf::Sprite& getPlantSprite();
 	virtual void setXgridCoordinate(int x);
 	virtual void setYgridCoordinate(int y);

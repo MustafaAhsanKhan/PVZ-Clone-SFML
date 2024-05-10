@@ -13,7 +13,7 @@ sf::Sprite& Wallnut::getPlantSprite()
     return plantSprite;
 }
 
-void Wallnut::setAnimation() // change for sunflower
+void Wallnut::Act() // change for sunflower
 {
     if (animationClock.getElapsedTime().asMilliseconds() > 300)
     {

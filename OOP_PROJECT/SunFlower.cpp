@@ -14,7 +14,7 @@ sf::Sprite& SunFlower::getPlantSprite()
     return plantSprite;
 }
 
-void SunFlower::setAnimation() // change for sunflower
+void SunFlower::Act() // change for sunflower
 {
     if (animationClock.getElapsedTime().asMilliseconds() > 300)
     {

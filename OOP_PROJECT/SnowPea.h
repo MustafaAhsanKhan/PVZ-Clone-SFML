@@ -9,7 +9,7 @@ public:
 	virtual void setExists(bool ex); 
 	virtual bool exists(); 
 	virtual void shootBullet(float deltaTime);
-	virtual void setAnimation();
+	virtual void Act();
 	virtual sf::Sprite& getPlantSprite();
 	virtual void setXgridCoordinate(int x);
 	virtual void setYgridCoordinate(int y);

@@ -392,12 +392,12 @@ void Game::run()
 		// For plant factory
 		for (int i = 0; i < totalTypeInstancesCreated; i++)
 		{
-			AllPlants.getShooter(0, i).setAnimation();
+			AllPlants.getShooter(0, i).Act();
 			AllPlants.getShooter(0, i).shootBullet(deltaTime);
 		}
 		for (int i = 0; i < totalTypeInstancesCreated; i++)
 		{
-			AllPlants.getNormalPlant(0, i).setAnimation();
+			AllPlants.getNormalPlant(0, i).Act();
 		}
 		
 

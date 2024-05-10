@@ -15,7 +15,7 @@ sf::Sprite& PeaShooter::getPlantSprite()
 }
 
 
-void PeaShooter::setAnimation()
+void PeaShooter::Act()
 {
 	// cout << "SETTING ANIMATION FOR PEASHOOTER...";
 	if (animationClock.getElapsedTime().asMilliseconds() > 300)

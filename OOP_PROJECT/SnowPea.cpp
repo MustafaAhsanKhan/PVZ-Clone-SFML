@@ -15,7 +15,7 @@ sf::Sprite& SnowPea::getPlantSprite()
 }
 
 
-void SnowPea::setAnimation()
+void SnowPea::Act()
 {
 	cout << "SETTING ANIMATION FOR SNOW PEA...";
 	if (animationClock.getElapsedTime().asMilliseconds() > 300)
