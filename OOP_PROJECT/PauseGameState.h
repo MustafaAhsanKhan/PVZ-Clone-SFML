@@ -9,6 +9,7 @@ private:
 	sf::Sprite levelBackground;
 	int backgroundIndex;
 public:
+	PauseGameState() {}
 	PauseGameState(int p_backgroundIndex) { backgroundIndex = p_backgroundIndex; }
 	virtual void Init(AssetManager& Assets);
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window);

@@ -24,7 +24,8 @@ private:
 	// sf::Music backgroundMusic;
 	sf::IntRect textureRect;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
-	// Plant* plant;  // The plant object
+
+	PeaShooter PeaShooterPlant;
 	PlantFactory AllPlants;
 
 	Zombie* zombie;
@@ -40,11 +41,11 @@ private:
 	int totaltypescreated = 1;
 public:
 	Level1State();
-
 	//void setPlantTextures();
 	void setPlantFactoryTextures(AssetManager& Assets);
 	void setZombieTextures(AssetManager& Assets);
 	void setUITextures(AssetManager& Assets);
+
 	void handleAllPlantsCreation(sf::RenderWindow& window);
 	//void handleMouseInput();  // Handle the mouse input	
 	void renderPlantFactory(sf::RenderWindow& window);
