@@ -3,6 +3,19 @@
 Level1State::Level1State()
 {
 
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            FIELD_GAME_STATUS[i][j] = false;  // Initially all the grid is empty
+        }
+    }
+
+    for (int i = 0; i < 7; i++)
+    {
+        clickedSeedPacket[i] = false;
+    }
+
     int temp = rand() % 5;
 
     zombie = &SimpleZombie;
