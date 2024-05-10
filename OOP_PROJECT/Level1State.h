@@ -37,8 +37,8 @@ private:
 
 	//Shooter* shooters;
 	bool isPlacingPlant;
-	bool clickedSeedPacket[2]; // change size later
-	int totaltypescreated = 1;
+	bool clickedSeedPacket[7]; // change size later
+	int totalTypeInstancesCreated = 1;
 public:
 	Level1State();
 	//void setPlantTextures();

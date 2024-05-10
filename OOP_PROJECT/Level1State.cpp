@@ -60,7 +60,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     // Peashooter
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(2));
+        AllPlants.getShooter(0, i).getPlantSprite().setTexture(Assets.getTexture(2));
         AllPlants.getShooter(0, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getShooter(0, i).getPlantSprite().setScale(3, 3);
     }
@@ -69,7 +69,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     textureRect = sf::IntRect(0, 0, 34, 34);
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getShooter(1, i).getPlantSprite().setTexture(Asset_Texture.getTexture(5));
+        AllPlants.getShooter(1, i).getPlantSprite().setTexture(Assets.getTexture(5));
         AllPlants.getShooter(1, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getShooter(1, i).getPlantSprite().setScale(3, 3);
     }
@@ -77,7 +77,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     textureRect = sf::IntRect(0, 0, 30.25, 31);
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getShooter(2, i).getPlantSprite().setTexture(Asset_Texture.getTexture(6));
+        AllPlants.getShooter(2, i).getPlantSprite().setTexture(Assets.getTexture(6));
         AllPlants.getShooter(2, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getShooter(2, i).getPlantSprite().setScale(3, 3);
     }
@@ -85,7 +85,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     textureRect = sf::IntRect(0, 0, 34.8, 33);
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getShooter(3, i).getPlantSprite().setTexture(Asset_Texture.getTexture(8));
+        AllPlants.getShooter(3, i).getPlantSprite().setTexture(Assets.getTexture(8));
         AllPlants.getShooter(3, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getShooter(3, i).getPlantSprite().setScale(3, 3);
     }
@@ -101,7 +101,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
         {
             for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
             {
-                AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(7));
+                AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(7));
                 AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setScale(3, 3);
                 AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
             }
@@ -114,7 +114,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     {
         for (int j = 0; j < AllPlants.getShooter(2, i).getMaxBullets(); j++)
         {
-            AllPlants.getShooter(2, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(6));
+            AllPlants.getShooter(2, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(6));
             AllPlants.getShooter(2, i).getBullet(j).getBulletSprite().setScale(3, 3);
             AllPlants.getShooter(2, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
         }
@@ -125,7 +125,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     {
         for (int j = 0; j < AllPlants.getShooter(3, i).getMaxBullets(); j++)
         {
-            AllPlants.getShooter(3, i).getBullet(j).getBulletSprite().setTexture(Asset_Texture.getTexture(8));
+            AllPlants.getShooter(3, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(8));
             AllPlants.getShooter(3, i).getBullet(j).getBulletSprite().setScale(3, 3);
             AllPlants.getShooter(3, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
         }
@@ -135,7 +135,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     textureRect = sf::IntRect(101.9, 36.75, 30, 32); // sunflower
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getNormalPlant(0, i).getPlantSprite().setTexture(Asset_Texture.getTexture(1));
+        AllPlants.getNormalPlant(0, i).getPlantSprite().setTexture(Assets.getTexture(1));
         AllPlants.getNormalPlant(0, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getNormalPlant(0, i).getPlantSprite().setScale(3, 3);
     }
@@ -143,14 +143,14 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     textureRect = sf::IntRect(0, 125.6, 28.1, 36); // Wallnut
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getNormalPlant(1, i).getPlantSprite().setTexture(Asset_Texture.getTexture(3));
+        AllPlants.getNormalPlant(1, i).getPlantSprite().setTexture(Assets.getTexture(3));
         AllPlants.getNormalPlant(1, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getNormalPlant(1, i).getPlantSprite().setScale(3, 3);
     }
     textureRect = sf::IntRect(69, 0, 47, 40); // Cherrybomb
     for (int i = 0; i < 50; i++) // 50 plants
     {
-        AllPlants.getNormalPlant(2, i).getPlantSprite().setTexture(Asset_Texture.getTexture(4));
+        AllPlants.getNormalPlant(2, i).getPlantSprite().setTexture(Assets.getTexture(4));
         AllPlants.getNormalPlant(2, i).getPlantSprite().setTextureRect(textureRect);
         AllPlants.getNormalPlant(2, i).getPlantSprite().setScale(2.25, 2.25);
     }
@@ -221,7 +221,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 
         const int totalPlantTypes = 7; // will be 6 once all are implemented
         const int eachtypenum = 5; // total types
-        // int totaltypescreated = 1; // the total instances of each type currently
+        // int totalTypeInstancesCreated = 1; // the total instances of each type currently
         int plantscreated = 1; // currently
         int plantTypescreated = 1;
         int seedPacketnum = 3;
