@@ -76,8 +76,7 @@ void Game::run()
     {
         machine.ProcessStateChanges(Assets);
 
-        deltaClock.restart();
-        deltaTime = deltaClock.getElapsedTime().asSeconds();
+        deltaTime = deltaClock.restart().asSeconds();
 
         sf::Event event;
         while (window.pollEvent(event))

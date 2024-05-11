@@ -5,10 +5,6 @@ FumeShroom::FumeShroom()
 	MAX_BULLETS = 1;
 	ShootingRate = 1;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
-	for (int i = 0; i < MAX_BULLETS; i++)
-	{
-		bullets[0].setBulletSpeed(500000);
-	}
 	Suncost = 100; 
 	plantExists = false; // checks if plant exists
 }
