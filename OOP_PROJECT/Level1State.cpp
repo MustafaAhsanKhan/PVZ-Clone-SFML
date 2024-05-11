@@ -260,7 +260,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
         // checks if seed packet clicked
         for (int i = 0; i < totalPlantTypes; ++i)
         {
-            if (mousePosition.x > 52 && mousePosition.x <= 150 && mousePosition.y >= (120 + 75 * i + 1) && mousePosition.y <= (175 + 75 * i + 1))
+            if (mousePosition.x > 52 && mousePosition.x <= 150 && mousePosition.y >= (123 + 75 * i + 1) && mousePosition.y <= (195 + 75 * i + 1))
             {
                 for (int j = 0; j < totalPlantTypes; j++)  // We selected another seed packet
                 {
