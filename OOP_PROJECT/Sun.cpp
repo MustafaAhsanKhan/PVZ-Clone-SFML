@@ -6,16 +6,15 @@ Sun::Sun()
 	x_pos = (rand() % (i * 12)) + 300; // random x position
 	x_pos = 400;
 	y_pos = -100; // out of frame currently
-	sunSpeed = 0.2;
-	//collected = false;
+	sunSpeed = 70;
 	sunExists = false;
 }
 
-void Sun::move()
+void Sun::move(float deltaTime)
 {
 	if (!(y_pos >= 660))
 	{
-		y_pos += sunSpeed;
+		y_pos += sunSpeed * deltaTime;
 	}
 	this->getSunSprite().setPosition(x_pos, y_pos);
 }
@@ -25,15 +24,6 @@ sf::Sprite& Sun::getSunSprite()
 	return sunSprite;
 }
 
-bool Sun::Collected()
-{
-	return collected;
-}
-
-void Sun::setCollected(bool co)
-{
-	collected = co;
-}
 void Sun::setExists(bool ex)
 {
 	sunExists = ex;

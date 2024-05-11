@@ -29,13 +29,12 @@ private:
 	sf::Sound sungen_Sound;
 	sf::SoundBuffer placingPlantSoundBuffer;
 	sf::Sound placingPlantSound;
-	// sf::Music backgroundMusic;
+	sf::Music backgroundMusic;
 	sf::IntRect textureRect;
 
+	// Game Objects
 	PlantFactory AllPlants;
-
 	ZombieFactory AllZombies;
-
 	Sun* suns;
 
 	// Required variables
@@ -49,6 +48,7 @@ private:
 	int totalShooterInstancesCreated = 1;
 	int totalNormalPlantInstancesCreated = 1;
 	bool leftMouseButtonPressed = false;	
+	const int totalPlantTypes = 7;
 	
 public:
 	Level1State();
@@ -58,14 +58,14 @@ public:
 	void handleAllPlantsCreation(sf::RenderWindow& window);
 	void spawnZombies();  // Spawn the zombies
 	void renderPlantFactory(sf::RenderWindow& window);
-	void renderZombies(sf::RenderWindow& window); 
+	void renderZombies(sf::RenderWindow& window, float deltaTime);
 	void renderUI(sf::RenderWindow& window); 
-	void generateSuns(sf::RenderWindow& window);
+	void generateSuns(sf::RenderWindow& window, float deltaTime);
 	void handleSunCollection(sf::RenderWindow& window);
 	void handlePlantRemoval(sf::RenderWindow& window);
 	virtual void Init(AssetManager& Assets);
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window);
 	virtual void Update(StateMachine* machine, float deltaTime);
-	virtual void Draw(sf::RenderWindow& window);
+	virtual void Draw(sf::RenderWindow& window, float deltaTime);
 
 };

@@ -28,7 +28,7 @@ void PauseGameState::Update(StateMachine* machine, float deltaTime)
 {
 
 }
-void PauseGameState::Draw(sf::RenderWindow& window)
+void PauseGameState::Draw(sf::RenderWindow& window, float deltaTime)
 {
 	window.draw(levelBackground);
 	window.draw(background);

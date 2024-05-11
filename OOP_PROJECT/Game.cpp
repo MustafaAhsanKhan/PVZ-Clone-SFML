@@ -91,6 +91,6 @@ void Game::run()
         
         machine.GetActiveState()->HandleInput(&machine, window);
         machine.GetActiveState()->Update(&machine, deltaTime);
-        machine.GetActiveState()->Draw(window);
+        machine.GetActiveState()->Draw(window, deltaTime);
     }
 }

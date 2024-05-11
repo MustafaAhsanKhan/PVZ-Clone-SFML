@@ -11,7 +11,7 @@ Level1State::Level1State()
 	placingPlantSound.setVolume(15);
 
 	// Fonts
-	sunsNum = 0;
+	sunsNum = 5000;
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
 	sunsNumText.setCharacterSize(40); // Set font size
@@ -24,7 +24,6 @@ Level1State::Level1State()
 
 	// Sun
 	sunCount = 5;
-	currentSuns = 0;
 	suns = new Sun[sunCount];
 
 
@@ -36,7 +35,7 @@ Level1State::Level1State()
 		}
 	}
 
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < totalPlantTypes; i++)
 	{
 		clickedSeedPacket[i] = false;
 	}
@@ -228,43 +227,24 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 	{
 		int gridX = 0;
 		int gridY = 0;
-
-
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-
 		gridX = (mousePosition.x / 100.66) - 3;
 		gridY = (mousePosition.y / 114) - 1;
 
-		const int totalPlantTypes = 7; // will be 6 once all are implemented
-		const int eachtypenum = 5; // total types
-		// int totalTypeInstancesCreated = 1; // the total instances of each type currently
-		int plantscreated = 1; // currently
-		int plantTypescreated = 1;
-		int seedPacketnum = 3;
-
 		/*
-		FOR CLARITY:
-		1. clickedSeedPacket[]
-		sunflower index : 0
-		peashooter index : 1
-		Wallnut index: 2
-		Cherrybomb index: 3
-		Repeater index: 4
-		Snow Pea index: 5
-		Fumeshroom index: 6
+		-----TEXTURE AND CLICKEDSEEDPACKET ARRAY INDEXES-----
 
-		2. Texture indexes:
-		sunflower index : 1
-		peashooter index : 2
-		Wallnut index: 3
-		Cherrybomb index: 4
-		Repeater index: 5
-		Snow Pea index: 6
+		* sunflower index : 1
+		* peashooter index : 2
+		* Wallnut index: 3
+		* Cherrybomb index: 4
+		* Repeater index: 5
+		* Snow Pea index: 6
 		Fumeshroom index: 7
+
 		*/
 
 		// checks if seed packet clicked
-		//cout << mousePosition.x << " " << mousePosition.y << endl;
 		for (int i = 0; i < totalPlantTypes; ++i)
 		{
 
@@ -276,7 +256,6 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				}
 
 				clickedSeedPacket[i] = true;
-				cout << clickedSeedPacket[0] << endl;
 			}
 
 			if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[i] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
@@ -285,9 +264,9 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				{
 				case 0:
 				{
-					if (sunsNum >= 100)
+					if (sunsNum >= 50)
 					{
-						sunsNum -= 100;
+						sunsNum -= 50;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
 						AllPlants.getNormalPlant(0, totalNormalPlantInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
@@ -473,7 +452,7 @@ void Level1State::renderPlantFactory(sf::RenderWindow& window)
 
 }
 
-void Level1State::renderZombies(sf::RenderWindow& window)
+void Level1State::renderZombies(sf::RenderWindow& window, float deltaTime)
 {
     for(int i = 0; i < 4 ; i++)  // This controls the type of zombie
 	{
@@ -481,6 +460,8 @@ void Level1State::renderZombies(sf::RenderWindow& window)
 		{
 			if(AllZombies.getZombie(i,j).getExists())
 			{
+				AllZombies.getZombie(i, j).moveZombie(deltaTime);
+				AllZombies.getZombie(i, j).setAnimation();
 				window.draw(AllZombies.getZombie(i,j).getZombieSprite());
 			}
 		}
@@ -497,7 +478,7 @@ void Level1State::renderUI(sf::RenderWindow& window)
 	window.draw(sunsNumText);
 }
 
-void Level1State::generateSuns(sf::RenderWindow& window)
+void Level1State::generateSuns(sf::RenderWindow& window, float deltaTime)
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -510,8 +491,7 @@ void Level1State::generateSuns(sf::RenderWindow& window)
 		if (suns[i].getExists() == true)
 		{
 			window.draw(suns[i].getSunSprite());
-			suns[i].move();
-
+			suns[i].move(deltaTime);
 		}
 	}
 
@@ -521,10 +501,12 @@ void Level1State::handleSunCollection(sf::RenderWindow& window)
 {
 	static bool LastFuncCallInput = false;
 	bool currentLeftMouseButtonState = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-	if (currentLeftMouseButtonState && !LastFuncCallInput) {
+	if (currentLeftMouseButtonState && !LastFuncCallInput)
+	{
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++)
+		{
 			if (mousePosition.x >= suns[i].getSunSprite().getPosition().x && mousePosition.x <= (suns[i].getSunSprite().getPosition().x + (250 * 0.375)) && mousePosition.y >= suns[i].getSunSprite().getPosition().y && mousePosition.y <= (suns[i].getSunSprite().getPosition().y + (250 * 0.375)))
 			{
 
@@ -637,26 +619,15 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
 
     spawnZombies();
 
-    for (int i = 0; i < 4; i++)  // This controls the type of zombie
-    {
-        for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
-        {
-            if (AllZombies.getZombie(i, j).getExists())
-            {
-                AllZombies.getZombie(i, j).moveZombie(deltaTime);
-                AllZombies.getZombie(i, j).setAnimation();
-            }
-        }
-    }
 
 }
-void Level1State::Draw(sf::RenderWindow& window)
+void Level1State::Draw(sf::RenderWindow& window, float deltaTime)
 {
 	window.draw(background);
 	renderPlantFactory(window);
-	renderZombies(window);
+	renderZombies(window, deltaTime);  // This also handles the movement of zombies
 	renderUI(window);
-	generateSuns(window);
+	generateSuns(window, deltaTime);  // This also handles the movement of suns
 	window.display();
 	window.clear();
 }

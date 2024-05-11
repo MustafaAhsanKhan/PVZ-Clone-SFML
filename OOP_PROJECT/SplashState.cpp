@@ -21,7 +21,7 @@ void SplashState::Update(StateMachine* machine, float deltaTime)
 	}
 }
 
-void SplashState::Draw(sf::RenderWindow& window)
+void SplashState::Draw(sf::RenderWindow& window, float deltaTime)
 {
 	window.draw(background);
 	window.display();
