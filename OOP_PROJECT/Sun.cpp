@@ -2,8 +2,8 @@
 
 Sun::Sun()
 {
-	int i = (rand() % 100);
-	x_pos = (rand() % (i * 12)) + 300; // random x position
+	int i = (rand() % 100) + 1;
+	x_pos = (rand() % (i * 12) ) + 300; // random x position
 	y_pos = -100; // out of frame currently
 	sunSpeed = 70;
 	sunExists = false;
