@@ -36,7 +36,7 @@ private:
 	DolphinRiderZombie DolphinRiderZombie;
 
 	//Shooter* shooters;
-	bool isPlacingPlant;
+	//bool isPlacingPlant;
 	bool clickedSeedPacket[7]; // change size later
 	int totalTypeInstancesCreated = 1;
 public:
