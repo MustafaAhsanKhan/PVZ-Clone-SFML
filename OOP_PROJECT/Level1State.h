@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #include "StateMachine.h"
 #include "PauseGameState.h"
 
