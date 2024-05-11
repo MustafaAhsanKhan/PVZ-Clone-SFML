@@ -16,13 +16,13 @@ void StateMachine::RemoveState()
 
 void StateMachine::ProcessStateChanges(AssetManager& Assets)
 {
-	if (isRemoving == true  && !states.empty())
+	if (isRemoving == true  && !states.isEmpty())
 	{
 		states.pop();
 
-		if (!states.empty())  // If the stack is not empty
+		if (!states.isEmpty())  // If the stack is not empty
 		{
-			states.top()->Resume();  // Resume the top state
+			states.gettop()->Resume();  // Resume the top state
 		}
 
 		isRemoving = false;
@@ -30,7 +30,7 @@ void StateMachine::ProcessStateChanges(AssetManager& Assets)
 
 	if (isAdding == true)
 	{
-		if (!states.empty())  // If the stack is not empty
+		if (!states.isEmpty())  // If the stack is not empty
 		{
 			if (isReplacing)
 			{
@@ -38,17 +38,17 @@ void StateMachine::ProcessStateChanges(AssetManager& Assets)
 			}
 			else
 			{
-				states.top()->Pause();
+				states.gettop()->Pause();
 			}
 		}
 
 		states.push(std::move(newState));
-		states.top()->Init(Assets);
+		states.gettop()->Init(Assets);
 		isAdding = false;
 	}
 }
 
 StateRef& StateMachine::GetActiveState()
 {
-	return states.top();
+	return states.gettop();
 }

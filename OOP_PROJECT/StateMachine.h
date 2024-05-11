@@ -1,6 +1,5 @@
 #pragma once
-#include <memory>
-#include <stack>
+#include "Stack.h"
 #include "AssetManager.h"
 
 #include <SFML/Graphics.hpp>
@@ -44,7 +43,7 @@ public:
 
 	~StateMachine() {};
 private:
-	std::stack<StateRef> states;  // A stack of states
+	Stack<StateRef> states;  // A stack of states
 	StateRef newState;
 
 	bool isRemoving;

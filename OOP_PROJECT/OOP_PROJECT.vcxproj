@@ -162,6 +162,7 @@
     <ClCompile Include="Shooter.cpp" />
     <ClCompile Include="SimpleZombie.cpp" />
     <ClCompile Include="SplashState.cpp" />
+    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="SnowPea.cpp" />
     <ClCompile Include="SunFlower.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Shooter.h" />
     <ClInclude Include="SimpleZombie.h" />
     <ClInclude Include="SplashState.h" />
+    <ClInclude Include="Stack.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="SnowPea.h" />
     <ClInclude Include="SunFlower.h" />
