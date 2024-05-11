@@ -41,7 +41,7 @@ Level1State::Level1State()
     zombie->setXgridCoordinate(8);
     zombie->setYgridCoordinate(temp);
     zombie->setx_pos(1180);
-    zombie->sety_pos((120 * temp) + 40);
+    zombie->sety_pos((120 * 4) + 40);  // change to random
 
     temp = rand() % 5;
     zombie = &DancingZombie;

@@ -44,13 +44,13 @@ void Game::InitializeUISprites()
 void Game::InitializePlantTextures()
 {
 	Assets.loadTexture(1, "../PVZ_Textures/PlantTextures/Sunflower.png");
-	Assets.loadTexture(2, "../PVZ_Textures/PlantTextures/Peashooter.png");  
+	Assets.loadTexture(2, "../PVZ_Textures/PlantTextures/Peashooter.png");
 	Assets.loadTexture(3, "../PVZ_Textures/PlantTextures/Wallnut.png");
-	Assets.loadTexture(4, "../PVZ_Textures/PlantTextures/Cherrybomb.png");	
+    Assets.loadTexture(4, "../PVZ_Textures/PlantTextures/Cherrybomb.png");
 	Assets.loadTexture(5, "../PVZ_Textures/PlantTextures/Repeater.png");
 	Assets.loadTexture(6, "../PVZ_Textures/PlantTextures/SnowPea.png");
-	Assets.loadTexture(7, "../PVZ_Textures/PlantTextures/Peashooter.png");  
-	Assets.loadTexture(8, "../PVZ_Textures/PlantTextures/FumeShroom.png"); 
+	Assets.loadTexture(7, "../PVZ_Textures/PlantTextures/Peashooter.png");
+	Assets.loadTexture(8, "../PVZ_Textures/PlantTextures/FumeShroom.png");
 }
 
 void Game::InitializeZombieTextures()

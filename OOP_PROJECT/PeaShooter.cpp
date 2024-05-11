@@ -2,7 +2,7 @@
 
 PeaShooter::PeaShooter()
 {
-	MAX_BULLETS = 2;
+	MAX_BULLETS = 1;
 	ShootingRate = 1;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
 	for (int i = 0; i < MAX_BULLETS; i++)

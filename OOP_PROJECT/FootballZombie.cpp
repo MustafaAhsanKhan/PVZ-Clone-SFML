@@ -75,7 +75,30 @@ void FootballZombie::setAnimation()
 
 void FootballZombie::moveZombie(float deltaTime)
 {
+	srand(time(0));
 	x_pos -= (zombieSpeed * deltaTime);
+	if (y_pos >= 40 && y_pos <= 520)  // Keeping the zombie within the grid
+	{
+		if (moveClock.getElapsedTime().asSeconds() > 2)
+		{
+			switch (rand() % 2)
+			{
+			case(0):  //  Move up
+				if (y_pos >= 60 && y_pos <= 520)
+				{
+					y_pos -= 120;
+				}
+				break;
+			case(1):  // Move down
+				if (y_pos >= 40 && y_pos <= 400)
+				{
+					y_pos += 120;
+				}
+				break;
+			}
+			moveClock.restart();
+		}
+	}
 
 	ZombieSprite.setPosition(x_pos, y_pos);
 }

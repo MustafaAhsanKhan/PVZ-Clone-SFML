@@ -2,6 +2,8 @@
 #include "Zombie.h"
 class DancingZombie : public Zombie
 {
+private:
+	bool movingUp;
 public:
 	DancingZombie();
 	sf::Sprite& getZombieSprite();

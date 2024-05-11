@@ -2,6 +2,8 @@
 #include "Zombie.h"
 class FootballZombie : public Zombie
 {
+private:
+	sf::Clock moveClock;
 public:
 	FootballZombie();
 	sf::Sprite& getZombieSprite();

@@ -4,9 +4,10 @@ DancingZombie::DancingZombie()
 {
 	ZombieHealth = 100;
 	XgridCoordinate = 0, YgridCoordinate = 0;
-	zombieSpeed = 30000;
+	zombieSpeed = 50000;
 	damagePerSec = 0;
 	is_Slowed = false;
+	movingUp = true;
 
 }
 sf::Sprite& DancingZombie::getZombieSprite()
@@ -78,6 +79,32 @@ void DancingZombie::setAnimation()
 void DancingZombie::moveZombie(float deltaTime)
 {
 	x_pos -= (zombieSpeed * deltaTime);
+
+	if (y_pos >= 20 && y_pos <= 540 && movingUp == true)
+	{
+		// move the zombie up
+		if(y_pos > 40)
+		{
+			y_pos -= zombieSpeed * deltaTime * 2;
+		}
+		else
+		{
+			movingUp = false;
+		}
+	}
+	else if (y_pos >= 20 && y_pos <= 540 && movingUp == false)
+	{
+		// move the zombie down
+		if (y_pos < 520)
+		{
+			y_pos += zombieSpeed * deltaTime * 2;
+		}
+		else
+		{
+			movingUp = true;
+		}
+	}
+	
 
 	ZombieSprite.setPosition(x_pos, y_pos);
 }
