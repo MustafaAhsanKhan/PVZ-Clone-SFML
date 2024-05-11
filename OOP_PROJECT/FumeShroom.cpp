@@ -30,7 +30,7 @@ void FumeShroom::Act()
 		}
 		else
 		{
-			textureRect.left += 33;
+			textureRect.left += 35;
 		}
 		this->getPlantSprite().setTextureRect(textureRect);
 		animationClock.restart();

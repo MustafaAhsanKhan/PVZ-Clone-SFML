@@ -11,21 +11,22 @@ Level1State::Level1State()
 	placingPlantSound.setVolume(15);
 
 	// Fonts
-	sunsNum = 0;
+	sunsNum = 5000;
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
 	sunsNumText.setCharacterSize(40); // Set font size
 	sunsNumText.setFillColor(sf::Color::White);
 	sunsNumText.setPosition(107, 20);
 	sunsNumText.setString(std::to_string(sunsNum));
-	
 
+	// shovel sprite
+	clickedShovel = false;
 
 	// Sun
 	sunCount = 5;
 	currentSuns = 0;
 	suns = new Sun[sunCount];
-	
+
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -171,7 +172,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 		AllPlants.getNormalPlant(0, i).getPlantSprite().setScale(3, 3);
 	}
 
-	textureRect = sf::IntRect(0, 125.6, 28.1, 36); // Wallnut
+	textureRect = sf::IntRect(0, 92, 28.75, 34); // Wallnut
 	for (int i = 0; i < 50; i++) // 50 plants
 	{
 		AllPlants.getNormalPlant(1, i).getPlantSprite().setTexture(Assets.getTexture(3));
@@ -227,7 +228,7 @@ void Level1State::setUITextures(AssetManager& Assets)
 	// Seed packet sprite
 	seedPacketSprite.setTexture(Assets.getTexture(30));
 	seedPacketSprite.setTextureRect(textureRect);
-	seedPacketSprite.setPosition(45, 110);
+	seedPacketSprite.setPosition(45, 100);
 	seedPacketSprite.setScale(0.9, 0.9);
 	// Lawn mower sprite
 	for (int i = 0; i < 5; i++)
@@ -241,7 +242,7 @@ void Level1State::setUITextures(AssetManager& Assets)
 		suns[i].getSunSprite().setTexture(Assets.getTexture(33));
 		suns[i].getSunSprite().setScale(0.375, 0.375);
 	}
-	
+
 
 }
 
@@ -289,7 +290,9 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 		// checks if seed packet clicked
 		for (int i = 0; i < totalPlantTypes; ++i)
 		{
-			if (mousePosition.x > 52 && mousePosition.x <= 150 && mousePosition.y >= (123 + 75 * i + 1) && mousePosition.y <= (195 + 75 * i + 1))
+			cout << mousePosition.x << " " << mousePosition.y << endl;
+
+			if (mousePosition.x > 52 && mousePosition.x <= 150 && mousePosition.y >= (112 + 75 * i + 1) && mousePosition.y <= (230 + 75 * i + 1))
 			{
 				for (int j = 0; j < totalPlantTypes; j++)  // We selected another seed packet
 				{
@@ -297,7 +300,6 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				}
 
 				clickedSeedPacket[i] = true;
-				cout << clickedSeedPacket[2];
 			}
 
 			if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[i] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
@@ -308,16 +310,14 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				{
 					if (sunsNum >= 100)
 					{
-						cout << "Sunlfowerrr";
 						sunsNum -= 100;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
-						AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
-						AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-						AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-						AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
-						totalTypeInstancesCreated++;
-						cout << "Sunflower created\n";
+						AllPlants.getNormalPlant(0, totalNormalPlantInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getNormalPlant(0, totalNormalPlantInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getNormalPlant(0, totalNormalPlantInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getNormalPlant(0, totalNormalPlantInstancesCreated - 1).setExists(true);
+						totalNormalPlantInstancesCreated++;
 						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 						clickedSeedPacket[i] = false;
 					}
@@ -331,17 +331,16 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						sunsNum -= 100;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
-						AllPlants.getShooter(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
-						AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-						AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-						AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setExists(true);
-						totalTypeInstancesCreated++;
-						cout << "Peashooter created\n";
+						AllPlants.getShooter(0, totalShooterInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getShooter(0, totalShooterInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getShooter(0, totalShooterInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getShooter(0, totalShooterInstancesCreated - 1).setExists(true);
+						totalShooterInstancesCreated++;
 						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 						clickedSeedPacket[i] = false;
 					}
 					break;
-					
+
 				}
 
 				case 2:
@@ -351,17 +350,17 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						sunsNum -= 50;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
-						AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
-						AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-						AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-						AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setExists(true);
-						totalTypeInstancesCreated++;
-						cout << "Wallnut created\n";
+						// AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).setExists(true);
+						totalNormalPlantInstancesCreated++;;
 						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 						clickedSeedPacket[i] = false;
 					}
 					break;
-					
+
 				}
 				case 3:
 				{
@@ -370,17 +369,16 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						sunsNum -= 150;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
-						AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
-						AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-						AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-						AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setExists(true);
-						totalTypeInstancesCreated++;
-						cout << "CherryBomb created\n";
+						AllPlants.getNormalPlant(2, totalNormalPlantInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getNormalPlant(2, totalNormalPlantInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getNormalPlant(2, totalNormalPlantInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getNormalPlant(2, totalNormalPlantInstancesCreated - 1).setExists(true);
+						totalNormalPlantInstancesCreated++;
 						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 						clickedSeedPacket[i] = false;
 					}
 					break;
-					
+
 				}
 				case 4:
 				{
@@ -389,17 +387,16 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						sunsNum -= 200;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
-						AllPlants.getShooter(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
-						AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-						AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-						AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setExists(true);
-						totalTypeInstancesCreated++;
-						cout << "Repeater created\n";
+						AllPlants.getShooter(1, totalShooterInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
+						AllPlants.getShooter(1, totalShooterInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getShooter(1, totalShooterInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getShooter(1, totalShooterInstancesCreated - 1).setExists(true);
+						totalShooterInstancesCreated++;
 						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 						clickedSeedPacket[i] = false;
 					}
 					break;
-					
+
 				}
 				case 5:
 				{
@@ -408,17 +405,16 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						sunsNum -= 175;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
-						AllPlants.getShooter(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
-						AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-						AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-						AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setExists(true);
-						totalTypeInstancesCreated++;
-						cout << "SnowPea created\n";
+						AllPlants.getShooter(2, totalShooterInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
+						AllPlants.getShooter(2, totalShooterInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getShooter(2, totalShooterInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getShooter(2, totalShooterInstancesCreated - 1).setExists(true);
+						totalShooterInstancesCreated++;
 						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 						clickedSeedPacket[i] = false;
 					}
 					break;
-					
+
 				}
 				case 6:
 				{
@@ -427,17 +423,16 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						sunsNum -= 75;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
-						AllPlants.getShooter(3, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
-						AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-						AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-						AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setExists(true);
-						totalTypeInstancesCreated++;
-						cout << "Fumeshroom created\n";
+						AllPlants.getShooter(3, totalShooterInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
+						AllPlants.getShooter(3, totalShooterInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getShooter(3, totalShooterInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getShooter(3, totalShooterInstancesCreated - 1).setExists(true);
+						totalShooterInstancesCreated++;
 						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
 						clickedSeedPacket[i] = false;
 					}
 					break;
-					
+
 				}
 				}
 
@@ -509,7 +504,7 @@ void Level1State::renderUI(sf::RenderWindow& window)
 }
 
 void Level1State::generateSuns(sf::RenderWindow& window)
-{	
+{
 	for (int i = 0; i < 5; i++)
 	{
 		if ((suns[i].getExists()) == false && (sunClock.getElapsedTime().asSeconds() > 10))
@@ -522,10 +517,10 @@ void Level1State::generateSuns(sf::RenderWindow& window)
 		{
 			window.draw(suns[i].getSunSprite());
 			suns[i].move();
-			
+
 		}
 	}
-	
+
 }
 
 void Level1State::handleSunCollection(sf::RenderWindow& window)
@@ -536,9 +531,9 @@ void Level1State::handleSunCollection(sf::RenderWindow& window)
 		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
 		for (int i = 0; i < 5; i++) {
-			if (mousePosition.x >= suns[i].getSunSprite().getPosition().x && mousePosition.x <= (suns[i].getSunSprite().getPosition().x + (250 * 0.375)) && mousePosition.y >= suns[i].getSunSprite().getPosition().y && mousePosition.y <= (suns[i].getSunSprite().getPosition().y + (250 * 0.375))) 
+			if (mousePosition.x >= suns[i].getSunSprite().getPosition().x && mousePosition.x <= (suns[i].getSunSprite().getPosition().x + (250 * 0.375)) && mousePosition.y >= suns[i].getSunSprite().getPosition().y && mousePosition.y <= (suns[i].getSunSprite().getPosition().y + (250 * 0.375)))
 			{
-			
+
 				suns[i].resetPosition();
 				suns[i].setExists(false);
 				sunsNum += 50;
@@ -550,7 +545,57 @@ void Level1State::handleSunCollection(sf::RenderWindow& window)
 	LastFuncCallInput = currentLeftMouseButtonState;
 }
 
+void Level1State::handlePlantRemoval(sf::RenderWindow& window)
+{
 
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		int gridX = 0;
+		int gridY = 0;
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+
+		if (mousePosition.x >= 1165 && mousePosition.x <= 1252 && mousePosition.y >= 600 && mousePosition.y <= 700) // if shovel button clicked
+		{
+			clickedShovel = true;
+		}
+
+		gridX = (mousePosition.x / 100.66) - 3;
+		gridY = (mousePosition.y / 114) - 1;
+
+		if (clickedShovel && mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && FIELD_GAME_STATUS[gridY][gridX]) // if a place on the grid is clicked
+		{
+
+			placingPlantSound.play();
+
+			for (int k = 0; k < 3; k++)  // 3 plant types
+			{
+				for (int i = 0; i < totalNormalPlantInstancesCreated; i++)
+				{
+					if (AllPlants.getNormalPlant(k, i).getXgridCoordinate() == gridX && AllPlants.getNormalPlant(k, i).getYgridCoordinate() == gridY)
+					{
+						AllPlants.getNormalPlant(k, i).setExists(false);
+						FIELD_GAME_STATUS[gridY][gridX] = false;
+					}
+				}
+
+			}
+			for (int k = 0; k < 4; k++) // 4 shooter tyoes
+			{
+				for (int i = 0; i < totalShooterInstancesCreated; i++)
+				{
+					if (AllPlants.getShooter(k, i).getXgridCoordinate() == gridX && AllPlants.getShooter(k, i).getYgridCoordinate() == gridY)
+					{
+						AllPlants.getShooter(k, i).setExists(false);
+						FIELD_GAME_STATUS[gridY][gridX] = false;
+					}
+				}
+			}
+			clickedShovel = false;
+
+		}
+	}
+}
 void Level1State::Init(AssetManager& Assets)
 {
 	background.setTexture(Assets.getTexture(26));
@@ -562,6 +607,7 @@ void Level1State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 {
 	handleAllPlantsCreation(window);
 	handleSunCollection(window);
+	handlePlantRemoval(window);
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
@@ -579,7 +625,7 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
 	// For plant factory
 	for (int k = 0; k < shooterPlanttypes; k++)
 	{
-		for (int i = 0; i < totalTypeInstancesCreated; i++)
+		for (int i = 0; i < totalShooterInstancesCreated; i++)
 		{
 			AllPlants.getShooter(k, i).Act();
 			AllPlants.getShooter(k, i).shootBullet(deltaTime);
@@ -589,7 +635,7 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
 	int normalPlantTypes = 3;
 	for (int k = 0; k < normalPlantTypes; k++)
 	{
-		for (int i = 0; i < totalTypeInstancesCreated; i++)
+		for (int i = 0; i < totalNormalPlantInstancesCreated; i++)
 		{
 			AllPlants.getNormalPlant(k, i).Act();
 		}

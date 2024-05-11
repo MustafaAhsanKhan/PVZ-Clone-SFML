@@ -16,24 +16,28 @@
 class Level1State : public State
 {
 private:
+	// UI Sprites
 	sf::Sprite background;
 	sf::Sprite seedPacketSprite;
 	sf::Sprite lawnMowerSprite[5];
+	sf::Sprite shovelSprite;
+
+	// UI features
 	sf::Clock ElapsedTime;
 	sf::Font font;
 	sf::Text sunsNumText;
-	Sun sun;
-	Sun* suns;
-	int sunCount;
-	int currentSuns;
-	int sunsNum;
-
-	bool leftMouseButtonPressed = false;
-
+	sf::Clock sunClock;
+	
+	// Sounds
+	sf::SoundBuffer sungen_SoundBuffer;
+	sf::Sound sungen_Sound;
+	sf::SoundBuffer placingPlantSoundBuffer;
+	sf::Sound placingPlantSound;
 	// sf::Music backgroundMusic;
-	sf::IntRect textureRect;
-	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
-	PeaShooter PeaShooterPlant;
+	
+	sf::IntRect textureRect; // Texture rectuangle for all things (zombies and plants)
+	
+	// Game Objects
 	PlantFactory AllPlants;
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
@@ -41,13 +45,20 @@ private:
 	FootballZombie FootballZombie;
 	DancingZombie DancingZombie;
 	DolphinRiderZombie DolphinRiderZombie;
+	Sun* suns;
+
+	// Required variables
+	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	bool clickedSeedPacket[7]; // change size later
+	bool clickedShovel;
 	int totalTypeInstancesCreated = 1;
-	sf::SoundBuffer sungen_SoundBuffer;
-	sf::Sound sungen_Sound;
-	sf::SoundBuffer placingPlantSoundBuffer;
-	sf::Sound placingPlantSound;
-	sf::Clock sunClock;
+	int sunCount;
+	int currentSuns;
+	int sunsNum;
+	int totalShooterInstancesCreated = 1;
+	int totalNormalPlantInstancesCreated = 1;
+	bool leftMouseButtonPressed = false;	
+	
 public:
 	Level1State();
 	void setPlantFactoryTextures(AssetManager& Assets);
@@ -59,6 +70,7 @@ public:
 	void renderUI(sf::RenderWindow& window); 
 	void generateSuns(sf::RenderWindow& window);
 	void handleSunCollection(sf::RenderWindow& window);
+	void handlePlantRemoval(sf::RenderWindow& window);
 	virtual void Init(AssetManager& Assets);
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window);
 	virtual void Update(StateMachine* machine, float deltaTime);
