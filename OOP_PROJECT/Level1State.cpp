@@ -456,33 +456,28 @@ void Level1State::renderUI(sf::RenderWindow& window)
 
 void Level1State::generateSuns(sf::RenderWindow& window)
 {
-	if (sunClock.getElapsedTime().asSeconds() > 2)
+	
+	for (int i = 0; i < 5; i++)
 	{
-		if (currentSuns < sunCount)
+		if (suns[i].exists() == false && (sunClock.getElapsedTime().asSeconds() > 2))
 		{
-			cout << currentSuns << endl;
-			currentSuns++;
+			sunClock.restart();
+			suns[i].setExists(true);
 			sungen_Sound.play();
 		}
-		
-		sunClock.restart();
-		suns[currentSuns - 1].setExists(true);
-		
-
-	}
-	for (int i = 0; i < currentSuns; i++)
-	{
-		if (suns[i].exists())
+		if (suns[i].exists() == true)
 		{
 			window.draw(suns[i].getSunSprite());
 			suns[i].move();
-		}		
-	}	
+			cout << suns[i].getSunSprite().getPosition().x << " " << suns[i].getSunSprite().getPosition().y << endl;
+		}
+	}
+	
 }
 
 void Level1State::handleSunCollection(sf::RenderWindow& window)
 {
-	for (int i = 0; i < currentSuns; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
@@ -493,8 +488,8 @@ void Level1State::handleSunCollection(sf::RenderWindow& window)
 				// cout << currentSuns << endl;
 				suns[i].resetPosition();
 				suns[i].setExists(false);
-				currentSuns--;
-				// break;
+				//currentSuns--;
+				break;
 				
 			}
 		}
