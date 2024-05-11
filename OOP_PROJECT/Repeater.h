@@ -1,11 +1,9 @@
 #pragma once
 #include "Shooter.h"
-
-class PeaShooter : public Shooter
+class Repeater :public Shooter
 {
-
 public:
-	PeaShooter();
+	Repeater();
 	virtual int getMaxBullets();
 	virtual Bullet& getBullet(int index);
 	virtual void setExists(bool ex);
@@ -17,5 +15,6 @@ public:
 	virtual int getYgridCoordinate();
 	virtual void setXgridCoordinate(int x);
 	virtual void setYgridCoordinate(int y);
-	~PeaShooter();
+	~Repeater();
 };
+

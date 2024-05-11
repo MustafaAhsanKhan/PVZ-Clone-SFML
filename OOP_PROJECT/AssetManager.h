@@ -6,16 +6,16 @@ using namespace std;
 
 /*
 Key for Assets
-0: Backgrounds
-1-9 reserved for plants
+0-9 reserved for plants
 10-19 reserved for zombies
-20-29 reserved for UI
+20-29 reserved for Backgrounds
+30-39 reserved for UI
 */
 
 class AssetManager
 {
 private:
-    static const int MAX_TEXTURES = 30;  // Maximum number of textures that can be stored
+    static const int MAX_TEXTURES = 50;  // Maximum number of textures that can be stored
     sf::Texture textures[MAX_TEXTURES];  // Array of textures
     bool loaded[MAX_TEXTURES] = { false };  // Array of flags to indicate if a texture is loaded
 

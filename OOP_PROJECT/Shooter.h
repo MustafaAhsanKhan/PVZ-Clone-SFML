@@ -1,6 +1,8 @@
 #pragma once
+#include<iostream>
+#include<SFML/Graphics.hpp>
 #include "Plant.h"
-#include "BulletPea.h"
+#include "Bullet.h"
 
 class Shooter : public Plant
 {
@@ -8,17 +10,14 @@ protected:
 	int MAX_BULLETS;
 	sf::Clock ShootingRateClock;
 	float ShootingRate;
-	BulletPea* bullets;
+	Bullet* bullets;
 public:
-	virtual void setMaxBullets(int bullets) = 0;
-	virtual void setShootingRate(float p_ShootingRate) = 0;
-	virtual BulletPea& getBullet(int index) = 0;
+	virtual Bullet& getBullet(int index) = 0;
 	virtual int getMaxBullets() = 0;
-	// virtual void moveBullets();
 	virtual void setExists(bool ex) = 0; // sets existence of the plant
 	virtual bool exists() = 0; // checks if it exists (returns plantExists data member)
 	virtual void shootBullet(float deltaTime) = 0;
-	virtual void setAnimation() = 0;
+	virtual void Act() = 0;
 	virtual sf::Sprite& getPlantSprite() = 0;
 	virtual void setXgridCoordinate(int x) = 0;
 	virtual void setYgridCoordinate(int y) = 0;
