@@ -39,6 +39,7 @@ private:
 	//bool isPlacingPlant;
 	bool clickedSeedPacket[7]; // change size later
 	int totalTypeInstancesCreated = 1;
+	sf::SoundBuffer placingPlantSound;
 public:
 	Level1State();
 	//void setPlantTextures();
