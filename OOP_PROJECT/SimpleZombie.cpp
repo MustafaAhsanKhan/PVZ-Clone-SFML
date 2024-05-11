@@ -2,10 +2,9 @@
 
 SimpleZombie::SimpleZombie()
 {
-	ZombieHealth = 100; // change later if needed
-	XgridCoordinate = 0, YgridCoordinate = 0;
-	zombieSpeed = 20; // change later if needed
-	damagePerSec = 10; // change later if needed
+	ZombieHealth = 100;
+	zombieSpeed = 20;
+	damagePerSec = 10;
 	is_Slowed = false;
 	Exists = false;
 }

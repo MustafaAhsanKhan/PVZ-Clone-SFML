@@ -3,10 +3,10 @@
 DolphinRiderZombie::DolphinRiderZombie()
 {
 	ZombieHealth = 100;
-	XgridCoordinate = 0, YgridCoordinate = 0;
 	zombieSpeed = 20;
 	damagePerSec = 0;
 	is_Slowed = false;
+	Exists = false;
 }
 sf::Sprite& DolphinRiderZombie::getZombieSprite()
 {

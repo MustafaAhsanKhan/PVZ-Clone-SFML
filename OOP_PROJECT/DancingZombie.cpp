@@ -3,8 +3,7 @@
 DancingZombie::DancingZombie()
 {
 	ZombieHealth = 100;
-	XgridCoordinate = 0, YgridCoordinate = 0;
-	zombieSpeed = 20;
+	zombieSpeed = 40;
 	damagePerSec = 0;
 	is_Slowed = false;
 	movingUp = true;
@@ -90,7 +89,7 @@ void DancingZombie::moveZombie(float deltaTime)
 		// move the zombie up
 		if(y_pos > 40)
 		{
-			y_pos -= zombieSpeed * deltaTime * 2;
+			y_pos -= zombieSpeed * deltaTime;
 		}
 		else
 		{
@@ -102,7 +101,7 @@ void DancingZombie::moveZombie(float deltaTime)
 		// move the zombie down
 		if (y_pos < 520)
 		{
-			y_pos += zombieSpeed * deltaTime * 2;
+			y_pos += zombieSpeed * deltaTime;
 		}
 		else
 		{

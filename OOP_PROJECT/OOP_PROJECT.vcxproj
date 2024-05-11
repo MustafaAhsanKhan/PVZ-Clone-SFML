@@ -160,12 +160,10 @@
     <ClCompile Include="Repeater.cpp" />
     <ClCompile Include="SimpleZombie.cpp" />
     <ClCompile Include="SplashState.cpp" />
-    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="SnowPea.cpp" />
     <ClCompile Include="SunFlower.cpp" />
     <ClCompile Include="WallNut.cpp" />
-    <ClCompile Include="Zombie.cpp" />
     <ClCompile Include="ZombieFactory.cpp" />
   </ItemGroup>
   <ItemGroup>

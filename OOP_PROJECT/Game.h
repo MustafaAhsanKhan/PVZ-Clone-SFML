@@ -8,8 +8,6 @@
 #include "AssetManager.h"
 
 #include "SplashState.h"
-#include "MainMenuState.h"
-#include "Level1State.h"
 
 
 class Game
