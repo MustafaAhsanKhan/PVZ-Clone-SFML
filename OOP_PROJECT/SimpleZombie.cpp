@@ -7,6 +7,7 @@ SimpleZombie::SimpleZombie()
 	zombieSpeed = 10000; // change later if needed
 	damagePerSec = 10; // change later if needed
 	is_Slowed = false;
+	Exists = false;
 }
 sf::Sprite& SimpleZombie::getZombieSprite()
 {
@@ -64,6 +65,10 @@ float SimpleZombie::gety_pos()
 {
 	return y_pos;
 }
+bool SimpleZombie::getExists()
+{
+	return Exists;
+}
 void SimpleZombie::setx_pos(float x)
 {
 	x_pos = x;
@@ -72,7 +77,10 @@ void SimpleZombie::sety_pos(float y)
 {
 	y_pos = y;
 }
-
+void SimpleZombie::setExists(bool p_Exists)
+{
+	Exists = p_Exists;
+}
 void SimpleZombie::moveZombie(float deltaTime)
 {
 	x_pos -= (zombieSpeed * deltaTime);

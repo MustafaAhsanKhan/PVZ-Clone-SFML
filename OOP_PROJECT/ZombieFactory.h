@@ -14,8 +14,9 @@ private:
 	int zombieTypes;
 
 public:
-	//ZombieFactory();
+	ZombieFactory();
 	ZombieFactory(int p_MAX_ZOMBIES);
 	Zombie& getZombie(int row, int col);
+	int getMAX_ZOMBIES();
 	~ZombieFactory();
 };

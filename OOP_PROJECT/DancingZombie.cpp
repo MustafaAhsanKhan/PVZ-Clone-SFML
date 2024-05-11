@@ -8,23 +8,20 @@ DancingZombie::DancingZombie()
 	damagePerSec = 0;
 	is_Slowed = false;
 	movingUp = true;
+	Exists = false;
 
 }
 sf::Sprite& DancingZombie::getZombieSprite()
 {
-		return ZombieSprite;
-
+	return ZombieSprite;
 }
 int DancingZombie::getXgridCoordinate()
 {
-		return XgridCoordinate;
-
-
+	return XgridCoordinate;
 }
 int DancingZombie::getYgridCoordinate()
 {
-			return YgridCoordinate;
-
+	return YgridCoordinate;
 }
 void DancingZombie::setXgridCoordinate(float x)
 {
@@ -42,6 +39,10 @@ float DancingZombie::gety_pos()
 {
 	return y_pos;
 }
+bool DancingZombie::getExists()
+{
+	return Exists;
+}
 void DancingZombie::setx_pos(float x)
 {
 	x_pos = x;
@@ -49,6 +50,10 @@ void DancingZombie::setx_pos(float x)
 void DancingZombie::sety_pos(float y)
 {
 	y_pos = y;
+}
+void DancingZombie::setExists(bool p_Exists)
+{
+	Exists = p_Exists;
 }
 void DancingZombie::damagePlant(Plant&)
 {

@@ -3,19 +3,18 @@
 FootballZombie::FootballZombie()
 {
 	ZombieHealth = 100;
-	XgridCoordinate = 0, YgridCoordinate = 0;
 	zombieSpeed = 30000;
 	damagePerSec = 0;
 	is_Slowed = false;
+	Exists = false;
 }
 sf::Sprite& FootballZombie::getZombieSprite()
 {
-		return ZombieSprite;
+	return ZombieSprite;
 }
 int FootballZombie::getXgridCoordinate()
 {
 	return XgridCoordinate;
-
 }
 int FootballZombie::getYgridCoordinate()
 {
@@ -27,8 +26,7 @@ void FootballZombie::setXgridCoordinate(float x)
 }
 void FootballZombie::setYgridCoordinate(float y)
 {
-		YgridCoordinate = y;
-
+	YgridCoordinate = y;
 }
 float FootballZombie::getx_pos()
 {
@@ -38,6 +36,10 @@ float FootballZombie::gety_pos()
 {
 	return y_pos;
 }
+bool FootballZombie::getExists()
+{
+	return Exists;
+}
 void FootballZombie::setx_pos(float x)
 {
 	x_pos = x;
@@ -45,6 +47,10 @@ void FootballZombie::setx_pos(float x)
 void FootballZombie::sety_pos(float y)
 {
 	y_pos = y;
+}
+void FootballZombie::setExists(bool p_Exists)
+{
+	Exists = p_Exists;
 }
 void FootballZombie::damagePlant(Plant&)
 {

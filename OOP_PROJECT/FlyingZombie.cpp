@@ -7,6 +7,7 @@ FlyingZombie::FlyingZombie()
 	zombieSpeed = 20000;
 	damagePerSec = 0;
 	is_Slowed = false;
+	Exists = false;
 }
 sf::Sprite& FlyingZombie::getZombieSprite()
 {
@@ -36,6 +37,10 @@ float FlyingZombie::gety_pos()
 {
 	return y_pos;
 }
+bool FlyingZombie::getExists()
+{
+	return Exists;
+}
 void FlyingZombie::setx_pos(float x)
 {
 	x_pos = x;
@@ -43,6 +48,10 @@ void FlyingZombie::setx_pos(float x)
 void FlyingZombie::sety_pos(float y)
 {
 	y_pos = y;
+}
+void FlyingZombie::setExists(bool p_Exists)
+{
+	Exists = p_Exists;
 }
 void FlyingZombie::damagePlant(Plant&)
 {

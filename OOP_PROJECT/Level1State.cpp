@@ -18,46 +18,19 @@ Level1State::Level1State()
         clickedSeedPacket[i] = false;
     }
 
-    int temp = rand() % 5;
+    srand(time(0));
+    for (int i = 0; i < 4; i++)  // This controls the type of zombie
+    {
+        for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+        {
+            int temp = rand() % 5;
+            AllZombies.getZombie(i, j).setXgridCoordinate(8);
+            AllZombies.getZombie(i, j).setYgridCoordinate(temp);
+            AllZombies.getZombie(i, j).setx_pos(1180);
+            AllZombies.getZombie(i, j).sety_pos((120 * temp) + 40);
+        }
+    }
 
-    zombie = &SimpleZombie;
-    zombie->setXgridCoordinate(8);
-    zombie->setYgridCoordinate(temp);
-    zombie->setx_pos(1180);
-    zombie->sety_pos((120 * temp) + 40);
-
-
-    temp = rand() % 5;
-    zombie = &FlyingZombie;
-
-    zombie->setXgridCoordinate(8);
-    zombie->setYgridCoordinate(temp);
-    zombie->setx_pos(1180);
-    zombie->sety_pos((120 * temp) + 40);
-
-    temp = rand() % 5;
-    zombie = &FootballZombie;
-
-    zombie->setXgridCoordinate(8);
-    zombie->setYgridCoordinate(temp);
-    zombie->setx_pos(1180);
-    zombie->sety_pos((120 * 4) + 40);  // change to random
-
-    temp = rand() % 5;
-    zombie = &DancingZombie;
-
-    zombie->setXgridCoordinate(8);
-    zombie->setYgridCoordinate(temp);
-    zombie->setx_pos(1180);
-    zombie->sety_pos((120 * temp) + 40);
-
-    temp = rand() % 5;
-    zombie = &DolphinRiderZombie;
-
-    zombie->setXgridCoordinate(8);
-    zombie->setYgridCoordinate(temp);
-    zombie->setx_pos(1180);
-    zombie->sety_pos((120 * temp) + 40);
 }
 
 void Level1State::setPlantFactoryTextures(AssetManager& Assets)
@@ -168,34 +141,37 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 
 void Level1State::setZombieTextures(AssetManager& Assets)
 {
-    zombie = &SimpleZombie;
+    textureRect = sf::IntRect(0, 58.28, 51.11, 58.28);  // SimpleZombie
+    for(int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+	{
+        AllZombies.getZombie(0 ,i).getZombieSprite().setTexture(Assets.getTexture(10));
+        AllZombies.getZombie(0 ,i).getZombieSprite().setTextureRect(textureRect);
+		AllZombies.getZombie(0 ,i).getZombieSprite().setScale(3, 3);
+	}
 
-    textureRect = sf::IntRect(0, 58.28, 51.11, 58.28);
+    textureRect = sf::IntRect(0, 0, 34.95, 58);  // FlyingZombie
+    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+    {
+        AllZombies.getZombie(1, i).getZombieSprite().setTexture(Assets.getTexture(11));
+        AllZombies.getZombie(1, i).getZombieSprite().setTextureRect(textureRect);
+        AllZombies.getZombie(1, i).getZombieSprite().setScale(3, 3);
+    }
 
-    zombie->getZombieSprite().setTexture(Assets.getTexture(10));
-    zombie->getZombieSprite().setScale(3, 3);
+    textureRect = sf::IntRect(0, 67.74, 64, 67.74);  // FootballZombie
+    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+    {
+        AllZombies.getZombie(2, i).getZombieSprite().setTexture(Assets.getTexture(12));
+        AllZombies.getZombie(2, i).getZombieSprite().setTextureRect(textureRect);
+        AllZombies.getZombie(2, i).getZombieSprite().setScale(2.5, 2.5);
+    }
 
-    zombie->getZombieSprite().setTextureRect(textureRect);
-
-    zombie = &FlyingZombie;
-
-    textureRect = sf::IntRect(0, 0, 34.95, 58);
-    zombie->getZombieSprite().setTexture(Assets.getTexture(11));
-    zombie->getZombieSprite().setScale(3, 3);
-
-    zombie->getZombieSprite().setTextureRect(textureRect);
-
-    zombie = &FootballZombie;
-    textureRect = sf::IntRect(0, 67.74, 64, 67.74);
-    zombie->getZombieSprite().setTexture(Assets.getTexture(12));
-    zombie->getZombieSprite().setScale(2.5, 2.5);
-    zombie->getZombieSprite().setTextureRect(textureRect);
-
-    zombie = &DancingZombie;
-    textureRect = sf::IntRect(0, 80, 56, 80);
-    zombie->getZombieSprite().setTexture(Assets.getTexture(13));
-    zombie->getZombieSprite().setScale(2.2, 2.2);
-    zombie->getZombieSprite().setTextureRect(textureRect);
+    textureRect = sf::IntRect(0, 80, 56, 80);  // DancingZombie
+    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+    {
+        AllZombies.getZombie(3, i).getZombieSprite().setTexture(Assets.getTexture(13));
+        AllZombies.getZombie(3, i).getZombieSprite().setTextureRect(textureRect);
+        AllZombies.getZombie(3, i).getZombieSprite().setScale(2.2, 2.2);
+    }
 }
 
 void Level1State::setUITextures(AssetManager& Assets)
@@ -370,10 +346,42 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
     }
 }
 
+void Level1State::spawnZombies()
+{
+    if(ElapsedTime.getElapsedTime().asSeconds() > 5  && ElapsedTime.getElapsedTime().asSeconds() < 60)  // Wave 1
+	{
+	    for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+	    {
+            if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
+            {
+                if (!AllZombies.getZombie(0, j).getExists())
+                {
+                    AllZombies.getZombie(0, j).setExists(true);  // Creating a new zombie
+                    ZombieSpawnRate.restart();
+                    break;
+                }
+            }
+	    }
+	}
+}
+
 void Level1State::renderPlantFactory(sf::RenderWindow& window)
 {
 
     int shooterPlantTypes = 4;
+
+    int normalPlantTypes = 3;
+    for (int type = 0; type < normalPlantTypes; type++)
+    {
+        for (int i = 0; i < 50; i++) // all plants
+        {
+            if (AllPlants.getNormalPlant(type, i).exists()) // check if exists then draw plant
+            {
+                window.draw(AllPlants.getNormalPlant(type, i).getPlantSprite());
+            }
+        }
+    }
+
     for (int k = 0; k < shooterPlantTypes; k++)
     {
         for (int i = 0; i < 50; i++) // each plants could have 50 instances
@@ -389,35 +397,20 @@ void Level1State::renderPlantFactory(sf::RenderWindow& window)
         }
     }
 
-    int normalPlantTypes = 3;
-    for (int type = 0; type < normalPlantTypes; type++)
-    {
-        for (int i = 0; i < 50; i++) // all plants 
-        {
-            if (AllPlants.getNormalPlant(type, i).exists()) // check if exists then draw plant
-            {
-                window.draw(AllPlants.getNormalPlant(type, i).getPlantSprite());
-            }
-        }
-    }
-
-
 }
 
 void Level1State::renderZombies(sf::RenderWindow& window)
 {
-    zombie = &FlyingZombie;
-    window.draw(zombie->getZombieSprite());
-
-    zombie = &SimpleZombie;
-    window.draw(zombie->getZombieSprite());
-
-    zombie = &FootballZombie;
-    window.draw(zombie->getZombieSprite());
-
-    zombie = &DancingZombie;
-    window.draw(zombie->getZombieSprite());
-    
+    for(int i = 0; i < 4 ; i++)  // This controls the type of zombie
+	{
+		for(int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+		{
+			if(AllZombies.getZombie(i,j).getExists())
+			{
+				window.draw(AllZombies.getZombie(i,j).getZombieSprite());
+			}
+		}
+	}
 }
 
 void Level1State::renderUI(sf::RenderWindow& window)
@@ -472,24 +465,20 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
         }
     }
 
-    if (zombie != nullptr)
+    spawnZombies();
+
+    for (int i = 0; i < 4; i++)  // This controls the type of zombie
     {
-        zombie = &FlyingZombie;
-        zombie->moveZombie(deltaTime);
-        zombie->setAnimation();
-
-        zombie = &SimpleZombie;
-        zombie->moveZombie(deltaTime);
-        zombie->setAnimation();
-
-        zombie = &FootballZombie;
-        zombie->moveZombie(deltaTime);
-        zombie->setAnimation();
-
-        zombie = &DancingZombie;
-        zombie->moveZombie(deltaTime);
-        zombie->setAnimation();
+        for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+        {
+            if (AllZombies.getZombie(i, j).getExists())
+            {
+                AllZombies.getZombie(i, j).moveZombie(deltaTime);
+                AllZombies.getZombie(i, j).setAnimation();
+            }
+        }
     }
+
 }
 void Level1State::Draw(sf::RenderWindow& window)
 {

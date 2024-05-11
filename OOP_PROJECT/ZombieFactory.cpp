@@ -1,11 +1,15 @@
 #include "ZombieFactory.h"
 
-//ZombieFactory::ZombieFactory()
-//{
-//	MAX_ZOMBIES = p_MAX_ZOMBIES;
-//	zombies = new Zombie * [zombieTypes];
-//	zombies[0] = new SimpleZombie[MAX_ZOMBIES];
-//}
+ZombieFactory::ZombieFactory()
+{
+	MAX_ZOMBIES = 50;
+	zombieTypes = 4;
+	zombies = new Zombie * [zombieTypes];
+	zombies[0] = new SimpleZombie[MAX_ZOMBIES];
+	zombies[1] = new FlyingZombie[MAX_ZOMBIES];
+	zombies[2] = new FootballZombie[MAX_ZOMBIES];
+	zombies[3] = new DancingZombie[MAX_ZOMBIES];
+}
 
 ZombieFactory::ZombieFactory(int p_MAX_ZOMBIES)
 {
@@ -22,6 +26,11 @@ ZombieFactory::ZombieFactory(int p_MAX_ZOMBIES)
 Zombie& ZombieFactory::getZombie(int row, int col)
 {
 	return zombies[row][col];
+}
+
+int ZombieFactory::getMAX_ZOMBIES()
+{
+	return MAX_ZOMBIES;
 }
 
 ZombieFactory::~ZombieFactory()

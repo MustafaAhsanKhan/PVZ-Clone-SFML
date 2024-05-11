@@ -6,12 +6,7 @@
 #include "PeaShooter.h"
 #include "PlantFactory.h"
 
-#include "Zombie.h"
-#include "SimpleZombie.h"
-#include "FlyingZombie.h"
-#include "FootballZombie.h"
-#include "DancingZombie.h"
-#include "DolphinRiderZombie.h"
+#include "ZombieFactory.h"
 
 class Level1State : public State
 {
@@ -20,6 +15,7 @@ private:
 	sf::Sprite seedPacketSprite;
 	sf::Sprite lawnMowerSprite[5];
 	sf::Clock ElapsedTime;  // Used to keep track of time  // Generate sun  // Maybe spawn zombies
+	sf::Clock ZombieSpawnRate;  // Used to spawn zombies
 
 	// sf::Music backgroundMusic;
 	sf::IntRect textureRect;
@@ -28,12 +24,7 @@ private:
 	PeaShooter PeaShooterPlant;
 	PlantFactory AllPlants;
 
-	Zombie* zombie;
-	SimpleZombie SimpleZombie;
-	FlyingZombie FlyingZombie;
-	FootballZombie FootballZombie;
-	DancingZombie DancingZombie;
-	DolphinRiderZombie DolphinRiderZombie;
+	ZombieFactory AllZombies;
 
 	//Shooter* shooters;
 	//bool isPlacingPlant;
@@ -48,6 +39,7 @@ public:
 	void setUITextures(AssetManager& Assets);
 
 	void handleAllPlantsCreation(sf::RenderWindow& window);
+	void spawnZombies();  // Spawn the zombies
 	//void handleMouseInput();  // Handle the mouse input	
 	void renderPlantFactory(sf::RenderWindow& window);
 	// void renderPlants();  // Render the plants
