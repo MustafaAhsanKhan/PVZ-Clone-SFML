@@ -190,14 +190,14 @@ void Level1State::setUITextures(AssetManager& Assets)
     // Seed packet sprite
     seedPacketSprite.setTexture(Assets.getTexture(30));
     seedPacketSprite.setTextureRect(textureRect);
-    seedPacketSprite.setPosition(50, 70);
-    seedPacketSprite.setScale(0.9, 0.9);
+    seedPacketSprite.setPosition(45, 120);
+    seedPacketSprite.setScale(0.8, 0.8);
     // Lawn mower sprite
     for (int i = 0; i < 5; i++)
     {
         lawnMowerSprite[i].setTexture(Assets.getTexture(31));
-        lawnMowerSprite[i].setScale(0.35, 0.35);
-        lawnMowerSprite[i].setPosition(185, (i * 118) + 70);
+        lawnMowerSprite[i].setScale(0.25, 0.25);
+        lawnMowerSprite[i].setPosition(230, (i * 117.5) + 120);
     }
 }
 
@@ -245,7 +245,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
         // checks if seed packet clicked
         for (int i = 0; i < totalPlantTypes; ++i)
         {
-            if (mousePosition.x > 52 && mousePosition.x <= 191 && mousePosition.y >= (55 + 89 * i + 1) && mousePosition.y <= (144 + 89 * i + 1))
+            if (mousePosition.x > 52 && mousePosition.x <= 150 && mousePosition.y >= (120 + 75 * i + 1) && mousePosition.y <= (185 + 75 * i + 1))
             {
                 for (int j = 0; j < totalPlantTypes; j++)  // We selected another seed packet
                 {
@@ -261,7 +261,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
                     {
                     case 0:
                     {
-                        AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 100);
                         AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
                         AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
                         AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
@@ -275,7 +275,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 
                     case 1:
                     {
-                        AllPlants.getShooter(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getShooter(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 100);
                         AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
                         AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
                         AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setExists(true);
@@ -288,7 +288,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 
                     case 2:
                     {
-                        AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 100);
                         AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
                         AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
                         AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setExists(true);
@@ -300,7 +300,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
                     }
                     case 3:
                     {
-                        AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 115);
+                        AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 100);
                         AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
                         AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
                         AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setExists(true);
@@ -312,7 +312,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
                     }
                     case 4:
                     {
-                        AllPlants.getShooter(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+                        AllPlants.getShooter(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 100);
                         AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
                         AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
                         AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setExists(true);
@@ -324,7 +324,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
                     }
                     case 5:
                     {
-                        AllPlants.getShooter(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+                        AllPlants.getShooter(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 100);
                         AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
                         AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
                         AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setExists(true);
@@ -336,7 +336,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
                     }
                     case 6:
                     {
-                        AllPlants.getShooter(3, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 115);
+                        AllPlants.getShooter(3, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 100);
                         AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
                         AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
                         AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setExists(true);
