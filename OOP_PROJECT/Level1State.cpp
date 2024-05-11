@@ -11,7 +11,7 @@ Level1State::Level1State()
 	placingPlantSound.setVolume(15);
 
 	// Fonts
-	sunsNum = 5000;
+	sunsNum = 0;
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
 	sunsNumText.setCharacterSize(40); // Set font size

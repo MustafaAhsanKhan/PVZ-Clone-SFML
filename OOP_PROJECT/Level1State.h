@@ -15,7 +15,6 @@ private:
 	sf::Sprite background;
 	sf::Sprite seedPacketSprite;
 	sf::Sprite lawnMowerSprite[5];
-	sf::Clock ElapsedTime;  // Used to keep track of time  // Generate sun  // Maybe spawn zombies
 	sf::Clock ZombieSpawnRate;  // Used to spawn zombies
 	sf::Sprite shovelSprite;
 
@@ -32,9 +31,7 @@ private:
 	sf::Sound placingPlantSound;
 	// sf::Music backgroundMusic;
 	sf::IntRect textureRect;
-	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 
-	PeaShooter PeaShooterPlant;
 	PlantFactory AllPlants;
 
 	ZombieFactory AllZombies;
