@@ -16,7 +16,7 @@ public:
 	void move();
 	void setCollected(bool ex);
 	bool Collected();
-	bool exists();
+	bool getExists();
 	void setExists(bool p_SunExists);
 	float getXpos();
 	float getYpos();

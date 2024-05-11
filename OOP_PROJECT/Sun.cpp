@@ -2,8 +2,8 @@
 
 Sun::Sun()
 {
-	//int i = (rand() % 100);
-	//x_pos = (rand() % (6 * 12)) + 200; // random x position
+	int i = (rand() % 100);
+	x_pos = (rand() % (i * 12)) + 300; // random x position
 	x_pos = 400;
 	y_pos = -100; // out of frame currently
 	sunSpeed = 0.2;
@@ -13,7 +13,7 @@ Sun::Sun()
 
 void Sun::move()
 {
-	if (!(y_pos >= 675))
+	if (!(y_pos >= 660))
 	{
 		y_pos += sunSpeed;
 	}
@@ -39,7 +39,7 @@ void Sun::setExists(bool ex)
 	sunExists = ex;
 }
 
-bool Sun::exists()
+bool Sun::getExists()
 {
 	return sunExists;
 }
@@ -56,8 +56,8 @@ float Sun::getYpos()
 
 void Sun::resetPosition()
 {
-	//int i = (rand() % 100);
-	//x_pos = (rand() % (6 * 12)) + 200; // random x position
+	int i = (rand() % 100);
+	x_pos = (rand() % (i * 12)) + 300; // random x position
 	x_pos = 400;
 	y_pos = -100; // out of frame currently
 }

@@ -10,6 +10,17 @@ Level1State::Level1State()
 	placingPlantSound.setBuffer(placingPlantSoundBuffer);
 	placingPlantSound.setVolume(15);
 
+	// Fonts
+	sunsNum = 0;
+	font.loadFromFile("../Fonts/Wedges.ttf");
+	sunsNumText.setFont(font);
+	sunsNumText.setCharacterSize(40); // Set font size
+	sunsNumText.setFillColor(sf::Color::White);
+	sunsNumText.setPosition(107, 20);
+	sunsNumText.setString(std::to_string(sunsNum));
+	
+
+
 	// Sun
 	sunCount = 5;
 	currentSuns = 0;
@@ -286,6 +297,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				}
 
 				clickedSeedPacket[i] = true;
+				cout << clickedSeedPacket[2];
 			}
 
 			if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[i] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
@@ -294,97 +306,138 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				{
 				case 0:
 				{
-					placingPlantSound.play();
-					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
-					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
-					totalTypeInstancesCreated++;
-					cout << "Sunflower created\n";
-					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-					clickedSeedPacket[i] = false;
+					if (sunsNum >= 100)
+					{
+						cout << "Sunlfowerrr";
+						sunsNum -= 100;
+						sunsNumText.setString(std::to_string(sunsNum));
+						placingPlantSound.play();
+						AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getNormalPlant(0, totalTypeInstancesCreated - 1).setExists(true);
+						totalTypeInstancesCreated++;
+						cout << "Sunflower created\n";
+						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+						clickedSeedPacket[i] = false;
+					}
 					break;
-
 				}
 
 				case 1:
 				{
-					placingPlantSound.play();
-					AllPlants.getShooter(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
-					AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setExists(true);
-					totalTypeInstancesCreated++;
-					cout << "Peashooter created\n";
-					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-					clickedSeedPacket[i] = false;
+					if (sunsNum >= 100)
+					{
+						sunsNum -= 100;
+						sunsNumText.setString(std::to_string(sunsNum));
+						placingPlantSound.play();
+						AllPlants.getShooter(0, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getShooter(0, totalTypeInstancesCreated - 1).setExists(true);
+						totalTypeInstancesCreated++;
+						cout << "Peashooter created\n";
+						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+						clickedSeedPacket[i] = false;
+					}
 					break;
+					
 				}
 
 				case 2:
 				{
-					placingPlantSound.play();
-					AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
-					AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setExists(true);
-					totalTypeInstancesCreated++;
-					cout << "Wallnut created\n";
-					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-					clickedSeedPacket[i] = false;
+					if (sunsNum >= 50)
+					{
+						sunsNum -= 50;
+						sunsNumText.setString(std::to_string(sunsNum));
+						placingPlantSound.play();
+						AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getNormalPlant(1, totalTypeInstancesCreated - 1).setExists(true);
+						totalTypeInstancesCreated++;
+						cout << "Wallnut created\n";
+						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+						clickedSeedPacket[i] = false;
+					}
 					break;
+					
 				}
 				case 3:
 				{
-					placingPlantSound.play();
-					AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
-					AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setExists(true);
-					totalTypeInstancesCreated++;
-					cout << "Wallnut created\n";
-					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-					clickedSeedPacket[i] = false;
+					if (sunsNum >= 150)
+					{
+						sunsNum -= 150;
+						sunsNumText.setString(std::to_string(sunsNum));
+						placingPlantSound.play();
+						AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
+						AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getNormalPlant(2, totalTypeInstancesCreated - 1).setExists(true);
+						totalTypeInstancesCreated++;
+						cout << "CherryBomb created\n";
+						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+						clickedSeedPacket[i] = false;
+					}
 					break;
+					
 				}
 				case 4:
 				{
-					placingPlantSound.play();
-					AllPlants.getShooter(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
-					AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setExists(true);
-					totalTypeInstancesCreated++;
-					cout << "Repeater created\n";
-					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-					clickedSeedPacket[i] = false;
+					if (sunsNum >= 200)
+					{
+						sunsNum -= 200;
+						sunsNumText.setString(std::to_string(sunsNum));
+						placingPlantSound.play();
+						AllPlants.getShooter(1, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
+						AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getShooter(1, totalTypeInstancesCreated - 1).setExists(true);
+						totalTypeInstancesCreated++;
+						cout << "Repeater created\n";
+						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+						clickedSeedPacket[i] = false;
+					}
 					break;
+					
 				}
 				case 5:
 				{
-					placingPlantSound.play();
-					AllPlants.getShooter(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
-					AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setExists(true);
-					totalTypeInstancesCreated++;
-					cout << "SnowPea created\n";
-					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-					clickedSeedPacket[i] = false;
+					if (sunsNum >= 175)
+					{
+						sunsNum -= 175;
+						sunsNumText.setString(std::to_string(sunsNum));
+						placingPlantSound.play();
+						AllPlants.getShooter(2, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
+						AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getShooter(2, totalTypeInstancesCreated - 1).setExists(true);
+						totalTypeInstancesCreated++;
+						cout << "SnowPea created\n";
+						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+						clickedSeedPacket[i] = false;
+					}
 					break;
+					
 				}
 				case 6:
 				{
-					placingPlantSound.play();
-					AllPlants.getShooter(3, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
-					AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
-					AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
-					AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setExists(true);
-					totalTypeInstancesCreated++;
-					cout << "Fumeshroom created\n";
-					FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
-					clickedSeedPacket[i] = false;
+					if (sunsNum >= 75)
+					{
+						sunsNum -= 75;
+						sunsNumText.setString(std::to_string(sunsNum));
+						placingPlantSound.play();
+						AllPlants.getShooter(3, totalTypeInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 305, gridY * 114 + 110);
+						AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setXgridCoordinate(gridX);
+						AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setYgridCoordinate(gridY);
+						AllPlants.getShooter(3, totalTypeInstancesCreated - 1).setExists(true);
+						totalTypeInstancesCreated++;
+						cout << "Fumeshroom created\n";
+						FIELD_GAME_STATUS[gridY][gridX] = true;  // So another plant cant be placed on the same spot
+						clickedSeedPacket[i] = false;
+					}
 					break;
+					
 				}
 				}
 
@@ -452,24 +505,24 @@ void Level1State::renderUI(sf::RenderWindow& window)
 		window.draw(lawnMowerSprite[i]);
 	}
 	window.draw(seedPacketSprite);  // Draw the seed packet (Buttons)
+	window.draw(sunsNumText);
 }
 
 void Level1State::generateSuns(sf::RenderWindow& window)
-{
-	
+{	
 	for (int i = 0; i < 5; i++)
 	{
-		if (suns[i].exists() == false && (sunClock.getElapsedTime().asSeconds() > 2))
+		if ((suns[i].getExists()) == false && (sunClock.getElapsedTime().asSeconds() > 10))
 		{
 			sunClock.restart();
 			suns[i].setExists(true);
 			sungen_Sound.play();
 		}
-		if (suns[i].exists() == true)
+		if (suns[i].getExists() == true)
 		{
 			window.draw(suns[i].getSunSprite());
 			suns[i].move();
-			cout << suns[i].getSunSprite().getPosition().x << " " << suns[i].getSunSprite().getPosition().y << endl;
+			
 		}
 	}
 	
@@ -477,24 +530,26 @@ void Level1State::generateSuns(sf::RenderWindow& window)
 
 void Level1State::handleSunCollection(sf::RenderWindow& window)
 {
-	for (int i = 0; i < 5; i++)
-	{
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+	static bool LastFuncCallInput = false;
+	bool currentLeftMouseButtonState = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	if (currentLeftMouseButtonState && !LastFuncCallInput) {
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-			if (mousePosition.x >= suns[i].getSunSprite().getPosition().x && mousePosition.x <= (suns[i].getSunSprite().getPosition().x + 250) && mousePosition.y >= suns[i].getSunSprite().getPosition().y && mousePosition.y <= (suns[i].getSunSprite().getPosition().y + 250))
+		for (int i = 0; i < 5; i++) {
+			if (mousePosition.x >= suns[i].getSunSprite().getPosition().x && mousePosition.x <= (suns[i].getSunSprite().getPosition().x + (250 * 0.375)) && mousePosition.y >= suns[i].getSunSprite().getPosition().y && mousePosition.y <= (suns[i].getSunSprite().getPosition().y + (250 * 0.375))) 
 			{
-				// cout << currentSuns << endl;
+			
 				suns[i].resetPosition();
 				suns[i].setExists(false);
-				//currentSuns--;
+				sunsNum += 50;
+				sunsNumText.setString(std::to_string(sunsNum));
 				break;
-				
 			}
 		}
 	}
+	LastFuncCallInput = currentLeftMouseButtonState;
 }
+
 
 void Level1State::Init(AssetManager& Assets)
 {

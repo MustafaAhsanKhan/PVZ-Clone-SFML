@@ -19,11 +19,17 @@ private:
 	sf::Sprite background;
 	sf::Sprite seedPacketSprite;
 	sf::Sprite lawnMowerSprite[5];
-	sf::Clock ElapsedTime;  // Used to keep track of time  // Generate sun  // Maybe spawn zombies
+	sf::Clock ElapsedTime;
+	sf::Font font;
+	sf::Text sunsNumText;
 	Sun sun;
 	Sun* suns;
 	int sunCount;
 	int currentSuns;
+	int sunsNum;
+
+	bool leftMouseButtonPressed = false;
+
 	// sf::Music backgroundMusic;
 	sf::IntRect textureRect;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
