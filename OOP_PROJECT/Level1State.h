@@ -1,7 +1,7 @@
 #pragma once
 #include "StateMachine.h"
 #include "PauseGameState.h"
-
+#include "Sun.h"
 #include "Plant.h"
 #include "PeaShooter.h"
 #include "PlantFactory.h"
@@ -20,42 +20,42 @@ private:
 	sf::Sprite seedPacketSprite;
 	sf::Sprite lawnMowerSprite[5];
 	sf::Clock ElapsedTime;  // Used to keep track of time  // Generate sun  // Maybe spawn zombies
-
+	Sun sun;
+	Sun* suns;
+	int sunCount;
+	int currentSuns;
 	// sf::Music backgroundMusic;
 	sf::IntRect textureRect;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
-
 	PeaShooter PeaShooterPlant;
 	PlantFactory AllPlants;
-
 	Zombie* zombie;
 	SimpleZombie SimpleZombie;
 	FlyingZombie FlyingZombie;
 	FootballZombie FootballZombie;
 	DancingZombie DancingZombie;
 	DolphinRiderZombie DolphinRiderZombie;
-
-	//Shooter* shooters;
-	//bool isPlacingPlant;
 	bool clickedSeedPacket[7]; // change size later
 	int totalTypeInstancesCreated = 1;
-	sf::SoundBuffer placingPlantSound;
+	sf::SoundBuffer sungen_SoundBuffer;
+	sf::Sound sungen_Sound;
+	sf::SoundBuffer placingPlantSoundBuffer;
+	sf::Sound placingPlantSound;
+	sf::Clock sunClock;
 public:
 	Level1State();
-	//void setPlantTextures();
 	void setPlantFactoryTextures(AssetManager& Assets);
 	void setZombieTextures(AssetManager& Assets);
 	void setUITextures(AssetManager& Assets);
-
-	void handleAllPlantsCreation(sf::RenderWindow& window);
-	//void handleMouseInput();  // Handle the mouse input	
+	void handleAllPlantsCreation(sf::RenderWindow& window);	
 	void renderPlantFactory(sf::RenderWindow& window);
-	// void renderPlants();  // Render the plants
-	void renderZombies(sf::RenderWindow& window);  // Render the zombies
-	void renderUI(sf::RenderWindow& window);  // Render the UI
-
+	void renderZombies(sf::RenderWindow& window); 
+	void renderUI(sf::RenderWindow& window); 
+	void generateSuns(sf::RenderWindow& window);
+	void handleSunCollection(sf::RenderWindow& window);
 	virtual void Init(AssetManager& Assets);
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window);
 	virtual void Update(StateMachine* machine, float deltaTime);
 	virtual void Draw(sf::RenderWindow& window);
+
 };
