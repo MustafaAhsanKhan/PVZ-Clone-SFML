@@ -460,6 +460,7 @@ void Level1State::generateSuns(sf::RenderWindow& window)
 	{
 		if (currentSuns < sunCount)
 		{
+			cout << currentSuns << endl;
 			currentSuns++;
 			sungen_Sound.play();
 		}
@@ -481,15 +482,20 @@ void Level1State::generateSuns(sf::RenderWindow& window)
 
 void Level1State::handleSunCollection(sf::RenderWindow& window)
 {
-	for (int i = 0; i < sunCount; i++)
+	for (int i = 0; i < currentSuns; i++)
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
-			if (mousePosition.x >= 2 && mousePosition.x <= 1252 && mousePosition.y >= 31 && mousePosition.y <= 112)
+			if (mousePosition.x >= suns[i].getSunSprite().getPosition().x && mousePosition.x <= (suns[i].getSunSprite().getPosition().x + 250) && mousePosition.y >= suns[i].getSunSprite().getPosition().y && mousePosition.y <= (suns[i].getSunSprite().getPosition().y + 250))
 			{
-
+				// cout << currentSuns << endl;
+				suns[i].resetPosition();
+				suns[i].setExists(false);
+				currentSuns--;
+				// break;
+				
 			}
 		}
 	}
@@ -505,6 +511,7 @@ void Level1State::Init(AssetManager& Assets)
 void Level1State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 {
 	handleAllPlantsCreation(window);
+	handleSunCollection(window);
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{

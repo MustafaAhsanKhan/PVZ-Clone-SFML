@@ -17,7 +17,10 @@ public:
 	void setCollected(bool ex);
 	bool Collected();
 	bool exists();
-	void setExists(bool ex);
+	void setExists(bool p_SunExists);
+	float getXpos();
+	float getYpos();
+	void resetPosition();
 	sf::Sprite& getSunSprite();
 };
 
