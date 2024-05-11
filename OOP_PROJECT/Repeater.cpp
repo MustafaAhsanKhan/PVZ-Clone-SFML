@@ -3,7 +3,7 @@
 Repeater::Repeater()
 {
 	MAX_BULLETS = 2;
-	ShootingRate = 0.2;  // 0.2 seconds
+	ShootingRate = 0.2;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
 	Suncost = 100; // initializing the cost of Peashooter
 	plantExists = false; // checks if plant exists
@@ -106,6 +106,3 @@ Repeater::~Repeater()
 {
 	delete[] bullets;
 }
-
-
-

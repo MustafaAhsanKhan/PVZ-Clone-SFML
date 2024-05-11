@@ -81,7 +81,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
     {
         for (int i = 0; i < 50; i++)
         {
-            for (int j = 0; j < AllPlants.getShooter(0, i).getMaxBullets(); j++)
+            for (int j = 0; j < AllPlants.getShooter(type, i).getMaxBullets(); j++)
             {
                 AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(7));
                 AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setScale(3, 3);

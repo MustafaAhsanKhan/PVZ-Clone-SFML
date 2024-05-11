@@ -15,5 +15,6 @@ public:
 	virtual void setYgridCoordinate(int y);
 	virtual int getXgridCoordinate();
 	virtual int getYgridCoordinate();
+	~SnowPea();
 };
 

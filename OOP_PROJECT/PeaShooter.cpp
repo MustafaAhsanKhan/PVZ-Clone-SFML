@@ -3,7 +3,7 @@
 PeaShooter::PeaShooter()
 {
 	MAX_BULLETS = 1;
-	ShootingRate = 1;  // 1 second
+	ShootingRate = 2;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
 	Suncost = 100; // initializing the cost of Peashooter
 	plantExists = false; // checks if plant exists
@@ -92,10 +92,6 @@ int PeaShooter::getMaxBullets()
 	return MAX_BULLETS;
 }
 
-PeaShooter::~PeaShooter()
-{
-	delete[] bullets;
-}
 
 void PeaShooter::setExists(bool ex)
 {
@@ -107,3 +103,7 @@ bool PeaShooter::exists()
 	return plantExists;
 }
 
+PeaShooter::~PeaShooter()
+{
+	delete[] bullets;
+}

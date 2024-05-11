@@ -61,10 +61,7 @@ void Bullet::setExists(bool exists)
 
 void Bullet::move(float deltaTime)
 {
-	if (exists)
-	{
-		x_pos += bulletSpeed * deltaTime;
-	}	
+	x_pos += bulletSpeed * deltaTime;	
 	if (x_pos > 1300)
 	{
 		exists = false;

@@ -91,10 +91,6 @@ int FumeShroom::getMaxBullets()
 	return MAX_BULLETS;
 }
 
-FumeShroom::~FumeShroom()
-{
-	delete[] bullets;
-}
 
 void FumeShroom::setExists(bool ex)
 {
@@ -106,3 +102,8 @@ bool FumeShroom::exists()
 	return plantExists;
 }
 
+
+FumeShroom::~FumeShroom()
+{
+	delete[] bullets;
+}

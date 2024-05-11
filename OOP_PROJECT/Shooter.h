@@ -23,6 +23,6 @@ public:
 	virtual void setYgridCoordinate(int y) = 0;
 	virtual int getXgridCoordinate() = 0;
 	virtual int getYgridCoordinate() = 0;
-	virtual ~Shooter() { delete[] bullets; }
+	~Shooter() { delete[] bullets; }
 
 };
