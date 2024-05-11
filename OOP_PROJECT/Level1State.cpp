@@ -288,11 +288,11 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 		*/
 
 		// checks if seed packet clicked
+		//cout << mousePosition.x << " " << mousePosition.y << endl;
 		for (int i = 0; i < totalPlantTypes; ++i)
 		{
-			cout << mousePosition.x << " " << mousePosition.y << endl;
 
-			if (mousePosition.x > 52 && mousePosition.x <= 150 && mousePosition.y >= (112 + 75 * i + 1) && mousePosition.y <= (230 + 75 * i + 1))
+			if (mousePosition.x > 50 && mousePosition.x <= 168 && mousePosition.y >= (109 + (i * 81.42)) && mousePosition.y <= (109 + ((i + 1) * 81.42)))
 			{
 				for (int j = 0; j < totalPlantTypes; j++)  // We selected another seed packet
 				{
@@ -300,6 +300,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				}
 
 				clickedSeedPacket[i] = true;
+				cout << clickedSeedPacket[0] << endl;
 			}
 
 			if (mousePosition.x >= 305 && mousePosition.x < 1175 && mousePosition.y >= 125 && mousePosition.y < 660 && clickedSeedPacket[i] == true && FIELD_GAME_STATUS[gridY][gridX] == false)
