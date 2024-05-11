@@ -12,7 +12,7 @@ Bullet::Bullet()
 	Its not going to depend on the rate at which the plant shoots. 
 	Hence when the bullet becomes false we just need to set its position back to the plant's
 	*/
-	this->bulletSpeed = 2000; // change to whatever speed
+	this->bulletSpeed = 600; // change to whatever speed
 }
 // Getters
 float Bullet::getBulletSpeed()
@@ -61,10 +61,7 @@ void Bullet::setExists(bool exists)
 
 void Bullet::move(float deltaTime)
 {
-	if (exists)
-	{
-		x_pos += bulletSpeed * deltaTime;
-	}	
+	x_pos += bulletSpeed * deltaTime;	
 	if (x_pos > 1300)
 	{
 		exists = false;

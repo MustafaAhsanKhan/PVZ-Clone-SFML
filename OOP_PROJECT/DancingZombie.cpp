@@ -3,27 +3,24 @@
 DancingZombie::DancingZombie()
 {
 	ZombieHealth = 100;
-	XgridCoordinate = 0, YgridCoordinate = 0;
-	zombieSpeed = 30000;
+	zombieSpeed = 40;
 	damagePerSec = 0;
 	is_Slowed = false;
+	movingUp = true;
+	Exists = false;
 
 }
 sf::Sprite& DancingZombie::getZombieSprite()
 {
-		return ZombieSprite;
-
+	return ZombieSprite;
 }
 int DancingZombie::getXgridCoordinate()
 {
-		return XgridCoordinate;
-
-
+	return XgridCoordinate;
 }
 int DancingZombie::getYgridCoordinate()
 {
-			return YgridCoordinate;
-
+	return YgridCoordinate;
 }
 void DancingZombie::setXgridCoordinate(float x)
 {
@@ -41,6 +38,10 @@ float DancingZombie::gety_pos()
 {
 	return y_pos;
 }
+bool DancingZombie::getExists()
+{
+	return Exists;
+}
 void DancingZombie::setx_pos(float x)
 {
 	x_pos = x;
@@ -48,6 +49,10 @@ void DancingZombie::setx_pos(float x)
 void DancingZombie::sety_pos(float y)
 {
 	y_pos = y;
+}
+void DancingZombie::setExists(bool p_Exists)
+{
+	Exists = p_Exists;
 }
 void DancingZombie::damagePlant(Plant&)
 {
@@ -78,6 +83,32 @@ void DancingZombie::setAnimation()
 void DancingZombie::moveZombie(float deltaTime)
 {
 	x_pos -= (zombieSpeed * deltaTime);
+
+	if (y_pos >= 20 && y_pos <= 540 && movingUp == true)
+	{
+		// move the zombie up
+		if(y_pos > 40)
+		{
+			y_pos -= zombieSpeed * deltaTime;
+		}
+		else
+		{
+			movingUp = false;
+		}
+	}
+	else if (y_pos >= 20 && y_pos <= 540 && movingUp == false)
+	{
+		// move the zombie down
+		if (y_pos < 520)
+		{
+			y_pos += zombieSpeed * deltaTime;
+		}
+		else
+		{
+			movingUp = true;
+		}
+	}
+	
 
 	ZombieSprite.setPosition(x_pos, y_pos);
 }

@@ -3,19 +3,18 @@
 FootballZombie::FootballZombie()
 {
 	ZombieHealth = 100;
-	XgridCoordinate = 0, YgridCoordinate = 0;
-	zombieSpeed = 30000;
+	zombieSpeed = 40;
 	damagePerSec = 0;
 	is_Slowed = false;
+	Exists = false;
 }
 sf::Sprite& FootballZombie::getZombieSprite()
 {
-		return ZombieSprite;
+	return ZombieSprite;
 }
 int FootballZombie::getXgridCoordinate()
 {
 	return XgridCoordinate;
-
 }
 int FootballZombie::getYgridCoordinate()
 {
@@ -27,8 +26,7 @@ void FootballZombie::setXgridCoordinate(float x)
 }
 void FootballZombie::setYgridCoordinate(float y)
 {
-		YgridCoordinate = y;
-
+	YgridCoordinate = y;
 }
 float FootballZombie::getx_pos()
 {
@@ -38,6 +36,10 @@ float FootballZombie::gety_pos()
 {
 	return y_pos;
 }
+bool FootballZombie::getExists()
+{
+	return Exists;
+}
 void FootballZombie::setx_pos(float x)
 {
 	x_pos = x;
@@ -45,6 +47,10 @@ void FootballZombie::setx_pos(float x)
 void FootballZombie::sety_pos(float y)
 {
 	y_pos = y;
+}
+void FootballZombie::setExists(bool p_Exists)
+{
+	Exists = p_Exists;
 }
 void FootballZombie::damagePlant(Plant&)
 {
@@ -75,7 +81,30 @@ void FootballZombie::setAnimation()
 
 void FootballZombie::moveZombie(float deltaTime)
 {
+	srand(time(0));
 	x_pos -= (zombieSpeed * deltaTime);
+	if (y_pos >= 40 && y_pos <= 520)  // Keeping the zombie within the grid
+	{
+		if (moveClock.getElapsedTime().asSeconds() > 2)
+		{
+			switch (rand() % 2)
+			{
+			case(0):  //  Move up
+				if (y_pos >= 60 && y_pos <= 520)
+				{
+					y_pos -= 120;
+				}
+				break;
+			case(1):  // Move down
+				if (y_pos >= 40 && y_pos <= 400)
+				{
+					y_pos += 120;
+				}
+				break;
+			}
+			moveClock.restart();
+		}
+	}
 
 	ZombieSprite.setPosition(x_pos, y_pos);
 }

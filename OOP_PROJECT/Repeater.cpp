@@ -106,6 +106,3 @@ Repeater::~Repeater()
 {
 	delete[] bullets;
 }
-
-
-

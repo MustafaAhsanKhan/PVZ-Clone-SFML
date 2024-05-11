@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #include "StateMachine.h"
 #include "PauseGameState.h"
 #include "Sun.h"
@@ -6,12 +6,7 @@
 #include "PeaShooter.h"
 #include "PlantFactory.h"
 
-#include "Zombie.h"
-#include "SimpleZombie.h"
-#include "FlyingZombie.h"
-#include "FootballZombie.h"
-#include "DancingZombie.h"
-#include "DolphinRiderZombie.h"
+#include "ZombieFactory.h"
 
 class Level1State : public State
 {
@@ -20,6 +15,8 @@ private:
 	sf::Sprite background;
 	sf::Sprite seedPacketSprite;
 	sf::Sprite lawnMowerSprite[5];
+	sf::Clock ElapsedTime;  // Used to keep track of time  // Generate sun  // Maybe spawn zombies
+	sf::Clock ZombieSpawnRate;  // Used to spawn zombies
 	sf::Sprite shovelSprite;
 
 	// UI features
@@ -34,17 +31,14 @@ private:
 	sf::SoundBuffer placingPlantSoundBuffer;
 	sf::Sound placingPlantSound;
 	// sf::Music backgroundMusic;
-	
-	sf::IntRect textureRect; // Texture rectuangle for all things (zombies and plants)
-	
-	// Game Objects
+	sf::IntRect textureRect;
+	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
+
+	PeaShooter PeaShooterPlant;
 	PlantFactory AllPlants;
-	Zombie* zombie;
-	SimpleZombie SimpleZombie;
-	FlyingZombie FlyingZombie;
-	FootballZombie FootballZombie;
-	DancingZombie DancingZombie;
-	DolphinRiderZombie DolphinRiderZombie;
+
+	ZombieFactory AllZombies;
+
 	Sun* suns;
 
 	// Required variables
@@ -64,7 +58,8 @@ public:
 	void setPlantFactoryTextures(AssetManager& Assets);
 	void setZombieTextures(AssetManager& Assets);
 	void setUITextures(AssetManager& Assets);
-	void handleAllPlantsCreation(sf::RenderWindow& window);	
+	void handleAllPlantsCreation(sf::RenderWindow& window);
+	void spawnZombies();  // Spawn the zombies
 	void renderPlantFactory(sf::RenderWindow& window);
 	void renderZombies(sf::RenderWindow& window); 
 	void renderUI(sf::RenderWindow& window); 

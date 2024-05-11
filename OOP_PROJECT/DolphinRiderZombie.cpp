@@ -3,56 +3,46 @@
 DolphinRiderZombie::DolphinRiderZombie()
 {
 	ZombieHealth = 100;
-	XgridCoordinate = 0, YgridCoordinate = 0;
-	zombieSpeed = 30000;
+	zombieSpeed = 20;
 	damagePerSec = 0;
 	is_Slowed = false;
+	Exists = false;
 }
 sf::Sprite& DolphinRiderZombie::getZombieSprite()
 {
-		return ZombieSprite;
-
+	return ZombieSprite;
 }
 int DolphinRiderZombie::getXgridCoordinate()
 {
-			return XgridCoordinate;
+	return XgridCoordinate;
 }
 int DolphinRiderZombie::getYgridCoordinate()
 {
-				return YgridCoordinate;
-
+	return YgridCoordinate;
 }
 void DolphinRiderZombie::setXgridCoordinate(float x)
 {
-		XgridCoordinate = x;
-
+	XgridCoordinate = x;
 }
 void DolphinRiderZombie::setYgridCoordinate(float y)
 {
-		YgridCoordinate = y;
-
+	YgridCoordinate = y;
 }
 float DolphinRiderZombie::getx_pos()
 {
-		return x_pos;
-
+	return x_pos;
 }
 float DolphinRiderZombie::gety_pos()
 {
-			return y_pos;
-
-
+	return y_pos;
 }
 void DolphinRiderZombie::setx_pos(float x)
 {
-		x_pos = x;
-
+	x_pos = x;
 }
 void DolphinRiderZombie::sety_pos(float y)
 {
-			y_pos = y;
-
-
+	y_pos = y;
 }
 void DolphinRiderZombie::damagePlant(Plant&)
 {
@@ -60,8 +50,7 @@ void DolphinRiderZombie::damagePlant(Plant&)
 }
 int DolphinRiderZombie::getZombieHealth()
 {
-		return ZombieHealth;
-
+	return ZombieHealth;
 }
 void DolphinRiderZombie::setAnimation()
 {

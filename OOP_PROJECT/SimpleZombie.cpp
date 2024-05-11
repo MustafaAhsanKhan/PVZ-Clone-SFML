@@ -2,11 +2,11 @@
 
 SimpleZombie::SimpleZombie()
 {
-	ZombieHealth = 100; // change later if needed
-	XgridCoordinate = 0, YgridCoordinate = 0;
-	zombieSpeed = 10000; // change later if needed
-	damagePerSec = 10; // change later if needed
+	ZombieHealth = 100;
+	zombieSpeed = 20;
+	damagePerSec = 10;
 	is_Slowed = false;
+	Exists = false;
 }
 sf::Sprite& SimpleZombie::getZombieSprite()
 {
@@ -64,6 +64,10 @@ float SimpleZombie::gety_pos()
 {
 	return y_pos;
 }
+bool SimpleZombie::getExists()
+{
+	return Exists;
+}
 void SimpleZombie::setx_pos(float x)
 {
 	x_pos = x;
@@ -72,7 +76,10 @@ void SimpleZombie::sety_pos(float y)
 {
 	y_pos = y;
 }
-
+void SimpleZombie::setExists(bool p_Exists)
+{
+	Exists = p_Exists;
+}
 void SimpleZombie::moveZombie(float deltaTime)
 {
 	x_pos -= (zombieSpeed * deltaTime);

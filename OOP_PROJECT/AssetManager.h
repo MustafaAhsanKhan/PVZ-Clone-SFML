@@ -4,13 +4,6 @@
 #include <iostream>
 using namespace std;
 
-/*
-Key for Assets
-0-9 reserved for plants
-10-19 reserved for zombies
-20-29 reserved for Backgrounds
-30-39 reserved for UI
-*/
 
 class AssetManager
 {
@@ -21,41 +14,8 @@ private:
 
 public:
     // Load texture from file and store it
-    bool loadTexture(int index, const string& filename)  // index - index of the texture in the array
-    {
-        if (index < 0 || index >= MAX_TEXTURES)
-        {
-            cout << "Invalid texture index!" << endl;
-            return false;
-        }
-
-        if (loaded[index])  // Check if the texture is already loaded
-        {
-            cout << "Texture at index " << index << " is already loaded!" << endl;
-            return false;
-        }
-
-        if (!textures[index].loadFromFile(filename))  // Unable to load the texture from file
-        {
-            cout << "Failed to load texture from file: " << filename << endl;
-            return false;
-        }
-
-        textures[index].loadFromFile(filename);  // Load the texture from file into the array
-        loaded[index] = true;
-        return true;
-    }
+    bool loadTexture(int index, const string& filename);  // index - index of the texture in the array
 
     // Retrieve texture by index
-    sf::Texture& getTexture(int index) 
-    {
-
-        if(index < 0 || index >= MAX_TEXTURES || !loaded[index])
-        {
-            cout << "Texture at index " << index << " not found or not loaded!" << endl;
-
-            return textures[0];  // Returning a dummy texture
-        }
-        return textures[index];
-    }
+    sf::Texture& getTexture(int index);
 };
