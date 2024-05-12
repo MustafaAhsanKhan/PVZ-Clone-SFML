@@ -443,7 +443,7 @@ void Level1State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {3}, {2, 3} };
+	const int zombieTypes[numWaves][4] = { {0}, {2, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.
@@ -772,19 +772,15 @@ void Level1State::handlePlantZombieCollision()
 					for (int m = 0; m < 5; ++m) // Iterate over zombie types
 					{
 						Zombie& currentZombie = AllZombies.getZombie(m, l);
-						Plant& currentPlant = AllPlants.getShooter(i, j);
-						if (currentPlant.getPlantSprite().getGlobalBounds().intersects(currentZombie.getZombieSprite().getGlobalBounds()));
+						Shooter& currentPlant = AllPlants.getShooter(i, j);
+						if (currentPlant.getPlantSprite().getGlobalBounds().intersects(currentZombie.getZombieSprite().getGlobalBounds()))
 						{
-							// cout << "Zombie position: " << currentZombie.getXgridCoordinate() << " " << currentZombie.getYgridCoordinate() << endl;
-							// cout << "Plant position " << currentPlant.getXgridCoordinate() << " " << currentPlant.getYgridCoordinate() << endl;
-							// currentPlant.setExists(false);
-							// cout << "Damaged " << endl;
+							//currentPlant.setExists(false);
 							currentZombie.damagePlant(currentPlant);
 						}
 					}
 				}
-			}
-			
+			}	
 		}
 	}
 }
