@@ -12,7 +12,7 @@ private:
 	float lawnMowerSpeed;
 	bool isActive;
 public:
-	LawnMower() : x_pos(0), lawnMowerSpeed(600), isActive(0) {}
+	LawnMower() : x_pos(0), lawnMowerSpeed(500), isActive(0) {}
 	bool ZombieCollided(Zombie& zombie);
 	void moveLawnMower(float deltaTime);
 	void setx_pos(int x);
