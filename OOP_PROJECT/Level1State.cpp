@@ -19,7 +19,7 @@ Level1State::Level1State()
 	placingPlantSound.setVolume(15);
 
 	// Fonts
-	sunsNum = 0;
+	sunsNum = 5000;  // This is the currency
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
 	sunsNumText.setCharacterSize(40); // Set font size
@@ -434,23 +434,88 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 	}
 }
 
+//void Level1State::spawnZombies()
+//{
+//	if (ElapsedTime.getElapsedTime().asSeconds() > 5 && ElapsedTime.getElapsedTime().asSeconds() < 60)  // Wave 1
+//	{
+//	    for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+//	    {
+//            if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
+//            {
+//                if (!AllZombies.getZombie(0, j).getExists())
+//                {
+//                    AllZombies.getZombie(0, j).setExists(true);  // Creating a new zombie
+//                    ZombieSpawnRate.restart();
+//                    break;
+//                }
+//            }
+//	    }
+//	}
+//}
+
 void Level1State::spawnZombies()
 {
-	if (ElapsedTime.getElapsedTime().asSeconds() > 5 && ElapsedTime.getElapsedTime().asSeconds() < 60)  // Wave 1
+	srand(time(nullptr));
+
+	
+	const int numWaves = 2;  // This variable stores the total number of waves.
+	const int waveDurations[numWaves] = { 20, 60 };
+	/*This array stores the duration of each wave in seconds. 
+	For example, waveDurations[0] represents the duration of the first wave, 
+	and waveDurations[1] represents the duration of the second wave, and so on.*/
+
+	const int numZombieTypes[numWaves] = { 1, 2 };
+	/*This array stores the number of different zombie types for each wave.
+	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
+	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
+
+	const int zombieTypes[numWaves][4] = { {1}, {2, 3} };
+	/*This is a 2D array where each row represents the zombie types for a particular wave.
+	For example, zombieTypes[0] contains the zombie types for the first wave,
+	and zombieTypes[1] contains the zombie types for the second wave, and so on.
+	In this example, the first wave has only one zombie type (type 0),
+	and the second wave has two zombie types (types 0 and 1).*/
+
+	// Find the current wave
+	int currentWave = 0;
+	int elapsedSeconds = ElapsedTime.getElapsedTime().asSeconds();
+	for (int i = 0; i < numWaves; ++i)
 	{
-	    for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
-	    {
-            if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
-            {
-                if (!AllZombies.getZombie(3, j).getExists())
-                {
-                    AllZombies.getZombie(3, j).setExists(true);  // Creating a new zombie
-                    ZombieSpawnRate.restart();
-                    break;
-                }
-            }
-	    }
+		if (elapsedSeconds < waveDurations[i])
+		{
+			currentWave = i;
+			break;
+		}
 	}
+
+	// Spawn zombies for the current wave
+	const int waveDuration = waveDurations[currentWave];
+	const int numZombieType = numZombieTypes[currentWave];
+	const int* zombieType = zombieTypes[currentWave];
+
+
+	for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); ++j)
+	{
+		if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)
+		{
+			for (int k = 0; k < numZombieType; ++k)
+			{
+				// Generate a random index to select a zombie type
+				int randomTypeIndex = rand() % numZombieType;
+				int type = zombieType[randomTypeIndex];
+
+				// Check if a zombie of this type can be spawned in the current slot
+				if (!AllZombies.getZombie(type, j).getExists())
+				{
+					AllZombies.getZombie(type, j).setExists(true);
+					ZombieSpawnRate.restart();
+					break; // Exit the inner loop after spawning one zombie
+				}
+			}
+		}
+	}
+
+
 }
 
 void Level1State::renderPlantFactory(sf::RenderWindow& window)
