@@ -12,7 +12,7 @@ bool LawnMower::moveLawnMower(Zombie& zombie, float deltaTime)
 		if (x_pos < 1350)
 		{
 			cout << "Collided with zombie !! " << endl;
-			LawnMower::x_pos += lawnMowerSpeed * deltaTime;
+			LawnMower::x_pos += lawnMowerSpeed * deltaTime;w
 			lawnmowerSprite.setPosition(x_pos, y_pos);
 			cout << x_pos << endl;
 			return false;
