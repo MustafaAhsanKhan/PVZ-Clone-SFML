@@ -424,7 +424,6 @@ void Level1State::spawnZombies()
 {
 	if (ElapsedTime.getElapsedTime().asSeconds() > 5 && ElapsedTime.getElapsedTime().asSeconds() < 60)  // Wave 1
 	{
-		zombieWave.play(); // playing zombie sound
 		for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
 		{
 			if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
