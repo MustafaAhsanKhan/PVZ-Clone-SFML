@@ -17,7 +17,7 @@ void WallNut::Act()
 {
 	sf::Vector2f currentPosition = getPlantSprite().getPosition();
 	float speed = 0.25f;
-	int Xlimit = XgridCoordinate * 100.66 + 315;
+	int Xlimit = XgridCoordinate * 100.66 + 250;
 	bool limitCrossed = currentPosition.x > Xlimit;
 	int startingPosition = currentPosition.x;
 
