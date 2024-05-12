@@ -2,6 +2,7 @@
 #include<iostream>
 #include<SFML/Graphics.hpp>
 #include "Plant.h"
+#include "Definitions.h"
 
 class Zombie
 {

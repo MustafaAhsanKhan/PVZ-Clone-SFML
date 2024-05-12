@@ -3,7 +3,7 @@
 DancingZombie::DancingZombie()
 {
 	ZombieHealth = 120;
-	zombieSpeed = 20;
+	zombieSpeed = 20 * ZOMBIE_SPEED_MULTIPLIER;
 	damagePerSec = 0;
 	is_Slowed = false;
 	movingUp = true;

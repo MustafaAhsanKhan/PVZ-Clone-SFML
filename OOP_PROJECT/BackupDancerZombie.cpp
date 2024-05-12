@@ -3,7 +3,7 @@
 BackupDancerZombie::BackupDancerZombie()
 {
 	ZombieHealth = 90;
-	zombieSpeed = 20;
+	zombieSpeed = 20 * ZOMBIE_SPEED_MULTIPLIER;
 	damagePerSec = 0;
 	is_Slowed = false;
 	movingUp = true;
