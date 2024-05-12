@@ -1,6 +1,6 @@
-#include "DancingZombie.h"
+#include "BackupDancerZombie.h"
 
-DancingZombie::DancingZombie()
+BackupDancerZombie::BackupDancerZombie()
 {
 	ZombieHealth = 100;
 	zombieSpeed = 20;
@@ -8,62 +8,60 @@ DancingZombie::DancingZombie()
 	is_Slowed = false;
 	movingUp = true;
 	Exists = false;
-	numBackupZombiesSpawned = 0;
-
 }
-sf::Sprite& DancingZombie::getZombieSprite()
+sf::Sprite& BackupDancerZombie::getZombieSprite()
 {
 	return ZombieSprite;
 }
-int DancingZombie::getXgridCoordinate()
+int BackupDancerZombie::getXgridCoordinate()
 {
 	return XgridCoordinate;
 }
-int DancingZombie::getYgridCoordinate()
+int BackupDancerZombie::getYgridCoordinate()
 {
 	return YgridCoordinate;
 }
-void DancingZombie::setXgridCoordinate(float x)
+void BackupDancerZombie::setXgridCoordinate(float x)
 {
 	XgridCoordinate = x;
 }
-void DancingZombie::setYgridCoordinate(float y)
+void BackupDancerZombie::setYgridCoordinate(float y)
 {
 	YgridCoordinate = y;
 }
-float DancingZombie::getx_pos()
+float BackupDancerZombie::getx_pos()
 {
 	return x_pos;
 }
-float DancingZombie::gety_pos()
+float BackupDancerZombie::gety_pos()
 {
 	return y_pos;
 }
-bool DancingZombie::getExists()
+bool BackupDancerZombie::getExists()
 {
 	return Exists;
 }
-void DancingZombie::setx_pos(float x)
+void BackupDancerZombie::setx_pos(float x)
 {
 	x_pos = x;
 }
-void DancingZombie::sety_pos(float y)
+void BackupDancerZombie::sety_pos(float y)
 {
 	y_pos = y;
 }
-void DancingZombie::setExists(bool p_Exists)
+void BackupDancerZombie::setExists(bool p_Exists)
 {
 	Exists = p_Exists;
 }
-void DancingZombie::damagePlant(Plant&)
+void BackupDancerZombie::damagePlant(Plant&)
 {
 
 }
-int DancingZombie::getZombieHealth()
+int BackupDancerZombie::getZombieHealth()
 {
 	return ZombieHealth;
 }
-void DancingZombie::setAnimation()
+void BackupDancerZombie::setAnimation()
 {
 	if (animationClock.getElapsedTime().asMilliseconds() > 350)
 	{
@@ -81,14 +79,14 @@ void DancingZombie::setAnimation()
 		animationClock.restart();
 	}
 }
-void DancingZombie::moveZombie(float deltaTime)
+void BackupDancerZombie::moveZombie(float deltaTime)
 {
 	x_pos -= (zombieSpeed * deltaTime);
 
-	if (y_pos >= 20 && y_pos <= 540 && movingUp == true)
+	if (y_pos >= -200 && y_pos <= 540 && movingUp == true)
 	{
 		// move the zombie up
-		if(y_pos > 40)
+		if (y_pos > 40)
 		{
 			y_pos -= zombieSpeed * deltaTime;
 		}
@@ -97,7 +95,7 @@ void DancingZombie::moveZombie(float deltaTime)
 			movingUp = false;
 		}
 	}
-	else if (y_pos >= 20 && y_pos <= 540 && movingUp == false)
+	else if (y_pos >= -200 && y_pos <= 540 && movingUp == false)
 	{
 		// move the zombie down
 		if (y_pos < 520)
@@ -109,7 +107,7 @@ void DancingZombie::moveZombie(float deltaTime)
 			movingUp = true;
 		}
 	}
-	
+
 
 	ZombieSprite.setPosition(x_pos, y_pos);
 }

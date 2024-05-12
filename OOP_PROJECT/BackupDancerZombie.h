@@ -1,10 +1,10 @@
 #pragma once
 #include "Zombie.h"
-#include "BackupDancerZombie.h"
-class DancingZombie : public Zombie
+
+class BackupDancerZombie : public Zombie
 {
 public:
-	DancingZombie();
+	BackupDancerZombie();
 	sf::Sprite& getZombieSprite();
 	virtual int getXgridCoordinate();
 	virtual int getYgridCoordinate();
@@ -21,3 +21,4 @@ public:
 	virtual void setAnimation();
 	virtual void moveZombie(float deltaTime);
 };
+

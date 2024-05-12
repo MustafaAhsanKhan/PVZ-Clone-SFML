@@ -17,10 +17,9 @@ protected:
 	sf::Clock zombie_damage_clock;
 	sf::Clock animationClock;
 	bool movingUp;
-	sf::Clock moveClock;
 
 public:
-	//Zombie() {}
+	Zombie() {}
 	virtual sf::Sprite& getZombieSprite() = 0;
 	virtual int getXgridCoordinate() = 0;
 	virtual int getYgridCoordinate() = 0;
@@ -36,6 +35,8 @@ public:
 	virtual int getZombieHealth() = 0;
 	virtual void setAnimation() = 0;
 	virtual void moveZombie(float deltaTime) = 0;
+	sf::Clock moveClock;
+	int numBackupZombiesSpawned;
 
 };
 
