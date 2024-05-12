@@ -40,6 +40,10 @@ Level1State::Level1State()
 	// Sun
 	sunCount = 10;
 	suns = new Sun[sunCount];
+	lawnmowers = new LawnMower[MAX_lawnmowers];
+
+
+
 
 	// Initializing field game status (all grids are currently empty)
 	for (int i = 0; i < 5; i++)
@@ -182,7 +186,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 
 void Level1State::setZombieTextures(AssetManager& Assets)
 {
-	textureRect = sf::IntRect(0, 57.28, 51.11, 57.28);  // SimpleZombie
+	textureRect = sf::IntRect(0, 65, 51.11, 57.28);  // SimpleZombie
 	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
 	{
 		AllZombies.getZombie(0, i).getZombieSprite().setTexture(Assets.getTexture(10));
@@ -232,13 +236,19 @@ void Level1State::setUITextures(AssetManager& Assets)
 	seedPacketSprite.setTextureRect(textureRect);
 	seedPacketSprite.setPosition(45, 100);
 	seedPacketSprite.setScale(0.9, 0.9);
-	// Lawn mower sprite
-	for (int i = 0; i < 5; i++)
+
+	// Lawn mowers
+	for (int i = 0; i < MAX_lawnmowers; i++)
 	{
-		lawnMowerSprite[i].setTexture(Assets.getTexture(31));
-		lawnMowerSprite[i].setScale(0.28, 0.28);
-		lawnMowerSprite[i].setPosition(220, (i * 117.5) + 120);
+		lawnmowers[i].getLawnMowerSprite().setTexture(Assets.getTexture(31));
+		lawnmowers[i].getLawnMowerSprite().setScale(0.28, 0.28);
+		lawnmowers[i].getLawnMowerSprite().setPosition(220, (i * 117.5) + 120);
+		lawnmowers[i].setX_pos(220);
+		lawnmowers[i].setY_pos((i * 117.5) + 120);
 	}
+
+	// Suns 
+	// Suns 
 	for (int i = 0; i < sunCount; i++)
 	{
 		suns[i].getSunSprite().setTexture(Assets.getTexture(33));
@@ -443,7 +453,7 @@ void Level1State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {4}, {2, 3} };
+	const int zombieTypes[numWaves][4] = { {0}, {2, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.
@@ -607,10 +617,12 @@ void Level1State::renderZombies(sf::RenderWindow& window, float deltaTime)
 
 void Level1State::renderUI(sf::RenderWindow& window)
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < MAX_lawnmowers; i++) // drawing lawnmower
 	{
-		window.draw(lawnMowerSprite[i]);
+		window.draw(lawnmowers[i].getLawnMowerSprite());
 	}
+
+
 	window.draw(seedPacketSprite);  // Draw the seed packet (Buttons)
 	window.draw(sunsNumText);
 	window.draw(elapsedTimeText);
@@ -757,7 +769,23 @@ void Level1State::handleBulletZombieCollision(sf::RenderWindow& window)
 	}
 }
 
-
+void Level1State::handleLawnMowerCollision(float deltaTime)
+{
+	for (int i = 0; i < AllZombieTypes; i++)
+	{
+		for (int j = 0; j < 50; j++)
+		{
+			for (int k = 0; k < MAX_lawnmowers; k++)
+			{
+				if (lawnmowers[k].ZombieCollided(AllZombies.getZombie(i, j)))
+				{
+					// while(lawnmowers[k].getX_pos() < 1350)
+					(lawnmowers[k].moveLawnMower(AllZombies.getZombie(i, j), deltaTime));//  moving the lawnmower
+				}
+			}
+		}
+	}
+}
 
 
 void Level1State::Init(AssetManager& Assets)
@@ -808,7 +836,12 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
 		}
 	}
 
-	spawnZombies();
+	Level1State::spawnZombies();
+	Level1State::handleLawnMowerCollision(deltaTime);
+
+
+
+	// DISPLAYING THE ELAPSED TIME
 	int minutes = static_cast<int>(ElapsedTime.getElapsedTime().asSeconds()) / 60;
 	int seconds = static_cast<int>(ElapsedTime.getElapsedTime().asSeconds()) % 60;
 

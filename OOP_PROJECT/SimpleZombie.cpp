@@ -3,7 +3,7 @@
 SimpleZombie::SimpleZombie()
 {
 	ZombieHealth = 90;
-	zombieSpeed = 20;
+	zombieSpeed = 200;
 	damagePerSec = 10;
 	is_Slowed = false;
 	Exists = false;

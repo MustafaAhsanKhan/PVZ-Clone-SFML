@@ -7,6 +7,7 @@
 #include "PlantFactory.h"
 #include <cstdlib>
 #include "ZombieFactory.h"
+#include "LawnMower.h"
 using namespace std;
 
 class Level1State : public State
@@ -15,7 +16,6 @@ private:
 	// UI Sprites
 	sf::Sprite background;
 	sf::Sprite seedPacketSprite;
-	sf::Sprite lawnMowerSprite[5];
 	sf::Clock ZombieSpawnRate;  // Used to spawn zombies
 	sf::Sprite shovelSprite;
 	sf::Text elapsedTimeText;
@@ -40,6 +40,12 @@ private:
 	PlantFactory AllPlants;
 	ZombieFactory AllZombies;
 	Sun* suns;
+	LawnMower* lawnmowers;
+
+	// Numbers for loops
+	const int MAX_lawnmowers = 5;
+	const int AllZombieTypes = 5;
+
 
 	// Required variables
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
@@ -70,6 +76,7 @@ private:
 	void handleSunCollection(sf::RenderWindow& window);
 	void handlePlantRemoval(sf::RenderWindow& window);
 	void handleBulletZombieCollision(sf::RenderWindow& window);
+	void handleLawnMowerCollision(float deltaTime);
 	virtual void Init(AssetManager& Assets);
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window);
 	virtual void Update(StateMachine* machine, float deltaTime);
