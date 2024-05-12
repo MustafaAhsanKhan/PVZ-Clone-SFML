@@ -419,11 +419,10 @@ void Level1State::spawnZombies()
 	    {
             if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
             {
-                if (!AllZombies.getZombie(4, j).getExists())
+                if (!AllZombies.getZombie(3, j).getExists())
                 {
-                    AllZombies.getZombie(4, j).setExists(true);  // Creating a new zombie
+                    AllZombies.getZombie(3, j).setExists(true);  // Creating a new zombie
                     ZombieSpawnRate.restart();
-                    cout << "Zombie spawned";
                     break;
                 }
             }
@@ -467,19 +466,104 @@ void Level1State::renderPlantFactory(sf::RenderWindow& window)
 
 void Level1State::renderZombies(sf::RenderWindow& window, float deltaTime)
 {
-    for(int i = 0; i < 5 ; i++)  // This controls the type of zombie
+	for (int i = 0; i < 5; i++) // Loop over zombie types
 	{
-		for(int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+		for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++) // Loop over zombies of each type
 		{
-			if(AllZombies.getZombie(i,j).getExists())
+			Zombie& zombie = AllZombies.getZombie(i, j);
+			if (zombie.getExists()) // Check if zombie exists
 			{
-				AllZombies.getZombie(i, j).moveZombie(deltaTime);
-				AllZombies.getZombie(i, j).setAnimation();
-				window.draw(AllZombies.getZombie(i,j).getZombieSprite());
+				// Move the zombie and set animation
+				zombie.moveZombie(deltaTime);
+				zombie.setAnimation();
+
+				// Draw the zombie
+				window.draw(zombie.getZombieSprite());
+
+				// Check if this is a DancingZombie
+				if (i == 3)
+				{
+					// Logic for Spawning backup zombies
+					// Check if it's time to spawn backup zombies
+					if (zombie.numBackupZombiesSpawned < 3)
+					{
+						// Check if backup zombies are already spawned for this DancingZombie
+						if (zombie.moveClock.getElapsedTime().asSeconds() > 8)
+						{
+							// Loop over all zombies to find suitable slots for backup zombies
+							for (int k = 0; k < AllZombies.getMAX_ZOMBIES(); k++)
+							{
+								// Check if backup zombie slot is available
+								if (!AllZombies.getZombie(4, k).getExists())
+								{
+									// Spawn backup zombie
+									AllZombies.getZombie(4, k).setExists(true);
+									cout << "Backup zombie spawned for DancingZombie " << j << endl;
+
+									// Set position for backup zombie based on numBackupZombiesSpawned
+									float offsetX = 100.0f; // Distance between DancingZombie and BackupZombie
+									float offsetY = 150.0f; // Distance between BackupZombies
+									switch (zombie.numBackupZombiesSpawned)
+									{
+									case 0: // First BackupZombie
+										AllZombies.getZombie(4, k).setx_pos(zombie.getx_pos() - offsetX);
+										AllZombies.getZombie(4, k).sety_pos(zombie.gety_pos());
+										break;
+									case 1: // Second BackupZombie
+										AllZombies.getZombie(4, k).setx_pos(zombie.getx_pos());
+										AllZombies.getZombie(4, k).sety_pos(zombie.gety_pos() - offsetY);
+										break;
+									case 2: // Third BackupZombie
+										AllZombies.getZombie(4, k).setx_pos(zombie.getx_pos() + offsetX + 20);
+										AllZombies.getZombie(4, k).sety_pos(zombie.gety_pos());
+										break;
+									default:
+										break;
+									}
+
+									// Increment counter for backup zombies spawned for this DancingZombie
+									zombie.numBackupZombiesSpawned++;
+
+									// Reset the timer for this DancingZombie
+									if (zombie.numBackupZombiesSpawned == 3)
+									{
+										AllZombies.getZombie(i, j + 1).moveClock.restart();
+									}
+
+									// Exit the loop to spawn only one backup zombie per DancingZombie
+									break;
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 }
+
+
+//switch (zombie.numBackupZombiesSpawned)
+//{
+//case 1: // First BackupZombie
+//	//AllZombies.getZombie(4, k).setPosition(zombie.getPosition().x - offsetX, zombie.getPosition().y);
+//	AllZombies.getZombie(4, k).setx_pos(zombie.getx_pos() - offsetX);
+//	AllZombies.getZombie(4, k).sety_pos(zombie.gety_pos());
+//	break;
+//case 2: // Second BackupZombie
+//	//AllZombies.getZombie(4, k).setPosition(zombie.getPosition().x, zombie.getPosition().y - offsetY);
+//	AllZombies.getZombie(4, k).setx_pos(zombie.getx_pos());
+//	AllZombies.getZombie(4, k).sety_pos(zombie.gety_pos() - offsetY);
+//	break;
+//case 3: // Third BackupZombie
+//	//AllZombies.getZombie(4, k).setPosition(zombie.getPosition().x + offsetX, zombie.getPosition().y);
+//	AllZombies.getZombie(4, k).setx_pos(zombie.getx_pos() + offsetX);
+//	AllZombies.getZombie(4, k).sety_pos(zombie.gety_pos());
+//	break;
+//default:
+//	break;
+//}
+
 
 void Level1State::renderUI(sf::RenderWindow& window)
 {
@@ -633,7 +717,6 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
 	}
 
     spawnZombies();
-
 
 }
 void Level1State::Draw(sf::RenderWindow& window, float deltaTime)

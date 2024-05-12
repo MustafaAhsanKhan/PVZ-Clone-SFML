@@ -3,11 +3,12 @@
 DancingZombie::DancingZombie()
 {
 	ZombieHealth = 100;
-	zombieSpeed = 40;
+	zombieSpeed = 20;
 	damagePerSec = 0;
 	is_Slowed = false;
 	movingUp = true;
 	Exists = false;
+	numBackupZombiesSpawned = 0;
 
 }
 sf::Sprite& DancingZombie::getZombieSprite()

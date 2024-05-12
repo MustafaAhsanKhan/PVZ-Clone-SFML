@@ -3,7 +3,7 @@
 BackupDancerZombie::BackupDancerZombie()
 {
 	ZombieHealth = 100;
-	zombieSpeed = 30;
+	zombieSpeed = 20;
 	damagePerSec = 0;
 	is_Slowed = false;
 	movingUp = true;
@@ -83,7 +83,7 @@ void BackupDancerZombie::moveZombie(float deltaTime)
 {
 	x_pos -= (zombieSpeed * deltaTime);
 
-	if (y_pos >= 20 && y_pos <= 540 && movingUp == true)
+	if (y_pos >= -200 && y_pos <= 540 && movingUp == true)
 	{
 		// move the zombie up
 		if (y_pos > 40)
@@ -95,7 +95,7 @@ void BackupDancerZombie::moveZombie(float deltaTime)
 			movingUp = false;
 		}
 	}
-	else if (y_pos >= 20 && y_pos <= 540 && movingUp == false)
+	else if (y_pos >= -200 && y_pos <= 540 && movingUp == false)
 	{
 		// move the zombie down
 		if (y_pos < 520)
