@@ -5,7 +5,7 @@ Bullet::Bullet()
 {
 	this->x_pos = 0;
 	this->y_pos = 0;
-	this->damage = 10; // change according to game
+	this->damage = 30; // change according to game
 	this->exists = false; // initially false  
 	/*
 	this variable is only to check if the bullet should draw or not. 
@@ -85,7 +85,7 @@ void Bullet::setBulletSpeed(int sp)
 
 bool Bullet::isColliding(Zombie& zombie)
 {
-	return (abs(Bullet::x_pos - zombie.getx_pos()) <= 1 && abs(Bullet::y_pos - zombie.gety_pos() < 200));
+	return (abs(Bullet::x_pos - zombie.getx_pos()) <= 10 && abs(Bullet::y_pos - (zombie.gety_pos() + 20) < 20));
 } 
 
 void Bullet::damageZombie(Zombie& zombie)

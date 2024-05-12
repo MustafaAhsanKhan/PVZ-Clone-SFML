@@ -2,7 +2,7 @@
 
 BackupDancerZombie::BackupDancerZombie()
 {
-	ZombieHealth = 100;
+	ZombieHealth = 90;
 	zombieSpeed = 20;
 	damagePerSec = 0;
 	is_Slowed = false;
@@ -119,5 +119,6 @@ void BackupDancerZombie::operator-=(int damage)
 	{
 		Exists = false;
 		x_pos = 1180;
+		ZombieHealth = 90;
 	}
 }
