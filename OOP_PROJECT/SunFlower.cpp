@@ -3,6 +3,7 @@
 
 SunFlower::SunFlower()
 {
+    plantHealth = 100;
     sun = new Sun;
     plantExists = false;
 }
@@ -67,6 +68,17 @@ void SunFlower::setExists(bool ex)
 bool SunFlower::exists()
 {
     return plantExists;
+}
+
+void SunFlower::operator-=(int damage)
+{
+    cout << "Damaged! Health: " << plantHealth << endl;
+    plantHealth -= damage;
+}
+
+int SunFlower::getPlantHealth()
+{
+    return plantHealth;
 }
 
 void SunFlower::setSunClock()

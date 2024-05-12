@@ -6,6 +6,7 @@ class PeaShooter : public Shooter
 
 public:
 	PeaShooter();
+	virtual int getPlantHealth();
 	virtual int getMaxBullets();
 	virtual Bullet& getBullet(int index);
 	virtual void setExists(bool ex);
@@ -17,6 +18,7 @@ public:
 	virtual int getYgridCoordinate();
 	virtual void setXgridCoordinate(int x);
 	virtual void setYgridCoordinate(int y);
+	virtual void operator-=(int damage);
 	virtual void setSunClock();
 	virtual Sun*& getSun();
 	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound) {}

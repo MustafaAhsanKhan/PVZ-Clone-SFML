@@ -70,6 +70,7 @@ private:
 	void handleSunCollection(sf::RenderWindow& window);
 	void handlePlantRemoval(sf::RenderWindow& window);
 	void handleBulletZombieCollision(sf::RenderWindow& window);
+	void handlePlantZombieCollision();
 	virtual void Init(AssetManager& Assets);
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window);
 	virtual void Update(StateMachine* machine, float deltaTime);

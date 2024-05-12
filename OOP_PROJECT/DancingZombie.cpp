@@ -55,9 +55,9 @@ void DancingZombie::setExists(bool p_Exists)
 {
 	Exists = p_Exists;
 }
-void DancingZombie::damagePlant(Plant&)
+void DancingZombie::damagePlant(Plant& plant)
 {
-
+	plant -= damagePerSec;
 }
 int DancingZombie::getZombieHealth()
 {

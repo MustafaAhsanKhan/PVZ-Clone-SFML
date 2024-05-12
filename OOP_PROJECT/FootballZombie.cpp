@@ -52,9 +52,9 @@ void FootballZombie::setExists(bool p_Exists)
 {
 	Exists = p_Exists;
 }
-void FootballZombie::damagePlant(Plant&)
+void FootballZombie::damagePlant(Plant& plant)
 {
-
+	plant -= damagePerSec;
 }
 int FootballZombie::getZombieHealth()
 {

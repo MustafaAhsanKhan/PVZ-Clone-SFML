@@ -19,7 +19,6 @@ protected:
 	bool movingUp;
 
 public:
-	Zombie() {}
 	virtual sf::Sprite& getZombieSprite() = 0;
 	virtual int getXgridCoordinate() = 0;
 	virtual int getYgridCoordinate() = 0;

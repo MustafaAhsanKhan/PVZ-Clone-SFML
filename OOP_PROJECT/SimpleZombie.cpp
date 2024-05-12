@@ -31,6 +31,8 @@ void SimpleZombie::setYgridCoordinate(float y)
 void SimpleZombie::damagePlant(Plant& plant)
 {
 	// get the health of plant and reduce it (inside for loop)
+	plant -= damagePerSec;
+	
 }
 
 int SimpleZombie::getZombieHealth()

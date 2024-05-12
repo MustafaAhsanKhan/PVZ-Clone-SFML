@@ -53,9 +53,9 @@ void BackupDancerZombie::setExists(bool p_Exists)
 {
 	Exists = p_Exists;
 }
-void BackupDancerZombie::damagePlant(Plant&)
+void BackupDancerZombie::damagePlant(Plant& plant)
 {
-
+	plant -= damagePerSec;
 }
 int BackupDancerZombie::getZombieHealth()
 {

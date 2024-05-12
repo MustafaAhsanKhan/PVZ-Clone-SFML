@@ -2,6 +2,7 @@
 
 SnowPea::SnowPea()
 {
+	plantHealth = 100;
 	MAX_BULLETS = 1;
 	ShootingRate = 2;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
@@ -119,3 +120,14 @@ SnowPea::~SnowPea()
 	delete[] bullets;
 }
 
+
+void SnowPea::operator-=(int damage)
+{
+	cout << "Damaged! Health: " << plantHealth << endl;
+	plantHealth -= damage;
+}
+
+int SnowPea::getPlantHealth()
+{
+	return plantHealth;
+}

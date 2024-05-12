@@ -12,6 +12,7 @@ protected:
 	bool isAlive;
 	bool isUnlocked;
 	bool plantExists;
+	int plantHealth;
 	sf::Sprite plantSprite;
 	sf::Clock animationClock;
 	Sun* sun;
@@ -25,6 +26,8 @@ public:
 	virtual void setYgridCoordinate(int y) = 0;
 	virtual int getXgridCoordinate() = 0;
 	virtual int getYgridCoordinate() = 0;
+	virtual int getPlantHealth() = 0;
+	virtual void operator-=(int damage) = 0;
 	virtual Sun*& getSun() = 0;
 	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound) = 0;
 };

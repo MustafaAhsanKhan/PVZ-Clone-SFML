@@ -2,6 +2,7 @@
 
 WallNut::WallNut()
 {
+	plantHealth = 300;
 	plantExists = false;
 	XgridCoordinate = 0;
 	YgridCoordinate = 0;
@@ -81,6 +82,11 @@ bool WallNut::exists()
 	return plantExists;
 }
 
+void WallNut::operator-=(int damage)
+{
+	plantHealth -= damage;
+}
+
 void WallNut::setSunClock()
 {
 
@@ -90,3 +96,7 @@ Sun*& WallNut::getSun()
 	return sun;
 }
 
+int WallNut::getPlantHealth()
+{
+	return plantHealth;
+}
