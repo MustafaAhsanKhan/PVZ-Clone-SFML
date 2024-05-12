@@ -2,43 +2,45 @@
 
 bool LawnMower::ZombieCollided(Zombie& zombie)
 {
-	// return lawnmowerSprite.getGlobalBounds().intersects(zombie.getZombieSprite().getGlobalBounds());
-	return ( ((lawnmowerSprite.getPosition().x) - (zombie.getZombieSprite().getPosition().x)) <= 20 ) ;
-}
-bool LawnMower::moveLawnMower(Zombie& zombie, float deltaTime)
-{
-	if (ZombieCollided(zombie))
+	if (abs(zombie.getx_pos() - x_pos <= 20) && abs(zombie.gety_pos() - y_pos <= 15))
 	{
-		if (x_pos < 1350)
-		{
-			cout << "Collided with zombie !! " << endl;
-			LawnMower::x_pos += lawnMowerSpeed * deltaTime;w
-			lawnmowerSprite.setPosition(x_pos, y_pos);
-			cout << x_pos << endl;
-			return false;
-		}
-
-		else
-			return true;
+		isActive = true;
+		return 1;
 	}
-	
-		
+	else
+	{
+		return 0;
+	}
+}
+void LawnMower::moveLawnMower(float deltaTime)
+{
+	if (x_pos < 1350)
+	{
+		cout << "Collided with zombie !! " << endl;
+		LawnMower::x_pos += lawnMowerSpeed * deltaTime;
+		lawnmowerSprite.setPosition(x_pos, y_pos);
+	}
 }
 
-void LawnMower::setX_pos(int x)
+void LawnMower::setx_pos(int x)
 {
 	x_pos = x;
 }
 
 
-void LawnMower::setY_pos(int y)
+void LawnMower::sety_pos(int y)
 {
 	y_pos = y;
 }
 
-float LawnMower::getX_pos()
+float LawnMower::getx_pos()
 {
 	return x_pos;
+}
+
+bool LawnMower::getisActive()
+{
+	return isActive;
 }
 
 sf::Sprite& LawnMower::getLawnMowerSprite()

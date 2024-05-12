@@ -243,11 +243,10 @@ void Level1State::setUITextures(AssetManager& Assets)
 		lawnmowers[i].getLawnMowerSprite().setTexture(Assets.getTexture(31));
 		lawnmowers[i].getLawnMowerSprite().setScale(0.28, 0.28);
 		lawnmowers[i].getLawnMowerSprite().setPosition(220, (i * 117.5) + 120);
-		lawnmowers[i].setX_pos(220);
-		lawnmowers[i].setY_pos((i * 117.5) + 120);
+		lawnmowers[i].setx_pos(220);
+		lawnmowers[i].sety_pos((i * 117.5) + 120);
 	}
-
-	// Suns 
+ 
 	// Suns 
 	for (int i = 0; i < sunCount; i++)
 	{
@@ -453,7 +452,7 @@ void Level1State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {0}, {2, 3} };
+	const int zombieTypes[numWaves][4] = { {2}, {2, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.
@@ -779,8 +778,11 @@ void Level1State::handleLawnMowerCollision(float deltaTime)
 			{
 				if (lawnmowers[k].ZombieCollided(AllZombies.getZombie(i, j)))
 				{
-					// while(lawnmowers[k].getX_pos() < 1350)
-					(lawnmowers[k].moveLawnMower(AllZombies.getZombie(i, j), deltaTime));//  moving the lawnmower
+					if (lawnmowers[k].getisActive())
+					{
+						(lawnmowers[k].moveLawnMower(deltaTime));//  moving the lawnmower
+						break;
+					}
 				}
 			}
 		}
