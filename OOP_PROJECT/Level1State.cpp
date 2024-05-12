@@ -51,18 +51,18 @@ Level1State::Level1State()
 
 
 	// Setting random coordinates to zombies
-    srand(time(0));
-    for (int i = 0; i < 4; i++)  // This controls the type of zombie
-    {
-        for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
-        {
-            int temp = rand() % 5;
-            AllZombies.getZombie(i, j).setXgridCoordinate(8);
-            AllZombies.getZombie(i, j).setYgridCoordinate(temp);
-            AllZombies.getZombie(i, j).setx_pos(1180);
-            AllZombies.getZombie(i, j).sety_pos((120 * temp) + 40);
-        }
-    }
+	srand(time(0));
+	for (int i = 0; i < 4; i++)  // This controls the type of zombie
+	{
+		for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+		{
+			int temp = rand() % 5;
+			AllZombies.getZombie(i, j).setXgridCoordinate(8);
+			AllZombies.getZombie(i, j).setYgridCoordinate(temp);
+			AllZombies.getZombie(i, j).setx_pos(1180);
+			AllZombies.getZombie(i, j).sety_pos((120 * temp) + 40);
+		}
+	}
 
 }
 
@@ -110,18 +110,18 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 	textureRect = sf::IntRect(78, 38, 10, 20);
 	int bullettextureindex = 4;
 
-    for (int type = 0; type < totalShooterTypes - 1; type++)
-    {
-        for (int i = 0; i < 50; i++)
-        {
-            for (int j = 0; j < AllPlants.getShooter(type, i).getMaxBullets(); j++)
-            {
-                AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(7));
-                AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setScale(3, 3);
-                AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
-            }
-        }
-    }
+	for (int type = 0; type < totalShooterTypes - 1; type++)
+	{
+		for (int i = 0; i < 50; i++)
+		{
+			for (int j = 0; j < AllPlants.getShooter(type, i).getMaxBullets(); j++)
+			{
+				AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTexture(Assets.getTexture(7));
+				AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setScale(3, 3);
+				AllPlants.getShooter(type, i).getBullet(j).getBulletSprite().setTextureRect(textureRect);
+			}
+		}
+	}
 
 	// Snow pea bullet 
 	textureRect = sf::IntRect(90, 44.95, 23, 20);
@@ -177,37 +177,37 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 
 void Level1State::setZombieTextures(AssetManager& Assets)
 {
-    textureRect = sf::IntRect(0, 58.28, 51.11, 58.28);  // SimpleZombie
-    for(int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+	textureRect = sf::IntRect(0, 58.28, 51.11, 58.28);  // SimpleZombie
+	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
 	{
-        AllZombies.getZombie(0 ,i).getZombieSprite().setTexture(Assets.getTexture(10));
-        AllZombies.getZombie(0 ,i).getZombieSprite().setTextureRect(textureRect);
-		AllZombies.getZombie(0 ,i).getZombieSprite().setScale(3, 3);
+		AllZombies.getZombie(0, i).getZombieSprite().setTexture(Assets.getTexture(10));
+		AllZombies.getZombie(0, i).getZombieSprite().setTextureRect(textureRect);
+		AllZombies.getZombie(0, i).getZombieSprite().setScale(3, 3);
 	}
 
-    textureRect = sf::IntRect(0, 0, 34.95, 58);  // FlyingZombie
-    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
-    {
-        AllZombies.getZombie(1, i).getZombieSprite().setTexture(Assets.getTexture(11));
-        AllZombies.getZombie(1, i).getZombieSprite().setTextureRect(textureRect);
-        AllZombies.getZombie(1, i).getZombieSprite().setScale(3, 3);
-    }
+	textureRect = sf::IntRect(0, 0, 34.95, 58);  // FlyingZombie
+	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+	{
+		AllZombies.getZombie(1, i).getZombieSprite().setTexture(Assets.getTexture(11));
+		AllZombies.getZombie(1, i).getZombieSprite().setTextureRect(textureRect);
+		AllZombies.getZombie(1, i).getZombieSprite().setScale(3, 3);
+	}
 
-    textureRect = sf::IntRect(0, 67.74, 64, 67.74);  // FootballZombie
-    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
-    {
-        AllZombies.getZombie(2, i).getZombieSprite().setTexture(Assets.getTexture(12));
-        AllZombies.getZombie(2, i).getZombieSprite().setTextureRect(textureRect);
-        AllZombies.getZombie(2, i).getZombieSprite().setScale(2.5, 2.5);
-    }
+	textureRect = sf::IntRect(0, 67.74, 64, 67.74);  // FootballZombie
+	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+	{
+		AllZombies.getZombie(2, i).getZombieSprite().setTexture(Assets.getTexture(12));
+		AllZombies.getZombie(2, i).getZombieSprite().setTextureRect(textureRect);
+		AllZombies.getZombie(2, i).getZombieSprite().setScale(2.5, 2.5);
+	}
 
-    textureRect = sf::IntRect(0, 80, 56, 80);  // DancingZombie
-    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
-    {
-        AllZombies.getZombie(3, i).getZombieSprite().setTexture(Assets.getTexture(13));
-        AllZombies.getZombie(3, i).getZombieSprite().setTextureRect(textureRect);
-        AllZombies.getZombie(3, i).getZombieSprite().setScale(2.2, 2.2);
-    }
+	textureRect = sf::IntRect(0, 80, 56, 80);  // DancingZombie
+	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+	{
+		AllZombies.getZombie(3, i).getZombieSprite().setTexture(Assets.getTexture(13));
+		AllZombies.getZombie(3, i).getZombieSprite().setTextureRect(textureRect);
+		AllZombies.getZombie(3, i).getZombieSprite().setScale(2.2, 2.2);
+	}
 }
 
 void Level1State::setUITextures(AssetManager& Assets)
@@ -283,7 +283,7 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				switch (i)
 				{
 				case 0:
-				{
+
 					if (sunsNum >= 50)
 					{
 						//sunflowerSunClock.restart();
@@ -304,10 +304,10 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						clickedSeedPacket[i] = false;
 					}
 					break;
-				}
+
 
 				case 1:
-				{
+
 					if (sunsNum >= 100)
 					{
 						sunsNum -= 100;
@@ -323,10 +323,10 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 					}
 					break;
 
-				}
+
 
 				case 2:
-				{
+
 					if (sunsNum >= 50)
 					{
 						sunsNum -= 50;
@@ -343,9 +343,9 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 					}
 					break;
 
-				}
+
 				case 3:
-				{
+
 					if (sunsNum >= 150)
 					{
 						sunsNum -= 150;
@@ -361,9 +361,9 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 					}
 					break;
 
-				}
+
 				case 4:
-				{
+
 					if (sunsNum >= 200)
 					{
 						sunsNum -= 200;
@@ -379,9 +379,9 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 					}
 					break;
 
-				}
+
 				case 5:
-				{
+
 					if (sunsNum >= 175)
 					{
 						sunsNum -= 175;
@@ -397,9 +397,9 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 					}
 					break;
 
-				}
+
 				case 6:
-				{
+
 					if (sunsNum >= 75)
 					{
 						sunsNum -= 75;
@@ -414,83 +414,78 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						clickedSeedPacket[i] = false;
 					}
 					break;
-
 				}
-				}
-
 			}
-
 		}
-
 	}
 }
 
 void Level1State::spawnZombies()
 {
-    if(ElapsedTime.getElapsedTime().asSeconds() > 5  && ElapsedTime.getElapsedTime().asSeconds() < 60)  // Wave 1
+	if (ElapsedTime.getElapsedTime().asSeconds() > 5 && ElapsedTime.getElapsedTime().asSeconds() < 60)  // Wave 1
 	{
 		zombieWave.play(); // playing zombie sound
-	    for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
-	    {
-            if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
-            {
-				
-                if (!AllZombies.getZombie(0, j).getExists())
-                {
-                    AllZombies.getZombie(0, j).setExists(true);  // Creating a new zombie
-                    ZombieSpawnRate.restart();
-                    break;
-                }
-            }
-	    }
+		for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+		{
+			if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
+			{
+
+				if (!AllZombies.getZombie(0, j).getExists())
+				{
+					AllZombies.getZombie(0, j).setExists(true);  // Creating a new zombie
+					ZombieSpawnRate.restart();
+					break;
+				}
+			}
+		}
 	}
 }
 
 void Level1State::renderPlantFactory(sf::RenderWindow& window)
 {
 
-    int shooterPlantTypes = 4;
+	int shooterPlantTypes = 4;
 
-    int normalPlantTypes = 3;
-    for (int type = 0; type < normalPlantTypes; type++)
-    {
-        for (int i = 0; i < 50; i++) // all plants
-        {
-            if (AllPlants.getNormalPlant(type, i).exists()) // check if exists then draw plant
-            {
-                window.draw(AllPlants.getNormalPlant(type, i).getPlantSprite());
-            }
-        }
-    }
+	int normalPlantTypes = 3;
+	for (int type = 0; type < normalPlantTypes; type++)
+	{
+		for (int i = 0; i < 50; i++) // all plants
+		{
+			if (AllPlants.getNormalPlant(type, i).exists()) // check if exists then draw plant
+			{
+				window.draw(AllPlants.getNormalPlant(type, i).getPlantSprite());
+			}
+		}
+	}
 
-    for (int k = 0; k < shooterPlantTypes; k++)
-    {
-        for (int i = 0; i < 50; i++) // each plants could have 50 instances
-        {
-            if (AllPlants.getShooter(k, i).exists()) // check if exists then draw plant
-            {
-                window.draw(AllPlants.getShooter(k, i).getPlantSprite());
-            }
-            for (int j = 0; j < AllPlants.getShooter(k, i).getMaxBullets(); j++)
-            {
-                AllPlants.getShooter(k, i).getBullet(j).drawBullet(window); // already checking existence
-            }
-        }
-    }
+	for (int k = 0; k < shooterPlantTypes; k++)
+	{
+		for (int i = 0; i < 50; i++) // each plants could have 50 instances
+		{
+			if (AllPlants.getShooter(k, i).exists()) // check if exists then draw plant
+			{
+				window.draw(AllPlants.getShooter(k, i).getPlantSprite());
+			}
+			for (int j = 0; j < AllPlants.getShooter(k, i).getMaxBullets(); j++)
+			{
+				AllPlants.getShooter(k, i).getBullet(j).drawBullet(window); // already checking existence
+			}
+		}
+	}
 
 }
 
 void Level1State::renderZombies(sf::RenderWindow& window, float deltaTime)
 {
-    for(int i = 0; i < 4 ; i++)  // This controls the type of zombie
+	for (int i = 0; i < 4; i++)  // This controls the type of zombie
 	{
-		for(int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+		for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
 		{
-			if(AllZombies.getZombie(i,j).getExists())
+			if (AllZombies.getZombie(i, j).getExists())
 			{
 				AllZombies.getZombie(i, j).moveZombie(deltaTime);
 				AllZombies.getZombie(i, j).setAnimation();
-				window.draw(AllZombies.getZombie(i,j).getZombieSprite());
+				window.draw(AllZombies.getZombie(i, j).getZombieSprite());
 			}
 		}
 	}
@@ -529,7 +524,7 @@ void Level1State::generateSuns(sf::RenderWindow& window, float deltaTime)
 			AllPlants.getNormalPlant(0, i).drawSun(window, sunsNum, sungen_Sound); // drawing sun
 			sunsNumText.setString(std::to_string(sunsNum));
 		}
-		
+
 	}
 
 }
@@ -550,7 +545,7 @@ void Level1State::handleSunCollection(sf::RenderWindow& window)
 				suns[i].setExists(false);
 				suns[i].resetPosition();
 				sunsNum += 50; // increment suns
-							
+
 				sunsNumText.setString(std::to_string(sunsNum));
 				break;
 			}
@@ -655,7 +650,7 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
 		}
 	}
 
-    spawnZombies();
+	spawnZombies();
 
 
 }
