@@ -3,9 +3,13 @@
 Level1State::Level1State()
 {
 	// Sounds
+	backgroundMusic.openFromFile("../Sounds/backgroundmusic.ogg");
+	backgroundMusic.setVolume(5); // change later
+	// backgroundMusic.play();
+	// backgroundMusic.pause();
 	sungen_SoundBuffer.loadFromFile("../Sounds/plants-vs-zombies-sun-pickup.ogg");
 	sungen_Sound.setBuffer(sungen_SoundBuffer);
-	sungen_Sound.setVolume(15);
+	sungen_Sound.setVolume(90);
 	placingPlantSoundBuffer.loadFromFile("../Sounds/plantplacingsound.ogg");
 	placingPlantSound.setBuffer(placingPlantSoundBuffer);
 	placingPlantSound.setVolume(15);
@@ -23,7 +27,7 @@ Level1State::Level1State()
 	clickedShovel = false;
 
 	// Sun
-	sunCount = 5;
+	sunCount = 10;
 	suns = new Sun[sunCount];
 
 
@@ -484,6 +488,7 @@ void Level1State::generateSuns(sf::RenderWindow& window, float deltaTime)
 	{
 		if ((suns[i].getExists()) == false && (sunClock.getElapsedTime().asSeconds() > 10))
 		{
+			cout << "Index: " << i << endl;
 			sunClock.restart();
 			suns[i].setExists(true);
 			sungen_Sound.play();
@@ -509,10 +514,11 @@ void Level1State::handleSunCollection(sf::RenderWindow& window)
 		{
 			if (mousePosition.x >= suns[i].getSunSprite().getPosition().x && mousePosition.x <= (suns[i].getSunSprite().getPosition().x + (250 * 0.375)) && mousePosition.y >= suns[i].getSunSprite().getPosition().y && mousePosition.y <= (suns[i].getSunSprite().getPosition().y + (250 * 0.375)))
 			{
-
-				suns[i].resetPosition();
 				suns[i].setExists(false);
-				sunsNum += 50;
+				cout << "Set false at index: " << i << endl;
+				suns[i].resetPosition();
+				// cout << suns[i].getXpos() << suns[i].getYpos() << endl;
+				sunsNum += 50; // increment suns
 				sunsNumText.setString(std::to_string(sunsNum));
 				break;
 			}

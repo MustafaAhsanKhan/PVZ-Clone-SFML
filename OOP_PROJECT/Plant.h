@@ -7,7 +7,6 @@ class Plant
 {
 protected:
 	int XgridCoordinate, YgridCoordinate;
-	int Suncost;
 	bool isAlive;
 	bool isUnlocked;
 	bool plantExists;

@@ -3,7 +3,6 @@
 
 SunFlower::SunFlower()
 {
-    Suncost = 50; // cost 
     plantExists = false;
     XgridCoordinate = 0;
     YgridCoordinate = 0;

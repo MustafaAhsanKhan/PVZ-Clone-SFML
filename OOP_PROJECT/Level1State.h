@@ -43,7 +43,7 @@ private:
 	bool clickedShovel;
 	int totalTypeInstancesCreated = 1;
 	int sunCount;
-	int currentSuns;
+	// int currentSuns;
 	int sunsNum;
 	int totalShooterInstancesCreated = 1;
 	int totalNormalPlantInstancesCreated = 1;
@@ -52,6 +52,7 @@ private:
 	
 public:
 	Level1State();
+private:
 	void setPlantFactoryTextures(AssetManager& Assets);
 	void setZombieTextures(AssetManager& Assets);
 	void setUITextures(AssetManager& Assets);

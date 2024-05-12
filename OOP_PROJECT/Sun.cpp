@@ -2,7 +2,7 @@
 
 Sun::Sun()
 {
-	int i = (rand() % 100);
+	int i = (rand() % 100) + 1;
 	x_pos = (rand() % (i * 12)) + 300; // random x position
 	y_pos = -100; // out of frame currently
 	sunSpeed = 70;
@@ -45,7 +45,7 @@ float Sun::getYpos()
 
 void Sun::resetPosition()
 {
-	int i = (rand() % 100);
+	int i = (rand() % 100) + 1;
 	x_pos = (rand() % (i * 12)) + 300; // random x position
 	y_pos = -100; // out of frame currently
 }
