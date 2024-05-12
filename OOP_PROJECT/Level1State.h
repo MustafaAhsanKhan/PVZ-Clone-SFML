@@ -25,6 +25,7 @@ private:
 	sf::Text sunsNumText;
 	sf::Clock sunClock;
 	sf::Clock sunflowerSunClock;
+	sf::Text livesText;
 	
 	// Sounds
 	sf::SoundBuffer sungen_SoundBuffer;
@@ -48,6 +49,7 @@ private:
 
 
 	// Required variables
+	int Lives;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
 	bool clickedSeedPacket[7]; // change size later
 	bool clickedShovel;
@@ -60,6 +62,7 @@ private:
 	bool leftMouseButtonPressed = false;	
 	const int totalPlantTypes = 7;
 	int sunflowerInstances = 0;
+	
 	
 public:
 	Level1State();

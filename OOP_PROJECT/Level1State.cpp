@@ -20,6 +20,11 @@ Level1State::Level1State()
 	placingPlantSound.setVolume(15);
 
 	// Fonts
+
+	sunsNumText.setCharacterSize(40); // Set font size
+	sunsNumText.setFillColor(sf::Color::White);
+	sunsNumText.setString("Lives: " + std::to_string(Lives));
+
 	sunsNum = 5000;  // This is the currency
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
@@ -35,6 +40,15 @@ Level1State::Level1State()
 	int seconds = static_cast<int>(ElapsedTime.getElapsedTime().asSeconds()) % 60;
 	string time = minutes + ":" + seconds;
 	elapsedTimeText.setString(time);
+
+	Lives = 5;
+	livesText.setFont(font);
+	livesText.setCharacterSize(40);
+	livesText.setPosition(900, 20);
+	livesText.setFillColor(sf::Color::White);
+	livesText.setString("Lives: " + std::to_string(Lives));
+
+
 	// shovel sprite
 	clickedShovel = false;
 
@@ -81,7 +95,7 @@ Level1State::Level1State()
 	{
 		AllZombies.getZombie(2, j).sety_pos((120 * temp2 - 20));
 	}
-	
+
 
 
 }
@@ -257,7 +271,7 @@ void Level1State::setUITextures(AssetManager& Assets)
 		lawnmowers[i].setx_pos(220);
 		lawnmowers[i].sety_pos((i * 117.5) + 120);
 	}
- 
+
 	// Suns 
 	for (int i = 0; i < sunCount; i++)
 	{
@@ -453,7 +467,7 @@ void Level1State::spawnZombies()
 
 
 	const int numWaves = 2;  // This variable stores the total number of waves.
-	const int waveDurations[numWaves] = { 20, 60 };
+	const int waveDurations[numWaves] = { 60, 60 };
 	/*This array stores the duration of each wave in seconds.
 	For example, waveDurations[0] represents the duration of the first wave,
 	and waveDurations[1] represents the duration of the second wave, and so on.*/
@@ -635,6 +649,7 @@ void Level1State::renderUI(sf::RenderWindow& window)
 	window.draw(seedPacketSprite);  // Draw the seed packet (Buttons)
 	window.draw(sunsNumText);
 	window.draw(elapsedTimeText);
+	window.draw(livesText);
 }
 
 void Level1State::generateSuns(sf::RenderWindow& window, float deltaTime)
@@ -807,7 +822,7 @@ void Level1State::handlePlantZombieCollision()
 						}
 					}
 				}
-			}	
+			}
 		}
 	}
 	for (int i = 0; i < 3; ++i) // Iterate over shooter types
@@ -830,7 +845,6 @@ void Level1State::handlePlantZombieCollision()
 							if (currentPlant.getPlantHealth() <= 0)
 							{
 								currentPlant.setExists(false); // false
-								currentPlant -= -(currentPlant.getPlantHealth()); // resets the health of the 
 								FIELD_GAME_STATUS[currentPlant.getYgridCoordinate()][currentPlant.getXgridCoordinate()] = false;
 							}
 						}
@@ -844,6 +858,9 @@ void Level1State::handlePlantZombieCollision()
 
 void Level1State::handleLawnMowerCollision(float deltaTime)
 {
+	static bool liveDecremented[5] = { false, false, false, false, false };
+	bool lawnmowerActive[5] = { false, false, false, false, false };
+
 	for (int i = 0; i < AllZombieTypes; i++)
 	{
 		for (int j = 0; j < 50; j++)
@@ -852,11 +869,28 @@ void Level1State::handleLawnMowerCollision(float deltaTime)
 			{
 				if (lawnmowers[k].ZombieCollided(AllZombies.getZombie(i, j)))
 				{
+
 					if (lawnmowers[k].getisActive())
 					{
 						(lawnmowers[k].moveLawnMower(deltaTime));  //  moving the lawnmower
+
 						break;
 					}
+				}
+
+				if (lawnmowers[k].getisActive() == true && AllZombies.getZombie(i, j).getZombieSprite().getPosition().x <= 200)
+				{
+
+					if (!liveDecremented[k])
+					{
+						cout << Lives;						
+						Lives--;
+												
+						livesText.setString("Lives: " + std::to_string(Lives));
+						liveDecremented[k] = true;
+						lawnmowerActive[k] = false;
+					}
+
 				}
 			}
 		}

@@ -11,14 +11,18 @@ bool LawnMower::ZombieCollided(Zombie& zombie)
 	{
 		return 0;
 	}
+	outofRes = false;
 }
 void LawnMower::moveLawnMower(float deltaTime)
 {
-	if (x_pos < 1350)
+	if (x_pos < 1450)
 	{
-		cout << "Collided with zombie !! " << endl;
 		LawnMower::x_pos += lawnMowerSpeed * deltaTime;
 		lawnmowerSprite.setPosition(x_pos, y_pos);
+	}
+	else if(x_pos > 1450)
+	{
+		isActive = false;
 	}
 }
 
@@ -46,4 +50,9 @@ bool LawnMower::getisActive()
 sf::Sprite& LawnMower::getLawnMowerSprite()
 {
 	return lawnmowerSprite;
+}
+
+bool LawnMower::OutofResolution()
+{
+	return outofRes;
 }

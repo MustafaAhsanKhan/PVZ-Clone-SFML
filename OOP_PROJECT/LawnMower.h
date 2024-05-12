@@ -11,6 +11,7 @@ private:
 	float x_pos, y_pos;
 	float lawnMowerSpeed;
 	bool isActive;
+	bool outofRes;
 public:
 	LawnMower() : x_pos(0), lawnMowerSpeed(500), isActive(0) {}
 	bool ZombieCollided(Zombie& zombie);
@@ -20,5 +21,6 @@ public:
 	void sety_pos(int y);
 	bool getisActive();
 	sf::Sprite& getLawnMowerSprite();
+	bool OutofResolution();
 };
 
