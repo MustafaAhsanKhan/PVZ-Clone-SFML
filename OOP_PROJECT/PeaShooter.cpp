@@ -125,7 +125,6 @@ PeaShooter::~PeaShooter()
 void PeaShooter::operator-=(int damage)
 {
 	plantHealth -= damage;
-	cout << "Damaged! Health: " << plantHealth << endl;
 }
 
 

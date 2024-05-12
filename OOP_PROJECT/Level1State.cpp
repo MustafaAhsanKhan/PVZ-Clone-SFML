@@ -5,12 +5,13 @@ Level1State::Level1State()
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/backgroundmusic.ogg");
 	backgroundMusic.setVolume(5); // change later
-	//backgroundMusic.play();
+	backgroundMusic.play();
+
 	zombieWaveBuffer.loadFromFile("../Sounds/zombiesarecoming.ogg");
 	zombieWave.setBuffer(zombieWaveBuffer);
 	zombieWave.setVolume(90);
+	zombieWave.play();
 
-	// backgroundMusic.pause();
 	sungen_SoundBuffer.loadFromFile("../Sounds/plants-vs-zombies-sun-pickup.ogg");
 	sungen_Sound.setBuffer(sungen_SoundBuffer);
 	sungen_Sound.setVolume(90);
@@ -154,7 +155,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 		}
 	}
 	// Fumeshroom bullet
-	textureRect = sf::IntRect(0, 100, 34, 16);
+	textureRect = sf::IntRect(0, 105, 34, 18);
 	for (int i = 0; i < 50; i++)
 	{
 		for (int j = 0; j < AllPlants.getShooter(3, i).getMaxBullets(); j++)
@@ -452,7 +453,7 @@ void Level1State::spawnZombies()
 
 
 	const int numWaves = 2;  // This variable stores the total number of waves.
-	const int waveDurations[numWaves] = { 60, 60 };
+	const int waveDurations[numWaves] = { 20, 60 };
 	/*This array stores the duration of each wave in seconds.
 	For example, waveDurations[0] represents the duration of the first wave,
 	and waveDurations[1] represents the duration of the second wave, and so on.*/
@@ -462,7 +463,7 @@ void Level1State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {2}, {2, 3} };
+	const int zombieTypes[numWaves][4] = { {0}, {1, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.
@@ -489,7 +490,7 @@ void Level1State::spawnZombies()
 
 	for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); ++j)
 	{
-		if (ZombieSpawnRate.getElapsedTime().asSeconds() > 1)
+		if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)
 		{
 			for (int k = 0; k < numZombieType; ++k)
 			{
@@ -577,7 +578,6 @@ void Level1State::renderZombies(sf::RenderWindow& window, float deltaTime)
 								{
 									// Spawn backup zombie
 									AllZombies.getZombie(4, k).setExists(true);
-									cout << "Backup zombie spawned for DancingZombie " << j << endl;
 
 									// Set position for backup zombie based on numBackupZombiesSpawned
 									float offsetX = 100.0f; // Distance between DancingZombie and BackupZombie

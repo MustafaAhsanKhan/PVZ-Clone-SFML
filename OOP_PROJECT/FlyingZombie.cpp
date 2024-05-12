@@ -3,7 +3,7 @@
 FlyingZombie::FlyingZombie()
 {
 	ZombieHealth = 100;
-	zombieSpeed = 20 * ZOMBIE_SPEED_MULTIPLIER;
+	zombieSpeed = 30 * ZOMBIE_SPEED_MULTIPLIER;
 	damagePerSec = 0;
 	is_Eating = false;
 	Exists = false;

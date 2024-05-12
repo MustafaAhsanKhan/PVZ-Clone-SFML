@@ -5,7 +5,7 @@ FootballZombie::FootballZombie()
 	ZombieHealth = 180;
 	zombieSpeed = 40 * ZOMBIE_SPEED_MULTIPLIER;
 	damagePerSec = 0;
-	is_Slowed = false;
+	is_Eating = false;
 	Exists = false;
 }
 sf::Sprite& FootballZombie::getZombieSprite()

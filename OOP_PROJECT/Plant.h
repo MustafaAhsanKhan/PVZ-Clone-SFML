@@ -10,7 +10,6 @@ class Plant
 protected:
 	int XgridCoordinate, YgridCoordinate;
 	bool isAlive;
-	bool isUnlocked;
 	bool plantExists;
 	int plantHealth;
 	sf::Sprite plantSprite;

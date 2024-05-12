@@ -3,7 +3,7 @@
 DolphinRiderZombie::DolphinRiderZombie()
 {
 	ZombieHealth = 100;
-	zombieSpeed = 20 * ZOMBIE_SPEED_MULTIPLIER;
+	zombieSpeed = 40 * ZOMBIE_SPEED_MULTIPLIER;
 	damagePerSec = 0;
 	is_Eating = false;
 	Exists = false;
