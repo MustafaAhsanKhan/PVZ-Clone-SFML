@@ -2,8 +2,8 @@
 
 bool LawnMower::ZombieCollided(Zombie& zombie)
 {
-	return lawnmowerSprite.getGlobalBounds().intersects(zombie.getZombieSprite().getGlobalBounds());
-	return ((lawnmowerSprite.getPosition().x) - (zombie.getZombieSprite().getPosition().x <= 20));
+	// return lawnmowerSprite.getGlobalBounds().intersects(zombie.getZombieSprite().getGlobalBounds());
+	return ( ((lawnmowerSprite.getPosition().x) - (zombie.getZombieSprite().getPosition().x)) <= 20 ) ;
 }
 bool LawnMower::moveLawnMower(Zombie& zombie, float deltaTime)
 {
