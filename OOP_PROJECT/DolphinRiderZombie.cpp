@@ -5,7 +5,7 @@ DolphinRiderZombie::DolphinRiderZombie()
 	ZombieHealth = 100;
 	zombieSpeed = 20;
 	damagePerSec = 0;
-	is_Slowed = false;
+	is_Eating = false;
 	Exists = false;
 }
 sf::Sprite& DolphinRiderZombie::getZombieSprite()

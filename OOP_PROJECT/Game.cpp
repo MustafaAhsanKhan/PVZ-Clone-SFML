@@ -57,11 +57,11 @@ void Game::InitializePlantTextures()
 
 void Game::InitializeZombieTextures()
 {
-	Assets.loadTexture(10, "../PVZ_Textures/Zombies/simple_zombie.png");
-    Assets.loadTexture(11, "../PVZ_Textures/Zombies/flying_zombie.png");
-    Assets.loadTexture(12, "../PVZ_Textures/Zombies/football_zombie.png");
-    Assets.loadTexture(13, "../PVZ_Textures/Zombies/dancing_zombie.png");
-    Assets.loadTexture(14, "../PVZ_Textures/Zombies/backup_dancer_zombie.png");
+	Assets.loadTexture(10, "../PVZ_Textures/Zombies/simple_zombie2.png");
+    Assets.loadTexture(11, "../PVZ_Textures/Zombies/flying_zombie2.png");
+    Assets.loadTexture(12, "../PVZ_Textures/Zombies/football_zombie2.png");
+    Assets.loadTexture(13, "../PVZ_Textures/Zombies/dancing_zombie2.png");
+    Assets.loadTexture(14, "../PVZ_Textures/Zombies/backup_dancer_zombie2.png");
     Assets.loadTexture(15, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
 }
 

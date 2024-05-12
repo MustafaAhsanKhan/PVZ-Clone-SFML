@@ -5,7 +5,7 @@ DancingZombie::DancingZombie()
 	ZombieHealth = 120;
 	zombieSpeed = 20;
 	damagePerSec = 0;
-	is_Slowed = false;
+	is_Eating = false;
 	movingUp = true;
 	Exists = false;
 	numBackupZombiesSpawned = 0;
@@ -57,7 +57,18 @@ void DancingZombie::setExists(bool p_Exists)
 }
 void DancingZombie::damagePlant(Plant& plant)
 {
-	plant -= damagePerSec;
+	// get the health of plant and reduce it (inside for loop)
+	// zombie_damage_clock.restart();
+	is_Eating = true;
+	if (zombie_damage_clock.getElapsedTime().asSeconds() > 2)
+	{
+		plant -= damagePerSec;
+		if (plant.getPlantHealth() <= 0)
+		{
+			is_Eating = false;
+		}
+		zombie_damage_clock.restart();
+	}
 }
 int DancingZombie::getZombieHealth()
 {
@@ -83,7 +94,10 @@ void DancingZombie::setAnimation()
 }
 void DancingZombie::moveZombie(float deltaTime)
 {
-	x_pos -= (zombieSpeed * deltaTime);
+	if (!is_Eating)
+	{
+		x_pos -= (zombieSpeed * deltaTime);
+	}
 
 	if (y_pos >= 20 && y_pos <= 540 && movingUp == true)
 	{
@@ -124,4 +138,9 @@ void DancingZombie::operator-=(int damage)
 		ZombieHealth = 120;
 		numBackupZombiesSpawned = 0;
 	}
+}
+
+void DancingZombie::setisEating(bool iseating)
+{
+	this->is_Eating = iseating;
 }

@@ -5,7 +5,7 @@ SimpleZombie::SimpleZombie()
 	ZombieHealth = 90;
 	zombieSpeed = 20;
 	damagePerSec = 10;
-	is_Slowed = false;
+	is_Eating = false;
 	Exists = false;
 }
 sf::Sprite& SimpleZombie::getZombieSprite()
@@ -31,8 +31,17 @@ void SimpleZombie::setYgridCoordinate(float y)
 void SimpleZombie::damagePlant(Plant& plant)
 {
 	// get the health of plant and reduce it (inside for loop)
-	plant -= damagePerSec;
-	
+	// zombie_damage_clock.restart();
+	is_Eating = true;
+	if (zombie_damage_clock.getElapsedTime().asSeconds() > 2)
+	{
+		plant -= damagePerSec;
+		if (plant.getPlantHealth() <= 0)
+		{
+			is_Eating = false;
+		}
+		zombie_damage_clock.restart();
+	}
 }
 
 int SimpleZombie::getZombieHealth()
@@ -84,7 +93,11 @@ void SimpleZombie::setExists(bool p_Exists)
 }
 void SimpleZombie::moveZombie(float deltaTime)
 {
-	x_pos -= (zombieSpeed * deltaTime);
+	if (!is_Eating)
+	{
+		x_pos -= (zombieSpeed * deltaTime);
+	}
+		
 	
 	ZombieSprite.setPosition(x_pos, y_pos);
 }
@@ -98,4 +111,9 @@ void SimpleZombie::operator-=(int damage)
 		x_pos = 1180;
 		ZombieHealth = 90;
 	}
+}
+
+void SimpleZombie::setisEating(bool iseating)
+{
+	this->is_Eating = iseating;
 }
