@@ -469,7 +469,7 @@ void Level1State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {1}, {2, 3} };
+	const int zombieTypes[numWaves][4] = { {3}, {2, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.
@@ -615,7 +615,10 @@ void Level1State::renderZombies(sf::RenderWindow& window, float deltaTime)
 									// Reset the timer for this DancingZombie
 									if (zombie.numBackupZombiesSpawned == 3)
 									{
-										AllZombies.getZombie(i, j + 1).moveClock.restart();
+										for (int m = 0; m < 50; m++)
+										{
+											AllZombies.getZombie(3, m).moveClock.restart();
+										}
 									}
 
 									// Exit the loop to spawn only one backup zombie per DancingZombie
