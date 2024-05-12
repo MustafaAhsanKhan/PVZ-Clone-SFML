@@ -5,8 +5,9 @@
 #include "Plant.h"
 #include "PeaShooter.h"
 #include "PlantFactory.h"
-
+#include <cstdlib>
 #include "ZombieFactory.h"
+using namespace std;
 
 class Level1State : public State
 {
@@ -17,7 +18,7 @@ private:
 	sf::Sprite lawnMowerSprite[5];
 	sf::Clock ZombieSpawnRate;  // Used to spawn zombies
 	sf::Sprite shovelSprite;
-
+	sf::Text elapsedTimeText;
 	// UI features
 	sf::Clock ElapsedTime;
 	sf::Font font;
@@ -68,9 +69,9 @@ private:
 	void generateSuns(sf::RenderWindow& window, float deltaTime);
 	void handleSunCollection(sf::RenderWindow& window);
 	void handlePlantRemoval(sf::RenderWindow& window);
+	void handleBulletZombieCollision(sf::RenderWindow& window);
 	virtual void Init(AssetManager& Assets);
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window);
 	virtual void Update(StateMachine* machine, float deltaTime);
 	virtual void Draw(sf::RenderWindow& window, float deltaTime);
-
 };

@@ -109,6 +109,10 @@ Sun*& SnowPea::getSun()
 	return sun;
 }
 
+sf::Clock& SnowPea::getShootingRateClock()
+{
+	return ShootingRateClock;
+}
 
 SnowPea::~SnowPea()
 {

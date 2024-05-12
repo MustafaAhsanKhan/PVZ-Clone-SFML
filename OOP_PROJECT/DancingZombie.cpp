@@ -113,3 +113,13 @@ void DancingZombie::moveZombie(float deltaTime)
 
 	ZombieSprite.setPosition(x_pos, y_pos);
 }
+
+void DancingZombie::operator-=(int damage)
+{
+	ZombieHealth -= damage;
+	if (ZombieHealth <= 0)
+	{
+		Exists = false;
+		x_pos = 1180;
+	}
+}

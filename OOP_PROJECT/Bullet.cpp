@@ -12,7 +12,7 @@ Bullet::Bullet()
 	Its not going to depend on the rate at which the plant shoots. 
 	Hence when the bullet becomes false we just need to set its position back to the plant's
 	*/
-	this->bulletSpeed = 600; // change to whatever speed
+	this->bulletSpeed = 400; // change to whatever speed
 }
 // Getters
 float Bullet::getBulletSpeed()
@@ -81,4 +81,22 @@ void Bullet::drawBullet(sf::RenderWindow& window)
 void Bullet::setBulletSpeed(int sp)
 {
 	bulletSpeed = sp;
+}
+
+bool Bullet::isColliding(Zombie& zombie)
+{
+	return (abs(Bullet::x_pos - zombie.getx_pos()) <= 1 && abs(Bullet::y_pos - zombie.gety_pos() < 200));
+} 
+
+void Bullet::damageZombie(Zombie& zombie)
+{
+	if (isColliding(zombie))
+	{
+		zombie -= damage;
+		cout << zombie.getExists();
+		cout << "Health: " << zombie.getZombieHealth() << endl;
+
+		cout << "Collided! " << endl;
+		Bullet::exists = false;
+	}
 }

@@ -36,20 +36,26 @@ void Repeater::Act()
 // Update all bullets
 void Repeater::shootBullet(float deltaTime)
 {
-
-	if (ShootingRateClock.getElapsedTime().asSeconds() > ShootingRate)  // Making a new bullet after every 300 milliseconds
+	if (RepeaterShootingRateClock.getElapsedTime().asSeconds() < 2)
 	{
-		for (int i = 0; i < this->getMaxBullets(); ++i)
+		if (ShootingRateClock.getElapsedTime().asSeconds() > ShootingRate)  // Making a new bullet after every 300 milliseconds
 		{
-			if (!bullets[i].getExists() && plantExists) // removed this condition since the rate will be constant and wont depend on if the bullet exists or not
+			for (int i = 0; i < this->getMaxBullets(); ++i)
 			{
-				bullets[i].setExists(true);
-				bullets[i].setXPos(XgridCoordinate * 100.66 + 380); // correctly alligned
-				bullets[i].setYPos(YgridCoordinate * 114 + 110); // correctly alligned
-				ShootingRateClock.restart();
-				break;
+				if (!bullets[i].getExists() && plantExists) // removed this condition since the rate will be constant and wont depend on if the bullet exists or not
+				{
+					bullets[i].setExists(true);
+					bullets[i].setXPos(XgridCoordinate * 100.66 + 380); // correctly alligned
+					bullets[i].setYPos(YgridCoordinate * 114 + 110); // correctly alligned
+					ShootingRateClock.restart();
+					break;
+				}
 			}
 		}
+	}
+	else
+	{
+		RepeaterShootingRateClock.restart();
 	}
 
 	for (int i = 0; i < this->getMaxBullets(); i++)
@@ -99,6 +105,12 @@ void Repeater::setExists(bool ex)
 bool Repeater::exists()
 {
 	return plantExists;
+}
+
+
+sf::Clock& Repeater::getShootingRateClock()
+{
+	return ShootingRateClock;
 }
 
 Repeater::~Repeater()

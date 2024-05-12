@@ -19,4 +19,5 @@ public:
 	virtual int getZombieHealth();
 	virtual void setAnimation();
 	virtual void moveZombie(float deltaTime);
+	virtual void operator-=(int damage);
 };

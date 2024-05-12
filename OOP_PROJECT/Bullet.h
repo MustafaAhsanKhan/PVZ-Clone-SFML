@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Zombie.h"
 #include <iostream>
 
 class Bullet
@@ -32,5 +33,7 @@ public:
 
 	// Functions to handle the bullet
 	void move(float deltaTime); // increment position at a constant rate (bullet speed will be constant)
+	bool isColliding(Zombie&);
 	void drawBullet(sf::RenderWindow& window);
+	void damageZombie(Zombie&);
 };

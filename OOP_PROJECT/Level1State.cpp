@@ -22,11 +22,18 @@ Level1State::Level1State()
 	sunsNum = 5000;  // This is the currency
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
-	sunsNumText.setCharacterSize(40); // Set font size
+	sunsNumText.setCharacterSize(50); // Set font size
 	sunsNumText.setFillColor(sf::Color::White);
 	sunsNumText.setPosition(107, 20);
 	sunsNumText.setString(std::to_string(sunsNum));
-
+	elapsedTimeText.setFont(font);
+	elapsedTimeText.setCharacterSize(45); // Set font size
+	elapsedTimeText.setFillColor(sf::Color::White);
+	elapsedTimeText.setPosition(500, 20);
+	int minutes = static_cast<int>(ElapsedTime.getElapsedTime().asSeconds()) / 60;
+	int seconds = static_cast<int>(ElapsedTime.getElapsedTime().asSeconds()) % 60;
+	string time = minutes + ":" + seconds;
+	elapsedTimeText.setString(time);
 	// shovel sprite
 	clickedShovel = false;
 
@@ -49,7 +56,7 @@ Level1State::Level1State()
 		clickedSeedPacket[i] = false;
 	}
 
-    srand(time(0));
+    // srand(time(0));
     for (int i = 0; i < 5; i++)  // This controls the type of zombie
     {
         for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
@@ -215,7 +222,7 @@ void Level1State::setZombieTextures(AssetManager& Assets)
         AllZombies.getZombie(3, j).getZombieSprite().setScale(2.2, 2.2);
     }
 
-    //textureRect = sf::IntRect(0, 80, 56, 80);  // BackupDancerZombie
+    textureRect = sf::IntRect(0, 80, 56, 80);  // BackupDancerZombie
     for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
     {
         AllZombies.getZombie(4, i).getZombieSprite().setTexture(Assets.getTexture(14));
@@ -300,11 +307,6 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 
 					if (sunsNum >= 50)
 					{
-						//sunflowerSunClock.restart();
-						//sunflowerSun[sunflowerInstances++].setExists(true); // sunflower Suns will generate
-						//sunflowerSun[sunflowerInstances - 1].setXpos(gridX * 100.66);
-						//sunflowerSun[sunflowerInstances - 1].setYpos(gridY * 114 + 150);
-						//sunflowerSun[sunflowerInstances - 1].getSunSprite().setPosition(gridX * 100.66, gridY * 114 + 150);
 						sunflowerInstances++; // increment
 						sunsNum -= 50;
 						sunsNumText.setString(std::to_string(sunsNum));
@@ -346,7 +348,6 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 						sunsNum -= 50;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
-						// AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
 						AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).getPlantSprite().setPosition(gridX * 100.66 + 315, gridY * 114 + 110);
 						AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).setXgridCoordinate(gridX);
 						AllPlants.getNormalPlant(1, totalNormalPlantInstancesCreated - 1).setYgridCoordinate(gridY);
@@ -434,25 +435,6 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 	}
 }
 
-//void Level1State::spawnZombies()
-//{
-//	if (ElapsedTime.getElapsedTime().asSeconds() > 5 && ElapsedTime.getElapsedTime().asSeconds() < 60)  // Wave 1
-//	{
-//	    for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
-//	    {
-//            if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
-//            {
-//                if (!AllZombies.getZombie(0, j).getExists())
-//                {
-//                    AllZombies.getZombie(0, j).setExists(true);  // Creating a new zombie
-//                    ZombieSpawnRate.restart();
-//                    break;
-//                }
-//            }
-//	    }
-//	}
-//}
-
 void Level1State::spawnZombies()
 {
 	srand(time(nullptr));
@@ -514,8 +496,6 @@ void Level1State::spawnZombies()
 			}
 		}
 	}
-
-
 }
 
 void Level1State::renderPlantFactory(sf::RenderWindow& window)
@@ -641,6 +621,7 @@ void Level1State::renderUI(sf::RenderWindow& window)
 	}
 	window.draw(seedPacketSprite);  // Draw the seed packet (Buttons)
 	window.draw(sunsNumText);
+	window.draw(elapsedTimeText);
 }
 
 void Level1State::generateSuns(sf::RenderWindow& window, float deltaTime)
@@ -747,6 +728,46 @@ void Level1State::handlePlantRemoval(sf::RenderWindow& window)
 		}
 	}
 }
+
+void Level1State::handleBulletZombieCollision(sf::RenderWindow& window)
+{
+	for (int i = 0; i < 4; ++i) // Iterate over shooter types
+	{
+		for (int j = 0; j < totalShooterInstancesCreated; ++j) // Iterate over shooter instances
+		{
+			Shooter& currentShooter = AllPlants.getShooter(i, j);
+
+			for (int k = 0; k < currentShooter.getMaxBullets(); ++k) // Iterate over bullets
+			{
+				Bullet& currentBullet = currentShooter.getBullet(k);
+
+				if (currentBullet.getExists()) // Check if the bullet exists
+				{
+					for (int l = 0; l < AllZombies.getMAX_ZOMBIES(); ++l) // Iterate over zombies
+					{
+						for (int m = 0; m < 5; ++m) // Iterate over zombie types
+						{
+							Zombie& currentZombie = AllZombies.getZombie(m, l);
+
+							if (currentZombie.getExists())  // If that zombie exists
+							{
+								if (currentBullet.isColliding(currentZombie)) // Check collision
+								{
+									currentBullet.damageZombie(currentZombie);
+									break; // No need to check other zombies
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
 void Level1State::Init(AssetManager& Assets)
 {
 	background.setTexture(Assets.getTexture(26));
@@ -759,6 +780,9 @@ void Level1State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 	handleAllPlantsCreation(window);
 	handleSunCollection(window);
 	handlePlantRemoval(window);
+
+	handleBulletZombieCollision(window); // handle collisions between bullet and zombie
+
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
@@ -793,7 +817,19 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
 	}
 
 	spawnZombies();
+	int minutes = static_cast<int>(ElapsedTime.getElapsedTime().asSeconds()) / 60;
+	int seconds = static_cast<int>(ElapsedTime.getElapsedTime().asSeconds()) % 60;
 
+	// Update the text to display the elapsed time
+	std::string timeString = "Time: ";
+	if (minutes < 10)
+		timeString += "0";
+	timeString += std::to_string(minutes) + ":";
+	if (seconds < 10)
+		timeString += "0";
+
+	timeString += std::to_string(seconds);
+	elapsedTimeText.setString(timeString);
 }
 void Level1State::Draw(sf::RenderWindow& window, float deltaTime)
 {

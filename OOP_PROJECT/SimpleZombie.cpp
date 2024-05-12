@@ -85,5 +85,14 @@ void SimpleZombie::moveZombie(float deltaTime)
 	x_pos -= (zombieSpeed * deltaTime);
 	
 	ZombieSprite.setPosition(x_pos, y_pos);
-	//XgridCoordinate = (x_pos / ;
+}
+
+void SimpleZombie::operator-=(int damage)
+{
+    ZombieHealth = ZombieHealth - damage;
+	if(ZombieHealth <= 0)
+	{
+		Exists = false;
+		x_pos = 1180;
+	}
 }

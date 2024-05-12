@@ -11,6 +11,7 @@ protected:
 	sf::Clock ShootingRateClock;
 	float ShootingRate;
 	Bullet* bullets;
+	sf::Clock RepeaterShootingRateClock;
 public:
 	virtual Bullet& getBullet(int index) = 0;
 	virtual int getMaxBullets() = 0;
@@ -25,6 +26,7 @@ public:
 	virtual int getYgridCoordinate() = 0;
 	virtual Sun*& getSun() = 0;
 	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound) = 0;
+	virtual sf::Clock& getShootingRateClock() = 0;
 	~Shooter() { delete[] bullets; }
 
 };

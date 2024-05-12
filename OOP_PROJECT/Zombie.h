@@ -35,6 +35,7 @@ public:
 	virtual int getZombieHealth() = 0;
 	virtual void setAnimation() = 0;
 	virtual void moveZombie(float deltaTime) = 0;
+	virtual void operator-=(int damage) = 0;
 	sf::Clock moveClock;
 	int numBackupZombiesSpawned;
 

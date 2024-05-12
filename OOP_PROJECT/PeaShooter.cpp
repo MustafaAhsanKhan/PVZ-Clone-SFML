@@ -111,6 +111,10 @@ Sun*& PeaShooter::getSun()
 	return sun;
 }
 
+sf::Clock& PeaShooter::getShootingRateClock()
+{
+	return ShootingRateClock;
+}
 
 PeaShooter::~PeaShooter()
 {

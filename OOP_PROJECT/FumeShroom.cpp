@@ -111,6 +111,12 @@ void FumeShroom::setSunClock()
 {
 
 }
+
+sf::Clock& FumeShroom::getShootingRateClock()
+{
+	return ShootingRateClock;
+}
+
 Sun*& FumeShroom::getSun()
 {
 	return sun;
