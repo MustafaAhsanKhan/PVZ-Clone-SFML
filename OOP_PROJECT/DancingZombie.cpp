@@ -122,5 +122,6 @@ void DancingZombie::operator-=(int damage)
 		Exists = false;
 		x_pos = 1180;
 		ZombieHealth = 120;
+		numBackupZombiesSpawned = 0;
 	}
 }
