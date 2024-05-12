@@ -2,6 +2,7 @@
 
 Cherrybomb::Cherrybomb()
 {
+	plantHealth = 0;
 	plantExists = false;
 	XgridCoordinate = 0;
 	YgridCoordinate = 0;
@@ -102,4 +103,15 @@ void Cherrybomb::setSunClock()
 Sun*& Cherrybomb::getSun()
 {
 	return sun;
+}
+
+void Cherrybomb::operator-=(int damage)
+{
+	cout << "Damaged! Health: " << plantHealth << endl;
+	plantHealth -= 0;
+}
+
+int Cherrybomb::getPlantHealth()
+{
+	return plantHealth;
 }

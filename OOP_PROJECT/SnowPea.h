@@ -4,6 +4,7 @@ class SnowPea : public Shooter
 {
 public:
 	SnowPea();
+	virtual int getPlantHealth();
 	virtual Bullet& getBullet(int index);
 	virtual int getMaxBullets();
 	virtual void setExists(bool ex); 
@@ -15,6 +16,7 @@ public:
 	virtual void setYgridCoordinate(int y);
 	virtual int getXgridCoordinate();
 	virtual int getYgridCoordinate();
+	virtual void operator-=(int damage);
 	virtual void setSunClock();
 	virtual Sun*& getSun();
 	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound) {}

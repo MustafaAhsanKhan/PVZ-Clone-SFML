@@ -60,18 +60,28 @@ Level1State::Level1State()
 		clickedSeedPacket[i] = false;
 	}
 
-    // srand(time(0));
-    for (int i = 0; i < 5; i++)  // This controls the type of zombie
-    {
-        for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
-        {
-            int temp = rand() % 5;
-            AllZombies.getZombie(i, j).setXgridCoordinate(8);
-            AllZombies.getZombie(i, j).setYgridCoordinate(temp);
-            AllZombies.getZombie(i, j).setx_pos(1180);
-            AllZombies.getZombie(i, j).sety_pos((120 * temp) + 40);
-        }
-    }
+	// srand(time(0));
+	int temp2;
+	for (int i = 0; i < 5; i++)  // This controls the type of zombie
+	{
+		for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+		{
+			int temp = rand() % 5;
+			AllZombies.getZombie(i, j).setXgridCoordinate(8);
+			AllZombies.getZombie(i, j).setYgridCoordinate(temp);
+			AllZombies.getZombie(i, j).setx_pos(1180);
+			AllZombies.getZombie(i, j).sety_pos((120 * temp) + 40);
+			if (i == 2)
+				temp2 = ++temp;
+
+		}
+	}
+	for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
+	{
+		AllZombies.getZombie(2, j).sety_pos((120 * temp2 - 20));
+	}
+	
+
 
 }
 
@@ -116,7 +126,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 
 
 	// The shooter bullets
-	textureRect = sf::IntRect(78, 38, 10, 15);
+	textureRect = sf::IntRect(78, 42, 10, 13);
 	int bullettextureindex = 4;
 
 	for (int type = 0; type < totalShooterTypes - 1; type++)
@@ -144,7 +154,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 		}
 	}
 	// Fumeshroom bullet
-	textureRect = sf::IntRect(0, 106, 34, 16);
+	textureRect = sf::IntRect(0, 100, 34, 16);
 	for (int i = 0; i < 50; i++)
 	{
 		for (int j = 0; j < AllPlants.getShooter(3, i).getMaxBullets(); j++)
@@ -199,7 +209,7 @@ void Level1State::setZombieTextures(AssetManager& Assets)
 	{
 		AllZombies.getZombie(1, i).getZombieSprite().setTexture(Assets.getTexture(11));
 		AllZombies.getZombie(1, i).getZombieSprite().setTextureRect(textureRect);
-		AllZombies.getZombie(1, i).getZombieSprite().setScale(2.5,2.5);
+		AllZombies.getZombie(1, i).getZombieSprite().setScale(2.5, 2.5);
 	}
 
 	textureRect = sf::IntRect(0, 76.74, 64, 60.74);  // FootballZombie
@@ -207,25 +217,25 @@ void Level1State::setZombieTextures(AssetManager& Assets)
 	{
 		AllZombies.getZombie(2, i).getZombieSprite().setTexture(Assets.getTexture(12));
 		AllZombies.getZombie(2, i).getZombieSprite().setTextureRect(textureRect);
-		AllZombies.getZombie(2, i).getZombieSprite().setScale(2.5, 2.5);
+		AllZombies.getZombie(2, i).getZombieSprite().setScale(1.75, 1.75);
 	}
 
-    textureRect = sf::IntRect(5, 85, 56, 74);  // DancingZombie
-    for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)
-    {
-        AllZombies.getZombie(3, j).getZombieSprite().setTexture(Assets.getTexture(13));
-        AllZombies.getZombie(3, j).getZombieSprite().setTextureRect(textureRect);
-        AllZombies.getZombie(3, j).getZombieSprite().setScale(2.2, 2.2);
-    }
+	textureRect = sf::IntRect(5, 85, 56, 74);  // DancingZombie
+	for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)
+	{
+		AllZombies.getZombie(3, j).getZombieSprite().setTexture(Assets.getTexture(13));
+		AllZombies.getZombie(3, j).getZombieSprite().setTextureRect(textureRect);
+		AllZombies.getZombie(3, j).getZombieSprite().setScale(2.2, 2.2);
+	}
 
-    textureRect = sf::IntRect(5, 90, 56, 64);  // BackupDancerZombie
-    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
-    {
-        AllZombies.getZombie(4, i).getZombieSprite().setTexture(Assets.getTexture(14));
-        AllZombies.getZombie(4, i).getZombieSprite().setTextureRect(textureRect);
-        AllZombies.getZombie(4, i).getZombieSprite().setScale(2.2, 2.2);
-    }
- }
+	textureRect = sf::IntRect(5, 90, 56, 64);  // BackupDancerZombie
+	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+	{
+		AllZombies.getZombie(4, i).getZombieSprite().setTexture(Assets.getTexture(14));
+		AllZombies.getZombie(4, i).getZombieSprite().setTextureRect(textureRect);
+		AllZombies.getZombie(4, i).getZombieSprite().setScale(2.2, 2.2);
+	}
+}
 
 void Level1State::setUITextures(AssetManager& Assets)
 {
@@ -440,11 +450,11 @@ void Level1State::spawnZombies()
 {
 	srand(time(nullptr));
 
-	
+
 	const int numWaves = 2;  // This variable stores the total number of waves.
 	const int waveDurations[numWaves] = { 60, 60 };
-	/*This array stores the duration of each wave in seconds. 
-	For example, waveDurations[0] represents the duration of the first wave, 
+	/*This array stores the duration of each wave in seconds.
+	For example, waveDurations[0] represents the duration of the first wave,
 	and waveDurations[1] represents the duration of the second wave, and so on.*/
 
 	const int numZombieTypes[numWaves] = { 1, 2 };
@@ -452,7 +462,7 @@ void Level1State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {0}, {2, 3} };
+	const int zombieTypes[numWaves][4] = { {2}, {2, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.
@@ -710,6 +720,7 @@ void Level1State::handlePlantRemoval(sf::RenderWindow& window)
 					if (AllPlants.getNormalPlant(k, i).getXgridCoordinate() == gridX && AllPlants.getNormalPlant(k, i).getYgridCoordinate() == gridY)
 					{
 						AllPlants.getNormalPlant(k, i).setExists(false);
+						AllPlants.getNormalPlant(k, i).getPlantSprite().setPosition(-1000, -1000);
 						FIELD_GAME_STATUS[gridY][gridX] = false;
 					}
 				}
@@ -722,6 +733,7 @@ void Level1State::handlePlantRemoval(sf::RenderWindow& window)
 					if (AllPlants.getShooter(k, i).getXgridCoordinate() == gridX && AllPlants.getShooter(k, i).getYgridCoordinate() == gridY)
 					{
 						AllPlants.getShooter(k, i).setExists(false);
+						AllPlants.getShooter(k, i).getPlantSprite().setPosition(-1000, -1000);
 						FIELD_GAME_STATUS[gridY][gridX] = false;
 					}
 				}
@@ -768,6 +780,69 @@ void Level1State::handleBulletZombieCollision(sf::RenderWindow& window)
 	}
 }
 
+
+void Level1State::handlePlantZombieCollision()
+{
+	for (int i = 0; i < 4; ++i) // Iterate over shooter types
+	{
+		for (int j = 0; j < totalShooterInstancesCreated; ++j) // Iterate over shooter instances
+		{
+			// Shooter& currentShooter = AllPlants.getShooter(i, j);
+			if (AllPlants.getShooter(i, j).exists())
+			{
+				for (int l = 0; l < AllZombies.getMAX_ZOMBIES(); ++l) // Iterate over zombies
+				{
+					for (int m = 0; m < 5; ++m) // Iterate over zombie types
+					{
+						Zombie& currentZombie = AllZombies.getZombie(m, l);
+						Shooter& currentPlant = AllPlants.getShooter(i, j);
+						if (currentPlant.getPlantSprite().getGlobalBounds().intersects(currentZombie.getZombieSprite().getGlobalBounds()))
+						{
+							currentZombie.damagePlant(currentPlant);
+							if (currentPlant.getPlantHealth() == 0)
+							{
+								currentPlant.setExists(false); // false
+								currentPlant -= -(currentPlant.getPlantHealth()); // resets the health of the 
+								FIELD_GAME_STATUS[currentPlant.getYgridCoordinate()][currentPlant.getXgridCoordinate()] = false;
+							}
+						}
+					}
+				}
+			}	
+		}
+	}
+	for (int i = 0; i < 3; ++i) // Iterate over shooter types
+	{
+		for (int j = 0; j < totalNormalPlantInstancesCreated; ++j) // Iterate over shooter instances
+		{
+			// Shooter& currentShooter = AllPlants.getShooter(i, j);
+			if (AllPlants.getNormalPlant(i, j).exists())
+			{
+				for (int l = 0; l < AllZombies.getMAX_ZOMBIES(); ++l) // Iterate over zombies
+				{
+					for (int m = 0; m < 5; ++m) // Iterate over zombie types
+					{
+						Zombie& currentZombie = AllZombies.getZombie(m, l);
+						Plant& currentPlant = AllPlants.getNormalPlant(i, j);
+						if (currentPlant.getPlantSprite().getGlobalBounds().intersects(currentZombie.getZombieSprite().getGlobalBounds()))
+						{
+							//currentPlant.setExists(false);
+							currentZombie.damagePlant(currentPlant);
+							if (currentPlant.getPlantHealth() <= 0)
+							{
+								currentPlant.setExists(false); // false
+								currentPlant -= -(currentPlant.getPlantHealth()); // resets the health of the 
+								FIELD_GAME_STATUS[currentPlant.getYgridCoordinate()][currentPlant.getXgridCoordinate()] = false;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
 void Level1State::handleLawnMowerCollision(float deltaTime)
 {
 	for (int i = 0; i < AllZombieTypes; i++)
@@ -804,6 +879,7 @@ void Level1State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 	handlePlantRemoval(window);
 
 	handleBulletZombieCollision(window); // handle collisions between bullet and zombie
+	handlePlantZombieCollision();
 
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))

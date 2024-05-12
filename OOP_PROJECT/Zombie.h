@@ -13,19 +13,19 @@ protected:
 	float x_pos, y_pos;
 	int zombieSpeed;
 	int damagePerSec;
-	bool is_Slowed;
+	bool is_Eating;
 	bool Exists;
 	sf::Clock zombie_damage_clock;
 	sf::Clock animationClock;
 	bool movingUp;
 
 public:
-	Zombie() {}
 	virtual sf::Sprite& getZombieSprite() = 0;
 	virtual int getXgridCoordinate() = 0;
 	virtual int getYgridCoordinate() = 0;
 	virtual void setXgridCoordinate(float) = 0;
 	virtual void setYgridCoordinate(float) = 0;
+	virtual void setisEating(bool iseating) = 0;
 	virtual float getx_pos() = 0;
 	virtual float gety_pos() = 0;
 	virtual bool getExists() = 0;

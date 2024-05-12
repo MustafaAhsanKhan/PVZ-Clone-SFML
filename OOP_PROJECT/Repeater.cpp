@@ -2,6 +2,7 @@
 
 Repeater::Repeater()
 {
+	plantHealth = 100;
 	MAX_BULLETS = 2;
 	ShootingRate = 0.2;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
@@ -125,4 +126,15 @@ void Repeater::setSunClock()
 Sun*& Repeater::getSun()
 {
 	return sun;
+}
+
+
+void Repeater::operator-=(int damage)
+{
+	cout << "Damaged! Health: " << plantHealth << endl;
+	plantHealth -= damage;
+}
+int Repeater::getPlantHealth()
+{
+	return plantHealth;
 }

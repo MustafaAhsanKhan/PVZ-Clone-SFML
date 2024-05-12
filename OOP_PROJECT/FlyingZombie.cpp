@@ -5,7 +5,7 @@ FlyingZombie::FlyingZombie()
 	ZombieHealth = 100;
 	zombieSpeed = 20 * ZOMBIE_SPEED_MULTIPLIER;
 	damagePerSec = 0;
-	is_Slowed = false;
+	is_Eating = false;
 	Exists = false;
 }
 sf::Sprite& FlyingZombie::getZombieSprite()
@@ -52,9 +52,14 @@ void FlyingZombie::setExists(bool p_Exists)
 {
 	Exists = p_Exists;
 }
-void FlyingZombie::damagePlant(Plant&)
+void FlyingZombie::damagePlant(Plant& plant)
 {
 	// get the health of plant and reduce it (inside for loop)
+	// zombie_damage_clock.restart();
+	if (zombie_damage_clock.getElapsedTime().asSeconds() > 2)
+	{
+		zombie_damage_clock.restart();
+	}
 }
 int FlyingZombie::getZombieHealth()
 {
@@ -95,4 +100,9 @@ void FlyingZombie::operator-=(int damage)
 		Exists = false;
 		x_pos = 1180;
 	}
+}
+
+void FlyingZombie::setisEating(bool iseating)
+{
+	this->is_Eating = iseating;
 }

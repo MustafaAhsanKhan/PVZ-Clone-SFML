@@ -2,6 +2,7 @@
 
 PeaShooter::PeaShooter()
 {
+	plantHealth = 100;
 	MAX_BULLETS = 1;
 	ShootingRate = 2;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
@@ -121,4 +122,14 @@ PeaShooter::~PeaShooter()
 	delete[] bullets;
 }
 
+void PeaShooter::operator-=(int damage)
+{
+	plantHealth -= damage;
+	cout << "Damaged! Health: " << plantHealth << endl;
+}
 
+
+int PeaShooter::getPlantHealth()
+{
+	return plantHealth;
+}

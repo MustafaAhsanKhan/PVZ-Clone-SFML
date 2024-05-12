@@ -52,9 +52,21 @@ void FootballZombie::setExists(bool p_Exists)
 {
 	Exists = p_Exists;
 }
-void FootballZombie::damagePlant(Plant&)
+void FootballZombie::damagePlant(Plant& plant)
 {
+	// get the health of plant and reduce it (inside for loop)
+	// zombie_damage_clock.restart();
+	is_Eating = true;
 
+	if (zombie_damage_clock.getElapsedTime().asSeconds() > 1.5)
+	{
+		plant -= damagePerSec;
+		if (plant.getPlantHealth() <= 0)
+		{
+			is_Eating = false;
+		}
+		zombie_damage_clock.restart();
+	}
 }
 int FootballZombie::getZombieHealth()
 {
@@ -82,27 +94,31 @@ void FootballZombie::setAnimation()
 void FootballZombie::moveZombie(float deltaTime)
 {
 	srand(time(0));
-	x_pos -= (zombieSpeed * deltaTime);
-	if (y_pos >= 40 && y_pos <= 520)  // Keeping the zombie within the grid
+	if (!is_Eating)
 	{
-		if (moveClock.getElapsedTime().asSeconds() > 2)
+		x_pos -= (zombieSpeed * deltaTime);
+
+		if (y_pos >= 40 && y_pos <= 520)  // Keeping the zombie within the grid
 		{
-			switch (rand() % 2)
+			if (moveClock.getElapsedTime().asSeconds() > 2)
 			{
-			case(0):  //  Move up
-				if (y_pos >= 60 && y_pos <= 520)
+				switch (rand() % 2)
 				{
-					y_pos -= 120;
+				case(0):  //  Move up
+					if (y_pos >= 60 && y_pos <= 520)
+					{
+						y_pos -= 120;
+					}
+					break;
+				case(1):  // Move down
+					if (y_pos >= 40 && y_pos <= 400)
+					{
+						y_pos += 120;
+					}
+					break;
 				}
-				break;
-			case(1):  // Move down
-				if (y_pos >= 40 && y_pos <= 400)
-				{
-					y_pos += 120;
-				}
-				break;
+				moveClock.restart();
 			}
-			moveClock.restart();
 		}
 	}
 
@@ -118,4 +134,9 @@ void FootballZombie::operator-=(int damage)
 		x_pos = 1180;
 		ZombieHealth = 180;
 	}
+}
+
+void FootballZombie::setisEating(bool iseating)
+{
+	this->is_Eating = iseating;
 }

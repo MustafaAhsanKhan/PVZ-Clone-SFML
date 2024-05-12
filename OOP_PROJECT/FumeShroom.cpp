@@ -2,6 +2,7 @@
 
 FumeShroom::FumeShroom()
 {
+	plantHealth = 100;
 	MAX_BULLETS = 1;
 	ShootingRate = 1;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
@@ -120,4 +121,15 @@ sf::Clock& FumeShroom::getShootingRateClock()
 Sun*& FumeShroom::getSun()
 {
 	return sun;
+}
+
+void FumeShroom::operator-=(int damage)
+{
+	cout << "Damaged! Health: " << plantHealth << endl;
+	plantHealth -= damage;
+}
+
+int FumeShroom::getPlantHealth()
+{
+	return plantHealth;
 }

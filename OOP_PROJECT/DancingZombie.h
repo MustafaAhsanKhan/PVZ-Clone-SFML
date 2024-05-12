@@ -7,6 +7,7 @@ public:
 	sf::Sprite& getZombieSprite();
 	virtual int getXgridCoordinate();
 	virtual int getYgridCoordinate();
+	virtual void setisEating(bool iseating);
 	virtual void setXgridCoordinate(float);
 	virtual void setYgridCoordinate(float);
 	virtual float getx_pos();
