@@ -19,7 +19,7 @@ Level1State::Level1State()
     }
 
     srand(time(0));
-    for (int i = 0; i < 4; i++)  // This controls the type of zombie
+    for (int i = 0; i < 5; i++)  // This controls the type of zombie
     {
         for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
         {
@@ -171,6 +171,14 @@ void Level1State::setZombieTextures(AssetManager& Assets)
         AllZombies.getZombie(3, i).getZombieSprite().setTexture(Assets.getTexture(13));
         AllZombies.getZombie(3, i).getZombieSprite().setTextureRect(textureRect);
         AllZombies.getZombie(3, i).getZombieSprite().setScale(2.2, 2.2);
+    }
+
+    //textureRect = sf::IntRect(0, 80, 56, 80);  // BackupDancerZombie
+    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+    {
+        AllZombies.getZombie(4, i).getZombieSprite().setTexture(Assets.getTexture(14));
+        AllZombies.getZombie(4, i).getZombieSprite().setTextureRect(textureRect);
+        AllZombies.getZombie(4, i).getZombieSprite().setScale(2.2, 2.2);
     }
 }
 
@@ -354,10 +362,11 @@ void Level1State::spawnZombies()
 	    {
             if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
             {
-                if (!AllZombies.getZombie(0, j).getExists())
+                if (!AllZombies.getZombie(4, j).getExists())
                 {
-                    AllZombies.getZombie(0, j).setExists(true);  // Creating a new zombie
+                    AllZombies.getZombie(4, j).setExists(true);  // Creating a new zombie
                     ZombieSpawnRate.restart();
+                    cout << "Zombie spawned";
                     break;
                 }
             }
@@ -401,7 +410,7 @@ void Level1State::renderPlantFactory(sf::RenderWindow& window)
 
 void Level1State::renderZombies(sf::RenderWindow& window)
 {
-    for(int i = 0; i < 4 ; i++)  // This controls the type of zombie
+    for(int i = 0; i < 5 ; i++)  // This controls the type of zombie
 	{
 		for(int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
 		{
@@ -467,7 +476,7 @@ void Level1State::Update(StateMachine* machine, float deltaTime)
 
     spawnZombies();
 
-    for (int i = 0; i < 4; i++)  // This controls the type of zombie
+    for (int i = 0; i < 5; i++)  // This controls the type of zombie
     {
         for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
         {

@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="BackupDancerZombie.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Cherrybomb.cpp" />
     <ClCompile Include="DancingZombie.cpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="BackupDancerZombie.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Cherrybomb.h" />
     <ClInclude Include="DancingZombie.h" />

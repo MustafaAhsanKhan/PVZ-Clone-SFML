@@ -59,7 +59,8 @@ void Game::InitializeZombieTextures()
     Assets.loadTexture(11, "../PVZ_Textures/Zombies/flying_zombie.png");
     Assets.loadTexture(12, "../PVZ_Textures/Zombies/football_zombie.png");
     Assets.loadTexture(13, "../PVZ_Textures/Zombies/dancing_zombie.png");
-    Assets.loadTexture(14, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
+    Assets.loadTexture(14, "../PVZ_Textures/Zombies/backup_dancer_zombie.png");
+    Assets.loadTexture(15, "../PVZ_Textures/Zombies/dolphin_rider_zombie.png");
 }
 
 
@@ -68,7 +69,7 @@ void Game::run()
     srand(time(0));
     //window.setFramerateLimit(60);
 
-    machine.AddState(StateRef(new SplashState));
+    machine.AddState(StateRef(new Level1State));  // Change back to splash state
     
     float deltaTime = 0.0;
    

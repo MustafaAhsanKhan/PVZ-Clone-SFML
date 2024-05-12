@@ -4,6 +4,7 @@
 #include "FlyingZombie.h"
 #include "FootballZombie.h"
 #include "DancingZombie.h"
+#include "BackupDancerZombie.h"
 #include "DolphinRiderZombie.h"
 
 class ZombieFactory
