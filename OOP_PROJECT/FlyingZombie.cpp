@@ -72,7 +72,7 @@ void FlyingZombie::setAnimation()
 		}
 		else
 		{
-			textureRect.left += 34;
+			textureRect.left += 34.05;
 		}
 		this->getZombieSprite().setTextureRect(textureRect);
 		animationClock.restart();

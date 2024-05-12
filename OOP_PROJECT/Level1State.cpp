@@ -182,7 +182,7 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 
 void Level1State::setZombieTextures(AssetManager& Assets)
 {
-	textureRect = sf::IntRect(0, 58.28, 51.11, 58.28);  // SimpleZombie
+	textureRect = sf::IntRect(0, 57.28, 51.11, 57.28);  // SimpleZombie
 	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
 	{
 		AllZombies.getZombie(0, i).getZombieSprite().setTexture(Assets.getTexture(10));
@@ -190,12 +190,12 @@ void Level1State::setZombieTextures(AssetManager& Assets)
 		AllZombies.getZombie(0, i).getZombieSprite().setScale(3, 3);
 	}
 
-	textureRect = sf::IntRect(0, 0, 34.95, 58);  // FlyingZombie
+	textureRect = sf::IntRect(0, 0, 34.95, 55);  // FlyingZombie
 	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
 	{
 		AllZombies.getZombie(1, i).getZombieSprite().setTexture(Assets.getTexture(11));
 		AllZombies.getZombie(1, i).getZombieSprite().setTextureRect(textureRect);
-		AllZombies.getZombie(1, i).getZombieSprite().setScale(3, 3);
+		AllZombies.getZombie(1, i).getZombieSprite().setScale(2.5,2.5);
 	}
 
 	textureRect = sf::IntRect(0, 67.74, 64, 67.74);  // FootballZombie
@@ -441,7 +441,7 @@ void Level1State::spawnZombies()
 
 	
 	const int numWaves = 2;  // This variable stores the total number of waves.
-	const int waveDurations[numWaves] = { 20, 60 };
+	const int waveDurations[numWaves] = { 60, 60 };
 	/*This array stores the duration of each wave in seconds. 
 	For example, waveDurations[0] represents the duration of the first wave, 
 	and waveDurations[1] represents the duration of the second wave, and so on.*/
@@ -451,7 +451,7 @@ void Level1State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {3}, {2, 3} };
+	const int zombieTypes[numWaves][4] = { {1}, {2, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.

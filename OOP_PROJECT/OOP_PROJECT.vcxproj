@@ -150,6 +150,7 @@
     <ClCompile Include="FumeShroom.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InstructionsState.cpp" />
+    <ClCompile Include="LawnMower.cpp" />
     <ClCompile Include="LeaderBoardState.cpp" />
     <ClCompile Include="Level1State.cpp" />
     <ClCompile Include="LevelSelectionState.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="FumeShroom.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InstructionsState.h" />
+    <ClInclude Include="LawnMower.h" />
     <ClInclude Include="LeaderBoardState.h" />
     <ClInclude Include="Level1State.h" />
     <ClInclude Include="LevelSelectionState.h" />

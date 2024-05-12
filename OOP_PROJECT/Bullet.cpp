@@ -85,7 +85,8 @@ void Bullet::setBulletSpeed(int sp)
 
 bool Bullet::isColliding(Zombie& zombie)
 {
-	return (abs(Bullet::x_pos - zombie.getx_pos()) <= 1 && abs(Bullet::y_pos - zombie.gety_pos() < 200));
+	return bulletSprite.getGlobalBounds().intersects(zombie.getZombieSprite().getGlobalBounds());
+	// return (abs(Bullet::x_pos - zombie.getx_pos()) <= 1 && abs(Bullet::y_pos - zombie.gety_pos() < 200));
 } 
 
 void Bullet::damageZombie(Zombie& zombie)
