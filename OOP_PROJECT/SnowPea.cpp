@@ -5,7 +5,6 @@ SnowPea::SnowPea()
 	MAX_BULLETS = 1;
 	ShootingRate = 2;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
-	Suncost = 100; // initializing the cost of Peashooter
 	plantExists = false; // checks if plant exists
 }
 

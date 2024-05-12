@@ -2,7 +2,6 @@
 
 WallNut::WallNut()
 {
-	Suncost = 50; // cost 
 	plantExists = false;
 	XgridCoordinate = 0;
 	YgridCoordinate = 0;
@@ -15,24 +14,22 @@ sf::Sprite& WallNut::getPlantSprite()
 
 void WallNut::Act() 
 {
-	srand(time(0));
-	std::srand(static_cast<unsigned int>(std::time(nullptr)));
-	int verticalDirection = (std::rand() % 3) - 1; // up or down direction
 	sf::Vector2f currentPosition = getPlantSprite().getPosition();
-	float speed = 0.75f; // Adjust the speed of movement as needed
-	float Yspeed = speed / 3 * verticalDirection;
-	bool initialRollingPhase = animationClock.getElapsedTime().asMilliseconds() < 3000;
+	float speed = 0.25f;
+	int Xlimit = XgridCoordinate * 100.66 + 315;
+	bool limitCrossed = currentPosition.x > Xlimit;
+	int startingPosition = currentPosition.x;
 
-	sf::Vector2f newPosition(currentPosition.x + speed, currentPosition.y + Yspeed);
-	this->getPlantSprite().setPosition(newPosition);
 
-	if (animationClock.getElapsedTime().asMilliseconds() > 120)
+	sf::Vector2f newPosition;
+
+	if (animationClock.getElapsedTime().asMilliseconds() > 100)
 	{
-		
+
 		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
 		if (textureRect.left >= 204.875 - 29.125)
 		{
-			textureRect.left = 0; 
+			textureRect.left = 0;
 		}
 		else
 		{
@@ -41,6 +38,20 @@ void WallNut::Act()
 		this->getPlantSprite().setTextureRect(textureRect);
 		animationClock.restart();
 	}
+	
+
+	if (!limitCrossed)
+	{
+		newPosition = sf::Vector2f((startingPosition - 300) + speed, currentPosition.y);
+		
+	}
+	else
+	{
+		newPosition = sf::Vector2f((startingPosition) + speed, currentPosition.y);
+	}
+
+	this->getPlantSprite().setPosition(newPosition);
+	
 }
 
 void WallNut::setXgridCoordinate(int x)

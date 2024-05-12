@@ -20,7 +20,7 @@ void LeaderBoardState::Update(StateMachine* machine, float deltaTime)
 {
 
 }
-void LeaderBoardState::Draw(sf::RenderWindow& window)
+void LeaderBoardState::Draw(sf::RenderWindow& window, float deltaTimew)
 {
 	window.draw(background);
 	window.display();

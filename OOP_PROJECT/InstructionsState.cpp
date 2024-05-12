@@ -20,7 +20,7 @@ void InstructionsState::Update(StateMachine* machine, float deltaTime)
 {
 
 }
-void InstructionsState::Draw(sf::RenderWindow& window)
+void InstructionsState::Draw(sf::RenderWindow& window, float deltaTime)
 {
 	window.draw(background);
 	window.display();

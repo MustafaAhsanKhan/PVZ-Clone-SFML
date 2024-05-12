@@ -27,7 +27,7 @@ void LevelSelectionState::Update(StateMachine* machine, float deltaTime)
 {
 
 }
-void LevelSelectionState::Draw(sf::RenderWindow& window)
+void LevelSelectionState::Draw(sf::RenderWindow& window, float deltaTime)
 {
 	window.draw(background);
 	window.display();

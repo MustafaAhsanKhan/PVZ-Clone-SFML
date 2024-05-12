@@ -16,9 +16,9 @@ public:
 
 	virtual void HandleInput(StateMachine* machine, sf::RenderWindow& window) = 0;
 
-	virtual void Update(StateMachine* machine, float deltaTime) = 0;  // DeltaTime?
+	virtual void Update(StateMachine* machine, float deltaTime) = 0;
 
-	virtual void Draw(sf::RenderWindow& window) = 0;  // DeltaTime?
+	virtual void Draw(sf::RenderWindow& window, float deltaTime) = 0;
 
 	void Pause() {}
 

@@ -30,7 +30,7 @@ void MainMenuState::Update(StateMachine* machine, float deltaTime)
 {
 
 }
-void MainMenuState::Draw(sf::RenderWindow& window)
+void MainMenuState::Draw(sf::RenderWindow& window, float deltaTime)
 {
 	window.draw(background);
 	window.display();

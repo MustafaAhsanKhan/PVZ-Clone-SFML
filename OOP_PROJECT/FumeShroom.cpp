@@ -5,7 +5,6 @@ FumeShroom::FumeShroom()
 	MAX_BULLETS = 1;
 	ShootingRate = 1;  // 1 second
 	bullets = new Bullet[MAX_BULLETS];
-	Suncost = 100; 
 	plantExists = false; // checks if plant exists
 }
 
@@ -26,7 +25,7 @@ void FumeShroom::Act()
 		}
 		else
 		{
-			textureRect.left += 33;
+			textureRect.left += 35;
 		}
 		this->getPlantSprite().setTextureRect(textureRect);
 		animationClock.restart();
