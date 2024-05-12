@@ -45,7 +45,7 @@ void SimpleZombie::setAnimation()
 		
 		if (textureRect.left >= 300)
 		{
-			textureRect.left = 0;
+			textureRect.left = 5;
 		}
 		else
 		{
