@@ -29,6 +29,6 @@ public:
 	virtual Sun*& getSun() = 0;
 	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound) = 0;
 	virtual sf::Clock& getShootingRateClock() = 0;
-	~Shooter() { delete[] bullets; }
+	~Shooter() { delete[] bullets;  }
 
 };

@@ -103,10 +103,6 @@ bool FumeShroom::exists()
 }
 
 
-FumeShroom::~FumeShroom()
-{
-	delete[] bullets;
-}
 
 void FumeShroom::setSunClock()
 {
@@ -125,7 +121,6 @@ Sun*& FumeShroom::getSun()
 
 void FumeShroom::operator-=(int damage)
 {
-	cout << "Damaged! Health: " << plantHealth << endl;
 	plantHealth -= damage;
 }
 

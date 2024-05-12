@@ -94,8 +94,6 @@ void Bullet::damageZombie(Zombie& zombie)
 	if (isColliding(zombie))
 	{
 		zombie -= damage;
-		cout << zombie.getExists();
-		cout << "Health: " << zombie.getZombieHealth() << endl;
 		Bullet::exists = false;
 	}
 }

@@ -4,7 +4,7 @@ FootballZombie::FootballZombie()
 {
 	ZombieHealth = 180;
 	zombieSpeed = 40 * ZOMBIE_SPEED_MULTIPLIER;
-	damagePerSec = 0;
+	damagePerSec = 20;
 	is_Eating = false;
 	Exists = false;
 }

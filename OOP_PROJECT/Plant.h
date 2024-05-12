@@ -29,4 +29,5 @@ public:
 	virtual void operator-=(int damage) = 0;
 	virtual Sun*& getSun() = 0;
 	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound) = 0;
+
 };

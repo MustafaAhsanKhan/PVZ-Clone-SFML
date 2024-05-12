@@ -123,7 +123,6 @@ SnowPea::~SnowPea()
 
 void SnowPea::operator-=(int damage)
 {
-	cout << "Damaged! Health: " << plantHealth << endl;
 	plantHealth -= damage;
 }
 

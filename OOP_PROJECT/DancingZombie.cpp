@@ -4,7 +4,7 @@ DancingZombie::DancingZombie()
 {
 	ZombieHealth = 120;
 	zombieSpeed = 30 * ZOMBIE_SPEED_MULTIPLIER;
-	damagePerSec = 0;
+	damagePerSec = 20;
 	is_Eating = false;
 	movingUp = true;
 	Exists = false;
@@ -97,30 +97,31 @@ void DancingZombie::moveZombie(float deltaTime)
 	if (!is_Eating)
 	{
 		x_pos -= (zombieSpeed * deltaTime);
-	}
 
-	if (y_pos >= 20 && y_pos <= 540 && movingUp == true)
-	{
-		// move the zombie up
-		if(y_pos > 40)
+
+		if (y_pos >= 20 && y_pos <= 540 && movingUp == true)
 		{
-			y_pos -= zombieSpeed * deltaTime;
+			// move the zombie up
+			if (y_pos > 40)
+			{
+				y_pos -= zombieSpeed * deltaTime;
+			}
+			else
+			{
+				movingUp = false;
+			}
 		}
-		else
+		else if (y_pos >= 20 && y_pos <= 540 && movingUp == false)
 		{
-			movingUp = false;
-		}
-	}
-	else if (y_pos >= 20 && y_pos <= 540 && movingUp == false)
-	{
-		// move the zombie down
-		if (y_pos < 520)
-		{
-			y_pos += zombieSpeed * deltaTime;
-		}
-		else
-		{
-			movingUp = true;
+			// move the zombie down
+			if (y_pos < 520)
+			{
+				y_pos += zombieSpeed * deltaTime;
+			}
+			else
+			{
+				movingUp = true;
+			}
 		}
 	}
 	

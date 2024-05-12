@@ -72,7 +72,6 @@ bool SunFlower::exists()
 
 void SunFlower::operator-=(int damage)
 {
-    cout << "Damaged! Health: " << plantHealth << endl;
     plantHealth -= damage;
 }
 

@@ -131,7 +131,6 @@ Sun*& Repeater::getSun()
 
 void Repeater::operator-=(int damage)
 {
-	cout << "Damaged! Health: " << plantHealth << endl;
 	plantHealth -= damage;
 }
 int Repeater::getPlantHealth()

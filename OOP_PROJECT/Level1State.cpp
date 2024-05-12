@@ -4,12 +4,12 @@ Level1State::Level1State()
 {
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/mainmusic.ogg");
-	backgroundMusic.setVolume(45); // change later
+	backgroundMusic.setVolume(15); // change later
 	backgroundMusic.play();
 
 	zombieWaveBuffer.loadFromFile("../Sounds/zombiesarecoming.ogg");
 	zombieWave.setBuffer(zombieWaveBuffer);
-	zombieWave.setVolume(90);
+	zombieWave.setVolume(80);
 	zombieWave.play();
 
 	sungen_SoundBuffer.loadFromFile("../Sounds/plants-vs-zombies-sun-pickup.ogg");
@@ -23,9 +23,9 @@ Level1State::Level1State()
 	sunsNum = 5000;  // This is the currency
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
-	sunsNumText.setCharacterSize(50); // Set font size
+	sunsNumText.setCharacterSize(40); // Set font size
 	sunsNumText.setFillColor(sf::Color::White);
-	sunsNumText.setPosition(107, 20);
+	sunsNumText.setPosition(100, 20);
 	sunsNumText.setString(std::to_string(sunsNum));
 	elapsedTimeText.setFont(font);
 	elapsedTimeText.setCharacterSize(45); // Set font size
@@ -801,8 +801,7 @@ void Level1State::handlePlantZombieCollision()
 							currentZombie.damagePlant(currentPlant);
 							if (currentPlant.getPlantHealth() == 0)
 							{
-								currentPlant.setExists(false); // false
-								currentPlant -= -(currentPlant.getPlantHealth()); // resets the health of the 
+								currentPlant.setExists(false); // false 
 								FIELD_GAME_STATUS[currentPlant.getYgridCoordinate()][currentPlant.getXgridCoordinate()] = false;
 							}
 						}
