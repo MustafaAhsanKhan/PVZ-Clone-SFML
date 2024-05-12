@@ -206,13 +206,13 @@ void Level1State::setZombieTextures(AssetManager& Assets)
 		AllZombies.getZombie(3, i).getZombieSprite().setTextureRect(textureRect);
 		AllZombies.getZombie(3, i).getZombieSprite().setScale(2.2, 2.2);
 	}
-}
+
     textureRect = sf::IntRect(0, 80, 56, 80);  // DancingZombie
-    for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
+    for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)
     {
-        AllZombies.getZombie(3, i).getZombieSprite().setTexture(Assets.getTexture(13));
-        AllZombies.getZombie(3, i).getZombieSprite().setTextureRect(textureRect);
-        AllZombies.getZombie(3, i).getZombieSprite().setScale(2.2, 2.2);
+        AllZombies.getZombie(3, j).getZombieSprite().setTexture(Assets.getTexture(13));
+        AllZombies.getZombie(3, j).getZombieSprite().setTextureRect(textureRect);
+        AllZombies.getZombie(3, j).getZombieSprite().setScale(2.2, 2.2);
     }
 
     //textureRect = sf::IntRect(0, 80, 56, 80);  // BackupDancerZombie
@@ -222,7 +222,7 @@ void Level1State::setZombieTextures(AssetManager& Assets)
         AllZombies.getZombie(4, i).getZombieSprite().setTextureRect(textureRect);
         AllZombies.getZombie(4, i).getZombieSprite().setScale(2.2, 2.2);
     }
-}
+ }
 
 void Level1State::setUITextures(AssetManager& Assets)
 {
