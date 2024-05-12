@@ -80,3 +80,13 @@ bool WallNut::exists()
 {
 	return plantExists;
 }
+
+void WallNut::setSunClock()
+{
+
+}
+Sun*& WallNut::getSun()
+{
+	return sun;
+}
+

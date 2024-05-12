@@ -106,3 +106,12 @@ FumeShroom::~FumeShroom()
 {
 	delete[] bullets;
 }
+
+void FumeShroom::setSunClock()
+{
+
+}
+Sun*& FumeShroom::getSun()
+{
+	return sun;
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include "Plant.h"
+#include <SFML/Audio.hpp>
 class SunFlower : public Plant
 {
 public:
@@ -12,4 +13,7 @@ public:
 	virtual void setYgridCoordinate(int y);
 	virtual int getXgridCoordinate();
 	virtual int getYgridCoordinate();
+	virtual void setSunClock();
+	virtual Sun*& getSun();
+	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound);
 };

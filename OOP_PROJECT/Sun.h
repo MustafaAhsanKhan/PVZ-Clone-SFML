@@ -15,6 +15,8 @@ public:
 	void move(float deltaTime);
 	bool getExists();
 	void setExists(bool p_SunExists);
+	void setXpos(int x);
+	void setYpos(int y);
 	float getXpos();
 	float getYpos();
 	void resetPosition();

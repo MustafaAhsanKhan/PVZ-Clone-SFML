@@ -23,11 +23,14 @@ private:
 	sf::Font font;
 	sf::Text sunsNumText;
 	sf::Clock sunClock;
+	sf::Clock sunflowerSunClock;
 	
 	// Sounds
 	sf::SoundBuffer sungen_SoundBuffer;
 	sf::Sound sungen_Sound;
 	sf::SoundBuffer placingPlantSoundBuffer;
+	sf::Sound zombieWave;
+	sf::SoundBuffer zombieWaveBuffer;
 	sf::Sound placingPlantSound;
 	sf::Music backgroundMusic;
 	sf::IntRect textureRect;
@@ -43,12 +46,13 @@ private:
 	bool clickedShovel;
 	int totalTypeInstancesCreated = 1;
 	int sunCount;
-	// int currentSuns;
+	int currentSuns = 0;
 	int sunsNum;
 	int totalShooterInstancesCreated = 1;
 	int totalNormalPlantInstancesCreated = 1;
 	bool leftMouseButtonPressed = false;	
 	const int totalPlantTypes = 7;
+	int sunflowerInstances = 0;
 	
 public:
 	Level1State();

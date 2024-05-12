@@ -15,6 +15,9 @@ public:
 	virtual int getYgridCoordinate();
 	virtual void setXgridCoordinate(int x);
 	virtual void setYgridCoordinate(int y);
+	virtual void setSunClock();
+	virtual Sun*& getSun();
+	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound) {}
 	~FumeShroom();
 };
 

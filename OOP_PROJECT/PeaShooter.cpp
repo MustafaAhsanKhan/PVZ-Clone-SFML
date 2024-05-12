@@ -19,7 +19,7 @@ void PeaShooter::Act()
 	// cout << "SETTING ANIMATION FOR PEASHOOTER...";
 	if (animationClock.getElapsedTime().asMilliseconds() > 300)
 	{
-		sf::IntRect textureRect = this->getPlantSprite().getTextureRect();
+		sf::IntRect textureRect = plantSprite.getTextureRect();
 		if (textureRect.left >= 188.75)
 		{
 			textureRect.left = 0;
@@ -28,7 +28,7 @@ void PeaShooter::Act()
 		{
 			textureRect.left += 27.25;
 		}
-		this->getPlantSprite().setTextureRect(textureRect);
+		plantSprite.setTextureRect(textureRect);
 		animationClock.restart();
 	}
 }
@@ -102,7 +102,19 @@ bool PeaShooter::exists()
 	return plantExists;
 }
 
+void PeaShooter::setSunClock()
+{
+
+}
+Sun*& PeaShooter::getSun()
+{
+	return sun;
+}
+
+
 PeaShooter::~PeaShooter()
 {
 	delete[] bullets;
 }
+
+

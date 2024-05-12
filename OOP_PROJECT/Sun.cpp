@@ -33,6 +33,16 @@ bool Sun::getExists()
 	return sunExists;
 }
 
+void Sun::setXpos(int x)
+{
+	this->x_pos = x;
+}
+
+void Sun::setYpos(int y)
+{
+	this->y_pos = y;
+}
+
 float Sun::getXpos()
 {
 	return x_pos;

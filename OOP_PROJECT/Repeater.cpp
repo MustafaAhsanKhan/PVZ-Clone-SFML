@@ -105,3 +105,12 @@ Repeater::~Repeater()
 {
 	delete[] bullets;
 }
+
+void Repeater::setSunClock()
+{
+
+}
+Sun*& Repeater::getSun()
+{
+	return sun;
+}

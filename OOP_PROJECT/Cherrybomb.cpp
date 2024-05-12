@@ -94,3 +94,12 @@ bool Cherrybomb::exists()
 {
 	return plantExists;
 }
+
+void Cherrybomb::setSunClock()
+{
+
+}
+Sun*& Cherrybomb::getSun()
+{
+	return sun;
+}

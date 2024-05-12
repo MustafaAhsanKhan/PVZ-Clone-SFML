@@ -100,7 +100,18 @@ bool SnowPea::exists()
 	return plantExists;
 }
 
+void SnowPea::setSunClock()
+{
+
+}
+Sun*& SnowPea::getSun()
+{
+	return sun;
+}
+
+
 SnowPea::~SnowPea()
 {
 	delete[] bullets;
 }
+

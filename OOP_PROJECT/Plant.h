@@ -1,6 +1,8 @@
 #pragma once
 #include<iostream>
 #include <SFML/Graphics.hpp>
+#include "Sun.h"
+#include <SFML/Audio.hpp>
 using namespace std;
 
 class Plant
@@ -12,6 +14,8 @@ protected:
 	bool plantExists;
 	sf::Sprite plantSprite;
 	sf::Clock animationClock;
+	Sun* sun;
+	sf::Clock sunClock;
 public:
 	virtual void setExists(bool ex) = 0;
 	virtual bool exists() = 0;
@@ -21,4 +25,6 @@ public:
 	virtual void setYgridCoordinate(int y) = 0;
 	virtual int getXgridCoordinate() = 0;
 	virtual int getYgridCoordinate() = 0;
+	virtual Sun*& getSun() = 0;
+	virtual void drawSun(sf::RenderWindow& window, int &sunsNum, sf::Sound& sound) = 0;
 };

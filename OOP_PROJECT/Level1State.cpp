@@ -5,7 +5,11 @@ Level1State::Level1State()
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/backgroundmusic.ogg");
 	backgroundMusic.setVolume(5); // change later
-	// backgroundMusic.play();
+	backgroundMusic.play();
+	zombieWaveBuffer.loadFromFile("../Sounds/zombiesarecoming.ogg");
+	zombieWave.setBuffer(zombieWaveBuffer);
+	zombieWave.setVolume(90);
+
 	// backgroundMusic.pause();
 	sungen_SoundBuffer.loadFromFile("../Sounds/plants-vs-zombies-sun-pickup.ogg");
 	sungen_Sound.setBuffer(sungen_SoundBuffer);
@@ -15,7 +19,7 @@ Level1State::Level1State()
 	placingPlantSound.setVolume(15);
 
 	// Fonts
-	sunsNum = 5000;
+	sunsNum = 0;
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
 	sunsNumText.setCharacterSize(40); // Set font size
@@ -30,7 +34,7 @@ Level1State::Level1State()
 	sunCount = 10;
 	suns = new Sun[sunCount];
 
-
+	// Initializing field game status (all grids are currently empty)
 	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 9; j++)
@@ -39,11 +43,14 @@ Level1State::Level1State()
 		}
 	}
 
+	// No plant seed packet has been clicked yet
 	for (int i = 0; i < totalPlantTypes; i++)
 	{
 		clickedSeedPacket[i] = false;
 	}
 
+
+	// Setting random coordinates to zombies
     srand(time(0));
     for (int i = 0; i < 4; i++)  // This controls the type of zombie
     {
@@ -146,6 +153,9 @@ void Level1State::setPlantFactoryTextures(AssetManager& Assets)
 		AllPlants.getNormalPlant(0, i).getPlantSprite().setTexture(Assets.getTexture(1));
 		AllPlants.getNormalPlant(0, i).getPlantSprite().setTextureRect(textureRect);
 		AllPlants.getNormalPlant(0, i).getPlantSprite().setScale(3, 3);
+		// Setting sun textures for sunflower
+		AllPlants.getNormalPlant(0, i).getSun()->getSunSprite().setTexture(Assets.getTexture(33));
+		AllPlants.getNormalPlant(0, i).getSun()->getSunSprite().setScale(0.375, 0.375);
 	}
 
 	textureRect = sf::IntRect(0, 92, 28.75, 34); // Wallnut
@@ -222,6 +232,12 @@ void Level1State::setUITextures(AssetManager& Assets)
 		suns[i].getSunSprite().setScale(0.375, 0.375);
 	}
 
+	/*for (int i = 0; i < 50; i++)
+	{
+		sunflowerSun[i].getSunSprite().setTexture(Assets.getTexture(33));
+		sunflowerSun[i].getSunSprite().setScale(0.375, 0.375);
+	}*/
+
 
 }
 
@@ -270,6 +286,12 @@ void Level1State::handleAllPlantsCreation(sf::RenderWindow& window)
 				{
 					if (sunsNum >= 50)
 					{
+						//sunflowerSunClock.restart();
+						//sunflowerSun[sunflowerInstances++].setExists(true); // sunflower Suns will generate
+						//sunflowerSun[sunflowerInstances - 1].setXpos(gridX * 100.66);
+						//sunflowerSun[sunflowerInstances - 1].setYpos(gridY * 114 + 150);
+						//sunflowerSun[sunflowerInstances - 1].getSunSprite().setPosition(gridX * 100.66, gridY * 114 + 150);
+						sunflowerInstances++; // increment
 						sunsNum -= 50;
 						sunsNumText.setString(std::to_string(sunsNum));
 						placingPlantSound.play();
@@ -407,10 +429,12 @@ void Level1State::spawnZombies()
 {
     if(ElapsedTime.getElapsedTime().asSeconds() > 5  && ElapsedTime.getElapsedTime().asSeconds() < 60)  // Wave 1
 	{
+		zombieWave.play(); // playing zombie sound
 	    for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)  // This controls the number of zombies
 	    {
             if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)  // 12 zombies spawning
             {
+				
                 if (!AllZombies.getZombie(0, j).getExists())
                 {
                     AllZombies.getZombie(0, j).setExists(true);  // Creating a new zombie
@@ -488,16 +512,24 @@ void Level1State::generateSuns(sf::RenderWindow& window, float deltaTime)
 	{
 		if ((suns[i].getExists()) == false && (sunClock.getElapsedTime().asSeconds() > 10))
 		{
-			cout << "Index: " << i << endl;
 			sunClock.restart();
 			suns[i].setExists(true);
-			sungen_Sound.play();
 		}
-		if (suns[i].getExists() == true)
+		if (suns[i].getExists() == true) // if sun exists
 		{
 			window.draw(suns[i].getSunSprite());
 			suns[i].move(deltaTime);
 		}
+	}
+
+	for (int i = 0; i < sunflowerInstances; i++) // drawing sun according to the instances of sunflower created
+	{
+		if (AllPlants.getNormalPlant(0, i).getSun()->getExists())
+		{
+			AllPlants.getNormalPlant(0, i).drawSun(window, sunsNum, sungen_Sound); // drawing sun
+			sunsNumText.setString(std::to_string(sunsNum));
+		}
+		
 	}
 
 }
@@ -514,11 +546,11 @@ void Level1State::handleSunCollection(sf::RenderWindow& window)
 		{
 			if (mousePosition.x >= suns[i].getSunSprite().getPosition().x && mousePosition.x <= (suns[i].getSunSprite().getPosition().x + (250 * 0.375)) && mousePosition.y >= suns[i].getSunSprite().getPosition().y && mousePosition.y <= (suns[i].getSunSprite().getPosition().y + (250 * 0.375)))
 			{
+				sungen_Sound.play();
 				suns[i].setExists(false);
-				cout << "Set false at index: " << i << endl;
 				suns[i].resetPosition();
-				// cout << suns[i].getXpos() << suns[i].getYpos() << endl;
 				sunsNum += 50; // increment suns
+							
 				sunsNumText.setString(std::to_string(sunsNum));
 				break;
 			}
