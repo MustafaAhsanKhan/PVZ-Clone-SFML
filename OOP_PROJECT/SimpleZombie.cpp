@@ -2,7 +2,7 @@
 
 SimpleZombie::SimpleZombie()
 {
-	ZombieHealth = 100;
+	ZombieHealth = 90;
 	zombieSpeed = 20;
 	damagePerSec = 10;
 	is_Slowed = false;
@@ -94,5 +94,6 @@ void SimpleZombie::operator-=(int damage)
 	{
 		Exists = false;
 		x_pos = 1180;
+		ZombieHealth = 90;
 	}
 }

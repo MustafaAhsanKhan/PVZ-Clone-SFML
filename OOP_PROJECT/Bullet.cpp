@@ -5,7 +5,7 @@ Bullet::Bullet()
 {
 	this->x_pos = 0;
 	this->y_pos = 0;
-	this->damage = 10; // change according to game
+	this->damage = 30; // change according to game
 	this->exists = false; // initially false  
 	/*
 	this variable is only to check if the bullet should draw or not. 

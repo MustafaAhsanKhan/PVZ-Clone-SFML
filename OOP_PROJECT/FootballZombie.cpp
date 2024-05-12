@@ -2,7 +2,7 @@
 
 FootballZombie::FootballZombie()
 {
-	ZombieHealth = 100;
+	ZombieHealth = 180;
 	zombieSpeed = 40;
 	damagePerSec = 0;
 	is_Slowed = false;
@@ -116,5 +116,6 @@ void FootballZombie::operator-=(int damage)
 	{
 		Exists = false;
 		x_pos = 1180;
+		ZombieHealth = 180;
 	}
 }

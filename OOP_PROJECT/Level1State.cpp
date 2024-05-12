@@ -5,7 +5,7 @@ Level1State::Level1State()
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/backgroundmusic.ogg");
 	backgroundMusic.setVolume(5); // change later
-	backgroundMusic.play();
+	//backgroundMusic.play();
 	zombieWaveBuffer.loadFromFile("../Sounds/zombiesarecoming.ogg");
 	zombieWave.setBuffer(zombieWaveBuffer);
 	zombieWave.setVolume(90);
@@ -198,7 +198,7 @@ void Level1State::setZombieTextures(AssetManager& Assets)
 		AllZombies.getZombie(1, i).getZombieSprite().setScale(2.5,2.5);
 	}
 
-	textureRect = sf::IntRect(0, 67.74, 64, 67.74);  // FootballZombie
+	textureRect = sf::IntRect(0, 76.74, 64, 60.74);  // FootballZombie
 	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
 	{
 		AllZombies.getZombie(2, i).getZombieSprite().setTexture(Assets.getTexture(12));
@@ -206,15 +206,7 @@ void Level1State::setZombieTextures(AssetManager& Assets)
 		AllZombies.getZombie(2, i).getZombieSprite().setScale(2.5, 2.5);
 	}
 
-	textureRect = sf::IntRect(0, 80, 56, 80);  // DancingZombie
-	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
-	{
-		AllZombies.getZombie(3, i).getZombieSprite().setTexture(Assets.getTexture(13));
-		AllZombies.getZombie(3, i).getZombieSprite().setTextureRect(textureRect);
-		AllZombies.getZombie(3, i).getZombieSprite().setScale(2.2, 2.2);
-	}
-
-    textureRect = sf::IntRect(0, 80, 56, 80);  // DancingZombie
+    textureRect = sf::IntRect(0, 85, 56, 75);  // DancingZombie
     for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++)
     {
         AllZombies.getZombie(3, j).getZombieSprite().setTexture(Assets.getTexture(13));
@@ -222,7 +214,7 @@ void Level1State::setZombieTextures(AssetManager& Assets)
         AllZombies.getZombie(3, j).getZombieSprite().setScale(2.2, 2.2);
     }
 
-    textureRect = sf::IntRect(0, 80, 56, 80);  // BackupDancerZombie
+    textureRect = sf::IntRect(0, 90, 56, 65);  // BackupDancerZombie
     for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
     {
         AllZombies.getZombie(4, i).getZombieSprite().setTexture(Assets.getTexture(14));
@@ -451,7 +443,7 @@ void Level1State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {1}, {2, 3} };
+	const int zombieTypes[numWaves][4] = { {4}, {2, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.

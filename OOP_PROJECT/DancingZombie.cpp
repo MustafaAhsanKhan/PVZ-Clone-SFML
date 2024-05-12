@@ -2,7 +2,7 @@
 
 DancingZombie::DancingZombie()
 {
-	ZombieHealth = 100;
+	ZombieHealth = 120;
 	zombieSpeed = 20;
 	damagePerSec = 0;
 	is_Slowed = false;
@@ -121,5 +121,6 @@ void DancingZombie::operator-=(int damage)
 	{
 		Exists = false;
 		x_pos = 1180;
+		ZombieHealth = 120;
 	}
 }
