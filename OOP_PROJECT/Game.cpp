@@ -71,7 +71,7 @@ void Game::run()
     srand(time(0));
     //window.setFramerateLimit(60);
 
-    machine.AddState(StateRef(new Level1State));  // Change back to splash state
+    machine.AddState(StateRef(new Level5State));  // Change back to splash state
     
     float deltaTime = 0.0;
    
