@@ -25,7 +25,7 @@ Level6State::Level6State()
 	sunsNumText.setFillColor(sf::Color::White);
 	sunsNumText.setString("Lives: " + std::to_string(Lives));
 
-	sunsNum = 0;  // This is the currency
+	sunsNum = 5000;  // This is the currency
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
 	sunsNumText.setCharacterSize(40); // Set font size
