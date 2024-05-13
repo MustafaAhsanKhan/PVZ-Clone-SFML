@@ -1,6 +1,5 @@
 #include "Game.h"
 
-// int Game::totaltypescreated = 1; // current plant types created
 
 Game::Game() : window(sf::VideoMode(1280, 720), "Plants Vs Zombies", sf::Style::Titlebar | sf::Style::Close)
 {
