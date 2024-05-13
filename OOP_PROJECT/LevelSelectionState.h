@@ -1,11 +1,12 @@
 #pragma once
 #include "StateMachine.h"
 #include "Level1State.h"
-// #include "Level2State.h"  // Comment out once levels are implemented
+#include "Level2State.h"
 #include "Level3State.h"
 #include "Level4State.h"
-//#include "Level5State.h"
-//#include "Level6State.h"
+#include "Level5State.h"
+#include "Level6State.h"
+
 class LevelSelectionState : public State
 {
 private:

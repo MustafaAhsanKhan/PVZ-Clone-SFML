@@ -8,7 +8,6 @@
 #include "AssetManager.h"
 
 #include "SplashState.h"
-#include "Level6State.h"
 
 
 class Game
