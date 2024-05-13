@@ -912,6 +912,11 @@ void Level3State::Update(StateMachine* machine, float deltaTime)
 
 	timeString += std::to_string(seconds);
 	elapsedTimeText.setString(timeString);
+
+	if (ElapsedTime.getElapsedTime().asSeconds() > 90)
+	{
+		machine->AddState(StateRef(new Level4State()), true);
+	}
 }
 void Level3State::Draw(sf::RenderWindow& window, float deltaTime)
 {

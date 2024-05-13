@@ -433,7 +433,7 @@ void Level2State::spawnZombies()
 
 	for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); ++j)
 	{
-		if (ZombieSpawnRate.getElapsedTime().asSeconds() > 5)
+		if (ZombieSpawnRate.getElapsedTime().asSeconds() > 10)
 		{
 			for (int k = 0; k < numZombieType; ++k)
 			{
@@ -895,6 +895,11 @@ void Level2State::Update(StateMachine* machine, float deltaTime)
 
 	timeString += std::to_string(seconds);
 	elapsedTimeText.setString(timeString);
+
+	if (ElapsedTime.getElapsedTime().asSeconds() > 90)
+	{
+		machine->AddState(StateRef(new Level3State()), true);
+	}
 }
 void Level2State::Draw(sf::RenderWindow& window, float deltaTime)
 {
