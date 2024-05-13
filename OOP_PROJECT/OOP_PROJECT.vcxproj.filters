@@ -102,10 +102,10 @@
     <ClCompile Include="ZombieFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Level2State.cpp">
+    <ClCompile Include="Level3State.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Level5State.cpp">
+    <ClCompile Include="Level4State.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,10 +209,10 @@
     <ClInclude Include="ZombieFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Level2State.h">
+    <ClInclude Include="Level3State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Level5State.h">
+    <ClInclude Include="Level4State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
