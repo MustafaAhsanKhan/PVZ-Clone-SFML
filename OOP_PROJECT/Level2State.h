@@ -1,4 +1,4 @@
- #pragma once
+#pragma once
 #include "StateMachine.h"
 #include "PauseGameState.h"
 #include "Sun.h"
@@ -10,9 +10,9 @@
 #include "LawnMower.h"
 using namespace std;
 
-class Level1State : public State
+class Level2State : public State
 {
-private:
+	private:
 	// UI Sprites
 	sf::Sprite background;
 	sf::Sprite seedPacketSprite;
@@ -51,7 +51,7 @@ private:
 	// Required variables
 	int Lives;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
-	bool clickedSeedPacket[2]; // change size later
+	bool clickedSeedPacket[3]; // change size later
 	bool clickedShovel;
 	int totalTypeInstancesCreated = 1;
 	int sunCount;
@@ -60,12 +60,12 @@ private:
 	int totalShooterInstancesCreated = 1;
 	int totalNormalPlantInstancesCreated = 1;
 	bool leftMouseButtonPressed = false;	
-	const int totalPlantTypes = 2;
+	const int totalPlantTypes = 3;
 	int sunflowerInstances = 0;
 	
 	
 public:
-	Level1State();
+	Level2State();
 private:
 	void setPlantFactoryTextures(AssetManager& Assets);
 	void setZombieTextures(AssetManager& Assets);
@@ -86,3 +86,4 @@ private:
 	virtual void Update(StateMachine* machine, float deltaTime);
 	virtual void Draw(sf::RenderWindow& window, float deltaTime);
 };
+

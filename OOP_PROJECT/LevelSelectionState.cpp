@@ -58,7 +58,6 @@ void LevelSelectionState::HandleInput(StateMachine* machine, sf::RenderWindow& w
 		}
 
 
-
 	}
 }
 void LevelSelectionState::Update(StateMachine* machine, float deltaTime)

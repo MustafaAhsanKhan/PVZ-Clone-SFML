@@ -1,4 +1,4 @@
- #pragma once
+#pragma once
 #include "StateMachine.h"
 #include "PauseGameState.h"
 #include "Sun.h"
@@ -10,7 +10,7 @@
 #include "LawnMower.h"
 using namespace std;
 
-class Level1State : public State
+class Level5State : public State
 {
 private:
 	// UI Sprites
@@ -26,7 +26,7 @@ private:
 	sf::Clock sunClock;
 	sf::Clock sunflowerSunClock;
 	sf::Text livesText;
-	
+
 	// Sounds
 	sf::SoundBuffer sungen_SoundBuffer;
 	sf::Sound sungen_Sound;
@@ -51,7 +51,7 @@ private:
 	// Required variables
 	int Lives;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
-	bool clickedSeedPacket[2]; // change size later
+	bool clickedSeedPacket[6]; // change size later
 	bool clickedShovel;
 	int totalTypeInstancesCreated = 1;
 	int sunCount;
@@ -59,13 +59,13 @@ private:
 	int sunsNum;
 	int totalShooterInstancesCreated = 1;
 	int totalNormalPlantInstancesCreated = 1;
-	bool leftMouseButtonPressed = false;	
-	const int totalPlantTypes = 2;
+	bool leftMouseButtonPressed = false;
+	const int totalPlantTypes = 6;
 	int sunflowerInstances = 0;
-	
-	
+
+
 public:
-	Level1State();
+	Level5State();
 private:
 	void setPlantFactoryTextures(AssetManager& Assets);
 	void setZombieTextures(AssetManager& Assets);
@@ -74,7 +74,7 @@ private:
 	void spawnZombies();  // Spawn the zombies
 	void renderPlantFactory(sf::RenderWindow& window);
 	void renderZombies(sf::RenderWindow& window, float deltaTime);
-	void renderUI(sf::RenderWindow& window); 
+	void renderUI(sf::RenderWindow& window);
 	void generateSuns(sf::RenderWindow& window, float deltaTime);
 	void handleSunCollection(sf::RenderWindow& window);
 	void handlePlantRemoval(sf::RenderWindow& window);
@@ -86,3 +86,4 @@ private:
 	virtual void Update(StateMachine* machine, float deltaTime);
 	virtual void Draw(sf::RenderWindow& window, float deltaTime);
 };
+
