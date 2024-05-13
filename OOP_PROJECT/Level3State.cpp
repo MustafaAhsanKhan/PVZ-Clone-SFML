@@ -5,7 +5,7 @@ Level3State::Level3State()
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/mainmusic.ogg");
 	backgroundMusic.setVolume(15); // change later
-	backgroundMusic.play();
+	// backgroundMusic.play();
 
 	zombieWaveBuffer.loadFromFile("../Sounds/zombiesarecoming.ogg");
 	zombieWave.setBuffer(zombieWaveBuffer);
@@ -254,7 +254,7 @@ void Level3State::setZombieTextures(AssetManager& Assets)
 
 void Level3State::setUITextures(AssetManager& Assets)
 {
-	sf::IntRect textureRect(0, 45, 143, 675);
+	sf::IntRect textureRect(0, 45, 143, 367);
 
 	// Seed packet sprite
 	seedPacketSprite.setTexture(Assets.getTexture(30));
@@ -506,7 +506,7 @@ void Level3State::renderPlantFactory(sf::RenderWindow& window)
 
 void Level3State::renderZombies(sf::RenderWindow& window, float deltaTime)
 {
-	for (int i = 0; i < 3; i++) // Loop over zombie types
+	for (int i = 0; i < 5; i++) // Loop over zombie types
 	{
 		for (int j = 0; j < AllZombies.getMAX_ZOMBIES(); j++) // Loop over zombies of each type
 		{

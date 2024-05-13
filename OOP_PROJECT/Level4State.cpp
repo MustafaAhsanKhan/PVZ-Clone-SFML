@@ -7,7 +7,7 @@ Level4State::Level4State()
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/mainmusic.ogg");
 	backgroundMusic.setVolume(15); // change later
-	backgroundMusic.play();
+	// backgroundMusic.play();
 
 	zombieWaveBuffer.loadFromFile("../Sounds/zombiesarecoming.ogg");
 	zombieWave.setBuffer(zombieWaveBuffer);
@@ -27,7 +27,7 @@ Level4State::Level4State()
 	sunsNumText.setFillColor(sf::Color::White);
 	sunsNumText.setString("Lives: " + std::to_string(Lives));
 
-	sunsNum = 4440;  // This is the currency
+	sunsNum = 0;  // This is the currency
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
 	sunsNumText.setCharacterSize(40); // Set font size
@@ -256,7 +256,7 @@ void Level4State::setZombieTextures(AssetManager& Assets)
 
 void Level4State::setUITextures(AssetManager& Assets)
 {
-	sf::IntRect textureRect(0, 45, 143, 675);
+	sf::IntRect textureRect(0, 45, 143, 472);
 
 	// Seed packet sprite
 	seedPacketSprite.setTexture(Assets.getTexture(30));

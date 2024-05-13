@@ -6,7 +6,7 @@ Level5State::Level5State()
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/mainmusic.ogg");
 	backgroundMusic.setVolume(15); // change later
-	backgroundMusic.play();
+	// backgroundMusic.play();
 
 	zombieWaveBuffer.loadFromFile("../Sounds/zombiesarecoming.ogg");
 	zombieWave.setBuffer(zombieWaveBuffer);
@@ -26,7 +26,7 @@ Level5State::Level5State()
 	sunsNumText.setFillColor(sf::Color::White);
 	sunsNumText.setString("Lives: " + std::to_string(Lives));
 
-	sunsNum = 5000;  // This is the currency
+	sunsNum = 0;  // This is the currency
 	font.loadFromFile("../Fonts/Wedges.ttf");
 	sunsNumText.setFont(font);
 	sunsNumText.setCharacterSize(40); // Set font size

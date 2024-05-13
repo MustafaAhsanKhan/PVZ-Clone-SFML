@@ -39,13 +39,13 @@ void LevelSelectionState::HandleInput(StateMachine* machine, sf::RenderWindow& w
 			machine->AddState(StateRef(new Level4State));  // Replacing the menu state with the level 4 state
 		}
 		
-		else if (mousePosition.x >= 709 && mousePosition.x <= 1196 && mousePosition.y >= 272 && mousePosition.y <= 368)
+		else if (mousePosition.x >= 696 && mousePosition.x <= 1196 && mousePosition.y >= 272 && mousePosition.y <= 368)
 		{
 			machine->RemoveState();  // Going back to the main menu
 			machine->AddState(StateRef(new Level5State));  // Replacing the menu state with the level 5 state
 		}
 		
-		else if (mousePosition.x >= 111 && mousePosition.x <= 598 && mousePosition.y >= 368 && mousePosition.y <= 555)
+		else if (mousePosition.x >= 696 && mousePosition.x <= 1196 && mousePosition.y >= 430 && mousePosition.y <= 555)
 		{
 			machine->RemoveState();  // Going back to the main menu
 			machine->AddState(StateRef(new Level6State));  // Replacing the meny state with the level 6 state

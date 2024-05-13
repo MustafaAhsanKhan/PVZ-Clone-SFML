@@ -5,7 +5,7 @@ Level1State::Level1State()
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/mainmusic.ogg");
 	backgroundMusic.setVolume(15); // change later
-	backgroundMusic.play();
+	// backgroundMusic.play();
 
 	zombieWaveBuffer.loadFromFile("../Sounds/zombiesarecoming.ogg");
 	zombieWave.setBuffer(zombieWaveBuffer);
