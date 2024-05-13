@@ -18,10 +18,10 @@ void PauseGameState::HandleInput(StateMachine* machine, sf::RenderWindow& window
 		}
 		if (mousePosition.x >= 365 && mousePosition.x <= 911 && mousePosition.y >= 379 && mousePosition.y <= 485)
 		{
-			machine->RemoveState();  // Going back to the game
+			//machine->RemoveState();  // Going back to the game
 			machine->AddState(StateRef(new MainMenuState), true);  // Switching to the main menu
 		}
-		
+
 	}
 }
 void PauseGameState::Update(StateMachine* machine, float deltaTime)
