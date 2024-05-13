@@ -155,6 +155,7 @@
     <ClCompile Include="Level1State.cpp" />
     <ClCompile Include="Level2State.cpp" />
     <ClCompile Include="Level5State.cpp" />
+    <ClCompile Include="Level6State.cpp" />
     <ClCompile Include="LevelSelectionState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Level1State.h" />
     <ClInclude Include="Level2State.h" />
     <ClInclude Include="Level5State.h" />
+    <ClInclude Include="Level6State.h" />
     <ClInclude Include="LevelSelectionState.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="PauseGameState.h" />

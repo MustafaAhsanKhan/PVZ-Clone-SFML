@@ -1,7 +1,6 @@
-#include "Level5State.h"
+#include "Level6State.h"
 
-
-Level5State::Level5State()
+Level6State::Level6State()
 {
 	// Sounds
 	backgroundMusic.openFromFile("../Sounds/mainmusic.ogg");
@@ -101,7 +100,7 @@ Level5State::Level5State()
 
 }
 
-void Level5State::setPlantFactoryTextures(AssetManager& Assets)
+void Level6State::setPlantFactoryTextures(AssetManager& Assets)
 {
 	textureRect = sf::IntRect(0, 0, 27.125, 31);  // initially works for normal peashooter
 	int totalShooterTypes = 3;
@@ -210,7 +209,7 @@ void Level5State::setPlantFactoryTextures(AssetManager& Assets)
 
 }
 
-void Level5State::setZombieTextures(AssetManager& Assets)
+void Level6State::setZombieTextures(AssetManager& Assets)
 {
 	textureRect = sf::IntRect(5, 65.28, 35.11, 48.28);  // SimpleZombie
 	for (int i = 0; i < AllZombies.getMAX_ZOMBIES(); i++)
@@ -253,9 +252,9 @@ void Level5State::setZombieTextures(AssetManager& Assets)
 	}
 }
 
-void Level5State::setUITextures(AssetManager& Assets)
+void Level6State::setUITextures(AssetManager& Assets)
 {
-	sf::IntRect textureRect(0, 45, 143, 555);
+	sf::IntRect textureRect(0, 45, 143, 675);
 
 	// Seed packet sprite
 	seedPacketSprite.setTexture(Assets.getTexture(30));
@@ -289,7 +288,7 @@ void Level5State::setUITextures(AssetManager& Assets)
 
 }
 
-void Level5State::handleAllPlantsCreation(sf::RenderWindow& window)
+void Level6State::handleAllPlantsCreation(sf::RenderWindow& window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
@@ -462,7 +461,7 @@ void Level5State::handleAllPlantsCreation(sf::RenderWindow& window)
 	}
 }
 
-void Level5State::spawnZombies()
+void Level6State::spawnZombies()
 {
 	srand(time(nullptr));
 
@@ -478,7 +477,7 @@ void Level5State::spawnZombies()
 	For example, numZombieTypes[0] represents the number of zombie types in the first wave,
 	and numZombieTypes[1] represents the number of zombie types in the second wave, and so on.*/
 
-	const int zombieTypes[numWaves][4] = { {1}, {0, 1, 2, 3} };
+	const int zombieTypes[numWaves][4] = { {2}, {0, 1, 2, 3} };
 	/*This is a 2D array where each row represents the zombie types for a particular wave.
 	For example, zombieTypes[0] contains the zombie types for the first wave,
 	and zombieTypes[1] contains the zombie types for the second wave, and so on.
@@ -525,7 +524,7 @@ void Level5State::spawnZombies()
 	}
 }
 
-void Level5State::renderPlantFactory(sf::RenderWindow& window)
+void Level6State::renderPlantFactory(sf::RenderWindow& window)
 {
 
 	int shooterPlantTypes = 4;
@@ -559,7 +558,7 @@ void Level5State::renderPlantFactory(sf::RenderWindow& window)
 
 }
 
-void Level5State::renderZombies(sf::RenderWindow& window, float deltaTime)
+void Level6State::renderZombies(sf::RenderWindow& window, float deltaTime)
 {
 	for (int i = 0; i < 5; i++) // Loop over zombie types
 	{
@@ -639,7 +638,7 @@ void Level5State::renderZombies(sf::RenderWindow& window, float deltaTime)
 	}
 }
 
-void Level5State::renderUI(sf::RenderWindow& window)
+void Level6State::renderUI(sf::RenderWindow& window)
 {
 	for (int i = 0; i < MAX_lawnmowers; i++) // drawing lawnmower
 	{
@@ -653,7 +652,7 @@ void Level5State::renderUI(sf::RenderWindow& window)
 	window.draw(livesText);
 }
 
-void Level5State::generateSuns(sf::RenderWindow& window, float deltaTime)
+void Level6State::generateSuns(sf::RenderWindow& window, float deltaTime)
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -681,7 +680,7 @@ void Level5State::generateSuns(sf::RenderWindow& window, float deltaTime)
 
 }
 
-void Level5State::handleSunCollection(sf::RenderWindow& window)
+void Level6State::handleSunCollection(sf::RenderWindow& window)
 {
 	static bool LastFuncCallInput = false;
 	bool currentLeftMouseButtonState = sf::Mouse::isButtonPressed(sf::Mouse::Left);
@@ -706,7 +705,7 @@ void Level5State::handleSunCollection(sf::RenderWindow& window)
 	LastFuncCallInput = currentLeftMouseButtonState;
 }
 
-void Level5State::handlePlantRemoval(sf::RenderWindow& window)
+void Level6State::handlePlantRemoval(sf::RenderWindow& window)
 {
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -760,7 +759,7 @@ void Level5State::handlePlantRemoval(sf::RenderWindow& window)
 	}
 }
 
-void Level5State::handleBulletZombieCollision(sf::RenderWindow& window)
+void Level6State::handleBulletZombieCollision(sf::RenderWindow& window)
 {
 	for (int i = 0; i < 4; ++i) // Iterate over shooter types
 	{
@@ -797,7 +796,7 @@ void Level5State::handleBulletZombieCollision(sf::RenderWindow& window)
 }
 
 
-void Level5State::handlePlantZombieCollision()
+void Level6State::handlePlantZombieCollision()
 {
 	for (int i = 0; i < 4; ++i) // Iterate over shooter types
 	{
@@ -857,7 +856,7 @@ void Level5State::handlePlantZombieCollision()
 }
 
 
-void Level5State::handleLawnMowerCollision(float deltaTime)
+void Level6State::handleLawnMowerCollision(float deltaTime)
 {
 	static bool liveDecremented[5] = { false, false, false, false, false };
 	bool lawnmowerActive[5] = { false, false, false, false, false };
@@ -899,14 +898,14 @@ void Level5State::handleLawnMowerCollision(float deltaTime)
 }
 
 
-void Level5State::Init(AssetManager& Assets)
+void Level6State::Init(AssetManager& Assets)
 {
-	background.setTexture(Assets.getTexture(28));
+	background.setTexture(Assets.getTexture(29));
 	setPlantFactoryTextures(Assets);
 	setZombieTextures(Assets);
 	setUITextures(Assets);
 }
-void Level5State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
+void Level6State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 {
 	handleAllPlantsCreation(window);
 	handleSunCollection(window);
@@ -922,11 +921,11 @@ void Level5State::HandleInput(StateMachine* machine, sf::RenderWindow& window)
 
 		if (mousePosition.x >= 1165 && mousePosition.x <= 1252 && mousePosition.y >= 31 && mousePosition.y <= 112)
 		{
-			machine->AddState(StateRef(new PauseGameState(28)), false);  // Switching to the Pause game state
+			machine->AddState(StateRef(new PauseGameState(29)), false);  // Switching to the Pause game state
 		}
 	}
 }
-void Level5State::Update(StateMachine* machine, float deltaTime)
+void Level6State::Update(StateMachine* machine, float deltaTime)
 {
 	int shooterPlanttypes = 4;
 	// For plant factory
@@ -948,8 +947,8 @@ void Level5State::Update(StateMachine* machine, float deltaTime)
 		}
 	}
 
-	Level5State::spawnZombies();
-	Level5State::handleLawnMowerCollision(deltaTime);
+	Level6State::spawnZombies();
+	Level6State::handleLawnMowerCollision(deltaTime);
 
 
 
@@ -968,7 +967,7 @@ void Level5State::Update(StateMachine* machine, float deltaTime)
 	timeString += std::to_string(seconds);
 	elapsedTimeText.setString(timeString);
 }
-void Level5State::Draw(sf::RenderWindow& window, float deltaTime)
+void Level6State::Draw(sf::RenderWindow& window, float deltaTime)
 {
 	window.draw(background);
 	renderPlantFactory(window);

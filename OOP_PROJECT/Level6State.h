@@ -10,7 +10,7 @@
 #include "LawnMower.h"
 using namespace std;
 
-class Level5State : public State
+class Level6State : public State
 {
 private:
 	// UI Sprites
@@ -51,7 +51,7 @@ private:
 	// Required variables
 	int Lives;
 	bool FIELD_GAME_STATUS[5][9];  // The status of the game field
-	bool clickedSeedPacket[6]; // change size later
+	bool clickedSeedPacket[7]; // change size later
 	bool clickedShovel;
 	int totalTypeInstancesCreated = 1;
 	int sunCount;
@@ -60,12 +60,12 @@ private:
 	int totalShooterInstancesCreated = 1;
 	int totalNormalPlantInstancesCreated = 1;
 	bool leftMouseButtonPressed = false;
-	const int totalPlantTypes = 6;
+	const int totalPlantTypes = 7;
 	int sunflowerInstances = 0;
 
 
 public:
-	Level5State();
+	Level6State();
 private:
 	void setPlantFactoryTextures(AssetManager& Assets);
 	void setZombieTextures(AssetManager& Assets);
